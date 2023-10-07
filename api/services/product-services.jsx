@@ -1,5 +1,5 @@
-// Importing the pre-configured API instance and its associated error handling function
-import { apiInstance, apiErrorHandler } from "../config/api-config";
+// Importing the pre-configured API instance
+import { apiInstance } from "../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
@@ -19,7 +19,8 @@ export const getAllProducts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all products.";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -41,7 +42,8 @@ export const getSingleProduct = async (productId) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting the specified product";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -63,7 +65,8 @@ export const getProductsBySearch = async (searchTerm) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem searching for " + searchTerm;
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -80,11 +83,12 @@ export const getAllCategories = async () => {
 	try {
 		const url = endpoint + "categories";
 		const response = await apiInstance.get(url);
-
-		return response.data;
+		result.data = response.data;
+		return result;
 	} catch (error) {
 		const msg = "There was a problem getting all categories";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -107,6 +111,7 @@ export const getCategoryProducts = async (categoryName) => {
 	} catch (error) {
 		const msg =
 			"There was a problem getting the products of the specified category";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };

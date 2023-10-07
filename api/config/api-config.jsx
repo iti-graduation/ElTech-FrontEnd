@@ -1,26 +1,122 @@
 // Importing axios for HTTP requests
 import axios from "axios";
 
+{
+	/* TODO Check if this is needed */
+}
+// async function handleApiResponse(url) {
+// 	try {
+// 		const response = await fetch(url);
+// 		const data = await response.json();
+
+// 		// Check if the API call was successful
+// 		if (data.status) {
+// 			// If the API call was successful, return the data
+// 			return data.data;
+// 		} else {
+// 			// If the API call was not successful, throw an error with the message from the API
+// 			throw new Error(data.message);
+// 		}
+// 	} catch (error) {
+// 		console.error("An error occurred:", error);
+// 		// You can also handle the error here, for example by showing a notification to the user
+// 		throw error;
+// 	}
+// }
+
 /**
- * Function to handle API error
+ * Makes a GET request to the specified URL and returns the received data or message in function of the status.
  *
- * @param {object} error - The error object from API
- * @param {string} msg - An additional message
+ * @param {string} url - The URL to fetch data from.
+ * @returns {Promise} - A promise that resolves to the received data or message.
  */
-export const apiErrorHandler = (error, msg) => {
-	console.log("Error:", msg);
-	console.log(error);
-};
+export async function fetchData(url) {
+	try {
+		// Making a GET request
+		const response = await apiInstance.get(url);
+
+		// Returning the received data if the status is truthy, otherwise returning the received message
+		return response.data.status
+			? response.data.data
+			: response.data.message;
+	} catch (error) {
+		console.error("An error occurred:", error);
+		// Throwing the error so it can be handled by the calling function
+		throw error;
+	}
+}
+
+/**
+ * Makes a POST request to the specified URL with the specified data and returns the received data or message in function of the status.
+ *
+ * @param {string} url - The URL to send data to.
+ * @param {object} data - The data to send.
+ * @returns {Promise} - A promise that resolves to the received data or message.
+ */
+export async function createData(url, data) {
+	try {
+		// Making a POST request with the specified data
+		const response = await apiInstance.post(url, data);
+
+		// Returning the received data if the status is truthy, otherwise returning the received message
+		return response.data.status
+			? response.data.data
+			: response.data.message;
+	} catch (error) {
+		console.error("An error occurred:", error);
+		// Throwing the error so it can be handled by the calling function
+		throw error;
+	}
+}
+
+/**
+ * Makes a PATCH request to the specified URL with the specified data and returns the received data or message in function of the status.
+ *
+ * @param {string} url - The URL to send data to.
+ * @param {object} data - The data to send.
+ * @returns {Promise} - A promise that resolves to the received data or message.
+ */
+export async function updateData(url, data) {
+	try {
+		// Making a PATCH request with the specified data
+		const response = await apiInstance.patch(url, data);
+
+		// Returning the received data if the status is truthy, otherwise returning the received message
+		return response.data.status
+			? response.data.data
+			: response.data.message;
+	} catch (error) {
+		console.error("An error occurred:", error);
+		// Throwing the error so it can be handled by the calling function
+		throw error;
+	}
+}
+
+/**
+ * Makes a DELETE request to the specified URL and returns the received data or message in function of the status.
+ *
+ * @param {string} url - The URL to delete data from.
+ * @returns {Promise} - A promise that resolves to the received data or message.
+ */
+export async function deleteData(url) {
+	try {
+		// Making a DELETE request
+		const response = await apiInstance.delete(url);
+
+		// Returning the received data if the status is truthy, otherwise returning the received message
+		return response.data.status
+			? response.data.data
+			: response.data.message;
+	} catch (error) {
+		console.error("An error occurred:", error);
+		// Throwing the error so it can be handled by the calling function
+		throw error;
+	}
+}
 
 // Creating a basic axios instance for API calls
 export const apiInstance = axios.create({
 	baseURL: process.env.REACT_APP_BASE_URL,
-	timeout: 10000,
-});
-
-// Creating an axios instance specifically for user related API calls
-export const userApiInstance = axios.create({
-	baseURL: process.env.REACT_APP_USER_API_URL,
 	timeout: 10000,
 });
 

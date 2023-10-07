@@ -1,5 +1,5 @@
-// Importing the pre-configured API instance and its associated error handling function
-import { apiInstance, apiErrorHandler } from "../config/api-config";
+// Importing the pre-configured API instance
+import { apiInstance } from "../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const endpoint = process.env.REACT_APP_POST_ENDPOINT;
@@ -16,7 +16,8 @@ export const getAllPosts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all posts";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -34,7 +35,8 @@ export const getSinglePost = async (postId) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting the specified post";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -52,6 +54,7 @@ export const getPostsBySearch = async (searchTerm) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem searching for " + searchTerm;
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };

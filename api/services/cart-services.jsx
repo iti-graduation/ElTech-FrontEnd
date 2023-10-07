@@ -1,5 +1,5 @@
-// Importing the pre-configured API instance and its associated error handling function
-import { apiInstance, apiErrorHandler } from "../config/api-config";
+// Importing the pre-configured API instance
+import { apiInstance } from "../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const endpoint = process.env.REACT_APP_CART_ENDPOINT;
@@ -19,7 +19,8 @@ export const getAllCarts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all carts";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -40,7 +41,8 @@ export const getSingleCart = async (cartId) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting the specified cart";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
 
@@ -62,6 +64,7 @@ export const getUserCarts = async (userId) => {
 	} catch (error) {
 		const msg =
 			"There was a problem getting the carts of the specified user";
-		apiErrorHandler(error, msg);
+		console.log(error);
+		throw new Error(msg);
 	}
 };
