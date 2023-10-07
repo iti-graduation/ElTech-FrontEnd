@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-// import slices
+import languageSlice from "../actions/languageSlice"
+import themeSlice from "../actions/themeSlice"
 
 export default configureStore({
     reducer: {
-        // slices
+        languageSlice,
+        themeSlice
     },
 });
