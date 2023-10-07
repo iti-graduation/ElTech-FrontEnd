@@ -79,3 +79,33 @@ export const getUserPosts = async (userId) => {
 		throw new Error(msg);
 	}
 };
+
+export const register = async (userData) => {
+	try {
+		const url = endpoint + "add";
+		const response = await apiInstance.post(url, userData, {
+			headers: { "Content-Type": "application/json" },
+		});
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem in registeration";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+export const login = async (userData) => {
+	try {
+		const url = "auth/login";
+		const response = await apiInstance.post(url, userData, {
+			headers: { "Content-Type": "application/json" },
+		});
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem logging in";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
