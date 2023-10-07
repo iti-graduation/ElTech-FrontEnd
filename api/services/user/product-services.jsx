@@ -1,5 +1,5 @@
 // Importing the pre-configured API instance
-import { apiInstance } from "../config/api-config";
+import { apiInstance } from "../../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;

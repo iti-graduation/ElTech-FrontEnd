@@ -2,7 +2,8 @@
 import { apiInstance } from "../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
-const endpoint = process.env.REACT_APP_CART_ENDPOINT;
+const cartEndpoint = process.env.REACT_APP_CART_ENDPOINT;
+const userEndpoint = process.env.REACT_APP_USER_ENDPOINT;
 
 /**
  * Retrieves all carts from the API's endpoint
@@ -14,7 +15,7 @@ const endpoint = process.env.REACT_APP_CART_ENDPOINT;
 
 export const getAllCarts = async () => {
 	try {
-		const response = await apiInstance.get(endpoint);
+		const response = await apiInstance.get(cartEndpoint);
 
 		return response.data;
 	} catch (error) {
@@ -35,7 +36,7 @@ export const getAllCarts = async () => {
 
 export const getSingleCart = async (cartId) => {
 	try {
-		const url = endpoint + cartId;
+		const url = cartEndpoint + cartId;
 		const response = await apiInstance.get(url);
 
 		return response.data;
@@ -47,23 +48,17 @@ export const getSingleCart = async (cartId) => {
 };
 
 /**
- * Retrieves all carts associated with a specific user from the API's endpoint using their ID
- * @async
- * @function getUserCarts
- * @param {string} userId - The ID of the specific user for which to retrieve carts
- * @throws {Error} When the API call fails
- * @returns {Promise<object>} The data from the API's response
+ * Fetches all users
+ * @return {Object} The data of all users
+ * @throws {Error} If there was a problem getting all users
  */
-
-export const getUserCarts = async (userId) => {
+export const getAllUsers = async () => {
 	try {
-		const url = endpoint + `user/${userId}`;
-		const response = await apiInstance.get(url);
+		const response = await apiInstance.get(userEndpoint);
 
 		return response.data;
 	} catch (error) {
-		const msg =
-			"There was a problem getting the carts of the specified user";
+		const msg = "There was a problem getting all users";
 		console.log(error);
 		throw new Error(msg);
 	}
