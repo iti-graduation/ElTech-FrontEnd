@@ -9,6 +9,8 @@ import { useEffect } from "react";
 // Importing Link component from react-router-dom
 import { Link } from "react-router-dom";
 
+import DropdownMenu from "../components/Header/DropdownMenu";
+
 // Importing images for website components
 import logo from "./../assets/images/logo.png";
 import flag from "./../assets/images/flag.png";
@@ -201,7 +203,7 @@ export default function Header() {
 								</a>
 							</div>
 							<ul>
-								<li className="active menu-item-has-children">
+								{/* <li className="active menu-item-has-children">
 									<a href="javascript:void(0);">Home</a>
 									<ul className="sub-menu">
 										<li>
@@ -295,7 +297,34 @@ export default function Header() {
 											</a>
 										</li>
 									</ul>
-								</li>
+								</li> */}
+								<DropdownMenu
+									className="active menu-item-has-children"
+									name="Home"
+									items={[
+										{ to: "/", content: "Home One" },
+										{ to: "/", content: "Home Two" },
+									]}
+								/>
+								<DropdownMenu
+									className="menu-item-has-children"
+									name="Shop"
+									items={[
+										{ to: "/", content: "Shop Fullwidth" },
+										{
+											to: "/",
+											content: "Shop Left Sidebar",
+										},
+									]}
+								/>
+								<DropdownMenu
+									className="menu-item-has-children"
+									name="Pages"
+									items={[
+										{ to: "/", content: "About Page" },
+										{ to: "/", content: "Newsletter Page" },
+									]}
+								/>
 								<li>
 									<a href="contact.html">Contact</a>
 								</li>
