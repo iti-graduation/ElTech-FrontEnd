@@ -1,8 +1,10 @@
+import t1 from "./../../assets/images/home/t1.jpg";
+
 export default function ProductCard() {
 	return (
 		<div className="single-trending-product">
 			<div className="trend-thumb">
-				<img src="assets/images/home/t1.jpg" alt="" />
+				<img src={t1} alt="" />
 			</div>
 			<div className="tr-pro-detail">
 				<h3>

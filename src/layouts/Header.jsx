@@ -1,5 +1,5 @@
 // Importing jQuery from node modules
-import $ from "./../../node_modules/jquery/dist/jquery";
+import $ from "jquery";
 // Importing TimelineLite, Power2 from gsap core module
 import { TimelineLite, Power2 } from "gsap/gsap-core";
 
@@ -22,10 +22,10 @@ export default function Header() {
 		$(window).on("scroll", function () {
 			// When the window is scrolled down 40px from the top, it adds classes to the .fix-header element
 			if ($(window).scrollTop() > 40) {
-				$(".fix-header").addclassName("sticky animated fadeIn");
+				$(".fix-header").addClass("sticky animated fadeIn");
 			} else {
 				// When the window is scrolled up to top, it removes classes from the .fix-header element
-				$(".fix-header").removeclassName("sticky animated fadeIn");
+				$(".fix-header").removeClass("sticky animated fadeIn");
 			}
 		});
 
