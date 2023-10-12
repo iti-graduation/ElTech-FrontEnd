@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import "./../../node_modules/bootstrap/dist/js/bootstrap.bundle";
-import "./../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 import $ from "./../../node_modules/jquery/dist/jquery";
 
 export default function Preloader() {

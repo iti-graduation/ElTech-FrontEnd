@@ -1,5 +1,7 @@
 import $ from "./../../node_modules/jquery/dist/jquery";
+
 import { useEffect } from "react";
+
 import logo from "./../assets/images/logo.png";
 import flag from "./../assets/images/flag.png";
 import cart from "./../assets/images/cart.png";
