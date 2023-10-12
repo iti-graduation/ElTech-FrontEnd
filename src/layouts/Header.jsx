@@ -1,4 +1,20 @@
+import $ from "./../../node_modules/jquery/dist/jquery";
+import { useEffect } from "react";
+import logo from "./../assets/images/logo.png";
+import flag from "./../assets/images/flag.png";
+import cart from "./../assets/images/cart.png";
+
 export default function Header() {
+	useEffect(() => {
+		$(window).on("scroll", function () {
+			if ($(window).scrollTop() > 40) {
+				$(".fix-header").addClass("sticky animated fadeIn");
+			} else {
+				$(".fix-header").removeClass("sticky animated fadeIn");
+			}
+		});
+	}, []);
+
 	return (
 		<header className="header-01 fix-header">
 			<div className="container-fluid">
@@ -6,7 +22,7 @@ export default function Header() {
 					<div className="col-lg-2 col-md-2">
 						<div className="logo">
 							<a href="index.html">
-								<img src="assets/images/logo.png" alt="Goru" />
+								<img src={logo} alt="Goru" />
 							</a>
 						</div>
 					</div>
@@ -132,7 +148,7 @@ export default function Header() {
 								className="select-country"
 								href="javascript:void(0);"
 							>
-								<img src="assets/images/flag.png" alt="" />
+								<img src={flag} alt="" />
 								Eng
 							</a>
 							<a
@@ -150,7 +166,7 @@ export default function Header() {
 							</a>
 							<a className="carts" href="javascript:void(0);">
 								<span>4</span>
-								<img src="assets/images/cart.png" alt="" />
+								<img src={cart} alt="" />
 							</a>
 						</div>
 					</div>
