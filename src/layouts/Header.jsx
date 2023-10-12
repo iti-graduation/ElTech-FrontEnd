@@ -1,4 +1,5 @@
 import $ from "./../../node_modules/jquery/dist/jquery";
+import { TimelineLite, Power2 } from "gsap/gsap-core";
 
 import { useEffect } from "react";
 
@@ -14,6 +15,116 @@ export default function Header() {
 			} else {
 				$(".fix-header").removeclassName("sticky animated fadeIn");
 			}
+		});
+
+		$(window).on("load resize", function (e) {
+			if ($(window).width() < 991) {
+				$(".mobile-btn a").on("click", function (e) {
+					e.preventDefault();
+					$(".mobile-menu > ul").stop(true, true).slideToggle();
+				});
+				$(".mobile-menu ul li.menu-item-has-children").each(
+					function () {
+						var $this = $(this);
+						$this.append(
+							'<span class="submenu-toggler"><i class="twi-caret-down"></i></span>'
+						);
+					}
+				);
+				$(
+					".mobile-menu ul li.menu-item-has-children > span.submenu-toggler"
+				).on("click", function () {
+					var $this = $(this);
+
+					if ($(this).hasClass("active-span")) {
+						$("i", $this)
+							.removeClass("twi-caret-up")
+							.addClass("twi-caret-down");
+					} else {
+						$("i", $this)
+							.addClass("twi-caret-up")
+							.removeClass("twi-caret-down");
+					}
+
+					$(this).prev("ul.sub-menu").slideToggle();
+					$(this).toggleClass("active-span");
+				});
+			}
+		});
+
+		$("#hamburger").on("click", function (e) {
+			e.preventDefault();
+			$(".popup_menu").addClass("active").fadeIn();
+			setTimeout(function () {
+				if ($(".popup_menu").hasClass("active")) {
+					var tlMenu = new TimelineLite();
+					tlMenu.set($(".animated_menu"), { y: 80, opacity: 0 });
+					$(".animated_menu").each(function (index, element) {
+						tlMenu.to(
+							element,
+							0.5,
+							{
+								y: 0,
+								opacity: 1,
+								delay: 0.4,
+								ease: Power2.easeOut,
+							},
+							index * 0.1
+						);
+					});
+				} else {
+					var tlMenu = new TimelineLite();
+					$(".animated_menu").each(function (index, element) {
+						tlMenu.to(
+							element,
+							0.25,
+							{ y: -80, opacity: 0, ease: Power2.easeIn },
+							index * 0.05
+						);
+					});
+				}
+			}, 20);
+		});
+
+		if ($(".menu_popup").length > 0) {
+			$(".menu_popup ul li.menu-item-has-children > a").on(
+				"click",
+				function (e) {
+					e.preventDefault();
+					if ($(this).parent("li").hasClass("active")) {
+						$(this).parent("li").removeClass("active");
+						$(this).next("ul.sub-menu").slideUp("slow");
+					} else {
+						$(".menu-item-has-children ul.sub-menu").slideUp(
+							"slow"
+						);
+						$(".menu-item-has-children.active").removeClass(
+							"active"
+						);
+						$(this).parent().toggleClass("active");
+						$(this).next("ul.sub-menu").slideToggle("slow");
+					}
+				}
+			);
+		}
+
+		$("#close_menu").on("click", function () {
+			var tlMenu = new TimelineLite();
+			$(".animated_menu").each(function (index, element) {
+				tlMenu.to(
+					element,
+					0.25,
+					{ y: -80, opacity: 0, ease: Power2.easeIn },
+					index * 0.05
+				);
+			});
+			$(".popup_menu ul.sub-menu").slideUp("slow", function () {
+				$(".menu-item-has-children.active").removeClass("active");
+				$(".popup_menu").removeClass("active");
+			});
+			setTimeout(function () {
+				$(".popup_menu").fadeOut();
+			}, 500);
 		});
 	}, []);
 
