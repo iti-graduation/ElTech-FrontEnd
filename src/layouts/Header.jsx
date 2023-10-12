@@ -9,20 +9,30 @@ import cart from "./../assets/images/cart.png";
 
 export default function Header() {
 	useEffect(() => {
+		// This function adds a scroll event listener to the window
 		$(window).on("scroll", function () {
+			// When the window is scrolled down 40px from the top, it adds classes to the .fix-header element
 			if ($(window).scrollTop() > 40) {
 				$(".fix-header").addclassName("sticky animated fadeIn");
 			} else {
+				// When the window is scrolled up to top, it removes classes from the .fix-header element
 				$(".fix-header").removeclassName("sticky animated fadeIn");
 			}
 		});
 
+		// This function adds load and resize event listeners to the window
 		$(window).on("load resize", function (e) {
+			// When the window is less than 991px wide, it modifies the .mobile-btn and .mobile-menu elements
 			if ($(window).width() < 991) {
+				// Toggling dropdown menu on click event
 				$(".mobile-btn a").on("click", function (e) {
+					// Prevents the default action of the event
 					e.preventDefault();
+					// Stops the currently-running animation on the matched elements.
 					$(".mobile-menu > ul").stop(true, true).slideToggle();
 				});
+
+				// Appends the span.submenu-toggler to each .menu-item-has-children
 				$(".mobile-menu ul li.menu-item-has-children").each(
 					function () {
 						var $this = $(this);
@@ -31,12 +41,16 @@ export default function Header() {
 						);
 					}
 				);
+
+				// Toggling sub-menu on click event of span.submenu-toggler
 				$(
 					".mobile-menu ul li.menu-item-has-children > span.submenu-toggler"
 				).on("click", function () {
 					var $this = $(this);
 
+					// If the span.submenu-toggler contains the .active-span class
 					if ($(this).hasClass("active-span")) {
+						// Changing the class name of the i element inside the span for visual manipulation
 						$("i", $this)
 							.removeClass("twi-caret-up")
 							.addClass("twi-caret-down");
@@ -46,20 +60,31 @@ export default function Header() {
 							.removeClass("twi-caret-down");
 					}
 
+					// Toggling sub-menu display
 					$(this).prev("ul.sub-menu").slideToggle();
+					// Togglening active-span class
 					$(this).toggleClass("active-span");
 				});
 			}
 		});
 
+		// Listens for a click event on an element with id hamburger
 		$("#hamburger").on("click", function (e) {
+			// Prevents the default action of the event
 			e.preventDefault();
+			// Adds active class to .popup_menu and fades it in
 			$(".popup_menu").addClass("active").fadeIn();
+			// Delays the following code execution for 20 milliseconds
 			setTimeout(function () {
+				// Checks if .popup_menu has a class active
 				if ($(".popup_menu").hasClass("active")) {
+					// Creates an instance of TimelineLite
 					var tlMenu = new TimelineLite();
+					// Sets initial properties on .animated_menu
 					tlMenu.set($(".animated_menu"), { y: 80, opacity: 0 });
+					// Iterates through all elements with .animated_menu class
 					$(".animated_menu").each(function (index, element) {
+						// Animates and manipulates properties of each .animated_menu element
 						tlMenu.to(
 							element,
 							0.5,
@@ -73,8 +98,11 @@ export default function Header() {
 						);
 					});
 				} else {
+					// Creates an instance of TimelineLite
 					var tlMenu = new TimelineLite();
+					// Iterates through all elements with .animated_menu class
 					$(".animated_menu").each(function (index, element) {
+						// Animates and manipulates properties of each .animated_menu element
 						tlMenu.to(
 							element,
 							0.25,
@@ -86,31 +114,44 @@ export default function Header() {
 			}, 20);
 		});
 
+		// Checks if any element with .menu_popup class is present
 		if ($(".menu_popup").length > 0) {
+			// Listens for click event on child anchor tags of li.menu-item-has-children within .menu_popup ul
 			$(".menu_popup ul li.menu-item-has-children > a").on(
 				"click",
 				function (e) {
+					// Prevents the default action of the event
 					e.preventDefault();
+					// Checks if the parent li of the clicked anchor has class active
 					if ($(this).parent("li").hasClass("active")) {
+						// If true, removes active class and slides up the ul.sub-menu next to the anchor
 						$(this).parent("li").removeClass("active");
 						$(this).next("ul.sub-menu").slideUp("slow");
 					} else {
+						// Slides up all the ul.sub-menus within li.menu-item-has-children
 						$(".menu-item-has-children ul.sub-menu").slideUp(
 							"slow"
 						);
+						// Removes active class from li.menu-item-has-children with active class
 						$(".menu-item-has-children.active").removeClass(
 							"active"
 						);
+						// Toggle active class on the parent li of the clicked anchor
 						$(this).parent().toggleClass("active");
+						// Toggles the sliding of ul.sub-menu next to the anchor
 						$(this).next("ul.sub-menu").slideToggle("slow");
 					}
 				}
 			);
 		}
 
+		// Listens for click event on element with id close_menu
 		$("#close_menu").on("click", function () {
+			// Creates an instance of TimelineLite
 			var tlMenu = new TimelineLite();
+			// Iterates through all elements with .animated_menu class
 			$(".animated_menu").each(function (index, element) {
+				// Animates and manipulates properties of each .animated_menu element
 				tlMenu.to(
 					element,
 					0.25,
@@ -118,11 +159,16 @@ export default function Header() {
 					index * 0.05
 				);
 			});
+			// Slides up all ul.sub-menus within .popup_menu and performs a callback function on complete
 			$(".popup_menu ul.sub-menu").slideUp("slow", function () {
+				// Removes the active class from li.menu-item-has-children with active class
 				$(".menu-item-has-children.active").removeClass("active");
+				// Removes active class from .popup_menu
 				$(".popup_menu").removeClass("active");
 			});
+			// Delays the following code execution for 500 milliseconds
 			setTimeout(function () {
+				// Fades out the .popup_menu
 				$(".popup_menu").fadeOut();
 			}, 500);
 		});
