@@ -1,8 +1,15 @@
+// Importing jQuery from node modules
 import $ from "./../../node_modules/jquery/dist/jquery";
+// Importing TimelineLite, Power2 from gsap core module
 import { TimelineLite, Power2 } from "gsap/gsap-core";
 
+// Importing useEffect hook from react
 import { useEffect } from "react";
 
+// Importing Link component from react-router-dom
+import { Link } from "react-router-dom";
+
+// Importing images for website components
 import logo from "./../assets/images/logo.png";
 import flag from "./../assets/images/flag.png";
 import cart from "./../assets/images/cart.png";
@@ -180,9 +187,9 @@ export default function Header() {
 				<div className="row">
 					<div className="col-lg-2 col-md-2">
 						<div className="logo">
-							<a href="index.html">
+							<Link to="/">
 								<img src={logo} alt="Goru" />
-							</a>
+							</Link>
 						</div>
 					</div>
 					<div className="col-lg-6 col-md-6">
