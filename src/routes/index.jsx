@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Home from '../pages/Home'
 
 // import pages
 // const PageName = React.lazy(() => import('path'));
@@ -11,9 +12,7 @@ export default function Router() {
             <></>
         }>
             <Routes>
-                {/*
-                <Route path="/" element={<pageName />} />
-                */}
+                <Route path="/" element={<Home />} />
             </Routes>
         </Suspense>
     )

@@ -20,6 +20,9 @@ import "./styles/site-themes/responsive.css";
 import "./styles/site-themes/pe-icon-7-stroke.css";
 
 import "./../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import "./../node_modules/jquery/dist/jquery.min.js";
+import "./../node_modules/owl.carousel/dist/owl.carousel.min.js";
+
 
 import App from "./App";
 
