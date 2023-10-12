@@ -10,9 +10,9 @@ export default function Header() {
 	useEffect(() => {
 		$(window).on("scroll", function () {
 			if ($(window).scrollTop() > 40) {
-				$(".fix-header").addClass("sticky animated fadeIn");
+				$(".fix-header").addclassName("sticky animated fadeIn");
 			} else {
-				$(".fix-header").removeClass("sticky animated fadeIn");
+				$(".fix-header").removeclassName("sticky animated fadeIn");
 			}
 		});
 	}, []);

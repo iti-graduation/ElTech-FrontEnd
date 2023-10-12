@@ -17,6 +17,8 @@ import "./styles/site-themes/themewar-icons.css";
 import "./styles/site-themes/animate.css";
 import "./styles/site-themes/flaticon.css";
 
+import "./../node_modules/bootstrap/dist/js/bootstrap.bundle";
+
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
