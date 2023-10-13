@@ -1,3 +1,4 @@
+// Importing DropdownItem component from local file
 import DropdownItem from "./DropdownItem";
 
 export default function DropdownMenu({ name, items, className }) {
