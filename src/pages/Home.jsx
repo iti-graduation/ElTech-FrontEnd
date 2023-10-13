@@ -1,3 +1,7 @@
+
+import Clients from "../layouts/Clients";
+import Services from "../layouts/Services";
+import Slider from "../layouts/Slider";
 import Preloader from "../layouts/Preloader";
 import Header from "../layouts/Header";
 import PopUpSearch from "../layouts/PopUpSearch";
@@ -9,7 +13,10 @@ export default function Home() {
 			<Preloader />
 			<Header />
 			<PopUpSearch />
+      <Slider />
+      <Services />
 			<Trending />
+      <Clients />      
 		</>
 	);
 }
