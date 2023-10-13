@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-export default function ProductsRow() {
+const ProductsRow = () => {
 	return (
 		<div className="row">
 			<div className="col-lg-6 col-md-6">
@@ -12,3 +12,5 @@ export default function ProductsRow() {
 		</div>
 	);
 }
+
+export default ProductsRow;

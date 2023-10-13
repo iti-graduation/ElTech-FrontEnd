@@ -1,6 +1,6 @@
-import t1 from "./../../assets/images/home/t1.jpg";
+import t1 from "../../../assets/images/home/t1.jpg";
 
-export default function ProductCard() {
+const ProductCard = () => {
 	return (
 		<div className="single-trending-product">
 			<div className="trend-thumb">
@@ -32,3 +32,5 @@ export default function ProductCard() {
 		</div>
 	);
 }
+
+export default ProductCard;

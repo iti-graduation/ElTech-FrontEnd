@@ -1,7 +1,7 @@
 // Importing DropdownItem component from local file
 import DropdownItem from "./DropdownItem";
 
-export default function DropdownMenu({ name, items, className }) {
+const DropdownMenu = ({ name, items }) => {
 	return (
 		<li>
 			<a href="javascript:void(0);">{name}</a>
@@ -17,3 +17,5 @@ export default function DropdownMenu({ name, items, className }) {
 		</li>
 	);
 }
+
+export default DropdownMenu;

@@ -1,3 +1,4 @@
+
 const SliderItemImage = ({ image }) => {
   return (
     <div

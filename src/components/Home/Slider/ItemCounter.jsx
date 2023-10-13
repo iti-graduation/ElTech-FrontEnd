@@ -1,5 +1,4 @@
 
-
 const ItemCounter = () => {
   return (
     <div className="slider-counter">

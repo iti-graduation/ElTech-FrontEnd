@@ -51,6 +51,7 @@ License URI:
     animation-delay: 1s
 }
 .trending-section{
+	background: #fff;
 	position: relative;
 	padding: 120px 0 110px;
 	background-position: left center;

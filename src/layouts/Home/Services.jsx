@@ -1,10 +1,7 @@
-
-import React from 'react';
-
-import Truck from "../assets/images/home/truck.png";
-import Headphone from "../assets/images/home/headphone.png";
-import Undo from "../assets/images/home/undo.png";
-import ServiceCard from '../components/Home/Services/ServiceCard';
+import Truck from "../../assets/images/home/truck.png";
+import Headphone from "../../assets/images/home/headphone.png";
+import Undo from "../../assets/images/home/undo.png";
+import ServiceCard from '../../components/Home/Services/ServiceCard';
 
 const Services = () => {
   return (
