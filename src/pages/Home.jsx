@@ -6,6 +6,7 @@ import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
 import Trending from "../layouts/Home/Trending";
 import CategorySection from "../layouts/Home/Categories";
+import MailChimpSection from "../layouts/Home/MailChimp";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Services />
       <Trending />
       <Clients />
+      <MailChimpSection />
     </>
   );
 }
