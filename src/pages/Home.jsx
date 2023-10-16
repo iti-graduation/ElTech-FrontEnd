@@ -5,6 +5,8 @@ import Preloader from "../layouts/Home/Preloader";
 import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
 import Trending from "../layouts/Home/Trending";
+import WeeklyDeal from "../layouts/Home/WeeklyDeal";
+import News from "../layouts/Home/News";
 import CategorySection from "../layouts/Home/Categories";
 import Popular from "../layouts/Home/Popular";
 
@@ -18,6 +20,8 @@ export default function Home() {
       <CategorySection />
       <Services />
       <Trending />
+      <WeeklyDeal />
+      <News />
       <Clients />
       <Popular />
     </>

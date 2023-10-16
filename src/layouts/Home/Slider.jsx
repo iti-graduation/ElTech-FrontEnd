@@ -8,7 +8,7 @@ const Slider = () => {
 
   return (
     <section className="slider-01">
-      <ScrollButton ScrollImage={Scroll} />
+      <ScrollButton ScrollImage={Scroll} content={"scroll to explore"} to={"#coupone"}/>
 
       <ItemCounter />
 
