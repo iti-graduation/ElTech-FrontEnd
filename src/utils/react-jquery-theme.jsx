@@ -31,7 +31,7 @@ License URI:
  import { TimelineLite, Power2 } from "gsap/gsap-core";
 
 
- const globalReactJQueryInitializer = (function ($) {
+ const globalReactJQueryInitializer = (function () {
 
     /* Init Vars */
     var trending_slider = window.$('.trending-slider'),
@@ -512,7 +512,7 @@ License URI:
         });
 
         if (required === 0) {
-            $.ajax({
+            window.$.ajax({
                 type: 'POST',
                 url: 'assets/ajax/mail.php',
                 data: {form_data: form_data},
@@ -520,7 +520,7 @@ License URI:
                     window.$('button[type="submit"]', $this).removeAttr('disabled');
                     window.$('.goru_loader', $this).fadeOut();
 
-                    $this.remove('.goru_con_message');
+                    window.$(this).remove('.goru_con_message');
                     window.$('.goru_con_message', $this).fadeIn().html('Congratulation! Message successfully sent.');
                     setTimeout(function () {
                         window.$('.goru_con_message', $this).fadeOut().html('');
