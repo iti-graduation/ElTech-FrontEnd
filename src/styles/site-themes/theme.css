@@ -500,6 +500,9 @@ header.sticky .header-cogs{
 
 
 /*----  Product Category  ------*/
+.categorie-section {
+    background-color: #fff;
+}
 .single-cate{
     position: relative;
     background: #fff;
