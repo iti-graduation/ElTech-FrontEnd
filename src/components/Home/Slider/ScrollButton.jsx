@@ -1,8 +1,10 @@
+// Importing Link component from react-router-dom
+import { Link } from "react-router-dom";
 
-const ScrollButton = ({ ScrollImage }) => {
+const ScrollButton = ({ ScrollImage, content, to }) => {
   return (
     <div className="scroll-down">
-      <a href="/">scroll to explore</a>
+      <Link to={to}>{content}</Link>
       <img src={ScrollImage} alt="" />
     </div>
   );
