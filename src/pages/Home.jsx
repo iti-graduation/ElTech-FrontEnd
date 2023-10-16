@@ -8,8 +8,8 @@ import Trending from "../layouts/Home/Trending";
 import WeeklyDeal from "../layouts/Home/WeeklyDeal";
 import News from "../layouts/Home/News";
 import CategorySection from "../layouts/Home/Categories";
+import MailChimpSection from "../layouts/Home/MailChimp";
 import Popular from "../layouts/Home/Popular";
-
 export default function Home() {
   return (
     <>
@@ -23,6 +23,7 @@ export default function Home() {
       <WeeklyDeal />
       <News />
       <Clients />
+      <MailChimpSection />
       <Popular />
     </>
   );
