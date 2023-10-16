@@ -1,6 +1,6 @@
 import React from 'react'
 
-import img1 from "../../../assets/images/home/1.jpg";
+import img1 from "../../../assets/images/home/blog/1.jpg";
 
 function NewsCard() {
     return (
