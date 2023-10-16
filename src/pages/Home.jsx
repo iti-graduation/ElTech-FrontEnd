@@ -17,9 +17,7 @@ export default function Home() {
       <Services />
       <Trending />
       <Clients />
-      {/*Remove this comment when all other sections are added
-        <Footer />
-      */}
+      <Footer />
     </>
   );
 }
