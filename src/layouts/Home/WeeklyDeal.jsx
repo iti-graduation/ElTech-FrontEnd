@@ -1,6 +1,6 @@
 import React from 'react';
 
-import img1 from "../../assets/images/home/1.png";
+import img1 from "../../assets/images/home/1.jpg";
 import shape3 from "../../assets/images/home/shape3.png";
 
 function WeeklyDeal() {
