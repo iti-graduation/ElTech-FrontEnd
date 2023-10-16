@@ -22,12 +22,12 @@ export default function Home() {
       <CategorySection />
       <Services />
       <Trending />
+      <Popular />
       <WeeklyDeal />
       <News />
       <Clients />
-      <Footer />
       <MailChimpSection />
-      <Popular />
+      <Footer />
     </>
   );
 }

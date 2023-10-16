@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-export default function renderCategoryIcons() {
+const CategoryIcons = () => {
     const categories = [
       'flaticon-smart-watch',
       'flaticon-drone',
@@ -13,7 +13,7 @@ export default function renderCategoryIcons() {
       'flaticon-wifi-router',
       'flaticon-pc',
     ];
-  
+
     return categories.map((category, index) => (
       <div key={index} className="col-lg-2 col-md-4">
         <Link to="#" className="single-cate">
@@ -21,4 +21,6 @@ export default function renderCategoryIcons() {
         </Link>
       </div>
     ));
-  }
+}
+
+export default CategoryIcons;

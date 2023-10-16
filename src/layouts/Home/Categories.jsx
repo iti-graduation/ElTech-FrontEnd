@@ -1,6 +1,6 @@
 import React from 'react';
 import shape1 from "../../assets/images/home/shape1.png"
-import CategoriesIcon from "../../components/Home/Categories/CategoriesIcon";
+import CategoryIcons from "../../components/Home/Categories/CategoriesIcon";
 
 
 const CategorySection = () => {
@@ -17,7 +17,7 @@ const CategorySection = () => {
           </div>
         </div>
         <div className="row">
-          <CategoriesIcon />
+          <CategoryIcons />
         </div>
       </div>
       <div className="cate-shage"><img src={shape1} alt="" /></div>
