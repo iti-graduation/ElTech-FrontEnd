@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
-
 import CartItem from "../../components/Home/Cart/CartItem";
 
-export default function CartLayout() {
+const CartLayout = () => {
 	return (
 		<section className="cart-section">
 			<div className="container">
@@ -134,4 +132,6 @@ export default function CartLayout() {
 			</div>
 		</section>
 	);
-}
+};
+
+export default CartLayout;
