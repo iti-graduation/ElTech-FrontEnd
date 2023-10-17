@@ -9,7 +9,7 @@ export default function Cart() {
 	return (
 		<>
 			<Preloader />
-			<Header />
+			<Header className="inner-header" />
 			<PopUpSearch />
 			<Banner name="Cart" />
 			<CartLayout />
