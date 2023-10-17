@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import productImg1 from "../../../assets/images/cart/1.jpg";
 
-export default function CartItem({ product }) {
+const CartItem = ({ product }) => {
 	return (
 		<tr className="cart-item">
 			<td className="product-thumbnail-title">
@@ -57,4 +57,6 @@ export default function CartItem({ product }) {
 			</td>
 		</tr>
 	);
-}
+};
+
+export default CartItem;
