@@ -1,8 +1,8 @@
 import Preloader from "../layouts/Home/Preloader";
 import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
-import Banner from "../layouts/Home/Banner";
-import CartLayout from "../layouts/Home/CartLayout";
+import Banner from "../layouts/Shared/Banner";
+import CartLayout from "../layouts/Cart/CartLayout";
 import Footer from "../layouts/Home/Footer";
 
 export default function Cart() {
