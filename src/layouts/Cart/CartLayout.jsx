@@ -1,6 +1,6 @@
-import CartItem from "../../components/Home/Cart/CartItem";
-import CartTotal from "../../components/Home/Cart/CartTotal";
-import DiscountCoupon from "../../components/Home/Cart/DiscountCoupon";
+import CartItem from "../../components/Cart/CartItem";
+import CartTotal from "../../components/Cart/CartTotal";
+import DiscountCoupon from "../../components/Cart/DiscountCoupon";
 
 const CartLayout = () => {
 	return (

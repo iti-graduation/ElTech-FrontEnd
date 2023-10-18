@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import productImg1 from "../../../assets/images/cart/1.jpg";
+import productImg1 from "../../assets/images/cart/1.jpg";
 
 const CartItem = ({ product }) => {
 	return (
