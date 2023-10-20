@@ -5,7 +5,7 @@ import Banner from "../layouts/Shared/Banner";
 import Footer from "../layouts/Home/Footer";
 import WishlistLayout from "../layouts/WishList/WishlistLayout";
 
- const Whishlist = () => {
+ const Wishlist = () => {
 	return (
 		<>
 			<Preloader />
@@ -18,4 +18,4 @@ import WishlistLayout from "../layouts/WishList/WishlistLayout";
 	);
 }
 
-export default Whishlist;
+export default Wishlist;
