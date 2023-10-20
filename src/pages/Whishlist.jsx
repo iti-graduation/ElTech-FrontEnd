@@ -3,7 +3,7 @@ import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
 import Banner from "../layouts/Shared/Banner";
 import Footer from "../layouts/Home/Footer";
-import WhishlistLayout from "../layouts/WhishList/WhishlistLayout";
+import WishlistLayout from "../layouts/WishList/WishlistLayout";
 
  const Whishlist = () => {
 	return (
@@ -11,8 +11,8 @@ import WhishlistLayout from "../layouts/WhishList/WhishlistLayout";
 			<Preloader />
 			<Header className="inner-header" />
 			<PopUpSearch />
-			<Banner name="Whish" />
-			<WhishlistLayout />
+			<Banner name="Wishlist" />
+			<WishlistLayout />
 			<Footer className="inner-footer"/>
 		</>
 	);

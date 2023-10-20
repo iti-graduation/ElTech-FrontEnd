@@ -1,5 +1,5 @@
 import React from 'react'
-import WhishlistTable from '../../components/WhishList/WhishlistTable'
+import WishlistTable from '../../components/WishList/WishlistTable'
 
 function WhishlistLayout() {
   return (
@@ -8,7 +8,7 @@ function WhishlistLayout() {
         <div className="row">
           <div className="col-md-12">
             <form className="woocommerce-wishlist-form" action="#">
-              <WhishlistTable />
+              <WishlistTable />
             </form>
           </div>
         </div>

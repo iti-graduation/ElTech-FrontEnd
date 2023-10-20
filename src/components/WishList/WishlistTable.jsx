@@ -1,7 +1,7 @@
 import React from 'react'
-import WhishlistTableRaw from './WhishlistTableRaw'
+import WishlistTableRaw from './WishlistTableRaw'
 
-function WhishlistTable() {
+function WishlistTable() {
     return (
         <table className="wishlist-table">
             <thead>
@@ -14,12 +14,12 @@ function WhishlistTable() {
                 </tr>
             </thead>
             <tbody>
-                <WhishlistTableRaw />
-                <WhishlistTableRaw />
-                <WhishlistTableRaw />
+                <WishlistTableRaw />
+                <WishlistTableRaw />
+                <WishlistTableRaw />
             </tbody>
         </table>
     )
 }
 
-export default WhishlistTable
+export default WishlistTable
