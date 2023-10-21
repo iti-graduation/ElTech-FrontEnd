@@ -1,36 +1,30 @@
-import React from 'react';
-import c1 from "../../../assets/images/blog/c1.jpg"
+import React from "react";
+import c1 from "../../../assets/images/blog/c1.jpg";
+import SingleComment from "./SingleComment";
 
 const ReviewsSection = () => {
   return (
-    <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="descriptions-tab">
+    <div
+      className="tab-pane fade"
+      id="reviews"
+      role="tabpanel"
+      aria-labelledby="descriptions-tab"
+    >
       <div className="comment-area">
         <h4 className="comment-title">2 Reviews to "Gaming Controller"</h4>
         <ol className="comment-list">
-          <li>
-            <div className="single-comment">
-              <img src={c1} alt="" />
-              <h5>
-                <a href="#">Jason Statham</a>
-                <span>July 06th, 2017</span>
-              </h5>
-              <div className="comment">
-                <p>sapien lorem et tristique nulla lectus fauc-ibus est Pellentesque dapibus</p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className="single-comment">
-              <img src={c1} alt="" />
-              <h5>
-                <a href="#">Jason Statham</a>
-                <span>July 06th, 2017</span>
-              </h5>
-              <div className="comment">
-                <p>Proin vitae dignissim enim, a iaculis sapien. nisi et dignissim efficitur</p>
-              </div>
-            </div>
-          </li>
+          <SingleComment
+            imgSrc={c1}
+            author="Jason Statham"
+            date="July 06th, 2017"
+            commentText="sapien lorem et tristique nulla lectus fauc-ibus est Pellentesque dapibus"
+          />
+          <SingleComment
+            imgSrc={c1}
+            author="Jason Statham"
+            date="July 06th, 2017"
+            commentText="sapien lorem et tristique nulla lectus fauc-ibus est Pellentesque dapibus"
+          />
         </ol>
         <div className="comment-form-wrapper">
           <h5>Add Review</h5>
