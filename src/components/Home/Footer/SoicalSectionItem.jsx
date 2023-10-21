@@ -4,6 +4,7 @@ const SoicalSectionItem = ({ soicalHref, soicalIcon }) => {
   return (
     <a href={soicalHref}>
       <i className={soicalIcon}></i>
+      <span>&nbsp;</span>
     </a>
   );
 };
