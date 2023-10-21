@@ -1,12 +1,8 @@
 import React from "react";
 import NavBar from "../../components/Home/Popular/NavBar";
-import ProductCard from "../../components/Home/Popular/ProductCard";
-import homeP1 from "../../assets/images/home/p1.jpg";
-import homeP2 from "../../assets/images/home/p2.jpg";
-import homeP3 from "../../assets/images/home/p3.jpg";
-import homeP4 from "../../assets/images/home/p4.jpg";
-import homeP5 from "../../assets/images/home/p5.jpg";
-import homeP6 from "../../assets/images/home/p6.jpg";
+
+import { popularProducts } from "../../utils/demoProducts";
+import NormalProductCard from "../../components/Shared/NormalProductCard/NormalProductCard";
 
 const Popular = () => {
   return (
@@ -31,7 +27,7 @@ const Popular = () => {
             <h2 className="sec-title">Most Popular</h2>
             <NavBar />
             {/* <div className="tab-content">
-              FIXME: Useless code built supposedly for responsiveness 
+              FIXME: Useless code built supposedly for responsiveness
               <div
                 className="tab-pane fade show in active"
                 id="all"
@@ -40,7 +36,19 @@ const Popular = () => {
               */}
 
             <div className="popular-tab-slider owl-carousel">
-              <div className="pp-single-slider">
+              {popularProducts.map((productGroup, index) => (
+                <div key={index} className="pp-single-slider">
+                  {productGroup.map((product, idx) => (
+                    <NormalProductCard
+                      key={idx}
+                      product={product}
+                      isPopularOrRelated= {true}
+                    />
+                  ))}
+                </div>
+              ))}
+
+              {/* <div className="pp-single-slider">
                 <ProductCard
                   productImage={homeP1}
                   productName="Gaming Headset"
@@ -139,11 +147,11 @@ const Popular = () => {
                   noDiscount="d-none"
                   productPriceAfter={222.0}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
           {/*
-              FIXME: Useless code built supposedly for responsiveness 
+              FIXME: Useless code built supposedly for responsiveness
               <div
                 className="tab-pane fade in"
                 id="smartphones"

@@ -2,17 +2,15 @@ import React from "react";
 import Footer from "../layouts/Home/Footer";
 import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
-import Preloader from "../layouts/Home/Preloader";
-import Banner from "../layouts/Checkout/Banner";
 import CheckoutSection from "../layouts/Checkout/CheckoutSection";
+import PageBanner from "../components/Shared/PageBanner/PageBanner";
 
 const Checkout = () => {
   return (
     <>
-      <Preloader />
-      <Header innerHeaderClass={"inner-header"} />
+      <Header className="inner-header" />
       <PopUpSearch />
-      <Banner />
+      <PageBanner section="Checkout" />
       <CheckoutSection />
       <Footer />
     </>

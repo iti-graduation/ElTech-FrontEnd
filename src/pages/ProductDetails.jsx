@@ -1,17 +1,15 @@
-import Preloader from "../layouts/Home/Preloader";
 import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
-import PageBanner from "../layouts/ProductsDetails/PageBanner";
+import PageBanner from "../components/Shared/PageBanner/PageBanner";
 import Footer from "../layouts/Home/Footer";
 import ProductSection from "../layouts/ProductsDetails/ProductSection";
 
 export default function ProductDetails() {
   return (
     <>
-      <Preloader />
-      <Header />
+      <Header className="inner-header"/>
       <PopUpSearch />
-      <PageBanner />
+      <PageBanner section="Shop" category="Gaming"/>
       <ProductSection />
       <Footer />
     </>
