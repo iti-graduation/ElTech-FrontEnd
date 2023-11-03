@@ -3,12 +3,12 @@ import React from "react";
 const ProductPrice = ({
   productPriceBefore,
   productPriceAfter,
-  noDiscount,
 }) => {
+
   return (
     <div className="product-price clearfix">
       <span className="price">
-        <del className={noDiscount}>
+        <del className={productPriceAfter == null? "d-none":""}>
           <span>
             <span className="woocommerce-Price-currencySymbol">$</span>
             {productPriceBefore}
@@ -17,7 +17,7 @@ const ProductPrice = ({
         <ins>
           <span>
             <span className="woocommerce-Price-currencySymbol">$</span>
-            {productPriceAfter}
+            {productPriceAfter??productPriceBefore}
           </span>
         </ins>
       </span>

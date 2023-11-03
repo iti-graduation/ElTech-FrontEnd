@@ -8,10 +8,10 @@ import logo from "../../assets/images/logo.png";
 import flag from "../../assets/images/flag.png";
 import cart from "../../assets/images/cart.png";
 
-const Header = () => {
+const Header = ({ className }) => {
 
 	return (
-		<header className="header-01 fix-header">
+		<header className={`header-01 fix-header ${className}`}>
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-lg-2 col-md-2">
@@ -42,7 +42,7 @@ const Header = () => {
 									className="menu-item-has-children"
 									name="Shop"
 									items={[
-										{ to: "/", content: "Shop Fullwidth" },
+										{ to: "/shop", content: "Shop Fullwidth" },
 										{
 											to: "/",
 											content: "Shop Left Sidebar",
@@ -101,6 +101,6 @@ const Header = () => {
 			</div>
 		</header>
 	);
-}
+};
 
 export default Header;

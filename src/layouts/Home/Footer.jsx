@@ -7,10 +7,10 @@ import Copyright from "../../components/Home/Footer/Copyright";
 import BackToTopButton from "../../components/Home/Footer/BackToTopButton";
 import Subscribe from "../../components/Home/Footer/Subscribe";
 
-const Footer = () => {
+const Footer = ({ className }) => {
   return (
     <>
-      <footer className="footer-01">
+      <footer className={`footer-01 ${className}`}>
         <div className="container-fluid">
           <div className="row">
             <SocialSection />

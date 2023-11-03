@@ -9,6 +9,7 @@ const Copyright = () => {
           <div className="col-lg-6 col-md-5">
             <ul className="menu-link">
               <FooterLink href="#" linkTitle="Privacy Policy" />
+              <span> | </span>
               <FooterLink href="#" linkTitle="Terms of Service" />
             </ul>
           </div>
