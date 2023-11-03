@@ -19,8 +19,6 @@ import "./styles/site-themes/theme.css";
 import "./styles/site-themes/responsive.css";
 import "./styles/site-themes/pe-icon-7-stroke.css";
 
-import "./../node_modules/bootstrap/dist/js/bootstrap.bundle";
-
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

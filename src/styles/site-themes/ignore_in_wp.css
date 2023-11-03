@@ -51,6 +51,7 @@ License URI:
     animation-delay: 1s
 }
 .trending-section{
+	background: #fff;
 	position: relative;
 	padding: 120px 0 110px;
 	background-position: left center;
@@ -98,6 +99,7 @@ License URI:
 .client-section{
 	position: relative;
 	padding: 115px 0;
+	background-color: #fff;
 }
 .mailchimp-section{
 	position: relative;
@@ -182,7 +184,7 @@ body.home-02{
 .bg-f5f5f5{
 	background: #f5f5f5;
 }
-.bg-f5f5f5 .mailchimp-form button, 
+.bg-f5f5f5 .mailchimp-form button,
 .bg-f5f5f5 .mailchimp-form input[type="submit"]{
 	background: #f36523;
 	-webkit-box-shadow: 0px 30px 60px 0 rgba(150, 176, 203, 0.2);

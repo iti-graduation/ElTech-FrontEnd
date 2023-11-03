@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 
 import { ThemeProvider } from "@mui/material/styles";
 
+import globalReactJQueryInitializer from "./utils/react-jquery-theme"
+
 import Router from "./routes/index";
 
 import { currentTheme } from "./services/actions/themeSlice";
@@ -15,13 +17,17 @@ const App = () => {
   const language = useSelector((state) => state.languageSlice.currentLang);
 
   useEffect(() => {
+    globalReactJQueryInitializer();
+  }, []);
+
+  useEffect(() => {
     document.documentElement.dir =
       language === "ar" ? "rtl" : "ltr";
     document.body.style.backgroundColor =
       theme === "light"
         ? lightTheme.palette.background.default
         : darkTheme.palette.background.default;
-  }, [theme]);
+  }, [theme, language]);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
