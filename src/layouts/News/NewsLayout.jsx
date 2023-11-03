@@ -30,9 +30,9 @@ const NewsLayout = () => {
                         lorem telica comuo fira mende"
 					/>
 				</div>
-				<div class="row m-top-20">
-					<div class="col-lg-12 text-center">
-						<a href="#" class="goru-btn">
+				<div className="row m-top-20">
+					<div className="col-lg-12 text-center">
+						<a href="#" className="goru-btn">
 							view more
 						</a>
 					</div>
