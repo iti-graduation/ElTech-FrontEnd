@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NewsCard({ post }) {
+const NewsCard = ({ post }) => {
 	console.log(post);
 
 	return (
@@ -11,7 +11,7 @@ function NewsCard({ post }) {
 				</div>
 				<div className="news-details">
 					<span className="post-meta">
-						<a href="#">In TV</a>, 1 week a go
+						By<a href="#"> Admin</a>, 1 week a go
 					</span>
 					<h4>
 						<Link to={`/news/${post.id}`} state={{ post: post }}>
@@ -29,6 +29,6 @@ function NewsCard({ post }) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default NewsCard;
