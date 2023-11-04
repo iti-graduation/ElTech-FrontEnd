@@ -9,6 +9,7 @@ import Shop from "../pages/Shop";
 import Wishlist from "../pages/Wishlist";
 import Preloader from "../layouts/Home/Preloader";
 import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 // import pages
 // const PageName = React.lazy(() => import('path'));
@@ -23,7 +24,8 @@ export default function Router() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/checkout" element={<Checkout />} />
-		<Route path="/about" element={<About />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Suspense>
   );
