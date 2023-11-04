@@ -3,9 +3,9 @@ import Headphone from "../../assets/images/home/headphone.png";
 import Undo from "../../assets/images/home/undo.png";
 import ServiceCard from '../../components/Home/Services/ServiceCard';
 
-const Services = () => {
+const Services = ({ additionalClassName }) => {
   return (
-    <section className="service-section">
+    <section className={`service-section ${additionalClassName}`}>
             <div className="container">
                 <div className="row">
                     <ServiceCard image={Truck} title={"100% Free Shipping"} description={"We ship all our products for free as long as you buying within the USA."}/>
