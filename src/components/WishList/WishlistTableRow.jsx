@@ -1,16 +1,16 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 import img3 from "../../assets/images/cart/3.jpg";
 
-function WhishlistTableRaw() {
+function WhishlistTableRow() {
     return (
         <tr className="wishlist-item">
             <td className="product-thumbnail-title">
-                <a href="#">
+                <Link  to="#">
                     <img src={img3} alt="" />
-                </a>
-                <a className="product-name" href="#">
+                </Link>
+                <Link className="product-name"to="#">
                     Gaming Controller
-                </a>
+                </Link>
             </td>
 
             <td className="product-unit-price">
@@ -41,4 +41,4 @@ function WhishlistTableRaw() {
     )
 }
 
-export default WhishlistTableRaw
+export default WhishlistTableRow

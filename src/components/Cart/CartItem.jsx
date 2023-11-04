@@ -6,10 +6,10 @@ const CartItem = ({ product }) => {
 	return (
 		<tr className="cart-item">
 			<td className="product-thumbnail-title">
-				<Link href="#">
+				<Link to="#">
 					<img src={productImg1} alt="" />
 				</Link>
-				<Link className="product-name" href="#">
+				<Link className="product-name" to="#">
 					{product.name}
 				</Link>
 			</td>
@@ -53,7 +53,7 @@ const CartItem = ({ product }) => {
 				</div>
 			</td>
 			<td className="product-remove">
-				<Link href="#"></Link>
+				<Link to="#"></Link>
 			</td>
 		</tr>
 	);

@@ -1,5 +1,5 @@
 import React from 'react'
-import WishlistTableRaw from './WishlistTableRaw'
+import WishlistTableRow from './WishlistTableRow'
 
 function WishlistTable() {
     return (
@@ -14,9 +14,9 @@ function WishlistTable() {
                 </tr>
             </thead>
             <tbody>
-                <WishlistTableRaw />
-                <WishlistTableRaw />
-                <WishlistTableRaw />
+                <WishlistTableRow />
+                <WishlistTableRow />
+                <WishlistTableRow />
             </tbody>
         </table>
     )

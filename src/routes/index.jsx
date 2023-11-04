@@ -7,6 +7,7 @@ import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import Shop from "../pages/Shop";
 import Wishlist from "../pages/Wishlist";
+import Orders from "../pages/Orders";
 import Preloader from "../layouts/Home/Preloader";
 import NotFound from "../pages/NotFound";
 
@@ -20,6 +21,7 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/checkout" element={<Checkout />} />

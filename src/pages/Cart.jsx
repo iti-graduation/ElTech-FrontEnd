@@ -11,7 +11,7 @@ export default function Cart() {
 			<PopUpSearch />
 			<PageBanner section="Cart" />
 			<CartLayout />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 }

@@ -12,7 +12,7 @@ const Checkout = () => {
       <PopUpSearch />
       <PageBanner section="Checkout" />
       <CheckoutSection />
-      <Footer />
+      <Footer className="inner-footer"/>
     </>
   );
 };
