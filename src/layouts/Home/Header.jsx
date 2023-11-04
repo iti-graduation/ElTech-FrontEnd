@@ -53,13 +53,13 @@ const Header = ({ className }) => {
 									className="menu-item-has-children"
 									name="Pages"
 									items={[
-										{ to: "/", content: "About Page" },
+										{ to: "/about", content: "About Page" },
 										{ to: "/", content: "Newsletter Page" },
 									]}
 								/>
-								<li>
-									<a href="contact.html">Contact</a>
-								</li>
+								<Link to="/contact">
+									Contact
+							    </Link>
 							</ul>
 						</nav>
 					</div>
