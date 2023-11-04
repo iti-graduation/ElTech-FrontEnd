@@ -10,6 +10,9 @@ import Wishlist from "../pages/Wishlist";
 import Preloader from "../layouts/Home/Preloader";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import TermsAndConditions from "../pages/PolicyPages/TermsAndConditions";
+import PrivacyPolicy from "../pages/PolicyPages/PrivacyPolicy";
+import ReturnPolicy from "../pages/PolicyPages/ReturnPolicy";
 
 // import pages
 // const PageName = React.lazy(() => import('path'));
@@ -26,6 +29,9 @@ export default function Router() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/return" element={<ReturnPolicy />} />
       </Routes>
     </Suspense>
   );
