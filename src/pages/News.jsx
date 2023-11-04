@@ -8,7 +8,7 @@ import Footer from "../layouts/Home/Footer";
 const News = () => {
 	return (
 		<>
-			<Preloader />
+			{/* <Preloader /> */}
 			<Header className="inner-header" />
 			<PopUpSearch />
 			<PageBanner section="News" />

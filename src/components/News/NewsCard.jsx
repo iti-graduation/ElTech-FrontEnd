@@ -1,22 +1,22 @@
-import image from "../../assets/images/blog/1.jpg";
+import { Link } from "react-router-dom";
 
-const NewsCard = ({ title }) => {
+const NewsCard = ({ post }) => {
 	return (
 		<div className="col-lg-4 col-md-6">
 			<div className="single-news">
 				<div className="news-thumb">
-					<img src={image} alt="" />
+					<img src={post.image} alt="" />
 				</div>
 				<div className="news-details">
 					<span className="post-meta">
 						By<a href="#"> Admin</a>, 1 week a go
 					</span>
 					<h4>
-						<a href="single-post.html">{title}</a>
+						<Link to={`/news/${post.id}`}>{post.title}</Link>
 					</h4>
-					<a className="read-more" href="single-post.html">
+					<Link className="read-more" to={`/news/${post.id}`}>
 						Read More
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>
