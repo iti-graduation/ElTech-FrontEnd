@@ -6,25 +6,31 @@ const LoginSection = () => {
     <>
       <div className="woocommerce-billing-fields">
         <h3 className="text-center">Login</h3>
-        <div className="row justify-content-center m-0">
-          <div className="col-lg-8 ">
+        <form
+          action="#"
+          method="post"
+          className=" d-flex justify-content-center "
+        >
+          <div className="row w-50 m-3">
             <InputField
+              noOfCol="col-lg-12"
               fieldLabel="Email"
               fieldPlaceholder="Enter your email address"
               fieldName="email"
               fieldType="email"
             />
             <InputField
+              noOfCol="col-lg-12"
               fieldLabel="Password"
               fieldPlaceholder="Enter your password"
               fieldName="password"
               fieldType="password"
             />
-            <a className="goru-btn w-100 text-center mb-5" href="#">
+            <button type="submit" class="goru-btn auth-button  ">
               Login
-            </a>
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
