@@ -13,10 +13,6 @@ export default function SocialLinksTab() {
                 <input type="text" className="form-control" placeholder="https://www.facebook.com/user"/>
             </div>
             <div className="form-group">
-                <label className="form-label">Google+</label>
-                <input type="text" className="form-control" placeholder="https://www.google.com/user"/>
-            </div>
-            <div className="form-group">
                 <label className="form-label">LinkedIn</label>
                 <input type="text" className="form-control" placeholder="https://www.LinkedIn.com/user"/>
             </div>
