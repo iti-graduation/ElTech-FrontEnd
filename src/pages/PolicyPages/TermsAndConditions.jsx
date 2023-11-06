@@ -11,7 +11,7 @@ const TermsAndConditions = () => {
 			<PopUpSearch />
 			<PageBanner section="Terms" customTitle="Terms and Conditions" />
             <TermsLayout />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 };

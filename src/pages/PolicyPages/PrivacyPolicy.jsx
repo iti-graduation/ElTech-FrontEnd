@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
 			<PopUpSearch />
 			<PageBanner section="privacy" customTitle="Privacy Policy" />
             <PrivacyPolicyLayout />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 };

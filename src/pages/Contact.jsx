@@ -11,7 +11,7 @@ const Contact = () => {
 			<PopUpSearch />
 			<PageBanner section="Contact" />
             <ContactLayout />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 };

@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 
 import Preloader from "../layouts/Home/Preloader";
 
-
 // import pages
 // const PageName = React.lazy(() => import('path'));
 const Home = React.lazy(() => import('../pages/Home'));
@@ -21,6 +20,7 @@ const ReturnPolicy = React.lazy(() => import('../pages/PolicyPages/ReturnPolicy'
 const NotFound = React.lazy(() => import('../pages/NotFound'));
 const News = React.lazy(() => import('../pages/News'));
 const NewsDetails = React.lazy(() => import('../pages/NewsDetails'));
+const MyAccountProfile = React.lazy(() => import('../pages/MyAccountProfile'));
 
 export default function Router() {
 	return (
@@ -29,18 +29,19 @@ export default function Router() {
 				<Route path="/" element={<Home />} />
 				<Route path="/shop" element={<Shop />} />
 				<Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/orders" element={<Orders />} />
+				<Route path="/orders" element={<Orders />} />
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/product/:id" element={<ProductDetails />} />
 				<Route path="/checkout" element={<Checkout />} />
 				<Route path="/news" element={<News />} />
 				<Route path="/news/:id" element={<NewsDetails />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/terms" element={<TermsAndConditions />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/return" element={<ReturnPolicy />} />
-        <Route path="*" element={<NotFound />} />
+				<Route path="/about" element={<About />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/terms" element={<TermsAndConditions />} />
+				<Route path="/privacy" element={<PrivacyPolicy />} />
+				<Route path="/return" element={<ReturnPolicy />} />
+				<Route path="/profile" element={<MyAccountProfile />} />
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</Suspense>
 	);

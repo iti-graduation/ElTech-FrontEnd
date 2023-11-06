@@ -12,7 +12,7 @@ const NewsDetails = () => {
 			<PopUpSearch />
 			<PageBanner section="News Details" />
 			<NewsDetailsLayout />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 };

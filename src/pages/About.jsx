@@ -16,7 +16,7 @@ const About = () => {
             <AboutLayout />
 			<Services additionalClassName="service-ab" />
             <Clients />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 };

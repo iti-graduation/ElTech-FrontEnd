@@ -11,7 +11,7 @@ const ReturnPolicy = () => {
 			<PopUpSearch />
 			<PageBanner section="return" customTitle="Return Policy" />
             <ReturnPolicyLayout />
-			<Footer />
+			<Footer className="inner-footer"/>
 		</>
 	);
 };
