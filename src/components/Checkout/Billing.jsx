@@ -14,24 +14,28 @@ const Billing = () => {
           </div>
         </div>
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="First Name"
           fieldPlaceholder=""
           fieldName="first_name"
           fieldType="text"
         />
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="Last Name"
           fieldPlaceholder=""
           fieldName="last_name"
           fieldType="text"
         />
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="Company Name"
           fieldPlaceholder=""
           fieldName="company"
           fieldType="text"
         />
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="Address"
           fieldPlaceholder=""
           fieldName="address_1"
@@ -51,18 +55,21 @@ const Billing = () => {
           </div>
         </div>
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="Postcode / Zip"
           fieldPlaceholder=""
           fieldName="postcode"
           fieldType="text"
         />
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="Email"
           fieldPlaceholder=""
           fieldName="billing_email"
           fieldType="email"
         />
         <BillingField
+          noOfCol="col-lg-6"
           fieldLabel="Phone Number"
           fieldPlaceholder=""
           fieldName="phone"
@@ -73,6 +80,7 @@ const Billing = () => {
           <label for="cac">Create an account?</label>
         </p>
         <BillingField
+          noOfCol="col-lg-12"
           fieldLabel="Account Password"
           fieldPlaceholder=""
           fieldName="password"

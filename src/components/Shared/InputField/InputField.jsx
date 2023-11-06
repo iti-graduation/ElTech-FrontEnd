@@ -1,6 +1,6 @@
 import React from "react";
 
-const BillingField = ({
+const InputField = ({
   fieldLabel,
   fieldPlaceholder,
   fieldName,
@@ -15,4 +15,4 @@ const BillingField = ({
   );
 };
 
-export default BillingField;
+export default InputField;
