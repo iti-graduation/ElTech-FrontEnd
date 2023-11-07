@@ -59,14 +59,14 @@ const Header = ({ className }) => {
               <a className="select-currency" href="javascript:void(0);">
                 <i className="twi-dollar-sign"></i>Usd
               </a>
-              <a className="user-login" href="javascript:void(0);">
+              <Link className="user-login" to="/profile">
                 <i className="twi-user-circle"></i>
                 <span>Account</span>
-              </a>
-              <a className="carts" href="javascript:void(0);">
+              </Link>
+              <Link className="carts" to="/cart">
                 <span>4</span>
                 <img src={cart} alt="" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

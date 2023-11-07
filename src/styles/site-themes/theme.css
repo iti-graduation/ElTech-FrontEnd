@@ -43,14 +43,14 @@ License URI:
 }
 .logo {
   position: relative;
-  padding: 60px 0 20px;
+  padding: 40px 0 0px;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 .logo img {
   width: auto;
-  height: 40px;
+  height: 70px;
 }
 .mainmenu {
   position: relative;
@@ -4807,7 +4807,7 @@ body.menu_open {
     width : 80px !important;
     height: auto;
     border-radius: 5px;
-    border:1px solid black;    
+    border:1px solid black;
 
 }
 
@@ -4816,7 +4816,7 @@ body.menu_open {
     width: 200px;
     margin: 40px;
     border-radius: 50%;
-    border:2px solid black;    
+    border:2px solid black;
 
 }
 

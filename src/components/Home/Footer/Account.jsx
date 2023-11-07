@@ -7,10 +7,10 @@ const Account = () => {
       <aside className="widget">
         <h3 className="widget-title">Account</h3>
         <ul>
-          <FooterLink href="#" linkTitle="My Account" />
-          <FooterLink href="#" linkTitle="Log in" />
-          <FooterLink href="#" linkTitle="Sign Up" />
-          <FooterLink href="#" linkTitle="Purchases" />
+          <FooterLink href="/profile" linkTitle="My Account" />
+          <FooterLink href="/login" linkTitle="Log in" />
+          <FooterLink href="/register" linkTitle="Sign Up" />
+          <FooterLink href="/orders" linkTitle="Purchases" />
           <FooterLink href="#" linkTitle="Shipping Address" />
         </ul>
       </aside>

@@ -8,9 +8,9 @@ const Copyright = () => {
         <div className="row">
           <div className="col-lg-6 col-md-5">
             <ul className="menu-link">
-              <FooterLink href="#" linkTitle="Privacy Policy" />
+              <FooterLink href="/privacy" linkTitle="Privacy Policy" />
               <span> | </span>
-              <FooterLink href="#" linkTitle="Terms of Service" />
+              <FooterLink href="/terms" linkTitle="Terms of Service" />
             </ul>
           </div>
           <div className="col-lg-6 col-md-7">

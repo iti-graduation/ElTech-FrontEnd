@@ -4,9 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import Preloader from "../layouts/Home/Preloader";
 import Home from "../pages/Home";
 
-// import pages
-// const PageName = React.lazy(() => import('path'));
-//const Home = React.lazy(() => import("../pages/Home"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Register = React.lazy(() => import("../pages/Register"));
 const Checkout = React.lazy(() => import("../pages/Checkout"));
