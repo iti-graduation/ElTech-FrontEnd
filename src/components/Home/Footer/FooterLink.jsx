@@ -1,9 +1,9 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const FooterLink = ({ href, linkTitle }) => {
   return (
     <li>
-      <a href={href}>{linkTitle}</a>
+      <Link to={href}>{linkTitle}</Link>
     </li>
   );
 };

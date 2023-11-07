@@ -7,11 +7,11 @@ const UsefulLinks = () => {
       <aside className="widget">
         <h3 className="widget-title">Useful Links</h3>
         <ul>
-          <FooterLink href="#" linkTitle="Privacy Policy" />
-          <FooterLink href="#" linkTitle="Return Policy" />
-          <FooterLink href="#" linkTitle="Blog" />
-          <FooterLink href="#" linkTitle="Contact" />
-          <FooterLink href="#" linkTitle="Terms & Conditions" />
+          <FooterLink href="/privacy" linkTitle="Privacy Policy" />
+          <FooterLink href="/return" linkTitle="Return Policy" />
+          <FooterLink href="/news" linkTitle="Blog" />
+          <FooterLink href="/contact" linkTitle="Contact" />
+          <FooterLink href="/terms" linkTitle="Terms & Conditions" />
         </ul>
       </aside>
     </div>

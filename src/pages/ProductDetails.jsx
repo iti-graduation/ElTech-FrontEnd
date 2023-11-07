@@ -11,7 +11,7 @@ export default function ProductDetails() {
       <PopUpSearch />
       <PageBanner section="Shop" category="Gaming"/>
       <ProductSection />
-      <Footer />
+      <Footer className="inner-footer"/>
     </>
   );
 }

@@ -5,9 +5,10 @@ const BillingField = ({
   fieldPlaceholder,
   fieldName,
   fieldType,
+  noOfCol,
 }) => {
   return (
-    <p className="col-lg-6">
+    <p className={noOfCol}>
       <label>{fieldLabel}</label>
       <input placeholder={fieldPlaceholder} name={fieldName} type={fieldType} />
     </p>
