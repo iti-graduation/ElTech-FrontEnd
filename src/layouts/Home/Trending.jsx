@@ -28,7 +28,7 @@ const Trending = () => {
 				</div>
 				<div className="row">
 					<div className="col-lg-12">
-					<div class="trending-slider owl-carousel">
+					<div className="trending-slider owl-carousel">
 							{/* <div className="trending-slider owl-carousel"> */}
 							<ProductsRow />
 							<ProductsRow />

@@ -1,28 +1,46 @@
 // Importing axios for HTTP requests
 import axios from "axios";
 
-{
-	/* TODO Check if this is needed */
-}
-// async function handleApiResponse(url) {
-// 	try {
-// 		const response = await fetch(url);
-// 		const data = await response.json();
+// Load API base url
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
-// 		// Check if the API call was successful
-// 		if (data.status) {
-// 			// If the API call was successful, return the data
-// 			return data.data;
-// 		} else {
-// 			// If the API call was not successful, throw an error with the message from the API
-// 			throw new Error(data.message);
-// 		}
-// 	} catch (error) {
-// 		console.error("An error occurred:", error);
-// 		// You can also handle the error here, for example by showing a notification to the user
-// 		throw error;
-// 	}
-// }
+// Load API used endpoints
+export const PRODUCT_ENDPOINT = process.env.REACT_APP_PRODUCT_ENDPOINT;
+export const ACCOUNTS_ENDPOINT = process.env.REACT_APP_ACCOUNTS_ENDPOINT;
+export const NEWS_ENDPOINT = process.env.REACT_APP_NEWS_ENDPOINT;
+
+
+// Creating a basic axios instance for API calls
+export const apiInstance = axios.create({
+	baseURL: API_BASE_URL,
+	timeout: 10000,
+});
+
+apiInstance.interceptors.request.use((config) => {
+	const token = localStorage.getItem('token');
+	config.headers.Authorization = token ? `Token ${token}` : '';
+	return config;
+});
+
+// Adding a request interceptor to apiInstance to handle JSON response
+apiInstance.interceptors.request.use(
+	(config) => {
+		config.headers.accept = "application/json";
+
+		return config;
+	},
+	// Returning the promise rejection to let following catch blocks handle it
+	(error) => Promise.reject(error)
+);
+
+// Adding a response interceptor to apiInstance
+apiInstance.interceptors.response.use(
+	// Resolver function handles success
+	(response) => response,
+	// Rejecting the promise in cases of HTTP error codes
+	(error) => Promise.reject(error)
+);
+
 
 /**
  * Makes a GET request to the specified URL and returns the received data or message in function of the status.
@@ -114,46 +132,26 @@ export async function deleteData(url) {
 	}
 }
 
-// Creating a basic axios instance for API calls
-export const apiInstance = axios.create({
-	baseURL: process.env.REACT_APP_BASE_URL,
-	timeout: 10000,
-});
 
-// Adding a request interceptor to apiInstance to handle JSON response
-apiInstance.interceptors.request.use(
-	(config) => {
-		config.headers.accept = "application/json";
+{
+	/* TODO Check if this is needed */
+}
+// async function handleApiResponse(url) {
+// 	try {
+// 		const response = await fetch(url);
+// 		const data = await response.json();
 
-		return config;
-	},
-	// Returning the promise rejection to let following catch blocks handle it
-	(error) => Promise.reject(error)
-);
-
-// Adding a response interceptor to apiInstance
-apiInstance.interceptors.response.use(
-	// Resolver function handles success
-	(response) => response,
-	// Rejecting the promise in cases of HTTP error codes
-	(error) => Promise.reject(error)
-);
-
-// Adding a request interceptor to userApiInstance to handle JSON response
-userApiInstance.interceptors.request.use(
-	(config) => {
-		config.headers.accept = "application/json";
-
-		return config;
-	},
-	// Returning the promise rejection to let following catch blocks handle it
-	(error) => Promise.reject(error)
-);
-
-// Adding a response interceptor to userApiInstance
-userApiInstance.interceptors.response.use(
-	// Resolver function handles success
-	(response) => response,
-	// Rejecting the promise in cases of HTTP error codes
-	(error) => Promise.reject(error)
-);
+// 		// Check if the API call was successful
+// 		if (data.status) {
+// 			// If the API call was successful, return the data
+// 			return data.data;
+// 		} else {
+// 			// If the API call was not successful, throw an error with the message from the API
+// 			throw new Error(data.message);
+// 		}
+// 	} catch (error) {
+// 		console.error("An error occurred:", error);
+// 		// You can also handle the error here, for example by showing a notification to the user
+// 		throw error;
+// 	}
+// }

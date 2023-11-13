@@ -11,7 +11,7 @@ const BackToTopButton = () => {
         visibility: "visible",
       }}
     >
-      <i class="twi-angle-double-up2"></i>
+      <i className="twi-angle-double-up2"></i>
     </a>
   );
 };

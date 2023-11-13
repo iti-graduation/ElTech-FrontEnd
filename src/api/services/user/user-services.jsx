@@ -1,7 +1,77 @@
 // Importing the pre-configured API instance
-import { apiInstance } from "../../config/api-config";
+// import GlobalToast from "../../../utils/globalToast";
+import { ACCOUNTS_ENDPOINT, apiInstance } from "../../config/api-config";
 
-const endpoint = process.env.REACT_APP_USER_ENDPOINT;
+const endpoint = ACCOUNTS_ENDPOINT;
+
+
+
+/**
+ * Registers a new user
+ * @param {Object} userData An object containing username and password of the user to be registered
+ * @return {Object} The response data
+ * @throws {Error} If there was a problem during registration
+ */
+export const register = async (userData) => {
+	try {
+		// construct url for registeration
+		const url = endpoint + "create/";
+		// perform POST request to the constructed url
+		const response = await apiInstance.post(url, userData, {
+			headers: { "Content-Type": "application/json" },
+		});
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during registeration
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			// Join all error messages into a single string
+			msg = Object.values(errors).flat().join(' ');
+		} else {
+			// Fallback error message
+			msg = 'An error occurred during registration';
+		}
+
+		throw new Error(msg);
+	}
+};
+
+/**
+ * Logs in a user
+ * @param {Object} userData An object containing username and password of the user to be logged in
+ * @return {Object} The response data
+ * @throws {Error} If there was a problem during login
+ */
+export const login = async (userData) => {
+	try {
+		// construct url for login
+		const url = endpoint + "token/";
+		// perform POST request to the constructed url
+		const response = await apiInstance.post(url, userData, {
+			headers: { "Content-Type": "application/json" },
+		});
+		localStorage.setItem('token', response.data.token);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during registeration
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			// Join all error messages into a single string
+			msg = Object.values(errors).flat().join(' ');
+		} else {
+			// Fallback error message
+			msg = 'Invalid credentials or server error';
+		}
+		throw new Error(msg);
+	}
+};
+
+
 
 /**
  * Fetches a specific user by their ID
@@ -9,15 +79,22 @@ const endpoint = process.env.REACT_APP_USER_ENDPOINT;
  * @return {Object} The data of the user
  * @throws {Error} If there was a problem getting the specified user
  */
-export const getSingleUser = async (userId) => {
+export const getUserData = async () => {
 	try {
-		const url = endpoint + userId;
+		const url = endpoint + "me/";
 		const response = await apiInstance.get(url);
-
+		console.log("From api", response.data);
 		return response.data;
 	} catch (error) {
-		const msg = "There was a problem getting the specified user";
-		console.log(error);
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			// Join all error messages into a single string
+			msg = Object.values(errors).flat().join(' ');
+		} else {
+			// Fallback error message
+			msg = 'There was a problem getting the specified user';
+		}
 		throw new Error(msg);
 	}
 };
@@ -93,52 +170,4 @@ export const getUserPosts = async (userId) => {
 	}
 };
 
-/**
- * Registers a new user
- * @param {Object} userData An object containing username and password of the user to be registered
- * @return {Object} The response data
- * @throws {Error} If there was a problem during registration
- */
-export const register = async (userData) => {
-	try {
-		// construct url for registeration
-		const url = endpoint + "add";
-		// perform POST request to the constructed url
-		const response = await apiInstance.post(url, userData, {
-			headers: { "Content-Type": "application/json" },
-		});
 
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during registeration
-		const msg = "There was a problem in registration";
-		console.log(error);
-		throw new Error(msg);
-	}
-};
-
-/**
- * Logs in a user
- * @param {Object} userData An object containing username and password of the user to be logged in
- * @return {Object} The response data
- * @throws {Error} If there was a problem during login
- */
-export const login = async (userData) => {
-	try {
-		// construct url for login
-		const url = "auth/login";
-		// perform POST request to the constructed url
-		const response = await apiInstance.post(url, userData, {
-			headers: { "Content-Type": "application/json" },
-		});
-
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during login
-		const msg = "There was a problem logging in";
-		console.log(error);
-		throw new Error(msg);
-	}
-};

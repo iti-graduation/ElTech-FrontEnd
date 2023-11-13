@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUserData } from '../services/actions/userSlice';
+
 import Clients from "../layouts/Home/Clients";
 import Services from "../layouts/Home/Services";
 import Slider from "../layouts/Home/Slider";
@@ -12,9 +16,23 @@ import MailChimpSection from "../layouts/Home/MailChimp";
 import Popular from "../layouts/Home/Popular";
 
 export default function Home() {
+  // const dispatch = useDispatch();
+  // const user = useSelector((state) => state.user.data);
+  // const userStatus = useSelector((state) => state.user.status);
+  // const error = useSelector((state) => state.user.error);
+
+  // useEffect(() => {
+  //   console.log("herwdafdsgf", user);
+  //   if (userStatus === 'idle') {
+  //     dispatch(fetchUserData());
+  //   }
+
+  // }, [userStatus, dispatch]);
+
+
   return (
     <>
-      <Header />
+      <Header/>
       <PopUpSearch />
       <Slider />
       <CategorySection />
