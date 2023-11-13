@@ -1,32 +1,52 @@
-import React from "react";
-import NavBar from "../../components/Home/Popular/NavBar";
+import { useEffect, useState } from "react";
 
+import { getPopularProducts } from "../../api/services/user/product-services";
+
+import NavBar from "../../components/Home/Popular/NavBar";
 import { popularProducts } from "../../utils/demoProducts";
 import NormalProductCard from "../../components/Shared/NormalProductCard/NormalProductCard";
 
 const Popular = () => {
-  return (
-    <section className="popular-section">
-      {/*Shape Round*/}
-      <div className="shape-round">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      {/* Shape Round */}
-      {/* Section Heading */}
-      <div className="sec-heading rotate-rl">
-        Most <span>Popular</span>
-      </div>
-      {/* Section Heading */}
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <h2 className="sec-title">Most Popular</h2>
-            <NavBar />
-            {/* <div className="tab-content">
+	const [products, setProducts] = useState();
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const data = await getPopularProducts();
+			console.log(data);
+			setProducts(
+				data.reduce((result, value, index, array) => {
+					if (index % 2 === 0)
+						result.push(array.slice(index, index + 2));
+					return result;
+				}, [])
+			);
+		};
+
+		fetchProducts();
+	}, []);
+
+	return (
+		<section className="popular-section">
+			{/*Shape Round*/}
+			<div className="shape-round">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			{/* Shape Round */}
+			{/* Section Heading */}
+			<div className="sec-heading rotate-rl">
+				Most <span>Popular</span>
+			</div>
+			{/* Section Heading */}
+			<div className="container">
+				<div className="row">
+					<div className="col-lg-12">
+						<h2 className="sec-title">Most Popular</h2>
+						<NavBar />
+						{/* <div className="tab-content">
               FIXME: Useless code built supposedly for responsiveness
               <div
                 className="tab-pane fade show in active"
@@ -35,20 +55,35 @@ const Popular = () => {
               >
               */}
 
-            <div className="popular-tab-slider owl-carousel">
-              {popularProducts.map((productGroup, index) => (
-                <div key={index} className="pp-single-slider">
-                  {productGroup.map((product, idx) => (
-                    <NormalProductCard
-                      key={idx}
-                      product={product}
-                      isPopularOrRelated= {true}
-                    />
-                  ))}
-                </div>
-              ))}
+						<div className="popular-tab-slider owl-carousel">
+							{/* {popularProducts.map((productGroup, index) => (
+								<div key={index} className="pp-single-slider">
+									{productGroup.map((product, idx) => (
+										<NormalProductCard
+											key={idx}
+											product={product}
+											isPopularOrRelated={true}
+										/>
+									))}
+								</div>
+							))} */}
+							{products &&
+								products.map((productPair, index) => (
+									<div
+										key={index}
+										className="pp-single-slider"
+									>
+										{productPair.map((product) => (
+											<NormalProductCard
+												key={product.id}
+												product={product}
+												isPopularOrRelated={true}
+											/>
+										))}
+									</div>
+								))}
 
-              {/* <div className="pp-single-slider">
+							{/* <div className="pp-single-slider">
                 <ProductCard
                   productImage={homeP1}
                   productName="Gaming Headset"
@@ -148,9 +183,9 @@ const Popular = () => {
                   productPriceAfter={222.0}
                 />
               </div> */}
-            </div>
-          </div>
-          {/*
+						</div>
+					</div>
+					{/*
               FIXME: Useless code built supposedly for responsiveness
               <div
                 className="tab-pane fade in"
@@ -1902,9 +1937,9 @@ const Popular = () => {
                </div>
             </div>
           </div>*/}
-        </div>
-      </div>
-    </section>
-  );
+				</div>
+			</div>
+		</section>
+	);
 };
 export default Popular;

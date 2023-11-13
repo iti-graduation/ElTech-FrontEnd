@@ -37,6 +37,22 @@ export const getTrendingProducts = async () => {
 	}
 };
 
+export const getPopularProducts = async () => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_popular: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting popular products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
+
 /**
  * Function to get all products from the API.
  * It uses predefined api instance and endpoint.
