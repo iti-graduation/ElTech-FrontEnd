@@ -2,7 +2,24 @@
 import { apiInstance } from "../../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
-const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
+const productEndpoint = process.env.REACT_APP_PRODUCT_ENDPOINT + "products/";
+const categoryEndpoint = process.env.REACT_APP_PRODUCT_ENDPOINT + "categories/";
+
+export const getFeaturedProducts = async () => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_featured: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting featured products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
 
 /**
  * Function to get all products from the API.
@@ -15,7 +32,7 @@ const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
  */
 export const getAllProducts = async () => {
 	try {
-		const response = await apiInstance.get(endpoint);
+		const response = await apiInstance.get(productEndpoint);
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all products.";
@@ -36,7 +53,7 @@ export const getAllProducts = async () => {
  */
 export const getSingleProduct = async (productId) => {
 	try {
-		const url = endpoint + productId;
+		const url = productEndpoint + productId;
 		const response = await apiInstance.get(url);
 
 		return response.data;
@@ -59,7 +76,7 @@ export const getSingleProduct = async (productId) => {
  */
 export const getProductsBySearch = async (searchTerm) => {
 	try {
-		const url = endpoint + `search?q=${searchTerm}`;
+		const url = productEndpoint + `search?q=${searchTerm}`;
 		const response = await apiInstance.get(url);
 
 		return response.data;
@@ -81,10 +98,9 @@ export const getProductsBySearch = async (searchTerm) => {
  */
 export const getAllCategories = async () => {
 	try {
-		const url = endpoint + "categories";
+		const url = categoryEndpoint;
 		const response = await apiInstance.get(url);
-		result.data = response.data;
-		return result;
+		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all categories";
 		console.log(error);
@@ -104,7 +120,7 @@ export const getAllCategories = async () => {
  */
 export const getCategoryProducts = async (categoryName) => {
 	try {
-		const url = endpoint + `category/${categoryName}`;
+		const url = categoryEndpoint + `category/${categoryName}`;
 		const response = await apiInstance.get(url);
 
 		return response.data;
