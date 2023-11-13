@@ -21,6 +21,22 @@ export const getFeaturedProducts = async () => {
 	}
 };
 
+export const getTrendingProducts = async () => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_trending: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting trending products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
+
 /**
  * Function to get all products from the API.
  * It uses predefined api instance and endpoint.

@@ -1,16 +1,21 @@
 import ProductCard from "./ProductCard";
 
-const ProductsRow = () => {
+const ProductsRow = ({ products }) => {
 	return (
 		<div className="row">
-			<div className="col-lg-6 col-md-6">
+			{products.map((product) => {
+				return (
+					<div className="col-lg-6 col-md-6">
+						<ProductCard key={product.id} product={product} />
+					</div>
+				);
+			})}
+
+			{/* <div className="col-lg-6 col-md-6">
 				<ProductCard />
-			</div>
-			<div className="col-lg-6 col-md-6">
-				<ProductCard />
-			</div>
+			</div> */}
 		</div>
 	);
-}
+};
 
 export default ProductsRow;

@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-
-import { getAllCategories } from "../../api/services/user/product-services";
-
 import shape1 from "../../assets/images/home/shape1.png";
 import CategoryIcons from "../../components/Home/Categories/CategoriesIcon";
 
