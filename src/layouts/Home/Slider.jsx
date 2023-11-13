@@ -10,14 +10,14 @@ import SliderItem from "../../components/Home/Slider/SliderItem/SliderItem";
 
 const Slider = () => {
 	const [products, setProducts] = useState();
-	const [loading, setLoading] = useState(true);
+	// const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
 			const data = await getFeaturedProducts();
 			console.log(data);
 			setProducts(data);
-			setLoading(false);
+			// setLoading(false);
 		};
 
 		fetchProducts();
@@ -58,7 +58,7 @@ const Slider = () => {
 								);
 							})}
 
-						<SliderItem
+						{/* <SliderItem
 							itemImage={
 								"http://127.0.0.1:8000/media/uploads/product/a8014845-3c80-43a0-a159-cdf1278d729b.jpg"
 							}
@@ -66,7 +66,7 @@ const Slider = () => {
 							itemDescription={
 								"Lorem ipsum dolor sit amet, consectetur adipisicin do eiu smod tempor incididunt ut labore et dolo aliqua. Ut enim ad minim veniam."
 							}
-						/>
+						/> */}
 
 						{/* <SliderItem
 itemImage={Layer1}

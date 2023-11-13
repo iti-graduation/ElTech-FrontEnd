@@ -2,8 +2,9 @@
 import { apiInstance } from "../../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
-const productEndpoint = process.env.REACT_APP_PRODUCT_ENDPOINT + "products/";
-const categoryEndpoint = process.env.REACT_APP_PRODUCT_ENDPOINT + "categories/";
+const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
+const productEndpoint = endpoint + "products/";
+const categoryEndpoint = endpoint + "categories/";
 
 export const getFeaturedProducts = async () => {
 	try {
@@ -47,6 +48,19 @@ export const getPopularProducts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting popular products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
+
+export const getWeeklyDeal = async () => {
+	try {
+		const url = endpoint + "weekly-deal/latest/";
+		const response = await apiInstance.get(url);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting the weekly deal.";
 		console.log(error);
 		return error;
 		throw new Error(msg);
