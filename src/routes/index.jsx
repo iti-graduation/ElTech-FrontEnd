@@ -8,6 +8,7 @@ const Login = React.lazy(() => import("../pages/Login"));
 const Register = React.lazy(() => import("../pages/Register"));
 const Checkout = React.lazy(() => import("../pages/Checkout"));
 const ProductDetails = React.lazy(() => import("../pages/ProductDetails"));
+const Category = React.lazy(() => import("../pages/Category"));
 const Cart = React.lazy(() => import("../pages/Cart"));
 const Shop = React.lazy(() => import("../pages/Shop"));
 const Wishlist = React.lazy(() => import("../pages/Wishlist"));
@@ -34,6 +35,7 @@ export default function Router() {
 				<Route path="/orders" element={<Orders />} />
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/product/:id" element={<ProductDetails />} />
+				<Route path="/category/:id" element={<Category />} />
 				<Route path="/checkout" element={<Checkout />} />
 				<Route path="/news" element={<News />} />
 				<Route path="/news/:id" element={<NewsDetails />} />

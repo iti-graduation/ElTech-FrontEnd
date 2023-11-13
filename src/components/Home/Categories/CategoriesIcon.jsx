@@ -40,7 +40,10 @@ const CategoryIcons = () => {
 			{categories &&
 				categories.map((category) => (
 					<div key={category.id} className="col-lg-2 col-md-4">
-						<Link to="#" className="single-cate">
+						<Link
+							to={`/category/${category.id}`}
+							className="single-cate"
+						>
 							<img src={category.image} alt="" />
 						</Link>
 					</div>

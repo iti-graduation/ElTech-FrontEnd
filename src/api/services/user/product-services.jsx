@@ -169,9 +169,9 @@ export const getAllCategories = async () => {
  * @return {Promise<object>} Promise object represents the product data of the specified category.
  * @throws Will throw an error if there is a problem completing the request.
  */
-export const getCategoryProducts = async (categoryName) => {
+export const getSingleCategory = async (categoryId) => {
 	try {
-		const url = categoryEndpoint + `category/${categoryName}`;
+		const url = categoryEndpoint + categoryId;
 		const response = await apiInstance.get(url);
 
 		return response.data;
