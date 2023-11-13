@@ -122,8 +122,13 @@ export const getSingleProduct = async (productId) => {
  */
 export const getProductsBySearch = async (searchTerm) => {
 	try {
-		const url = productEndpoint + `search?q=${searchTerm}`;
-		const response = await apiInstance.get(url);
+		// const url = productEndpoint + `search?q=${searchTerm}`;
+		// const response = await apiInstance.get(url);
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				q: searchTerm,
+			},
+		});
 
 		return response.data;
 	} catch (error) {

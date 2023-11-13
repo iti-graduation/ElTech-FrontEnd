@@ -1,5 +1,24 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { getProductsBySearch } from "../../api/services/user/product-services";
 
 const PopUpSearch = () => {
+	const [searchTerm, setSearchTerm] = useState("");
+	const navigate = useNavigate();
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		try {
+			const products = await getProductsBySearch(searchTerm);
+
+			// Pass the products to the shop page.
+			navigate("/shop", { state: { products } });
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<section className="popup-search-sec">
@@ -10,11 +29,13 @@ const PopUpSearch = () => {
 				</a>
 				<div className="middle-search">
 					<div className="popup-search-form">
-						<form method="get" action="#">
+						<form onSubmit={handleSubmit}>
 							<input
 								type="search"
-								name="s"
-								id="s"
+								value={searchTerm}
+								onChange={(event) =>
+									setSearchTerm(event.target.value)
+								}
 								placeholder="Search..."
 							/>
 							<button type="submit">
@@ -26,6 +47,6 @@ const PopUpSearch = () => {
 			</div>
 		</section>
 	);
-}
+};
 
 export default PopUpSearch;
