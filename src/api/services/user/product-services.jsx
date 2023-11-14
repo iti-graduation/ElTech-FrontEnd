@@ -182,3 +182,16 @@ export const getSingleCategory = async (categoryId) => {
 		throw new Error(msg);
 	}
 };
+
+export const createReview = async (productId, reviewContent) => {
+	try {
+		const url = productEndpoint + `${productId}/reviews/`;
+		const response = await apiInstance.post(url, reviewContent);
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem creating your review!";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
