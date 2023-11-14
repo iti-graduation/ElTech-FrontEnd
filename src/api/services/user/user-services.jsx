@@ -45,17 +45,18 @@ export const register = async (userData) => {
  * @throws {Error} If there was a problem during login
  */
 export const login = async (userData) => {
+	localStorage.setItem('token', "");
 	try {
 		// construct url for login
 		const url = endpoint + "token/";
+
 		// perform POST request to the constructed url
-		const response = await apiInstance.post(url, userData, {
-			headers: { "Content-Type": "application/json" },
-		});
+		const response = await apiInstance.post(url, userData);
+
 		localStorage.setItem('token', response.data.token);
 
 		// Return response data
-		return response.data;
+		return response.data.token;
 	} catch (error) {
 		// Handle any error that occurred during registeration
 		let msg = error;
@@ -75,7 +76,6 @@ export const login = async (userData) => {
 
 /**
  * Fetches a specific user by their ID
- * @param {number} userId The ID of the user
  * @return {Object} The data of the user
  * @throws {Error} If there was a problem getting the specified user
  */
@@ -84,6 +84,7 @@ export const getUserData = async () => {
 		const url = endpoint + "me/";
 		const response = await apiInstance.get(url);
 		console.log("From api", response.data);
+		localStorage.setItem('user', JSON.stringify(response.data));
 		return response.data;
 	} catch (error) {
 		let msg = error;

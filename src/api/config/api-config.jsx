@@ -16,16 +16,20 @@ export const apiInstance = axios.create({
 	timeout: 10000,
 });
 
-apiInstance.interceptors.request.use((config) => {
-	const token = localStorage.getItem('token');
-	config.headers.Authorization = token ? `Token ${token}` : '';
-	return config;
-});
+// apiInstance.interceptors.request.use((config) => {
+// 	const token = localStorage.getItem('token');
+// 	console.log("token from interceptors", token)
+// 	config.headers.Authorization = token ? `Token ${token}` : '';
+// 	return config;
+// });
 
 // Adding a request interceptor to apiInstance to handle JSON response
 apiInstance.interceptors.request.use(
 	(config) => {
 		config.headers.accept = "application/json";
+
+		const token = localStorage.getItem('token');
+		config.headers.Authorization = token?`Token ${token}` : "";
 
 		return config;
 	},

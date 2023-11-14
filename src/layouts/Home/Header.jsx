@@ -1,7 +1,6 @@
 // Importing Link component from react-router-dom
 import { Link } from "react-router-dom";
-
-import DropdownMenu from "../../components/Home/Header/DropdownMenu";
+import { useSelector } from 'react-redux';
 
 // Importing images for website components
 import logo from "../../assets/images/logo.png";
@@ -9,6 +8,8 @@ import flag from "../../assets/images/flag.png";
 import cart from "../../assets/images/cart.png";
 
 const Header = ({ className }) => {
+  const user = useSelector((state) => state.authSlice.user);
+
   return (
     <header className={`header-01 fix-header ${className}`}>
       <div className="container-fluid">
@@ -59,9 +60,9 @@ const Header = ({ className }) => {
               <a className="select-currency" href="javascript:void(0);">
                 <i className="twi-dollar-sign"></i>Usd
               </a>
-              <Link className="user-login" to="/profile">
+              <Link className="user-login" to={user?"/profile":"/login"}>
                 <i className="twi-user-circle"></i>
-                <span>Account</span>
+                <span>{user?user.first_name:"Account"}</span>
               </Link>
               <Link className="carts" to="/cart">
                 <span>4</span>

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loginUserThunk } from '../../services/actions/authSlice';
 
 import InputField from "../../components/Shared/InputField/InputField";
-import { login } from "../../api/services/user/user-services";
-import { showToast } from '../../utils/toastUtil';
 
 const LoginSection = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.authSlice);
+
   const [credentials, setCredentials] = useState({ email: '', password: '' });
 
   const handleChange = (e) => {
@@ -15,17 +19,15 @@ const LoginSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await login(credentials);
 
-      showToast('Login successful!', 'success');
-      navigate('/');
-    } catch (error) {
-      showToast(error.toString(), 'error');
-      console.error(error);
-    }
+    dispatch(loginUserThunk({ credentials }));
   };
 
+  useEffect(() => {
+    if (auth.user && auth.token) {
+      navigate('/');
+    }
+  }, [auth, navigate]);
 
   return (
     <>
@@ -56,7 +58,7 @@ const LoginSection = () => {
               value={credentials.password}
               onChange={handleChange}
             />
-            <button type="submit" class="goru-btn auth-button  ">
+            <button type="submit" className="goru-btn auth-button  ">
               Login
             </button>
           </div>
