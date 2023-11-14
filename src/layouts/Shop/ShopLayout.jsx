@@ -8,7 +8,7 @@ const ShopLayout = () => {
 			<ShopBanner />
 			<section className="shop-fullwidth">
 				<ShopDetails />
-				<ShopPagination />
+				{/* <ShopPagination /> */}
 			</section>
 		</>
 	);

@@ -6,10 +6,17 @@ import { getProducts } from "../../../api/services/user/product-services";
 import ShopDetailsCategories from "./ShopDetailsCategories";
 import shopImageHolder370x460 from "../../../assets/images/shop/holder370x460.jpg";
 import NormalProductCard from "../../Shared/NormalProductCard/NormalProductCard";
+import ShopPagination from "../ShopPagination/ShopPagination";
 
 const ShopDetails = () => {
 	const [products, setProducts] = useState([]);
 	const location = useLocation();
+	const [currentPage, setCurrentPage] = useState(0);
+
+	const handlePageClick = (data) => {
+		let selected = data.selected;
+		setCurrentPage(selected);
+	};
 
 	useEffect(() => {
 		if (
@@ -150,6 +157,10 @@ const ShopDetails = () => {
 
 				{!products && <h1>No Products matched your search term.</h1>}
 			</div>
+			<ShopPagination
+				pageCount={Math.ceil(products.count / 12)}
+				onPageChange={handlePageClick}
+			/>
 		</div>
 	);
 };
