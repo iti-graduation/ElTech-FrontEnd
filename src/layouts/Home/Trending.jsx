@@ -14,7 +14,6 @@ const Trending = () => {
 	useEffect(() => {
 		const fetchProducts = async () => {
 			const data = await getTrendingProducts();
-			console.log(data);
 			setProducts(
 				data.reduce((result, value, index, array) => {
 					if (index % 2 === 0)
@@ -25,7 +24,27 @@ const Trending = () => {
 		};
 
 		fetchProducts();
-	}, []);
+	});
+
+	useEffect(() => {
+		var trending_slider = window.$(".trending-slider");
+
+		trending_slider.owlCarousel({
+			loop: false,
+			margin: 0,
+			responsiveClass: true,
+			dots: false,
+			smartSpeed: 700,
+			animateIn: "slideInRight",
+			animateOut: "slideOutRight",
+			nav: true,
+			navText: [
+				'<i class="twi-long-arrow-alt-left1"></i>',
+				'<i class="twi-long-arrow-alt-right1"></i>',
+			],
+			items: 1,
+		});
+	}, [products]);
 
 	return (
 		<section
@@ -58,8 +77,6 @@ const Trending = () => {
 										products={productPair}
 									/>
 								))}
-							{/* <ProductsRow />
-							<ProductsRow /> */}
 						</div>
 					</div>
 				</div>

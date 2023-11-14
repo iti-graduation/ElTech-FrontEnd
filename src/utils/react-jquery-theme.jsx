@@ -43,48 +43,48 @@ const globalReactJQueryInitializer = function () {
 	/*--------------------------------------------------------
      / 1. Revolution Slider 01
      /----------------------------------------------------------*/
-	var revapi = window
-		.jQuery("#rev_slider_1")
-		.show()
-		.revolution({
-			delay: 7000,
-			responsiveLevels: [1200, 1140, 778, 480],
-			gridwidth: [1140, 920, 700, 380],
-			sliderLayout: "fullscreen",
-			navigation: {
-				arrows: {
-					enable: true,
-					style: "uranus",
-					hide_onmobile: false,
-					hide_onleave: false,
-					left: {
-						h_align: "right",
-						v_align: "bottom",
-						h_offset: 208,
-						v_offset: 100,
-					},
-					right: {
-						h_align: "right",
-						v_align: "bottom",
-						h_offset: 130,
-						v_offset: 100,
-					},
-				},
-			},
-		});
-	revapi.one("revolution.slide.onloaded", function () {
-		var currentSlide = parseInt(revapi.revcurrentslide(), 10) + 1;
-		currentSlide = currentSlide < 10 ? "0" + currentSlide : currentSlide;
-		var totalSlides = revapi.revmaxslide();
-		totalSlides = totalSlides < 10 ? "0" + totalSlides : totalSlides;
-		window.$(".slider-counter .total-item").html(totalSlides);
-		window.$(".slider-counter .current-item").html(currentSlide);
-	});
-	revapi.on("revolution.slide.onafterswap", function (event, data) {
-		var currentSlide = revapi.revcurrentslide();
-		currentSlide = currentSlide < 10 ? "0" + currentSlide : currentSlide;
-		window.$(".slider-counter .current-item").html(currentSlide);
-	});
+	// var revapi = window
+	// 	.jQuery("#rev_slider_1")
+	// 	.show()
+	// 	.revolution({
+	// 		delay: 7000,
+	// 		responsiveLevels: [1200, 1140, 778, 480],
+	// 		gridwidth: [1140, 920, 700, 380],
+	// 		sliderLayout: "fullscreen",
+	// 		navigation: {
+	// 			arrows: {
+	// 				enable: true,
+	// 				style: "uranus",
+	// 				hide_onmobile: false,
+	// 				hide_onleave: false,
+	// 				left: {
+	// 					h_align: "right",
+	// 					v_align: "bottom",
+	// 					h_offset: 208,
+	// 					v_offset: 100,
+	// 				},
+	// 				right: {
+	// 					h_align: "right",
+	// 					v_align: "bottom",
+	// 					h_offset: 130,
+	// 					v_offset: 100,
+	// 				},
+	// 			},
+	// 		},
+	// 	});
+	// revapi.one("revolution.slide.onloaded", function () {
+	// 	var currentSlide = parseInt(revapi.revcurrentslide(), 10) + 1;
+	// 	currentSlide = currentSlide < 10 ? "0" + currentSlide : currentSlide;
+	// 	var totalSlides = revapi.revmaxslide();
+	// 	totalSlides = totalSlides < 10 ? "0" + totalSlides : totalSlides;
+	// 	window.$(".slider-counter .total-item").html(totalSlides);
+	// 	window.$(".slider-counter .current-item").html(currentSlide);
+	// });
+	// revapi.on("revolution.slide.onafterswap", function (event, data) {
+	// 	var currentSlide = revapi.revcurrentslide();
+	// 	currentSlide = currentSlide < 10 ? "0" + currentSlide : currentSlide;
+	// 	window.$(".slider-counter .current-item").html(currentSlide);
+	// });
 
 	/*--------------------------------------------------------
      / 2. Revolution Slider 02
@@ -136,80 +136,80 @@ const globalReactJQueryInitializer = function () {
      /----------------------------------------------------------*/
 
 	/*----- 3.1 Trending Slider -----*/
-	trending_slider.owlCarousel({
-		loop: false,
-		margin: 0,
-		responsiveClass: true,
-		dots: false,
-		smartSpeed: 700,
-		animateIn: "slideInRight",
-		animateOut: "slideOutRight",
-		nav: true,
-		navText: [
-			'<i class="twi-long-arrow-alt-left1"></i>',
-			'<i class="twi-long-arrow-alt-right1"></i>',
-		],
-		items: 1,
-	});
+	// trending_slider.owlCarousel({
+	// 	loop: false,
+	// 	margin: 0,
+	// 	responsiveClass: true,
+	// 	dots: false,
+	// 	smartSpeed: 700,
+	// 	animateIn: "slideInRight",
+	// 	animateOut: "slideOutRight",
+	// 	nav: true,
+	// 	navText: [
+	// 		'<i class="twi-long-arrow-alt-left1"></i>',
+	// 		'<i class="twi-long-arrow-alt-right1"></i>',
+	// 	],
+	// 	items: 1,
+	// });
 	/*----- 3.2 Popular Product Slider -----*/
-	popular_tab_slider.owlCarousel({
-		loop: false,
-		margin: 30,
-		responsiveClass: true,
-		dots: false,
-		smartSpeed: 700,
-		animateIn: "slideInRight",
-		animateOut: "slideOutRight",
-		nav: true,
-		navText: [
-			'<i class="twi-long-arrow-alt-left1"></i>',
-			'<i class="twi-long-arrow-alt-right1"></i>',
-		],
-		items: 3,
-		responsive: {
-			0: {
-				items: 1,
-			},
-			700: {
-				items: 2,
-			},
-			992: {
-				items: 3,
-			},
-		},
-	});
+	// popular_tab_slider.owlCarousel({
+	// 	loop: false,
+	// 	margin: 30,
+	// 	responsiveClass: true,
+	// 	dots: false,
+	// 	smartSpeed: 700,
+	// 	animateIn: "slideInRight",
+	// 	animateOut: "slideOutRight",
+	// 	nav: true,
+	// 	navText: [
+	// 		'<i class="twi-long-arrow-alt-left1"></i>',
+	// 		'<i class="twi-long-arrow-alt-right1"></i>',
+	// 	],
+	// 	items: 3,
+	// 	responsive: {
+	// 		0: {
+	// 			items: 1,
+	// 		},
+	// 		700: {
+	// 			items: 2,
+	// 		},
+	// 		992: {
+	// 			items: 3,
+	// 		},
+	// 	},
+	// });
 	/*----- 3.3 Popular Product Slider 02 -----*/
-	popular_tab_slider_two.owlCarousel({
-		loop: false,
-		margin: 40,
-		responsiveClass: true,
-		dots: false,
-		smartSpeed: 700,
-		animateIn: "slideInLeft",
-		animateOut: "slideOutRight",
-		nav: true,
-		navText: [
-			'<i class="twi-long-arrow-alt-left1"></i>',
-			'<i class="twi-long-arrow-alt-right1"></i>',
-		],
-		items: 4,
-		responsive: {
-			0: {
-				items: 1,
-			},
-			700: {
-				items: 2,
-				margin: 30,
-			},
-			992: {
-				items: 3,
-				margin: 30,
-			},
-			1200: {
-				items: 4,
-			},
-		},
-	});
+	// popular_tab_slider_two.owlCarousel({
+	// 	loop: false,
+	// 	margin: 40,
+	// 	responsiveClass: true,
+	// 	dots: false,
+	// 	smartSpeed: 700,
+	// 	animateIn: "slideInLeft",
+	// 	animateOut: "slideOutRight",
+	// 	nav: true,
+	// 	navText: [
+	// 		'<i class="twi-long-arrow-alt-left1"></i>',
+	// 		'<i class="twi-long-arrow-alt-right1"></i>',
+	// 	],
+	// 	items: 4,
+	// 	responsive: {
+	// 		0: {
+	// 			items: 1,
+	// 		},
+	// 		700: {
+	// 			items: 2,
+	// 			margin: 30,
+	// 		},
+	// 		992: {
+	// 			items: 3,
+	// 			margin: 30,
+	// 		},
+	// 		1200: {
+	// 			items: 4,
+	// 		},
+	// 	},
+	// });
 
 	/*----- 3.4 Related Product Slider -----*/
 	related_slider.owlCarousel({
@@ -268,27 +268,27 @@ const globalReactJQueryInitializer = function () {
 	/*--------------------------------------------------------
     / 4. Popup Search and Scroll Off
     /----------------------------------------------------------*/
-	window.$(".search-toggles").on("click", function (e) {
-		e.preventDefault();
-		window.$(".popup-search-sec").toggleClass("active");
-	});
-	window.$(".search-closer").on("click", function () {
-		window.$(".popup-search-sec").removeClass("active");
-	});
+	// window.$(".search-toggles").on("click", function (e) {
+	// 	e.preventDefault();
+	// 	window.$(".popup-search-sec").toggleClass("active");
+	// });
+	// window.$(".search-closer").on("click", function () {
+	// 	window.$(".popup-search-sec").removeClass("active");
+	// });
 
-	window.$(".scroll-down a").on("click", function () {
-		window
-			.$("html, body")
-			.animate(
-				{ scrollTop: window.$(this.hash).offset().top - 68 },
-				1000
-			);
-		return false;
-	});
-	window.$(".colse-popup").on("click", function (e) {
-		e.preventDefault();
-		window.$(".newsletter-popup").fadeOut("medium");
-	});
+	// window.$(".scroll-down a").on("click", function () {
+	// 	window
+	// 		.$("html, body")
+	// 		.animate(
+	// 			{ scrollTop: window.$(this.hash).offset().top - 68 },
+	// 			1000
+	// 		);
+	// 	return false;
+	// });
+	// window.$(".colse-popup").on("click", function (e) {
+	// 	e.preventDefault();
+	// 	window.$(".newsletter-popup").fadeOut("medium");
+	// });
 
 	/*--------------------------------------------------------
      / 5. Count Down

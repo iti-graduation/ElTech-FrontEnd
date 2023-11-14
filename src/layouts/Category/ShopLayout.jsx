@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { getSingleCategory } from "../../api/services/user/product-services";
 
-import ShopBanner from "../../components/Shop/ShopBanner/ShopBanner";
+import CategoryBanner from "../../components/Category/CategoryBanner";
 import ShopPagination from "../../components/Shop/ShopPagination/ShopPagination";
 import CategoryDetails from "../../components/Category/CategoryDetails";
 
@@ -28,7 +28,7 @@ const ShopLayout = () => {
 	}, [id]);
 	return (
 		<>
-			{category && <ShopBanner category={category} />}
+			{category && <CategoryBanner category={category} />}
 			<section className="shop-fullwidth">
 				<CategoryDetails products={products} />
 				<ShopPagination />

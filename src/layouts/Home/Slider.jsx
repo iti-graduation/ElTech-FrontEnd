@@ -10,22 +10,65 @@ import SliderItem from "../../components/Home/Slider/SliderItem/SliderItem";
 
 const Slider = () => {
 	const [products, setProducts] = useState();
-	// const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
 			const data = await getFeaturedProducts();
-			console.log(data);
 			setProducts(data);
-			// setLoading(false);
 		};
 
 		fetchProducts();
 	}, []);
 
-	// if (loading) {
-	// 	return <div>Loading...</div>;
-	// }
+	useEffect(() => {
+		if (products) {
+			var revapi = window
+				.jQuery("#rev_slider_1")
+				.show()
+				.revolution({
+					delay: 7000,
+					responsiveLevels: [1200, 1140, 778, 480],
+					gridwidth: [1140, 920, 700, 380],
+					sliderLayout: "fullscreen",
+					navigation: {
+						arrows: {
+							enable: true,
+							style: "uranus",
+							hide_onmobile: false,
+							hide_onleave: false,
+							left: {
+								h_align: "right",
+								v_align: "bottom",
+								h_offset: 208,
+								v_offset: 100,
+							},
+							right: {
+								h_align: "right",
+								v_align: "bottom",
+								h_offset: 130,
+								v_offset: 100,
+							},
+						},
+					},
+				});
+			revapi.one("revolution.slide.onloaded", function () {
+				var currentSlide = parseInt(revapi.revcurrentslide(), 10) + 1;
+				currentSlide =
+					currentSlide < 10 ? "0" + currentSlide : currentSlide;
+				var totalSlides = revapi.revmaxslide();
+				totalSlides =
+					totalSlides < 10 ? "0" + totalSlides : totalSlides;
+				window.$(".slider-counter .total-item").html(totalSlides);
+				window.$(".slider-counter .current-item").html(currentSlide);
+			});
+			revapi.on("revolution.slide.onafterswap", function (event, data) {
+				var currentSlide = revapi.revcurrentslide();
+				currentSlide =
+					currentSlide < 10 ? "0" + currentSlide : currentSlide;
+				window.$(".slider-counter .current-item").html(currentSlide);
+			});
+		}
+	}, [products]);
 
 	return (
 		<section className="slider-01">
@@ -54,6 +97,7 @@ const Slider = () => {
 										itemDescription={
 											"Lorem ipsum dolor sit amet, consectetur adipisicin do eiu smod tempor incididunt ut labore et dolo aliqua. Ut enim ad minim veniam."
 										}
+										itemId={product.id}
 									/>
 								);
 							})}

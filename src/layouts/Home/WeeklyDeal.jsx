@@ -7,6 +7,7 @@ import { getWeeklyDeal } from "../../api/services/user/product-services";
 
 import img1 from "../../assets/images/home/1.jpg";
 import shape3 from "../../assets/images/home/shape3.png";
+import { Link } from "react-router-dom";
 
 function WeeklyDeal() {
 	const countdownRef = useRef();
@@ -118,12 +119,12 @@ function WeeklyDeal() {
 									data-year={weeklyDeal.year}
 									ref={countdownRef}
 								></div>
-								<a
+								<Link
 									className="goru-btn"
-									href="single-product.html"
+									to={`/product/${weeklyDeal.product.id}`}
 								>
 									Shop Now
-								</a>
+								</Link>
 							</div>
 						</div>
 						<div className="col-lg-6 col-md-7">

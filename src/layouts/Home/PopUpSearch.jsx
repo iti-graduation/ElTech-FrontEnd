@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getProductsBySearch } from "../../api/services/user/product-services";
@@ -15,10 +15,35 @@ const PopUpSearch = () => {
 
 			// Pass the products to the shop page.
 			navigate("/shop", { state: { products } });
+			window.$(".popup-search-sec").removeClass("active");
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
+	useEffect(() => {
+		window.$(".search-toggles").on("click", function (e) {
+			e.preventDefault();
+			window.$(".popup-search-sec").toggleClass("active");
+		});
+		window.$(".search-closer").on("click", function () {
+			window.$(".popup-search-sec").removeClass("active");
+		});
+
+		window.$(".scroll-down a").on("click", function () {
+			window
+				.$("html, body")
+				.animate(
+					{ scrollTop: window.$(this.hash).offset().top - 68 },
+					1000
+				);
+			return false;
+		});
+		window.$(".colse-popup").on("click", function (e) {
+			e.preventDefault();
+			window.$(".newsletter-popup").fadeOut("medium");
+		});
+	});
 
 	return (
 		<section className="popup-search-sec">

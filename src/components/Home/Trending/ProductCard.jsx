@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import t1 from "../../../assets/images/home/t1.jpg";
 
 const ProductCard = ({ product }) => {
@@ -12,7 +14,7 @@ const ProductCard = ({ product }) => {
 			</div>
 			<div className="tr-pro-detail">
 				<h3>
-					<a href="single-product.html">{product.name}</a>
+					<Link to={`/product/${product.id}`}>{product.name}</Link>
 					<div className="product-price clearfix">
 						<span className="price">
 							<span>

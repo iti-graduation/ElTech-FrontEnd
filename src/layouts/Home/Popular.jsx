@@ -25,6 +25,70 @@ const Popular = () => {
 		fetchProducts();
 	}, []);
 
+	useEffect(() => {
+		const popular_tab_slider = window.$(".popular-tab-slider");
+		const popular_tab_slider_two = window.$(".popular-tab-slider-two");
+
+		popular_tab_slider.owlCarousel({
+			loop: false,
+			margin: 30,
+			responsiveClass: true,
+			dots: false,
+			smartSpeed: 700,
+			animateIn: "slideInRight",
+			animateOut: "slideOutRight",
+			nav: true,
+			navText: [
+				'<i class="twi-long-arrow-alt-left1"></i>',
+				'<i class="twi-long-arrow-alt-right1"></i>',
+			],
+			items: 3,
+			responsive: {
+				0: {
+					items: 1,
+				},
+				700: {
+					items: 2,
+				},
+				992: {
+					items: 3,
+				},
+			},
+		});
+
+		popular_tab_slider_two.owlCarousel({
+			loop: false,
+			margin: 40,
+			responsiveClass: true,
+			dots: false,
+			smartSpeed: 700,
+			animateIn: "slideInLeft",
+			animateOut: "slideOutRight",
+			nav: true,
+			navText: [
+				'<i class="twi-long-arrow-alt-left1"></i>',
+				'<i class="twi-long-arrow-alt-right1"></i>',
+			],
+			items: 4,
+			responsive: {
+				0: {
+					items: 1,
+				},
+				700: {
+					items: 2,
+					margin: 30,
+				},
+				992: {
+					items: 3,
+					margin: 30,
+				},
+				1200: {
+					items: 4,
+				},
+			},
+		});
+	}, [products]);
+
 	return (
 		<section className="popular-section">
 			{/*Shape Round*/}
