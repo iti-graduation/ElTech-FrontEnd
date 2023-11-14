@@ -1,12 +1,43 @@
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+
+import { getProducts } from "../../../api/services/user/product-services";
 
 import ShopDetailsCategories from "./ShopDetailsCategories";
 import shopImageHolder370x460 from "../../../assets/images/shop/holder370x460.jpg";
 import NormalProductCard from "../../Shared/NormalProductCard/NormalProductCard";
 
 const ShopDetails = () => {
+	const [products, setProducts] = useState([]);
 	const location = useLocation();
-	const products = location.state?.products;
+
+	useEffect(() => {
+		if (
+			location.pathname.includes("/search") &&
+			location.state?.searchTerm
+		) {
+			fetchProducts({ q: location.state.searchTerm });
+		} else {
+			fetchProducts();
+		}
+	}, [location]);
+
+	const fetchProducts = async (options = {}) => {
+		const fetchedProducts = await getProducts(options);
+		setProducts(fetchedProducts);
+	};
+
+	const handleSelectChange = async (event) => {
+		const selectedValue = event.target.value;
+
+		if (selectedValue === "default") {
+			fetchProducts();
+		} else if (selectedValue === "price" || selectedValue === "-price") {
+			fetchProducts({ ordering: selectedValue });
+		} else if (selectedValue === "popular") {
+			fetchProducts({ is_popular: "1" });
+		}
+	};
 
 	// const products = [
 	// 	{
@@ -109,11 +140,11 @@ const ShopDetails = () => {
 
 	return (
 		<div className="container-fluid">
-			<ShopDetailsCategories />
+			<ShopDetailsCategories onSortChange={handleSelectChange} />
 
 			<div className="row">
-				{products &&
-					products.map((product) => (
+				{products.results &&
+					products.results.map((product) => (
 						<NormalProductCard key={product.id} product={product} />
 					))}
 

@@ -122,8 +122,6 @@ export const getSingleProduct = async (productId) => {
  */
 export const getProductsBySearch = async (searchTerm) => {
 	try {
-		// const url = productEndpoint + `search?q=${searchTerm}`;
-		// const response = await apiInstance.get(url);
 		const response = await apiInstance.get(productEndpoint, {
 			params: {
 				q: searchTerm,
@@ -191,6 +189,36 @@ export const createReview = async (productId, reviewContent) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem creating your review!";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+export const getOrderedProducts = async (ordering) => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				ordering,
+			},
+		});
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting ordered products.";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+export const getProducts = async (options = {}) => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: options,
+		});
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting products.";
 		console.log(error);
 		throw new Error(msg);
 	}

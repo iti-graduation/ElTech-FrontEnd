@@ -5,8 +5,8 @@ const ProductsRow = ({ products }) => {
 		<div className="row">
 			{products.map((product) => {
 				return (
-					<div className="col-lg-6 col-md-6">
-						<ProductCard key={product.id} product={product} />
+					<div key={product.id} className="col-lg-6 col-md-6">
+						<ProductCard product={product} />
 					</div>
 				);
 			})}
