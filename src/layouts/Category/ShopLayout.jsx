@@ -31,7 +31,7 @@ const ShopLayout = () => {
 			{category && <CategoryBanner category={category} />}
 			<section className="shop-fullwidth">
 				<CategoryDetails products={products} />
-				<ShopPagination />
+				{/* <ShopPagination /> */}
 			</section>
 		</>
 	);
