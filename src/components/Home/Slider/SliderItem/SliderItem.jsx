@@ -3,20 +3,18 @@ import SliderItemDescription from "./SliderItemDescription";
 import SliderItemImage from "./SliderItemImage";
 import SliderItemTitle from "./SliderItemTitle";
 
-const SliderItem = ({ itemImage, itemTitle, itemDescription }) => {
-  return (
-    <li className="rev-slidebg">
+const SliderItem = ({ itemImage, itemTitle, itemDescription, itemId }) => {
+	return (
+		<li className="rev-slidebg">
+			<SliderItemTitle title={itemTitle} />
 
-      <SliderItemTitle title={itemTitle} />
+			<SliderItemDescription description={itemDescription} />
 
-      <SliderItemDescription description={itemDescription} />
+			<SliderItemButton id={itemId} />
 
-      <SliderItemButton />
-
-      <SliderItemImage image={itemImage} />
-      
-    </li>
-  );
+			<SliderItemImage image={itemImage} />
+		</li>
+	);
 };
 
 export default SliderItem;
