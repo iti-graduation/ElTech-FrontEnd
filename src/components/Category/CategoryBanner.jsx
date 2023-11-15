@@ -14,7 +14,14 @@ const ShopBanner = ({ category }) => {
 							<Link to="/">Home</Link> / {category.name}
 						</div>
 						<div className="banner-img">
-							<img src={shopBannerImage} alt="" />
+							<img
+								src={category.image}
+								alt=""
+								style={{
+									maxWidth: "150px",
+									// maxHeight: "191px",
+								}}
+							/>
 						</div>
 					</div>
 				</div>

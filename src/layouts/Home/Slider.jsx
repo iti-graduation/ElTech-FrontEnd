@@ -94,9 +94,7 @@ const Slider = () => {
 										key={product.id}
 										itemImage={product.thumbnail.image}
 										itemTitle={product.name}
-										itemDescription={
-											"Lorem ipsum dolor sit amet, consectetur adipisicin do eiu smod tempor incididunt ut labore et dolo aliqua. Ut enim ad minim veniam."
-										}
+										itemDescription={product.description}
 										itemId={product.id}
 									/>
 								);

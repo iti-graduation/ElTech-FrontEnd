@@ -26,11 +26,7 @@ const ProductCard = ({ product }) => {
 						</span>
 					</div>
 				</h3>
-				<p>
-					Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-					odit aut fugit, sed quia consequuntur magni dolores eos qui
-					ratione voluptatem sequid.
-				</p>
+				<p>{product.description}</p>
 				<a className="tr-atc" href="#">
 					Add To Cart
 				</a>
