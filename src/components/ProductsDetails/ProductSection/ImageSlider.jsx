@@ -18,10 +18,10 @@ const ProductSlider = ({ product }) => {
 					</div>
 				</div>
 				{product.images &&
-					product.images.map((image, index) => {
+					product.images.map((image) => {
 						if (image.image !== product.thumbnail.image) {
 							return (
-								<div className="carousel-item" key={index}>
+								<div className="carousel-item" key={image.id}>
 									<div className="ps-img">
 										<img
 											src={image.image}
@@ -61,13 +61,13 @@ const ProductSlider = ({ product }) => {
 					/>
 				</li>
 				{product.images &&
-					product.images.map((image, index) => {
+					product.images.map((image) => {
 						if (image.image !== product.thumbnail.image) {
 							return (
 								<li
 									data-target="#product-slider"
 									data-slide-to="1"
-									key={index}
+									key={image.id}
 								>
 									<img
 										src={image.image}

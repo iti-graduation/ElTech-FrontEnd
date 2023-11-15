@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { createReview } from "../../../api/services/user/product-services";
+import { getUserData } from "../../../api/services/user/user-services";
 
 import c1 from "../../../assets/images/blog/c1.jpg";
 import SingleComment from "./SingleComment";

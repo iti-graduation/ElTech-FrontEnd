@@ -23,17 +23,22 @@ const NormalProductCard = ({ product, isPopularOrRelated = false }) => {
 							alt=""
 							style={{ maxWidth: "370px", maxHeight: "460px" }}
 						/>
-						{product.badge != null && (
-							<ProductCardBadge badgeClass={product.badge} />
-						)}
+						<ProductCardBadge
+							badgeClass={product.badge}
+							product={product}
+						/>
+						{/* {product.badge != null && (
+							
+						)} */}
 					</div>
 				</Link>
 				<div className="sp-details">
 					<h4>{product.name}</h4>
 					<div className="product-price clearfix">
 						<ProductPrice
-							productPriceBefore={product.price}
-							productPriceAfter={product.discountedPrice}
+							// productPriceBefore={product.price}
+							// productPriceAfter={product.discountedPrice}
+							product={product}
 						/>
 						{/* <span className="price">
               {product.discountedPrice != null && <del>
