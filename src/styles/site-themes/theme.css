@@ -3235,12 +3235,24 @@ footer.inner-footer {
   display: flex;
   justify-content: flex-start;
 }
-.sin-product-details .woocommerce-product-rating i {
+
+.sin-product-details .woocommerce-product-rating span.twi-star {
   font-size: 14px;
   line-height: 30px;
   color: #5e80df;
   display: inline-block;
 }
+
+.sin-product-details .woocommerce-product-rating span.twi-star.empty-star {
+  color: #a1a1a1;
+}
+
+/* .sin-product-details .woocommerce-product-rating i {
+  font-size: 14px;
+  line-height: 30px;
+  color: #5e80df;
+  display: inline-block;
+} */
 .sin-product-details .woocommerce-product-rating span i {
   color: #a1a1a1;
 }
