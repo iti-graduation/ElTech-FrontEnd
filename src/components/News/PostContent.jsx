@@ -1,17 +1,17 @@
-const PostContent = ({ post }) => {
+const PostContent = ({ post,category }) => {
 	return (
 		<div className="blog-content">
 			<h3 className="blog-title">{post.title}</h3>
 			<p>{post.content}</p>
-			<h4>Features:</h4>
+			{/* <h4>Features:</h4>
 			<ul>
-				{post.features.map((feature, index) => (
+				{post.map((feature, index) => (
 					<li key={index}>{feature}</li>
 				))}
-			</ul>
+			</ul> */}
 			<div className="post-tag">
 				<h5>
-					Tag: <a href="#"> {post.tag}</a>
+					Category: <a> {category.name}</a>
 				</h5>
 			</div>
 		</div>
