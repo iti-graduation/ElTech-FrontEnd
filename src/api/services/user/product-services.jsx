@@ -212,10 +212,10 @@ export const getOrderedProducts = async (ordering) => {
 
 export const getProducts = async (options = {}) => {
 	try {
+		console.log("Options:", options);
 		const response = await apiInstance.get(productEndpoint, {
 			params: options,
 		});
-
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting products.";
