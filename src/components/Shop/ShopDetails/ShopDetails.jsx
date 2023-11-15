@@ -12,10 +12,38 @@ const ShopDetails = () => {
 	const [products, setProducts] = useState([]);
 	const location = useLocation();
 	const [currentPage, setCurrentPage] = useState(0);
+	const [activeItem, setActiveItem] = useState("ALL");
+	const [activeFilter, setActiveFilter] = useState("default");
 
 	const handlePageClick = (data) => {
 		let selected = data.selected;
 		setCurrentPage(selected);
+	};
+
+	const handleFilterChange = async (categoryId, orderFilter) => {
+		let filter = {};
+
+		if (categoryId !== "ALL") {
+			filter.category = categoryId;
+		}
+
+		if (orderFilter === "price" || orderFilter === "-price") {
+			filter.ordering = orderFilter;
+		} else if (orderFilter === "popular") {
+			filter.is_popular = "1";
+		}
+
+		fetchProducts(filter);
+	};
+
+	const handleSelectChange = async (event) => {
+		const selectedValue = event.target.value;
+		handleFilterChange(activeItem, selectedValue);
+	};
+
+	const handleCategoryClick = (categoryId) => {
+		handleFilterChange(categoryId, activeFilter);
+		setActiveItem(categoryId);
 	};
 
 	useEffect(() => {
@@ -29,22 +57,22 @@ const ShopDetails = () => {
 		}
 	}, [location]);
 
-	const fetchProducts = async (options = {}) => {
-		const fetchedProducts = await getProducts(options);
+	const fetchProducts = async (filter = {}) => {
+		const fetchedProducts = await getProducts(filter);
 		setProducts(fetchedProducts);
 	};
 
-	const handleSelectChange = async (event) => {
-		const selectedValue = event.target.value;
+	// const handleSelectChange = async (event) => {
+	// 	const selectedValue = event.target.value;
 
-		if (selectedValue === "default") {
-			fetchProducts();
-		} else if (selectedValue === "price" || selectedValue === "-price") {
-			fetchProducts({ ordering: selectedValue });
-		} else if (selectedValue === "popular") {
-			fetchProducts({ is_popular: "1" });
-		}
-	};
+	// 	if (selectedValue === "default") {
+	// 		fetchProducts();
+	// 	} else if (selectedValue === "price" || selectedValue === "-price") {
+	// 		fetchProducts({ ordering: selectedValue });
+	// 	} else if (selectedValue === "popular") {
+	// 		fetchProducts({ is_popular: "1" });
+	// 	}
+	// };
 
 	// const products = [
 	// 	{
@@ -147,7 +175,12 @@ const ShopDetails = () => {
 
 	return (
 		<div className="container-fluid">
-			<ShopDetailsCategories onSortChange={handleSelectChange} />
+			<ShopDetailsCategories
+				onSortChange={handleSelectChange}
+				onCategoryChange={handleCategoryClick}
+				activeItem={activeItem}
+				setActiveItem={setActiveItem}
+			/>
 
 			<div className="row">
 				{products.results &&
