@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const CartTotal = () => {
+const CartTotal = ({total}) => {
 	return (
 		<div className="col-md-6">
 			<div className="cart-totals">
@@ -14,7 +14,7 @@ const CartTotal = () => {
 									<span className="woocommerce-Price-currencySymbol">
 										$
 									</span>
-									42.00
+									{total}
 								</span>
 							</td>
 						</tr>
@@ -25,7 +25,7 @@ const CartTotal = () => {
 									<span className="woocommerce-Price-currencySymbol">
 										$
 									</span>
-									48.00
+									{total}
 								</span>
 							</td>
 						</tr>

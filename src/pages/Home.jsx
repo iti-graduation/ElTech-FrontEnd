@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserData } from '../services/actions/authSlice';
+import React from 'react';
 
 import Clients from "../layouts/Home/Clients";
 import Services from "../layouts/Home/Services";

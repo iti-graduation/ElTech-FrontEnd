@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 import CartItem from './CartItem'
 
-function CartTable() {
+function CartTable({ products, handleDeleteProduct, handleUpdateProduct }) {
+    const navigate = useNavigate();
+
     return (
         <table className="cart-table">
             <thead>
@@ -21,35 +25,22 @@ function CartTable() {
                 </tr>
             </thead>
             <tbody>
-                <CartItem
-                    product={{
-                        name: "Wireless Headset",
-                        price: "79.00",
-                    }}
-                />
-                <CartItem
-                    product={{
-                        name: "VRBOX Gaming",
-                        price: "142.00",
-                    }}
-                />
+                {products.map((product) => {
+                    return (
+                        <CartItem
+                            product={product}
+                            handleDeleteProduct={handleDeleteProduct}
+                            handleUpdateProduct={handleUpdateProduct}
+                        />
+                    );
+                })}
+
                 <tr>
                     <td colspan="6" className="actions">
                         <button
-                            type="submit"
-                            className="button clear-cart"
-                        >
-                            Clear Shopping Cart
-                        </button>
-                        <button
-                            type="submit"
-                            className="button update"
-                        >
-                            Update Shopping Cart
-                        </button>
-                        <button
-                            type="submit"
+                            type="button"
                             className="button continue-shopping"
+                            onClick={() => navigate("/shop")}
                         >
                             Continue Shopping
                         </button>

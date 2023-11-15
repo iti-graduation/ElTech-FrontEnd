@@ -9,6 +9,7 @@ import cart from "../../assets/images/cart.png";
 
 const Header = ({ className }) => {
   const user = useSelector((state) => state.authSlice.user);
+  const count = useSelector((state) => state.cartSlice.count);
 
   return (
     <header className={`header-01 fix-header ${className}`}>
@@ -65,7 +66,7 @@ const Header = ({ className }) => {
                 <span>{user?user.first_name:"Account"}</span>
               </Link>
               <Link className="carts" to="/cart">
-                <span>4</span>
+                <span>{count}</span>
                 <img src={cart} alt="" />
               </Link>
             </div>
