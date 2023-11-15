@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { getTrendingProducts } from "../../api/services/user/product-services";
+import { getProducts } from "../../api/services/user/product-services";
+// import { getTrendingProducts } from "../../api/services/user/product-services";
 
 // Importing ProductsRow component from Trending subdirectory in components folder
 import ProductsRow from "../../components/Home/Trending/ProductsRow";
@@ -11,20 +12,39 @@ import shape2 from "../../assets/images/home/shape2.png";
 const Trending = () => {
 	const [products, setProducts] = useState();
 
+	// useEffect(() => {
+	// 	const fetchProducts = async () => {
+	// 		const data = await getProducts({ is_trending: 1 });
+	// 		console.log("Trending Products", data);
+	// 		setProducts(
+	// 			data.results.reduce((result, value, index, array) => {
+	// 				if (index % 2 === 0)
+	// 					result.push(array.slice(index, index + 2));
+	// 				return result;
+	// 			}, [])
+	// 		);
+	// 	};
+
+	// 	fetchProducts();
+	// });
+
 	useEffect(() => {
 		const fetchProducts = async () => {
-			const data = await getTrendingProducts();
-			setProducts(
-				data.results.reduce((result, value, index, array) => {
-					if (index % 2 === 0)
-						result.push(array.slice(index, index + 2));
-					return result;
-				}, [])
-			);
+			const data = await getProducts({ is_trending: 1 });
+			console.log("Trending Products", data);
+			if (JSON.stringify(data) !== JSON.stringify(products)) {
+				setProducts(
+					data.results.reduce((result, value, index, array) => {
+						if (index % 2 === 0)
+							result.push(array.slice(index, index + 2));
+						return result;
+					}, [])
+				);
+			}
 		};
 
 		fetchProducts();
-	});
+	}, []);
 
 	useEffect(() => {
 		var trending_slider = window.$(".trending-slider");
