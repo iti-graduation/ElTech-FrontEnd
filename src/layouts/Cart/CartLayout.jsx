@@ -22,7 +22,6 @@ const CartLayout = () => {
 		if (user) {
 			try {
 				await updateCartProduct(productID, quantity)
-				showToast('product added to cart successfully', 'success');
 			} catch (error) {
 				showToast(error.toString())
 			}

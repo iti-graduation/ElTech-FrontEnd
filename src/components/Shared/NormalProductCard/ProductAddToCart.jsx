@@ -6,7 +6,7 @@ import {
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
 
-const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
+const ProductAddToCart = ({ handleAddProductToCart, productId }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const handleAddToWishlist = async (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
   return (
     <div className="sp-details-hover">
       <Link className="sp-cart"
-      onClick={() => handleAddProductToCart(productID)}
+      onClick={() => handleAddProductToCart(productId)}
       >
         <i className="twi-cart-plus"></i>
         <span>Add to cart</span>
