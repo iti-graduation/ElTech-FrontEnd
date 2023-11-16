@@ -5,11 +5,9 @@ import {
   createUserFavorite,
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
-
-const ProductCartQty = ({ productId }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
+ 
 const ProductCartQty = ({ handleUpdateProductToCart, quantity, handleQuantity, productId }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const handleAddToWishlist = async (e) => {
     e.preventDefault();
     try {

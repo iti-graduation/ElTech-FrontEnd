@@ -6,10 +6,8 @@ import {
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
 
-const ProductAddToCart = ({ productId }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
 const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const handleAddToWishlist = async (e) => {
     e.preventDefault();
     try {
@@ -57,7 +55,7 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
       >
         <i className="twi-cart-plus"></i>
         <span>Add to cart</span>
-      </a>
+      </Link>
 
       {/* Add to Wishlist */}
       <a

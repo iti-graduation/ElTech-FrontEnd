@@ -9,6 +9,7 @@ export const PRODUCT_ENDPOINT = process.env.REACT_APP_PRODUCT_ENDPOINT;
 export const ACCOUNTS_ENDPOINT = process.env.REACT_APP_ACCOUNTS_ENDPOINT;
 export const NEWS_ENDPOINT = process.env.REACT_APP_NEWS_ENDPOINT;
 export const FAVORITE_ENDPOINT = process.env.REACT_APP_FAVORITE_ENDPOINT;
+export const SERVICE_ENDPOINT = process.env.REACT_APP_SERVICE_ENDPOINT;
 
 // Creating a basic axios instance for API calls
 export const apiInstance = axios.create({
