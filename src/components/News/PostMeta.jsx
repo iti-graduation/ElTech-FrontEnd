@@ -1,19 +1,21 @@
-import postImage from "../../assets/images/blog/blog-details.jpg";
 import authorImage from "../../assets/images/blog/author.jpg";
+import moment from "moment";
 
-const PostMeta = ({ category }) => {
+const PostMeta = ({ post }) => {
+	const formattedDate = moment(post.created_at).fromNow();
+
 	return (
 		<>
 			<div className="blog-thumb">
-				<img src={postImage} alt="" />
+				<img src={post.image} alt="" />
 			</div>
 			<div className="blog-post-meta">
 				<span>
-					<img src={authorImage} alt="" />
-					By <a href="#">Admin</a>, 1 week a go{" "}
+					<img src={post.user.image} alt="" />
+					By <a>{post.user.email}</a>, {formattedDate}
 				</span>
 				<span className="cate">
-					<a href="#">{category}</a>
+					<a>{post.category.name}</a>
 				</span>
 			</div>
 		</>

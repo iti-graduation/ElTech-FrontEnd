@@ -1,11 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import languageSlice from "../actions/languageSlice"
-import themeSlice from "../actions/themeSlice"
+import languageSlice from "../actions/languageSlice";
+import themeSlice from "../actions/themeSlice";
+import authSlice from '../actions/authSlice';
+import cartSlice from "../actions/cartSlice";
 
-export default configureStore({
+const store = configureStore({
     reducer: {
         languageSlice,
-        themeSlice
+        themeSlice,
+        authSlice,
+        cartSlice,
     },
 });
+
+export default store;

@@ -10,7 +10,7 @@ const NewsDetails = () => {
 		<>
 			<Header className="inner-header" />
 			<PopUpSearch />
-			<PageBanner section="News Details" />
+			<PageBanner section="Post Details" />
 			<NewsDetailsLayout />
 			<Footer className="inner-footer"/>
 		</>

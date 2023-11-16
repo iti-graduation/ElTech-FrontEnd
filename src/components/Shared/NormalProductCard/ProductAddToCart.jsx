@@ -1,12 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const ProductAddToCart = () => {
+const ProductAddToCart = ({ handleAddProductToCart, productID }) => {
   return (
     <div className="sp-details-hover">
-      <a className="sp-cart" href="#">
+      <Link className="sp-cart" 
+      onClick={() => handleAddProductToCart(productID)}
+      >
         <i className="twi-cart-plus"></i>
         <span>Add to cart</span>
-      </a>
+      </Link>
       <a className="sp-wishlist" href="#">
         <i className="twi-heart2"></i>
       </a>

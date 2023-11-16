@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const NewsCard = ({ post }) => {
-	console.log(post);
+	const formattedDate = moment(post.created_at).fromNow();
 
 	return (
 		<div className="col-lg-4 col-md-6">
@@ -11,7 +12,7 @@ const NewsCard = ({ post }) => {
 				</div>
 				<div className="news-details">
 					<span className="post-meta">
-						By<a href="#"> Admin</a>, 1 week a go
+						By<span> {post.user.email}</span>, {formattedDate}
 					</span>
 					<h4>
 						<Link to={`/news/${post.id}`} state={{ post: post }}>

@@ -3,6 +3,69 @@ import { apiInstance } from "../../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
+const productEndpoint = endpoint + "products/";
+const categoryEndpoint = endpoint + "categories/";
+
+export const getFeaturedProducts = async () => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_featured: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting featured products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
+
+export const getTrendingProducts = async () => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_trending: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting trending products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
+
+export const getPopularProducts = async () => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_popular: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting popular products.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
+
+export const getWeeklyDeal = async () => {
+	try {
+		const url = endpoint + "weekly-deal/latest/";
+		const response = await apiInstance.get(url);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting the weekly deal.";
+		console.log(error);
+		return error;
+		throw new Error(msg);
+	}
+};
 
 /**
  * Function to get all products from the API.
@@ -15,7 +78,7 @@ const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
  */
 export const getAllProducts = async () => {
 	try {
-		const response = await apiInstance.get(endpoint);
+		const response = await apiInstance.get(productEndpoint);
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all products.";
@@ -36,7 +99,7 @@ export const getAllProducts = async () => {
  */
 export const getSingleProduct = async (productId) => {
 	try {
-		const url = endpoint + productId;
+		const url = productEndpoint + productId;
 		const response = await apiInstance.get(url);
 
 		return response.data;
@@ -59,8 +122,11 @@ export const getSingleProduct = async (productId) => {
  */
 export const getProductsBySearch = async (searchTerm) => {
 	try {
-		const url = endpoint + `search?q=${searchTerm}`;
-		const response = await apiInstance.get(url);
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				q: searchTerm,
+			},
+		});
 
 		return response.data;
 	} catch (error) {
@@ -81,10 +147,9 @@ export const getProductsBySearch = async (searchTerm) => {
  */
 export const getAllCategories = async () => {
 	try {
-		const url = endpoint + "categories";
+		const url = categoryEndpoint;
 		const response = await apiInstance.get(url);
-		result.data = response.data;
-		return result;
+		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all categories";
 		console.log(error);
@@ -102,15 +167,58 @@ export const getAllCategories = async () => {
  * @return {Promise<object>} Promise object represents the product data of the specified category.
  * @throws Will throw an error if there is a problem completing the request.
  */
-export const getCategoryProducts = async (categoryName) => {
+export const getSingleCategory = async (categoryId) => {
 	try {
-		const url = endpoint + `category/${categoryName}`;
+		const url = categoryEndpoint + categoryId;
 		const response = await apiInstance.get(url);
 
 		return response.data;
 	} catch (error) {
 		const msg =
 			"There was a problem getting the products of the specified category";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+export const createReview = async (productId, reviewContent) => {
+	try {
+		const url = productEndpoint + `${productId}/reviews/`;
+		const response = await apiInstance.post(url, reviewContent);
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem creating your review!";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+export const getOrderedProducts = async (ordering) => {
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				ordering,
+			},
+		});
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting ordered products.";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+export const getProducts = async (options = {}) => {
+	try {
+		console.log("Options:", options);
+		const response = await apiInstance.get(productEndpoint, {
+			params: options,
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting products.";
 		console.log(error);
 		throw new Error(msg);
 	}

@@ -1,11 +1,14 @@
 import { useEffect } from "react";
+import { Provider } from 'react-redux';
+import store from './services/reducers/index';
 
 import { BrowserRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@mui/material/styles";
 
-import globalReactJQueryInitializer from "./utils/react-jquery-theme"
+import globalReactJQueryInitializer from "./utils/react-jquery-theme";
 
 import Router from "./routes/index";
 
@@ -21,8 +24,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.dir =
-      language === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
     document.body.style.backgroundColor =
       theme === "light"
         ? lightTheme.palette.background.default
@@ -31,9 +33,12 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ToastContainer />
+          <Router />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   );
 };

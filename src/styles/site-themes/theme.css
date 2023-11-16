@@ -2911,13 +2911,67 @@ footer.inner-footer {
 .mt-20 {
   margin-top: 20px;
 }
+
 .goru-pagination {
+  /* list-style: none; */
+  /* display: flex; */
+  /* justify-content: center; */
   position: relative;
   background: #f4f8ff;
   padding: 11px 35px;
   margin: 0 37px;
 }
-.goru-pagination a,
+
+/* .goru-pagination li {
+  margin: 0 5px;
+} */
+
+.goru-pagination li {
+  font-size: 14px;
+  color: #999999;
+  line-height: 0.8;
+  text-align: center;
+  display: inline-block;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  padding: 0 0;
+  margin: 0 7px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.goru-pagination li:hover,
+.goru-pagination li.current {
+  color: #000;
+}
+.goru-pagination li.next,
+.goru-pagination li.prev {
+  font-size: 20px;
+  color: #666666;
+  letter-spacing: 1px;
+  position: relative;
+  top: 5px;
+}
+.goru-pagination li.next {
+  float: right;
+}
+.goru-pagination li.prev {
+  float: left;
+}
+.goru-pagination li.next:hover,
+.goru-pagination li.prev:hover {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* .goru-pagination {
+  position: relative;
+  background: #f4f8ff;
+  padding: 11px 35px;
+  margin: 0 37px;
+} */
+
+/* .goru-pagination a,
 .goru-pagination span {
   font-size: 14px;
   color: #999999;
@@ -2953,7 +3007,7 @@ footer.inner-footer {
 .goru-pagination a.next:hover,
 .goru-pagination a.prev:hover {
   color: var(--primary-color);
-}
+} */
 .shop-right-sidebar {
   position: relative;
   padding: 60px 0 120px;
@@ -3181,12 +3235,24 @@ footer.inner-footer {
   display: flex;
   justify-content: flex-start;
 }
-.sin-product-details .woocommerce-product-rating i {
+
+.sin-product-details .woocommerce-product-rating span.twi-star {
   font-size: 14px;
   line-height: 30px;
   color: #5e80df;
   display: inline-block;
 }
+
+.sin-product-details .woocommerce-product-rating span.twi-star.empty-star {
+  color: #a1a1a1;
+}
+
+/* .sin-product-details .woocommerce-product-rating i {
+  font-size: 14px;
+  line-height: 30px;
+  color: #5e80df;
+  display: inline-block;
+} */
 .sin-product-details .woocommerce-product-rating span i {
   color: #a1a1a1;
 }

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Clients from "../layouts/Home/Clients";
 import Services from "../layouts/Home/Services";
 import Slider from "../layouts/Home/Slider";
@@ -12,9 +14,10 @@ import MailChimpSection from "../layouts/Home/MailChimp";
 import Popular from "../layouts/Home/Popular";
 
 export default function Home() {
+
   return (
     <>
-      <Header />
+      <Header/>
       <PopUpSearch />
       <Slider />
       <CategorySection />

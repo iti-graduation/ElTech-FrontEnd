@@ -11,7 +11,7 @@ const Clients = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
-          <div class="client-logo owl-carousel">
+          <div className="client-logo owl-carousel">
               <a href="/">
                 <img src={client_logo_1} alt="client_logo_1" />
               </a>
