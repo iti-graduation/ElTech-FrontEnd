@@ -115,7 +115,7 @@ export const updateCartProduct = async (productID, quantity) => {
  * delete product from the cart of a specific user
  * @param {number} productID The ID of the product
  * @return status code 204
- * @throws {Error} If there was a problem updating the product to the cart of the specified user
+ * @throws {Error} If there was a problem deleting the product to the cart of the specified user
  */
 export const deleteCartProduct = async (productID) => {
 	try {

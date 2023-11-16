@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 import CartSubtotal from "./CartSubtotal";
 import PaymentMethod from "./PaymentMethod";
 
-const OrderOverview = () => {
+const OrderOverview = ({ products, total }) => {
   return (
     <div className="col-md-6">
       <div className="woocommerce-checkout-review-order" id="order_review">
@@ -16,18 +16,20 @@ const OrderOverview = () => {
             </tr>
           </thead>
           <tbody>
-            <CartItem productName="Cum sociis natoque" productPrice="14.00" />
-            <CartItem
-              productName="Habitant morbi tristique"
-              productPrice="28.00"
-            />
-            <CartItem productName="Aenean ultricies" productPrice="24.00" />
+            {products.map((product) => {
+              return (
+                <CartItem
+                  key={product.id}
+                  product={product}
+                />
+              );
+            })}
           </tbody>
           <tfoot>
             <CartSubtotal
               subtotalClass="cart-subtotal"
               subtotalName="Subtotal"
-              subtotalPrice="68.00"
+              subtotalPrice={total}
             />
             <CartSubtotal
               subtotalClass="cart-subtotal"
@@ -37,7 +39,7 @@ const OrderOverview = () => {
             <CartSubtotal
               subtotalClass="order-total"
               subtotalName="Total"
-              subtotalPrice="68.00"
+              subtotalPrice={total}
             />
           </tfoot>
         </table>

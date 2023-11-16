@@ -32,7 +32,7 @@ const CartTotal = ({total}) => {
 					</tbody>
 				</table>
 				<div className="wc-proceed-to-checkout">
-					<Link to="#" className="checkout-button">
+					<Link to="/checkout" className="checkout-button">
 						Proceed to checkout
 					</Link>
 				</div>
