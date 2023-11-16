@@ -10,7 +10,7 @@ const CategoryIcons = () => {
 		const fetchCategories = async () => {
 			const data = await getAllCategories();
 			console.log(data);
-			// setCategories(data);
+			setCategories(data);
 		};
 
 		fetchCategories();
