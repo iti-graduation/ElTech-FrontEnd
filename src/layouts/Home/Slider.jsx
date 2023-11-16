@@ -81,7 +81,7 @@ const Slider = () => {
 					to={"#coupone"}
 				/>
 				<h1 className="text-center">
-					There are no featured products to show!
+					Sorry, there are no featured products to show!
 				</h1>
 			</section>
 		);
