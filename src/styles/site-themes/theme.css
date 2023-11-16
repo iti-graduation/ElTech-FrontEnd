@@ -2955,6 +2955,9 @@ footer.inner-footer {
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
+.goru-pagination li:not(.current) {
+  cursor: pointer;
+}
 .goru-pagination li:hover,
 .goru-pagination li.current {
   color: #000;
