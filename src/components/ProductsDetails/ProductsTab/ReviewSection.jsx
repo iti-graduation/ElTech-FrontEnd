@@ -62,7 +62,7 @@ const ReviewsSection = ({ product }) => {
 								window.location.reload();
 							}}
 						>
-							<div className="col-lg-6 col-md-6">
+							{/* <div className="col-lg-6 col-md-6">
 								<input
 									type="text"
 									name="name"
@@ -75,7 +75,7 @@ const ReviewsSection = ({ product }) => {
 									name="email"
 									placeholder="Email"
 								/>
-							</div>
+							</div> */}
 							<div className="col-lg-12 col-md-12">
 								<textarea
 									name="message"

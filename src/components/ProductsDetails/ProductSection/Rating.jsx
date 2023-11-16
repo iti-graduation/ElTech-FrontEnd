@@ -1,11 +1,26 @@
 import { useState, useEffect } from "react";
 
 import { getUserData } from "../../../api/services/user/user-services";
+import { addProductRating } from "../../../api/services/user/product-services";
 
 import Rating from "react-rating";
 
-const ProductRatingReviews = ({ reviewsCount, averageRating, ratings }) => {
+const ProductRatingReviews = ({
+	reviewsCount,
+	averageRating,
+	ratings,
+	productId,
+}) => {
 	const [userId, setUserId] = useState(null);
+
+	const handleRatingChange = async (newRating) => {
+		try {
+			await addProductRating(productId, newRating);
+			console.log("Rating submitted successfully");
+		} catch (error) {
+			console.error("Failed to submit rating", error);
+		}
+	};
 
 	useEffect(() => {
 		const fetchUserData = async () => {
@@ -47,6 +62,7 @@ const ProductRatingReviews = ({ reviewsCount, averageRating, ratings }) => {
 					initialRating={averageRating}
 					readonly={!userId || hasRated}
 					className="woocommerce-product-rating"
+					onChange={handleRatingChange}
 				/>
 			</div>
 

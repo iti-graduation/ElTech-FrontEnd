@@ -223,3 +223,16 @@ export const getProducts = async (options = {}) => {
 		throw new Error(msg);
 	}
 };
+
+export const addProductRating = async (productId, rating) => {
+	try {
+		const url = productEndpoint + `${productId}/ratings/`;
+		const response = await apiInstance.post(url, rating);
+
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem adding your rating!";
+		console.log(error);
+		throw new Error(msg);
+	}
+};

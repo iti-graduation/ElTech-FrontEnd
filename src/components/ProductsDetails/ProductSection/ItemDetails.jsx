@@ -21,6 +21,7 @@ const ItemDetails = ({ product }) => {
 						reviewsCount={product.reviews_count}
 						averageRating={product.average_rating}
 						ratings={product.ratings}
+						productId={product.id}
 					/>
 					<ProductPrice price={product.price} />
 					<div className="pro-excerp">
