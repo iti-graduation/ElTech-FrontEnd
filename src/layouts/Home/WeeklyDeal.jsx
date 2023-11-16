@@ -94,7 +94,11 @@ function WeeklyDeal() {
 			<div className="sec-heading rotate-tb">
 				Coupon <span>Deals</span>
 			</div>
-
+			{!weeklyDeal && (
+				<h1 className="text-center">
+					Sorry, there is no weekly deal available!
+				</h1>
+			)}
 			{weeklyDeal && (
 				<div className="container">
 					<div className="row">
