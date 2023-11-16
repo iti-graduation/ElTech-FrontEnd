@@ -4858,187 +4858,181 @@ body.menu_open {
   margin-left: 15px;
 }
 
-
 /*------------------------------------------------------------------------------------
 / 15. User Profile
 /-------------------------------------------------------------------------------------*/
-#UserProfileContainer,#UserProfilePreview {
-    font-size: 18px;
-    margin-top: 20px;
-    font-family: 'Poppins', sans-serif;
+#UserProfileContainer,
+#UserProfilePreview {
+  font-size: 18px;
+  margin-top: 20px;
+  font-family: "Poppins", sans-serif;
 }
 
-
 .ui-w-80 {
-    width : 80px !important;
-    height: auto;
-    border-radius: 5px;
-    border:1px solid black;
-
+  width: 80px !important;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 
 .ui-w-100 {
-    height: 200px;
-    width: 200px;
-    margin: 40px;
-    border-radius: 50%;
-    border:2px solid black;
-
+  height: 200px;
+  width: 200px;
+  margin: 40px;
+  border-radius: 50%;
+  border: 2px solid black;
 }
 
 #ImageAlert {
-    font-weight: 500;
-    font-size: 12px;
-    color: grey;
+  font-weight: 500;
+  font-size: 12px;
+  color: grey;
 }
 
-#UserProfileCard label{
-    font-size: 14px;
-    line-height: .8;
-    color: #a1a1a1;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: block;
-    margin: 0 0 15px;
+#UserProfileCard label {
+  font-size: 14px;
+  line-height: 0.8;
+  color: #a1a1a1;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+  margin: 0 0 15px;
 }
 
-#UserProfileCard input{
-    width: 100%;
-    height: 45px;
-    background: #f6f7fb;
-    padding: 0 20px;
-    font-size: 14px;
-    line-height: 45px;
-    color: #7d7d7d;
-    border: none;
-    outline: none;
-    margin: 0 0 15px;
+#UserProfileCard input {
+  width: 100%;
+  height: 45px;
+  background: #f6f7fb;
+  padding: 0 20px;
+  font-size: 14px;
+  line-height: 45px;
+  color: #7d7d7d;
+  border: none;
+  outline: none;
+  margin: 0 0 15px;
 }
 
 #UserProfileCard select {
-    width: 100%;
-    height: 45px;
-    background: #f6f7fb;
-    margin: 0 0 31px;
-    padding: 0 20px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    line-height: 45px;
-    color: #7d7d7d;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  width: 100%;
+  height: 45px;
+  background: #f6f7fb;
+  margin: 0 0 31px;
+  padding: 0 20px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  line-height: 45px;
+  color: #7d7d7d;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-
-#UserProfileCard textarea{
-    width: 100%;
-    height: 200px;
-    background: #f6f7fb;
-    padding: 12px 20px 0;
-    font-size: 14px;
-    line-height: 28px;
-    color: #7d7d7d;
-    border: none;
-    outline: none;
-    resize: none;
-    margin: 0 0 15px;
+#UserProfileCard textarea {
+  width: 100%;
+  height: 200px;
+  background: #f6f7fb;
+  padding: 12px 20px 0;
+  font-size: 14px;
+  line-height: 28px;
+  color: #7d7d7d;
+  border: none;
+  outline: none;
+  resize: none;
+  margin: 0 0 15px;
 }
 
 #btn-container {
-    display: flex;
-    flex-direction: row;
-    padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
 }
 
 #uploadbtn .account-settings-fileinput {
-    opacity: 0;
-    position: relative;
+  opacity: 0;
+  position: relative;
 }
 #UserProfileCard #uploadbtn {
-    width: 25%;
-    height: 45px;
-    border: none;
-    text-align: center;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 45px;
-    padding: 0 15px;
-    letter-spacing: .28px;
-    text-transform: uppercase;
-    background: #000;
-    color: #fff;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    border-radius: 0;
+  width: 25%;
+  height: 45px;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 15px;
+  letter-spacing: 0.28px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  border-radius: 0;
 }
 
 #UserProfileBtn button {
-    width: 10%;
-    height: 45px;
-    border: none;
-    text-align: center;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 45px;
-    padding: 0 15px;
-    letter-spacing: .28px;
-    text-transform: uppercase;
-    background: #000;
-    color: #fff;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    border-radius: 0;
-
+  width: 10%;
+  height: 45px;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 15px;
+  letter-spacing: 0.28px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  border-radius: 0;
 }
 
 #UserProfileCard button {
-    width: 25%;
-    height: 45px;
-    border: none;
-    text-align: center;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 45px;
-    padding: 0 15px;
-    letter-spacing: .28px;
-    text-transform: uppercase;
-    background: #000;
-    color: #fff;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    border-radius: 0;
+  width: 25%;
+  height: 45px;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 15px;
+  letter-spacing: 0.28px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  border-radius: 0;
 }
 
 #account-settings-links {
-    padding: 10%;
+  padding: 10%;
 }
 #account-settings-links a {
-    height: 45px;
-    border: none;
-    text-align: center;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 45px;
-    padding: 0 15px;
-    letter-spacing: .28px;
-    text-transform: uppercase;
-    background: #000;
-    color: #fff;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    margin-bottom: 10px;
-
+  height: 45px;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 15px;
+  letter-spacing: 0.28px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  margin-bottom: 10px;
 }
 
 #UserProfileCard button:hover,
@@ -5046,54 +5040,65 @@ body.menu_open {
 #UserProfileCard #uploadbtn:hover,
 #UserProfileBtn button:hover,
 #account-settings-links a.active {
-    background: var(--primary-color);
+  background: var(--primary-color);
 }
 
 */---------------------------------UserProfilePreview--------------------------------------*/
-#userCardBody {
-    height: 100%;
+  #userCardBody {
+  height: 100%;
 }
 
-#userCardBody h6 ,#userSocialCard h6 {
-    padding: 10px;
-    font-size: 14px;
-    line-height: .8;
-    color: black;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: block;
-    margin: 0 0 15px;
+#userCardBody h6,
+#userSocialCard h6 {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 0.8;
+  color: black;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+  margin: 0 0 15px;
 }
 
-#userCardBody h6 {font-size: 16px;}
+#userCardBody h6 {
+  font-size: 16px;
+}
 
-#UserProfilePreview #editbtn{
-    float: right;
-    margin-top: 30px;
-    width: 20%;
-    height: 45px;
-    border: none;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 45px;
-    padding: 0 15px;
-    letter-spacing: .28px;
-    text-transform: uppercase;
-    background: #000;
-    color: #fff;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    margin-bottom: 10px;
+#UserProfilePreview #editbtn {
+  float: right;
+  margin-top: 30px;
+  width: 20%;
+  height: 45px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 15px;
+  letter-spacing: 0.28px;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  margin-bottom: 10px;
 }
 
 #UserProfilePreview #editbtn:hover {
-    background: var(--primary-color);
+  background: var(--primary-color);
 }
 
 #userImageCard img {
-    border:1px solid black;
-    border-radius: 50%;
-    width: 200px;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 200px;
+}
+
+.backgroundBlack {
+  background-color: #000;
+}
+
+.backgroundBlue {
+  background-color: #007bff;
 }

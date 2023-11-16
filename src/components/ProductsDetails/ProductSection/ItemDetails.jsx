@@ -33,6 +33,7 @@ const ItemDetails = ({ product, handleUpdateProductToCart, handleQuantity, quant
 						handleQuantity = {handleQuantity}
 						quantity = {quantity}
 						handleUpdateProductToCart={handleUpdateProductToCart}
+						productId={product.id}
 					/>
 					<div className="pro-socila">
 						<a href="#">

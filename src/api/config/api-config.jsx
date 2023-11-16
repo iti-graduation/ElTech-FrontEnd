@@ -8,7 +8,7 @@ const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 export const PRODUCT_ENDPOINT = process.env.REACT_APP_PRODUCT_ENDPOINT;
 export const ACCOUNTS_ENDPOINT = process.env.REACT_APP_ACCOUNTS_ENDPOINT;
 export const NEWS_ENDPOINT = process.env.REACT_APP_NEWS_ENDPOINT;
-
+export const FAVORITE_ENDPOINT = process.env.REACT_APP_FAVORITE_ENDPOINT;
 
 // Creating a basic axios instance for API calls
 export const apiInstance = axios.create({
@@ -16,12 +16,11 @@ export const apiInstance = axios.create({
 	timeout: 10000,
 });
 
-// apiInstance.interceptors.request.use((config) => {
-// 	const token = localStorage.getItem('token');
-// 	console.log("token from interceptors", token)
-// 	config.headers.Authorization = token ? `Token ${token}` : '';
-// 	return config;
-// });
+apiInstance.interceptors.request.use((config) => {
+	const token = localStorage.getItem('token');
+	config.headers.Authorization = token ? `Token ${token}` : '';
+	return config;
+});
 
 // Adding a request interceptor to apiInstance to handle JSON response
 apiInstance.interceptors.request.use(

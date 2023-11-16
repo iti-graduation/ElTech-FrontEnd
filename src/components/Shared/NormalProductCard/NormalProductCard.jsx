@@ -4,7 +4,7 @@ import ProductCardBadge from "../Badges/ProductCardBadge";
 import ProductPrice from "./ProductPrice";
 import ProductAddToCart from "./ProductAddToCart";
 
-const NormalProductCard = ({ product, isPopularOrRelated = false, handleAddProductToCart }) => {
+const NormalProductCard = ({ product, isPopularOrRelated = false }) => {
 	return (
 		<div className={isPopularOrRelated ? "" : "col-lg-3 col-md-6"}>
 			<div
@@ -53,7 +53,7 @@ const NormalProductCard = ({ product, isPopularOrRelated = false, handleAddProdu
             </span> */}
 					</div>
 					<ProductAddToCart
-					productID={product.id}
+					productId={product.id}
 					handleAddProductToCart={handleAddProductToCart} />
 				</div>
 			</div>
