@@ -54,18 +54,18 @@ const Header = ({ className }) => {
               <a className="search search-toggles" href="javascript:void(0);">
                 <i className="twi-search"></i>
               </a>
-              <a className="select-country" href="javascript:void(0);">
+              {/* <a className="select-country" href="javascript:void(0);">
                 <img src={flag} alt="" />
                 Eng
               </a>
               <a className="select-currency" href="javascript:void(0);">
                 <i className="twi-dollar-sign"></i>Usd
-              </a>
+              </a> */}
               <Link className="user-login" to={user?"/profile":"/login"}>
                 <i className="twi-user-circle"></i>
                 <span>{user?user.first_name:"Account"}</span>
               </Link>
-              <Link className="carts" to="/cart">
+              <Link className="carts" to={user?"/cart":"/login"}>
                 <span>{count}</span>
                 <img src={cart} alt="" />
               </Link>

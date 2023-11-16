@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { cartCount } from "../../services/actions/cartSlice"
 import { fetchUserCart, updateCartProduct, deleteCartProduct, addCoupon } from "../../api/services/user/cart-services";
@@ -16,14 +16,21 @@ const CartLayout = () => {
 	const [cart, setCart] = useState([]);
 	const [total, setTotal] = useState([]);
 	dispatch(cartCount(cart.length));
+	const user = useSelector((state) => state.authSlice.user);
 
 	const handleUpdateProduct = async (productID, quantity) => {
-		try {
-			await updateCartProduct(productID, quantity)
-		} catch (error) {
-			showToast("There is no more products in stock !")
+		if (user) {
+			try {
+				await updateCartProduct(productID, quantity)
+				showToast('product added to cart successfully', 'success');
+			} catch (error) {
+				showToast(error.toString())
+			}
+			setChange(change + 1);
 		}
-		setChange(change + 1);
+		else {
+			showToast('You need Login to add product to cart !');
+		}
 	};
 	
 	const handleDeleteProduct = async (productID) => {
@@ -37,13 +44,14 @@ const CartLayout = () => {
 	};
 
 	useEffect(() => {
-		fetchUserCart()
-			.then((data) => {
-				setCart(data.products);
-				setTotal(data.total_price);
-			})
-			.catch((err) => console.log(err));
-
+		if (user) {
+			fetchUserCart()
+				.then((data) => {
+					setCart(data.products);
+					setTotal(data.total_price);
+				})
+				.catch((err) => console.log(err));
+		}
 	}, [change]);
 
 	return (

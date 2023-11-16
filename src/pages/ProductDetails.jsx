@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUserCart, fetchCartProduct, updateCartProduct } from "../api/services/user/cart-services";
 
@@ -27,6 +27,7 @@ export default function ProductDetails() {
 	const [quantity, setQuantity] = useState(1);
 	const dispatch = useDispatch();
 	dispatch(cartCount(cart.length));
+	const user = useSelector((state) => state.authSlice.user);
 
 	const handleQuantity = (flag) => {
 		if (flag == true){
@@ -49,13 +50,18 @@ export default function ProductDetails() {
 	}
 
 	const handleUpdateProductToCart = async (quantity) => {
-		try {
-			await updateCartProduct(id, quantity)
-			showToast('product added to cart successfully', 'success');
-		} catch (error) {
-			showToast(error.toString())
+		if (user) {
+			try {
+				await updateCartProduct(id, quantity)
+				showToast('product added to cart successfully', 'success');
+			} catch (error) {
+				showToast(error.toString())
+			}
+			setChange(change + 1);
 		}
-		setChange(change + 1);
+		else {
+			showToast('You need Login to add product to cart !');
+		}
 	};
 
 	useEffect(() => {
@@ -64,11 +70,13 @@ export default function ProductDetails() {
 		})
 		.catch((err) => console.log(err));
 		
-		fetchUserCart()
-			.then((data) => {
-				setCart(data.products);
-			})
-			.catch((err) => console.log(err));
+		if (user) {
+			fetchUserCart()
+				.then((data) => {
+					setCart(data.products);
+				})
+				.catch((err) => console.log(err));
+		}
 
 		const fetchProduct = async () => {
 			try {

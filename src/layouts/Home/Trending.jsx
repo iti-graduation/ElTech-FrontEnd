@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {fetchUserCart, addCartProduct } from "../../api/services/user/cart-services";
 
@@ -23,15 +23,21 @@ const Trending = () => {
 	const [change, setChange] = useState(0);
 	const dispatch = useDispatch();
 	dispatch(cartCount(cart.length));
+	const user = useSelector((state) => state.authSlice.user);
 
 	const handleAddProductToCart = async (productID, quantity) => {
-		try {
-			await addCartProduct(productID, quantity)
-			showToast('product added to cart successfully', 'success');
-		} catch (error) {
-			showToast(error.toString())
+		if (user) {
+			try {
+				await addCartProduct(productID, quantity)
+				showToast('product added to cart successfully', 'success');
+			} catch (error) {
+				showToast(error.toString())
+			}
+			setChange(change + 1);
 		}
-		setChange(change + 1);
+		else {
+			showToast('You need Login to add product to cart !');
+		}
 	};
 
 	// useEffect(() => {
@@ -51,11 +57,13 @@ const Trending = () => {
 	// });
 
 	useEffect(() => {
+		if (user){
 		fetchUserCart()
 			.then((data) => {
 				setCart(data.products);
 			})
 			.catch((err) => console.log(err));
+		}
 
 		const fetchProducts = async () => {
 			const data = await getProducts({ is_trending: 1 });
