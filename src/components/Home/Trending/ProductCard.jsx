@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import t1 from "../../../assets/images/home/t1.jpg";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, handleAddProductToCart }) => {
 	return (
 		<div className="single-trending-product">
 			<div className="trend-thumb">
@@ -27,9 +27,11 @@ const ProductCard = ({ product }) => {
 					</div>
 				</h3>
 				<p>{product.description}</p>
-				<a className="tr-atc" href="#">
+				<Link className="tr-atc"
+				onClick={() => handleAddProductToCart(product.id)}
+				>
 					Add To Cart
-				</a>
+				</Link>
 			</div>
 		</div>
 	);

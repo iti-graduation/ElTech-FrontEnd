@@ -28,6 +28,7 @@ function CartTable({ products, handleDeleteProduct, handleUpdateProduct }) {
                 {products.map((product) => {
                     return (
                         <CartItem
+                            key={product.id}
                             product={product}
                             handleDeleteProduct={handleDeleteProduct}
                             handleUpdateProduct={handleUpdateProduct}

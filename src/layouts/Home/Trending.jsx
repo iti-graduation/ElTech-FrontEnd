@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 
+import { useDispatch } from "react-redux";
+
+import {fetchUserCart, addCartProduct } from "../../api/services/user/cart-services";
+
+import { cartCount } from "../../services/actions/cartSlice"
+
+import { showToast } from '../../utils/toastUtil';
 import { getProducts } from "../../api/services/user/product-services";
 // import { getTrendingProducts } from "../../api/services/user/product-services";
 
@@ -11,6 +18,21 @@ import shape2 from "../../assets/images/home/shape2.png";
 
 const Trending = () => {
 	const [products, setProducts] = useState();
+
+	const [cart, setCart] = useState([]);
+	const [change, setChange] = useState(0);
+	const dispatch = useDispatch();
+	dispatch(cartCount(cart.length));
+
+	const handleAddProductToCart = async (productID, quantity) => {
+		try {
+			await addCartProduct(productID, quantity)
+			showToast('product added to cart successfully', 'success');
+		} catch (error) {
+			showToast(error.toString())
+		}
+		setChange(change + 1);
+	};
 
 	// useEffect(() => {
 	// 	const fetchProducts = async () => {
@@ -29,6 +51,12 @@ const Trending = () => {
 	// });
 
 	useEffect(() => {
+		fetchUserCart()
+			.then((data) => {
+				setCart(data.products);
+			})
+			.catch((err) => console.log(err));
+
 		const fetchProducts = async () => {
 			const data = await getProducts({ is_trending: 1 });
 			console.log("Trending Products", data);
@@ -44,7 +72,7 @@ const Trending = () => {
 		};
 
 		fetchProducts();
-	}, []);
+	}, [change]);
 
 	useEffect(() => {
 		var trending_slider = window.$(".trending-slider");
@@ -95,6 +123,7 @@ const Trending = () => {
 									<ProductsRow
 										key={index}
 										products={productPair}
+										handleAddProductToCart={handleAddProductToCart}
 									/>
 								))}
 						</div>

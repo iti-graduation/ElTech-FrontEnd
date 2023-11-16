@@ -1,13 +1,35 @@
 import { useEffect, useState } from "react";
 
-import { getProducts } from "../../api/services/user/product-services";
+import { useDispatch } from "react-redux";
 
+import { getProducts } from "../../api/services/user/product-services";
+import {fetchUserCart, addCartProduct } from "../../api/services/user/cart-services";
+
+import { cartCount } from "../../services/actions/cartSlice"
+
+import { showToast } from '../../utils/toastUtil';
 import NavBar from "../../components/Home/Popular/NavBar";
 import { popularProducts } from "../../utils/demoProducts";
 import NormalProductCard from "../../components/Shared/NormalProductCard/NormalProductCard";
 
 const Popular = () => {
 	const [products, setProducts] = useState();
+
+	const [cart, setCart] = useState([]);
+	const [change, setChange] = useState(0);
+	const dispatch = useDispatch();
+	dispatch(cartCount(cart.length));
+
+	const handleAddProductToCart = async (productID, quantity) => {
+		try {
+			await addCartProduct(productID, quantity)
+			showToast('product added to cart successfully', 'success');
+		} catch (error) {
+			showToast(error.toString())
+		}
+		setChange(change + 1);
+	};
+
 
 	const fetchProducts = async (categoryId) => {
 		let data = [];
@@ -39,6 +61,14 @@ const Popular = () => {
 			fetchProducts();
 		}
 	};
+
+	useEffect(() => {		
+		fetchUserCart()
+			.then((data) => {
+				setCart(data.products);
+			})
+	}, [change]);
+
 
 	useEffect(() => {
 		fetchProducts();
@@ -161,6 +191,7 @@ const Popular = () => {
 												key={product.id}
 												product={product}
 												isPopularOrRelated={true}
+												handleAddProductToCart={handleAddProductToCart}
 											/>
 										))}
 									</div>

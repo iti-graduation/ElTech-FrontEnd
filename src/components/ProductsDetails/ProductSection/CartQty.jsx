@@ -1,14 +1,29 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 
-const ProductCartQty = () => {
+const ProductCartQty = ({ handleUpdateProductToCart, quantity, handleQuantity }) => {
   return (
     <div className="product-cart-qty">
       <div className="quantityd clearfix">
-        <button className="qtyBtn btnMinus"><span>-</span></button>
-        <input name="qty" value="1" title="Qty" className="input-text qty text carqty" type="text" />
-        <button className="qtyBtn btnPlus">+</button>
+        <button
+          type="button"
+          className="qtyBtn btnMinus"
+          onClick={() => handleQuantity()}
+        >
+          <span>-</span>
+        </button>
+        <input name="qty" value={quantity} title="Qty" className="input-text qty text carqty" type="text" />
+        <button
+          type="button"
+          className="qtyBtn btnPlus"
+          onClick={() => handleQuantity(true)}
+        >
+          +
+        </button>
       </div>
-      <a href="#" className="add-to-cart-btn">Add To Cart</a>
+      <Link
+        className="add-to-cart-btn"
+        onClick={() => handleUpdateProductToCart(quantity)}>Add To Cart
+      </Link>
       <a href="#" className="Whislist"><i className="twi-heart"></i></a>
       <a href="#" className="compare"><i className="twi-random"></i></a>
     </div>

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { cartCount } from "../../services/actions/cartSlice"
-import { fetchUserCart, addCartProduct, deleteCartProduct, addCoupon } from "../../api/services/user/cart-services";
+import { fetchUserCart, updateCartProduct, deleteCartProduct, addCoupon } from "../../api/services/user/cart-services";
+
+import { showToast } from '../../utils/toastUtil';
 
 import CartTable from "../../components/Cart/CartTable";
 import CartTotal from "../../components/Cart/CartTotal";
@@ -16,9 +18,11 @@ const CartLayout = () => {
 	dispatch(cartCount(cart.length));
 
 	const handleUpdateProduct = async (productID, quantity) => {
-		console.log(productID);
-		console.log(quantity);
-		await addCartProduct(productID, quantity)
+		try {
+			await updateCartProduct(productID, quantity)
+		} catch (error) {
+			showToast("There is no more products in stock !")
+		}
 		setChange(change + 1);
 	};
 	

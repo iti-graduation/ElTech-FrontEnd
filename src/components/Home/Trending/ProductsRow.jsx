@@ -1,12 +1,15 @@
 import ProductCard from "./ProductCard";
 
-const ProductsRow = ({ products }) => {
+const ProductsRow = ({ products, handleAddProductToCart }) => {
 	return (
 		<div className="row">
 			{products.map((product) => {
 				return (
 					<div key={product.id} className="col-lg-6 col-md-6">
-						<ProductCard product={product} />
+						<ProductCard 
+						product={product}
+						handleAddProductToCart={handleAddProductToCart}
+						/>
 					</div>
 				);
 			})}
