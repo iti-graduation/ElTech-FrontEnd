@@ -65,7 +65,6 @@ const Trending = () => {
 		var trending_slider = window.$(".trending-slider");
 
 		if (trending_slider.length > 0) {
-			console.log("Products", products);
 			trending_slider.owlCarousel({
 				loop: false,
 				margin: 0,
@@ -106,11 +105,12 @@ const Trending = () => {
 				</div>
 				<div className="row">
 					<div className="col-lg-12">
-						{products && (
-							<div
-								className="trending-slider owl-carousel"
-								key={products.length}
-							>
+						{!products.length ? (
+							<h1>
+								Sorry, there are no trending products to show!
+							</h1>
+						) : (
+							<div className="trending-slider owl-carousel">
 								{Array.from(
 									{ length: Math.ceil(products.length / 2) },
 									(_, index) => (
