@@ -8,7 +8,12 @@ import ProductPrice from "./PriceComp";
 import ProductSlider from "./ImageSlider";
 import ProductColorOptions from "./ProductColor";
 
-const ItemDetails = ({ product, handleUpdateProductToCart, handleQuantity, quantity }) => {
+const ItemDetails = ({
+	product,
+	handleUpdateProductToCart,
+	handleQuantity,
+	quantity,
+}) => {
 	return (
 		<div className="row">
 			<div className="col-lg-7 col-md-12">
@@ -23,19 +28,21 @@ const ItemDetails = ({ product, handleUpdateProductToCart, handleQuantity, quant
 						ratings={product.ratings}
 						productId={product.id}
 					/>
-					<ProductPrice price={product.price} />
+					<ProductPrice product={product} />
 					<div className="pro-excerp">
 						<p>{product.description}</p>
 					</div>
 					{/* <ProductColorOptions /> */}
 					{/* <ProductSizeOptions /> */}
+
 					<ProductCartQty
-						handleQuantity = {handleQuantity}
-						quantity = {quantity}
+						handleQuantity={handleQuantity}
+						quantity={quantity}
 						handleUpdateProductToCart={handleUpdateProductToCart}
 						productId={product.id}
+						stock={product.stock}
 					/>
-					<div className="pro-socila">
+					{/* <div className="pro-socila">
 						<a href="#">
 							<i className="twi-facebook"></i>
 						</a>
@@ -45,7 +52,7 @@ const ItemDetails = ({ product, handleUpdateProductToCart, handleQuantity, quant
 						<a href="#">
 							<i className="twi-pinterest-square"></i>
 						</a>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
