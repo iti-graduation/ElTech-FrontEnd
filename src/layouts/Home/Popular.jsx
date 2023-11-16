@@ -45,12 +45,19 @@ const Popular = () => {
 		}
 
 		console.log(data);
-		setProducts(
-			data.results.reduce((result, value, index, array) => {
-				if (index % 2 === 0) result.push(array.slice(index, index + 2));
-				return result;
-			}, [])
-		);
+		if (
+			data &&
+			data.results &&
+			JSON.stringify(data) !== JSON.stringify(products)
+		) {
+			setProducts(
+				data.results.reduce((result, value, index, array) => {
+					if (index % 2 === 0)
+						result.push(array.slice(index, index + 2));
+					return result;
+				}, [])
+			);
+		}
 	};
 
 	const handleClick = (categoryId) => {

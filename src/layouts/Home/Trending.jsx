@@ -60,7 +60,11 @@ const Trending = () => {
 		const fetchProducts = async () => {
 			const data = await getProducts({ is_trending: 1 });
 			console.log("Trending Products", data);
-			if (JSON.stringify(data) !== JSON.stringify(products)) {
+			if (
+				data &&
+				data.results &&
+				JSON.stringify(data) !== JSON.stringify(products)
+			) {
 				setProducts(
 					data.results.reduce((result, value, index, array) => {
 						if (index % 2 === 0)
