@@ -76,6 +76,7 @@ export const login = async (userData) => {
 
 /**
  * Fetches a specific user by their ID
+ * @param {number} userId The ID of the user
  * @return {Object} The data of the user
  * @throws {Error} If there was a problem getting the specified user
  */

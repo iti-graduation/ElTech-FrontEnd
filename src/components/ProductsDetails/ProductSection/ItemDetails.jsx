@@ -21,6 +21,7 @@ const ItemDetails = ({ product, handleUpdateProductToCart, handleQuantity, quant
 						reviewsCount={product.reviews_count}
 						averageRating={product.average_rating}
 						ratings={product.ratings}
+						productId={product.id}
 					/>
 					<ProductPrice price={product.price} />
 					<div className="pro-excerp">
@@ -32,6 +33,7 @@ const ItemDetails = ({ product, handleUpdateProductToCart, handleQuantity, quant
 						handleQuantity = {handleQuantity}
 						quantity = {quantity}
 						handleUpdateProductToCart={handleUpdateProductToCart}
+						productId={product.id}
 					/>
 					<div className="pro-socila">
 						<a href="#">

@@ -14,6 +14,8 @@ const Slider = () => {
 	useEffect(() => {
 		const fetchProducts = async () => {
 			const data = await getFeaturedProducts();
+			console.log(data);
+			console.log(data.results);
 			setProducts(data.results);
 		};
 
