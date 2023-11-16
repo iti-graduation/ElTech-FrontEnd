@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import t1 from "../../../assets/images/home/t1.jpg";
 
 import ProductPrice from "../../Shared/NormalProductCard/ProductPrice";
+import ProductCardBadge from "../../Shared/Badges/ProductCardBadge";
 
 const ProductCard = ({ product, handleAddProductToCart }) => {
 	return (
@@ -39,12 +40,18 @@ const ProductCard = ({ product, handleAddProductToCart }) => {
 						? product.description.substring(0, 60) + "..."
 						: product.description}
 				</p>
-				<Link
-					className="tr-atc"
-					onClick={() => handleAddProductToCart(product.id)}
-				>
-					Add To Cart
-				</Link>
+				{product.stock === 0 ? (
+					<span className="pro-badge2 out-of-stock">
+						Out of Stock
+					</span>
+				) : (
+					<Link
+						className="tr-atc"
+						onClick={() => handleAddProductToCart(product.id)}
+					>
+						Add To Cart
+					</Link>
+				)}
 			</div>
 		</div>
 	);
