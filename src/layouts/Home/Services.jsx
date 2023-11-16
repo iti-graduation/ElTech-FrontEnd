@@ -1,21 +1,48 @@
-import Truck from "../../assets/images/home/truck.png";
-import Headphone from "../../assets/images/home/headphone.png";
-import Undo from "../../assets/images/home/undo.png";
-import ServiceCard from '../../components/Home/Services/ServiceCard';
+import React, { useState, useEffect } from "react";
+import ServiceCard from "../../components/Home/Services/ServiceCard";
 
 const Services = ({ additionalClassName }) => {
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/service/services/"
+        );
+        const data = await response.json();
+        setServices(data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <section className={`service-section ${additionalClassName}`}>
-            <div className="container">
-                <div className="row">
-                    <ServiceCard image={Truck} title={"100% Free Shipping"} description={"We ship all our products for free as long as you buying within the USA."}/>
-                    <ServiceCard image={Headphone} title={"24/7 Support"} description={"Our support team is extremely active, you will get response within 2 minutes."} />
-                    <ServiceCard image={Undo} title={"30 Day Return"} description={"Our 30 day return program is open from customers, just fill up a simple form."} />
-                </div>
-            </div>
-        </section>
+      <div className="container">
+        {loading ? (
+          <p>Loading services...</p>
+        ) : (
+          <div className="row">
+            {services.map((service) => (
+              <ServiceCard
+                key={service.id}
+                image={service.logo}
+                title={service.title}
+                description={service.description}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 
 export default Services;
-
