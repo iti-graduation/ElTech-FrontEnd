@@ -242,3 +242,45 @@ export const resetPassword = async (
 		throw new Error(msg);
 	}
 };
+
+export const verifyEmailRequest = async (email) => {
+	try {
+		const url = endpoint + "verify-email/";
+		const response = await apiInstance.post(url, { email });
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem sending the email verification email";
+		}
+
+		throw new Error(msg);
+	}
+};
+
+export const verifyEmail = async (uidb64, token, email) => {
+	try {
+		const url = `${endpoint}verify-email/${uidb64}/${token}/`;
+		console.log('URL', url)
+		const response = await apiInstance.post(url, { email });
+		console.log('Response', response)
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem verifying the email";
+		}
+
+		throw new Error(msg);
+	}
+};

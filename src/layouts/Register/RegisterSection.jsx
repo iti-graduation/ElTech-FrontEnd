@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from "../../api/services/user/user-services"
 
@@ -23,29 +23,75 @@ const RegisterSection = () => {
     twitter_profile: ''
   });
 
+  // const validate = () => {
+  //   let tempErrors = {};
+  //   if (!formData.email) {
+  //     tempErrors.email = 'Email is required';
+  //   }
+  //   if (!formData.password) {
+  //     tempErrors.password = 'Password is required';
+  //   }
+  //   if (formData.password !== formData.confirmPassword) {
+  //     tempErrors.confirmPassword = 'Passwords do not match';
+  //   }
+  //   if (!formData.mobile_phone) {
+  //     tempErrors.mobile_phone = 'You must provide a unique mobile number';
+  //   }
+  //   if (!formData.first_name) {
+  //     tempErrors.first_name = 'First Name is required';
+  //   }
+  //   if (!formData.last_name) {
+  //     tempErrors.last_name = 'Last Name is required';
+  //   }
+
+  //   setErrors(tempErrors);
+  //   return Object.keys(tempErrors).length === 0;
+  // };
+
   const validate = () => {
     let tempErrors = {};
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const phoneRegex = /^[0-9]{10,15}$/;
+  
     if (!formData.email) {
       tempErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      tempErrors.email = 'Invalid email';
     }
+  
     if (!formData.password) {
       tempErrors.password = 'Password is required';
+    } else if (formData.password.length < 5) {
+      tempErrors.password = 'Password should be at least 5 characters long';
     }
+  
     if (formData.password !== formData.confirmPassword) {
       tempErrors.confirmPassword = 'Passwords do not match';
     }
+  
     if (!formData.mobile_phone) {
       tempErrors.mobile_phone = 'You must provide a unique mobile number';
+    } else if (!phoneRegex.test(formData.mobile_phone)) {
+      tempErrors.mobile_phone = 'Invalid phone number';
     }
+  
     if (!formData.first_name) {
       tempErrors.first_name = 'First Name is required';
+    } else if (formData.first_name.length < 3) {
+      tempErrors.first_name = 'First Name should be at least 3 characters long';
     }
+  
     if (!formData.last_name) {
       tempErrors.last_name = 'Last Name is required';
+    } else if (formData.last_name.length < 3) {
+      tempErrors.last_name = 'Last Name should be at least 3 characters long';
     }
-
+  
+    // Add validations for other fields here
+  
     setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
+    // return Object.keys(tempErrors).length === 0;
+    return tempErrors;
   };
 
   const handleChange = (e) => {
@@ -54,18 +100,41 @@ const RegisterSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) {
+    const validationErrors = validate();
+
+    // if (!validate()) {
+    //   Object.values(errors).forEach(error => {
+    //     showToast(error, 'error');
+    //   });
+    //   return;
+    // }
+
+    if (Object.keys(validationErrors).length !== 0) {
+      Object.values(validationErrors).forEach(error => {
+        showToast(error, 'error');
+      });
       return;
     }
+
     try {
       const response = await register(formData);
       console.log(response.data);
-      showToast('Registration successful! please check your mail to activate your account.', 'success');
-      navigate('/');
+      // showToast('Registration successful! please check your mail to activate your account.', 'success');
+      showToast('Registration successful! You can now login to your account.', 'success');
+      // navigate('/login');
+      // navigate('/verify-email');
+      navigate('/verify-email', { state: { email: formData.email } });
     } catch (error) {
       showToast(error.toString())
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/profile');
+    }
+  }, []);
 
 
 
@@ -150,6 +219,17 @@ const RegisterSection = () => {
             </button>
           </div>
         </form>
+        <div className="text-center">
+					<p>
+						Already have an account?{" "}
+						<button
+							className="goru-btn auth-button"
+							onClick={() => navigate("/login")}
+						>
+							Login!
+						</button>
+					</p>
+				</div>
       </div>
     </>
   );
