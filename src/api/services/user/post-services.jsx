@@ -5,14 +5,21 @@ import { apiInstance } from "../../config/api-config";
 const endpoint = process.env.REACT_APP_NEWS_ENDPOINT;
 
 /**
- * Fetch all posts from the API
+ * Fetch all posts from the API with pagination
  *
+ * @param {number} pageNumber The page number to fetch
+ * @param {number} pageSize The number of posts per page
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem retrieving the posts
  */
-export const getAllPosts = async () => {
+export const getAllPosts = async (pageNumber, pageSize) => {
 	try {
-	  const response = await apiInstance.get(endpoint + 'posts/');
+	  const response = await apiInstance.get(endpoint + 'posts/', {
+		params: {
+		  page: pageNumber,
+		  page_size: pageSize
+		}
+	  });
 	  return response.data;
 	} catch (error) {
 	  const msg = "There was a problem getting all posts";
@@ -41,16 +48,23 @@ export const getSinglePost = async (postId) => {
 };
 
 /**
- * Search for posts from the API using a search term
+ * Search for posts from the API using a category ID
  *
+ * @param {number} pageNumber The page number to fetch
+ * @param {number} pageSize The number of posts per page
  * @param {String} searchTerm The term to use in searching for posts
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem searching for the posts
  */
-export const getPostsBySearch = async (searchTerm) => {
+export const getPostsBySearch = async (pageNumber,pageSize,searchTerm) => {
 	try {
-		const url = endpoint + `search?q=${searchTerm}`;
-		const response = await apiInstance.get(url);
+		const response = await apiInstance.get(endpoint + 'posts/', {
+		  params: {
+			page: pageNumber,
+			page_size: pageSize,
+			search: searchTerm
+		  }
+		});
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem searching for " + searchTerm;
@@ -58,6 +72,33 @@ export const getPostsBySearch = async (searchTerm) => {
 		throw new Error(msg);
 	}
 };
+
+
+/**
+ * Search for posts from the API using a category ID
+ *
+ * @param {number} pageNumber The page number to fetch
+ * @param {number} pageSize The number of posts per page
+ * @param {number} categoryId The category ID to use in searching for posts
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem searching for the posts
+ */
+export const getPostsByCategory = async (pageNumber, pageSize, categoryId) => {
+	try {
+	  const response = await apiInstance.get(endpoint + 'posts/', {
+		params: {
+		  page: pageNumber,
+		  page_size: pageSize,
+		  category_id: categoryId
+		}
+	  });
+	  return response.data;
+	} catch (error) {
+	  const msg = `There was a problem searching for posts in category ${categoryId}`;
+	  console.error(error);
+	  throw new Error(msg);
+	}
+  };
 
 
 /**
