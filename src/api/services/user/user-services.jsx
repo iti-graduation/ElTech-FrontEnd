@@ -266,9 +266,9 @@ export const verifyEmailRequest = async (email) => {
 export const verifyEmail = async (uidb64, token, email) => {
 	try {
 		const url = `${endpoint}verify-email/${uidb64}/${token}/`;
-		console.log('URL', url)
+		console.log("URL", url);
 		const response = await apiInstance.post(url, { email });
-		console.log('Response', response)
+		console.log("Response", response);
 
 		// Return response data
 		return response.data;
@@ -281,6 +281,40 @@ export const verifyEmail = async (uidb64, token, email) => {
 			msg = "There was a problem verifying the email";
 		}
 
+		throw new Error(msg);
+	}
+};
+
+export const subscribe = async (email) => {
+	try {
+		const url = `${endpoint}subscribe/`;
+		const response = await apiInstance.post(url, { email });
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem subscribing the email";
+		}
+		throw new Error(msg);
+	}
+};
+
+export const unsubscribe = async (email) => {
+	try {
+		const url = `${endpoint}unsubscribe/`;
+		const response = await apiInstance.post(url, { email });
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem unsubscribing the email";
+		}
 		throw new Error(msg);
 	}
 };
