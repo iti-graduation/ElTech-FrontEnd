@@ -4,8 +4,6 @@ import { ACCOUNTS_ENDPOINT, apiInstance } from "../../config/api-config";
 
 const endpoint = ACCOUNTS_ENDPOINT;
 
-
-
 /**
  * Registers a new user
  * @param {Object} userData An object containing username and password of the user to be registered
@@ -28,10 +26,10 @@ export const register = async (userData) => {
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
 			// Join all error messages into a single string
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
 			// Fallback error message
-			msg = 'An error occurred during registration';
+			msg = "An error occurred during registration";
 		}
 
 		throw new Error(msg);
@@ -45,7 +43,7 @@ export const register = async (userData) => {
  * @throws {Error} If there was a problem during login
  */
 export const login = async (userData) => {
-	localStorage.setItem('token', "");
+	localStorage.setItem("token", "");
 	try {
 		// construct url for login
 		const url = endpoint + "token/";
@@ -53,7 +51,7 @@ export const login = async (userData) => {
 		// perform POST request to the constructed url
 		const response = await apiInstance.post(url, userData);
 
-		localStorage.setItem('token', response.data.token);
+		localStorage.setItem("token", response.data.token);
 
 		// Return response data
 		return response.data.token;
@@ -63,16 +61,14 @@ export const login = async (userData) => {
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
 			// Join all error messages into a single string
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
 			// Fallback error message
-			msg = 'Invalid credentials or server error';
+			msg = "Invalid credentials or server error";
 		}
 		throw new Error(msg);
 	}
 };
-
-
 
 /**
  * Fetches a specific user by their ID
@@ -85,17 +81,17 @@ export const getUserData = async () => {
 		const url = endpoint + "me/";
 		const response = await apiInstance.get(url);
 		console.log("From api", response.data);
-		localStorage.setItem('user', JSON.stringify(response.data));
+		localStorage.setItem("user", JSON.stringify(response.data));
 		return response.data;
 	} catch (error) {
 		let msg = error;
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
 			// Join all error messages into a single string
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
 			// Fallback error message
-			msg = 'There was a problem getting the specified user';
+			msg = "There was a problem getting the specified user";
 		}
 		throw new Error(msg);
 	}
@@ -175,7 +171,7 @@ export const getUserPosts = async (userId) => {
 export const updateUserInfo = async (userData) => {
 	try {
 		// construct url with user Id
-		const url = endpoint + 'me/';
+		const url = endpoint + "me/";
 		// perform GET request to the constructed url
 		const response = await apiInstance.patch(url, userData);
 
@@ -190,11 +186,31 @@ export const updateUserInfo = async (userData) => {
 		let msg = error;
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
-			msg = 'There was a problem updating the user information';
+			msg = "There was a problem updating the user information";
 		}
 
 		throw new Error(msg);
 	}
-}
+};
+
+export const resetPasswordRequest = async (email) => {
+	try {
+		const url = endpoint + "password-reset/";
+		const response = await apiInstance.post(url, { email });
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem sending the password reset email";
+		}
+
+		throw new Error(msg);
+	}
+};
