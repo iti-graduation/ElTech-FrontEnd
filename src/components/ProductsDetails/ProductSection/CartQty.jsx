@@ -39,7 +39,6 @@ const ProductCartQty = ({
       window.location.href = "/login";
     }
   };
-  console.log(isFavorite);
   // Use effect to check if the product is in favorites when the component mounts
   useEffect(() => {
     const checkFavoriteStatus = async () => {
