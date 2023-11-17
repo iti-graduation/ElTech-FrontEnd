@@ -32,7 +32,7 @@ export default function SocialCard() {
                 </li> */}
 
 
-                { user.twitter_profile &&  (
+                {user && user.twitter_profile &&  (
                   <a  href={user.twitter_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h6 className="mb-0">
                     <svg
@@ -56,7 +56,7 @@ export default function SocialCard() {
                 )}
 
 
-                {user.instagram_profile && (
+                {user && user.instagram_profile && (
                   <a href={user.instagram_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h6 className="mb-0">
                     <svg
@@ -88,7 +88,7 @@ export default function SocialCard() {
                 </a>
                 )}
 
-                  {user.facebook_profile && (
+                  {user && user.facebook_profile && (
                     <a href={user.facebook_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
                       <svg

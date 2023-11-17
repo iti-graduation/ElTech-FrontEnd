@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import profilePic from '../../../assets/images/user/profile_pic_placeholder.png';
 
 export default function GeneralTab() {
   const user = useSelector((state) => state.authSlice.user);
@@ -9,7 +11,7 @@ export default function GeneralTab() {
     <div className="tab-pane fade active show" id="account-general">
 
         <div className="card-body media align-items-center">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
+            <img src={user?.profile_picture??profilePic} alt=""
                 className="d-block ui-w-80"/>
             <div className="media-body ml-4" id="btn-container">
                 <label className="btn btn-outline-primary" id="uploadbtn">
@@ -18,7 +20,7 @@ export default function GeneralTab() {
                     
                 </label> &nbsp;
 
-                <button type="button" className="btn btn-default md-btn-flat">Reset</button>
+                {/* <button type="button" className="btn btn-default md-btn-flat">Reset</button> */}
 
                 <div className="text-light small mt-1" id="ImageAlert">Allowed JPG, GIF or PNG. Max size of 800Kb</div>
             </div>
