@@ -1,7 +1,7 @@
 import Header from "../layouts/Home/Header";
 import PopUpSearch from "../layouts/Home/PopUpSearch";
 import PageBanner from "../components/Shared/PageBanner/PageBanner";
-import LoginSection from "../layouts/Login/LoginSection";
+import ForgetPasswordSection from "../layouts/ForgetPassword/ForgetPasswordSection";
 import Footer from "../layouts/Home/Footer";
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
 			<Header className="inner-header" />
 			<PopUpSearch />
 			<PageBanner section="Forget Password" />
-			<LoginSection />
+			<ForgetPasswordSection />
 			<Footer className="inner-footer" />
 		</>
 	);

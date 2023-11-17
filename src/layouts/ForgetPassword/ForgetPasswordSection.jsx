@@ -9,7 +9,7 @@ import { loginUserThunk } from "../../services/actions/authSlice";
 import InputField from "../../components/Shared/InputField/InputField";
 import { showToast } from "../../utils/toastUtil";
 
-const LoginSection = () => {
+const ForgetPasswordSection = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const auth = useSelector((state) => state.authSlice);
@@ -26,7 +26,9 @@ const LoginSection = () => {
 	// 	dispatch(loginUserThunk({ credentials }));
 	// };
 
-	const handlePasswordReset = async () => {
+	const handlePasswordReset = async (event) => {
+		event.preventDefault();
+
 		try {
 			const email = credentials.email; // replace this with the actual email
 
@@ -66,7 +68,7 @@ const LoginSection = () => {
 					action="#"
 					method="post"
 					className=" d-flex justify-content-center "
-					// onSubmit={handleSubmit}
+					onSubmit={handlePasswordReset}
 				>
 					<div className="row w-50 m-3">
 						<InputField
@@ -81,7 +83,7 @@ const LoginSection = () => {
 						<button
 							type="submit"
 							className="goru-btn auth-button  "
-							onClick={handlePasswordReset}
+							// onClick={handlePasswordReset}
 						>
 							Get Password Reset Link
 						</button>
@@ -112,4 +114,4 @@ const LoginSection = () => {
 	);
 };
 
-export default LoginSection;
+export default ForgetPasswordSection;

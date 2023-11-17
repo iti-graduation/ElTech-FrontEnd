@@ -32,7 +32,7 @@ const LoginSection = () => {
 	return (
 		<>
 			<div className="woocommerce-billing-fields">
-				<h3 className="text-center">Forget Password</h3>
+				<h3 className="text-center">Login</h3>
 				<form
 					action="#"
 					method="post"
@@ -58,19 +58,22 @@ const LoginSection = () => {
 							value={credentials.password}
 							onChange={handleChange}
 						/>
-						<button type="submit" className="goru-btn auth-button  ">
+						<button
+							type="submit"
+							className="goru-btn auth-button  "
+						>
 							Login
 						</button>
 					</div>
 				</form>
 				<div className="text-center">
 					<p>
-						Already have an account?{" "}
+						forgot your password?{" "}
 						<button
 							className="goru-btn auth-button"
-							onClick={() => navigate("/login")}
+							onClick={() => navigate("/forget-password")}
 						>
-							Login!
+							Reset Password!
 						</button>
 					</p>
 					<p>
