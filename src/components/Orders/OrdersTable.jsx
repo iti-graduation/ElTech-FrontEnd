@@ -1,6 +1,6 @@
 import OrdersTableRow from "./OrdersTableRow"
 
-function OrdersTable() {
+function OrdersTable({ orders }) {
     return (
         <table className="cart-table">
             <thead>
@@ -20,10 +20,20 @@ function OrdersTable() {
                     </th>
                 </tr>
             </thead>
+            {orders.map((order) => {
+                    return (
             <tbody>
-                <OrdersTableRow />
-                <OrdersTableRow />
+                {order.products.map((product) => {
+                    return (
+                        <OrdersTableRow 
+                        status={order.status}
+                        product={product} 
+                        />
+                    );
+                })}
             </tbody>
+            );
+        })}
         </table>
     )
 }

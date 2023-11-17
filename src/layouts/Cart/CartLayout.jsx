@@ -15,6 +15,7 @@ const CartLayout = () => {
 	const [change, setChange] = useState(0);
 	const [cart, setCart] = useState([]);
 	const [total, setTotal] = useState([]);
+	const [subtotal, setSubtotal] = useState([]);
 	dispatch(cartCount(cart.length));
 	const user = useSelector((state) => state.authSlice.user);
 
@@ -31,7 +32,7 @@ const CartLayout = () => {
 			showToast('You need Login to add product to cart !');
 		}
 	};
-	
+
 	const handleDeleteProduct = async (productID) => {
 		await deleteCartProduct(productID)
 		setChange(change + 1);
@@ -46,8 +47,9 @@ const CartLayout = () => {
 		if (user) {
 			fetchUserCart()
 				.then((data) => {
-					setCart(data.products.sort((a,b)=> a.id - b.id));
+					setCart(data.products.sort((a, b) => a.id - b.id));
 					setTotal(data.total_price);
+					setSubtotal(data.default_total_price);
 				})
 				.catch((err) => console.log(err));
 		}
@@ -60,13 +62,17 @@ const CartLayout = () => {
 					<div className="col-md-12">
 						<form className="woocommerce-cart-form" action="#">
 							<CartTable
-								products = {cart}
-								handleDeleteProduct = {handleDeleteProduct}
-								handleUpdateProduct = {handleUpdateProduct} 
+								products={cart}
+								handleDeleteProduct={handleDeleteProduct}
+								handleUpdateProduct={handleUpdateProduct}
 							/>
 							<div className="row">
-								<DiscountCoupon handleCoupon = {handleCoupon} />
-								<CartTotal total={total} />
+								<DiscountCoupon handleCoupon={handleCoupon} />
+								<CartTotal
+									total={total}
+									subtotal={subtotal}
+									products={cart}
+								/>
 							</div>
 						</form>
 					</div>

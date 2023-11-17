@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 import CartSubtotal from "./CartSubtotal";
 import PaymentMethod from "./PaymentMethod";
 
-const OrderOverview = ({ products, total }) => {
+const OrderOverview = ({ products, total, subtotal, discount, handelOrder }) => {
   return (
     <div className="col-md-6">
       <div className="woocommerce-checkout-review-order" id="order_review">
@@ -29,13 +29,20 @@ const OrderOverview = ({ products, total }) => {
             <CartSubtotal
               subtotalClass="cart-subtotal"
               subtotalName="Subtotal"
-              subtotalPrice={total}
+              subtotalPrice={subtotal}
             />
-            <CartSubtotal
-              subtotalClass="cart-subtotal"
-              subtotalName="Shipping"
-              subtotalPrice="0"
-            />
+            <tr className="cart-subtota">
+              <th>Discount</th>
+              <td>
+                <div className="product-price clearfix">
+                  <span className="price">
+                    <span>
+                      {discount + " %"}
+                    </span>
+                  </span>
+                </div>
+              </td>
+            </tr>
             <CartSubtotal
               subtotalClass="order-total"
               subtotalName="Total"
@@ -83,7 +90,11 @@ const OrderOverview = ({ products, total }) => {
           </ul>
         </div>
         <div className="place-order">
-          <button type="submit" className="button">
+          <button 
+          type="button" 
+          className="button"
+          onClick={() => handelOrder()}
+          >
             Place Order
           </button>
         </div>

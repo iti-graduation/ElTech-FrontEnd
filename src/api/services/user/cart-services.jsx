@@ -1,7 +1,7 @@
 // Importing the pre-configured API instance
 import { apiInstance } from "../../config/api-config";
 
-// Setting up the endpoint for the API to be the product endpoint in the environment variables
+// Setting up the endpoint for the API to be the cart endpoint in the environment variables
 const cart_endpoint = process.env.REACT_APP_CART_ENDPOINT;
 
 /**

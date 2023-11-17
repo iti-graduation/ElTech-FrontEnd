@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import productImg1 from "../../assets/images/cart/1.jpg";
 
-function OrdersTableRow() {
+function OrdersTableRow({ product, status }) {
     return (
         <tr className="cart-item">
             <td className="product-thumbnail-title">
-                <Link to="#">
-                    <img src={productImg1} alt="" />
-                </Link>
-                <Link className="product-name" to="#">
-                    Wireless Headset
-                </Link>
+            <Link to={'/product/'+ product.product.id}>
+					<img src={product.product.thumbnail.image ? product.product.thumbnail.image : productImg1} alt="" />
+				</Link>
+				<Link className="product-name" to={'/product/'+ product.product.id}>
+					{product.product.name}
+				</Link>
             </td>
             <td className="product-unit-price">
                 <div className="product-price clearfix">
@@ -19,7 +19,7 @@ function OrdersTableRow() {
                             <span className="woocommerce-Price-currencySymbol">
                                 $
                             </span>
-                            79.00
+                            {product.product.price}
                         </span>
                     </span>
                 </div>
@@ -42,13 +42,13 @@ function OrdersTableRow() {
                             <span className="woocommerce-Price-currencySymbol">
                                 $
                             </span>
-                            42.00
+                            {product.total_price}
                         </span>
                     </span>
                 </div>
             </td>
             <td className="product-total">
-                Delivered
+                {status}
             </td>
         </tr>
     )

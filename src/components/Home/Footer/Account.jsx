@@ -14,7 +14,7 @@ const Account = () => {
           {user && (
             <>
             <FooterLink href="/profile" linkTitle="My Account" />
-            <FooterLink href="/orders" linkTitle="Purchases" />
+            <FooterLink href={user?"/orders":"/login"} linkTitle="Purchases" />
             </>
           )}
           {!user && (
