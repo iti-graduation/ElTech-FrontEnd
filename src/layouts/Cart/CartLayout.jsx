@@ -46,7 +46,7 @@ const CartLayout = () => {
 		if (user) {
 			fetchUserCart()
 				.then((data) => {
-					setCart(data.products);
+					setCart(data.products.sort((a,b)=> a.id - b.id));
 					setTotal(data.total_price);
 				})
 				.catch((err) => console.log(err));
