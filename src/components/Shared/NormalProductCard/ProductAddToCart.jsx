@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { apiInstance, FAVORITE_ENDPOINT } from "../../../api/config/api-config";
 import {
@@ -7,25 +8,33 @@ import {
 } from "../../../api/services/user/favorite-services";
 
 const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
+  const user = useSelector((state) => state.authSlice.user);
   const [isFavorite, setIsFavorite] = useState(false);
+
   const handleAddToWishlist = async (e) => {
     e.preventDefault();
-    try {
-      if (isFavorite) {
-        // If already favored, remove it
-        // Make a DELETE request to remove the favorite
-        await deleteUserFavorite(productId);
-        setIsFavorite(false);
-      } else {
-        // If not favored, add it
-        // Make a POST request to create the favorite
-        await createUserFavorite(productId);
-        setIsFavorite(true);
+    if (user) {
+      try {
+        if (isFavorite) {
+          // If already favored, remove it
+          // Make a DELETE request to remove the favorite
+          await deleteUserFavorite(productId);
+          setIsFavorite(false);
+        } else {
+          // If not favored, add it
+          // Make a POST request to create the favorite
+          await createUserFavorite(productId);
+          setIsFavorite(true);
+        }
+      } catch (error) {
+        console.error("Error toggling wishlist:", error.response.data);
       }
-    } catch (error) {
-      console.error("Error toggling wishlist:", error.response.data);
+    } else {
+      // Redirect to the login page
+      window.location.href = "/login";
     }
   };
+
   // Use effect to check if the product is in favorites when the component mounts
   useEffect(() => {
     const checkFavoriteStatus = async () => {
@@ -50,21 +59,22 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
 
   return (
     <div className="sp-details-hover">
-      <Link className="sp-cart"
-      onClick={() => handleAddProductToCart(productID)}
+      <Link
+        className="sp-cart"
+        onClick={() => handleAddProductToCart(productID)}
       >
         <i className="twi-cart-plus"></i>
         <span>Add to cart</span>
       </Link>
 
       {/* Add to Wishlist */}
-      <a
+      <Link
+        to="/login"
         className={`sp-wishlist ${isFavorite ? "backgroundBlack" : ""}`}
         onClick={handleAddToWishlist}
-        href="#"
       >
         <i className="twi-heart2"></i>
-      </a>
+      </Link>
     </div>
   );
 };

@@ -5,25 +5,38 @@ import {
   createUserFavorite,
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
- 
-const ProductCartQty = ({ handleUpdateProductToCart, quantity, handleQuantity, productId }) => {
+import { useSelector } from "react-redux";
+
+const ProductCartQty = ({
+  handleUpdateProductToCart,
+  quantity,
+  handleQuantity,
+  productId,
+}) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const user = useSelector((state) => state.authSlice.user);
+
   const handleAddToWishlist = async (e) => {
     e.preventDefault();
-    try {
-      if (isFavorite) {
-        // If already favored, remove it
-        // Make a DELETE request to remove the favorite
-        await deleteUserFavorite(productId);
-        setIsFavorite(false);
-      } else {
-        // If not favored, add it
-        // Make a POST request to create the favorite
-        await createUserFavorite(productId);
-        setIsFavorite(true);
+    if (user) {
+      try {
+        if (isFavorite) {
+          // If already favored, remove it
+          // Make a DELETE request to remove the favorite
+          await deleteUserFavorite(productId);
+          setIsFavorite(false);
+        } else {
+          // If not favored, add it
+          // Make a POST request to create the favorite
+          await createUserFavorite(productId);
+          setIsFavorite(true);
+        }
+      } catch (error) {
+        console.error("Error toggling wishlist:", error.response.data);
       }
-    } catch (error) {
-      console.error("Error toggling wishlist:", error.response.data);
+    } else {
+      // Redirect to the login page
+      window.location.href = "/login";
     }
   };
   console.log(isFavorite);
@@ -59,7 +72,13 @@ const ProductCartQty = ({ handleUpdateProductToCart, quantity, handleQuantity, p
         >
           <span>-</span>
         </button>
-        <input name="qty" value={quantity} title="Qty" className="input-text qty text carqty" type="text" />
+        <input
+          name="qty"
+          value={quantity}
+          title="Qty"
+          className="input-text qty text carqty"
+          type="text"
+        />
         <button
           type="button"
           className="qtyBtn btnPlus"
@@ -70,16 +89,20 @@ const ProductCartQty = ({ handleUpdateProductToCart, quantity, handleQuantity, p
       </div>
       <Link
         className="add-to-cart-btn"
-        onClick={() => handleUpdateProductToCart(quantity)}>Add To Cart
+        onClick={() => handleUpdateProductToCart(quantity)}
+      >
+        Add To Cart
       </Link>
-		<a
-			href="#"
-			className={`Whislist ${isFavorite ? "backgroundBlue" : ""}`}
-			onClick={handleAddToWishlist}
-		>
-			<i className="twi-heart"></i>
-		</a>
-      <a href="#" className="compare"><i className="twi-random"></i></a>
+      <a
+        href="#"
+        className={`Whislist ${isFavorite ? "backgroundBlue" : ""}`}
+        onClick={handleAddToWishlist}
+      >
+        <i className="twi-heart"></i>
+      </a>
+      <a href="#" className="compare">
+        <i className="twi-random"></i>
+      </a>
     </div>
   );
 };
