@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -7,10 +8,21 @@ import CategoryBanner from "../../components/Category/CategoryBanner";
 import ShopPagination from "../../components/Shop/ShopPagination/ShopPagination";
 import CategoryDetails from "../../components/Category/CategoryDetails";
 
+export const ProductsContext = React.createContext();
+
 const ShopLayout = () => {
 	const [products, setProducts] = useState([]);
 	const [category, setCategory] = useState({});
 	const { id } = useParams();
+
+	const updateCategory = async (categoryId) => {
+		try {
+			const data = await getSingleCategory(categoryId);
+			setCategory(data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	useEffect(() => {
 		const fetchCategory = async () => {
@@ -28,10 +40,18 @@ const ShopLayout = () => {
 	}, [id]);
 	return (
 		<>
-			{category && <CategoryBanner category={category} />}
+			{category && category.name && (
+				<CategoryBanner category={category} />
+			)}
 			<section className="shop-fullwidth">
-				<CategoryDetails products={products} />
+				{/* <ProductsContext.Provider value={products}> */}
+				<CategoryDetails
+					products={products}
+					id={id}
+					updateCategory={updateCategory}
+				/>
 				{/* <ShopPagination /> */}
+				{/* </ProductsContext.Provider> */}
 			</section>
 		</>
 	);

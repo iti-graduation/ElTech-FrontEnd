@@ -7,7 +7,7 @@ import {
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
 
-const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
+const ProductAddToCart = ({ handleAddProductToCart, productID, productId, stock }) => {
   const user = useSelector((state) => state.authSlice.user);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -56,15 +56,19 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
     checkFavoriteStatus();
   }, [productId]); // Add productId as a dependency to re-run the effect when productId changes
 
-  return (
-    <div className="sp-details-hover">
-      <Link
-        className="sp-cart"
-        onClick={() => handleAddProductToCart(productID)}
-      >
-        <i className="twi-cart-plus"></i>
-        <span>Add to cart</span>
-      </Link>
+	return (
+		<div className="sp-details-hover">
+			{stock === 0 ? (
+				<span className="pro-badge2 out-of-stock">Out of Stock</span>
+			) : (
+				<Link
+					className="sp-cart"
+					onClick={() => handleAddProductToCart(productID)}
+				>
+					<i className="twi-cart-plus"></i>
+					<span>Add to cart</span>
+				</Link>
+			)}
 
       {/* Add to Wishlist */}
       <Link

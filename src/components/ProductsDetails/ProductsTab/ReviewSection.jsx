@@ -20,7 +20,10 @@ const ReviewsSection = ({ product }) => {
 			<div className="comment-area">
 				<h4 className="comment-title">
 					{product.reviews && product.reviews.length} Review(s) to "
-					{product.name}"
+					{product && product.name && product.name.length > 35
+						? product.name.substring(0, 35) + "..."
+						: product.name}
+					"
 				</h4>
 
 				<ol className="comment-list">

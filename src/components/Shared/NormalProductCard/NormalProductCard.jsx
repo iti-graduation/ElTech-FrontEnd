@@ -23,23 +23,28 @@ const NormalProductCard = ({
               src={product.thumbnail.image}
               // src={product.image}
               alt=""
-              style={{ maxWidth: "370px", maxHeight: "460px" }}
+              style={{ maxWidth: "370px", maxHeight: "460px", minHeight: "460px", }}
             />
             <ProductCardBadge badgeClass={product.badge} product={product} />
             {/* {product.badge != null && (
 							
 						)} */}
-          </div>
-        </Link>
-        <div className="sp-details">
-          <h4>{product.name}</h4>
-          <div className="product-price clearfix">
-            <ProductPrice
-              // productPriceBefore={product.price}
-              // productPriceAfter={product.discountedPrice}
-              product={product}
-            />
-            {/* <span className="price">
+					</div>
+				</Link>
+				<div className="sp-details">
+					{/* <h4>{product.name}</h4> */}
+					<h4>
+						{product.name.length > 30
+							? product.name.substring(0, 30) + "..."
+							: product.name}
+					</h4>
+					<div className="product-price clearfix">
+						<ProductPrice
+							// productPriceBefore={product.price}
+							// productPriceAfter={product.discountedPrice}
+							product={product}
+						/>
+						{/* <span className="price">
               {product.discountedPrice != null && <del>
                 <span>
                   <span className="woocommerce-Price-currencySymbol">$</span>
@@ -50,15 +55,16 @@ const NormalProductCard = ({
                 {product.discountedPrice??product.price}
               </span></ins>
             </span> */}
-          </div>
-          <ProductAddToCart
-            productId={product.id}
-            handleAddProductToCart={handleAddProductToCart}
-          />
-        </div>
-      </div>
-    </div>
-  );
+					</div>
+					<ProductAddToCart
+						productId={product.id}
+						stock={product.stock}
+						handleAddProductToCart={handleAddProductToCart}
+					/>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default NormalProductCard;

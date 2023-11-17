@@ -17,6 +17,7 @@ const ProductRatingReviews = ({
 		try {
 			await addProductRating(productId, newRating);
 			console.log("Rating submitted successfully");
+			window.location.reload();
 		} catch (error) {
 			console.error("Failed to submit rating", error);
 		}
@@ -26,7 +27,6 @@ const ProductRatingReviews = ({
 		const fetchUserData = async () => {
 			const userData = await getUserData();
 			setUserId(userData.id);
-			// localStorage.setItem("userId", userData.id);
 		};
 
 		// const storedUserId = localStorage.getItem("userId");

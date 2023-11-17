@@ -1,6 +1,7 @@
 // Importing Link component from react-router-dom
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 // Importing images for website components
 import logo from "../../assets/images/logo.png";
@@ -8,8 +9,15 @@ import flag from "../../assets/images/flag.png";
 import cart from "../../assets/images/cart.png";
 
 const Header = ({ className }) => {
-  const user = useSelector((state) => state.authSlice.user);
-  const count = useSelector((state) => state.cartSlice.count);
+const user = useSelector((state) => state.authSlice.user);
+const count = useSelector((state) => state.cartSlice.count);
+
+	useEffect(() => {
+		window.$(".search-toggles").on("click", function (e) {
+			e.preventDefault();
+			window.$(".popup-search-sec").toggleClass("active");
+		});
+	}, []);
 
   return (
     <header className={`header-01 fix-header ${className}`}>
@@ -46,7 +54,7 @@ const Header = ({ className }) => {
                 <li>
                   <Link to="/about">About</Link>
                 </li>
-                {/*               
+                {/*
                   <li>
                     <Link to="/contact">Contact</Link>
                   </li>
