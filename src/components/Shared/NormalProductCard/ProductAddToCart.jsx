@@ -12,7 +12,6 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleAddToWishlist = async (e) => {
-    e.preventDefault();
     if (user) {
       try {
         if (isFavorite) {
@@ -69,7 +68,6 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId }) => {
 
       {/* Add to Wishlist */}
       <Link
-        to="/login"
         className={`sp-wishlist ${isFavorite ? "backgroundBlack" : ""}`}
         onClick={handleAddToWishlist}
       >

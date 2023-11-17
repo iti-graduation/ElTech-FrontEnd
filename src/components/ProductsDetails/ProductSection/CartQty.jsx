@@ -17,7 +17,6 @@ const ProductCartQty = ({
   const user = useSelector((state) => state.authSlice.user);
 
   const handleAddToWishlist = async (e) => {
-    e.preventDefault();
     if (user) {
       try {
         if (isFavorite) {
@@ -92,13 +91,13 @@ const ProductCartQty = ({
       >
         Add To Cart
       </Link>
-      <a
-        href="#"
+      <Link
         className={`Whislist ${isFavorite ? "backgroundBlue" : ""}`}
         onClick={handleAddToWishlist}
       >
         <i className="twi-heart"></i>
-      </a>
+      </Link>
+
       <a href="#" className="compare">
         <i className="twi-random"></i>
       </a>
