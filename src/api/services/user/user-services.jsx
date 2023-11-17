@@ -214,3 +214,31 @@ export const resetPasswordRequest = async (email) => {
 		throw new Error(msg);
 	}
 };
+
+export const resetPassword = async (
+	uid,
+	token,
+	newPassword,
+	confirmPassword
+) => {
+	try {
+		const url = `${endpoint}password-reset-confirm/${uid}/${token}/`;
+		const response = await apiInstance.post(url, {
+			new_password: newPassword,
+			confirm_password: confirmPassword,
+		});
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem resetting the password";
+		}
+
+		throw new Error(msg);
+	}
+};
