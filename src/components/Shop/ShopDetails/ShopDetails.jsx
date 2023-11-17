@@ -4,11 +4,14 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProducts } from "../../../api/services/user/product-services";
-import {fetchUserCart, addCartProduct } from "../../../api/services/user/cart-services";
+import {
+	fetchUserCart,
+	addCartProduct,
+} from "../../../api/services/user/cart-services";
 
-import { cartCount } from "../../../services/actions/cartSlice"
+import { cartCount } from "../../../services/actions/cartSlice";
 
-import { showToast } from '../../../utils/toastUtil';
+import { showToast } from "../../../utils/toastUtil";
 import ShopDetailsCategories from "./ShopDetailsCategories";
 import shopImageHolder370x460 from "../../../assets/images/shop/holder370x460.jpg";
 import NormalProductCard from "../../Shared/NormalProductCard/NormalProductCard";
@@ -20,7 +23,7 @@ const ShopDetails = () => {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [activeItem, setActiveItem] = useState("ALL");
 	const [activeFilter, setActiveFilter] = useState("default");
-	
+
 	const [cart, setCart] = useState([]);
 	const [change, setChange] = useState(0);
 	const dispatch = useDispatch();
@@ -42,10 +45,10 @@ const ShopDetails = () => {
 		}
 	};
 
-
 	const handlePageClick = (data) => {
 		let selected = data.selected;
 		setCurrentPage(selected);
+		fetchProducts({ page: selected + 1 });
 	};
 
 	const handleFilterChange = async (categoryId, orderFilter) => {
@@ -98,117 +101,6 @@ const ShopDetails = () => {
 		setProducts(fetchedProducts);
 	};
 
-	// const handleSelectChange = async (event) => {
-	// 	const selectedValue = event.target.value;
-
-	// 	if (selectedValue === "default") {
-	// 		fetchProducts();
-	// 	} else if (selectedValue === "price" || selectedValue === "-price") {
-	// 		fetchProducts({ ordering: selectedValue });
-	// 	} else if (selectedValue === "popular") {
-	// 		fetchProducts({ is_popular: "1" });
-	// 	}
-	// };
-
-	// const products = [
-	// 	{
-	// 		id: 1,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "sale",
-	// 		title: "Gaming Headset",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "hot",
-	// 		title: "VRBOX Gaming",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		image: shopImageHolder370x460,
-	// 		badge: null,
-	// 		title: "Gaming Mouse",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 4,
-	// 		image: shopImageHolder370x460,
-	// 		badge: null,
-	// 		title: "Gaming Controller",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 5,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "sale",
-	// 		title: "Gaming Headset",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 6,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "hot",
-	// 		title: "Wireless Headset",
-	// 		price: "122.00",
-	// 		discountedPrice: null,
-	// 	},
-	// 	{
-	// 		id: 7,
-	// 		image: shopImageHolder370x460,
-	// 		badge: null,
-	// 		title: "Gaming Controller",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 8,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "sale",
-	// 		title: "LED TV",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 9,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "hot",
-	// 		title: "Wirless Headset",
-	// 		price: "122.00",
-	// 		discountedPrice: null,
-	// 	},
-	// 	{
-	// 		id: 10,
-	// 		image: shopImageHolder370x460,
-	// 		badge: null,
-	// 		title: "Black Drone",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 11,
-	// 		image: shopImageHolder370x460,
-	// 		badge: null,
-	// 		title: "Bluetooth Earphones",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// 	{
-	// 		id: 12,
-	// 		image: shopImageHolder370x460,
-	// 		badge: "sale",
-	// 		title: "LED TV",
-	// 		price: "42.00",
-	// 		discountedPrice: "38.00",
-	// 	},
-	// ];
-
 	return (
 		<div className="container-fluid">
 			<ShopDetailsCategories
@@ -219,21 +111,26 @@ const ShopDetails = () => {
 			/>
 
 			<div className="row">
+				{(!products.results || !products.results.length) && (
+					<h1>Sorry, there are no products to show!</h1>
+				)}
 				{products.results &&
 					products.results.map((product) => (
-						<NormalProductCard 
-						key={product.id} 
-						product={product}
-						handleAddProductToCart={handleAddProductToCart}
+						<NormalProductCard
+							key={product.id}
+							product={product}
+							handleAddProductToCart={handleAddProductToCart}
 						/>
 					))}
 
-				{!products && <h1>No Products matched your search term.</h1>}
+				{/* {!products && <h1>No Products matched your search term.</h1>} */}
 			</div>
-			<ShopPagination
-				pageCount={Math.ceil(products.count / 12)}
-				onPageChange={handlePageClick}
-			/>
+			{products.results && products.results.length !== 0 && (
+				<ShopPagination
+					pageCount={Math.ceil(products.count / 12)}
+					onPageChange={handlePageClick}
+				/>
+			)}
 		</div>
 	);
 };

@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../api/services/user/product-services";
 import { fetchUserCart, addCartProduct } from "../../api/services/user/cart-services";
 
-import { cartCount } from "../../services/actions/cartSlice"
+import { cartCount } from "../../services/actions/cartSlice";
 
-import { showToast } from '../../utils/toastUtil';
+import { showToast } from "../../utils/toastUtil";
 import NavBar from "../../components/Home/Popular/NavBar";
 import { popularProducts } from "../../utils/demoProducts";
 import NormalProductCard from "../../components/Shared/NormalProductCard/NormalProductCard";
 
 const Popular = () => {
-	const [products, setProducts] = useState();
+	const [products, setProducts] = useState([]);
 
 	const [cart, setCart] = useState([]);
 	const [change, setChange] = useState(0);
@@ -37,7 +37,6 @@ const Popular = () => {
 
 	};
 
-
 	const fetchProducts = async (categoryId) => {
 		let data = [];
 		if (Number.isInteger(categoryId)) {
@@ -57,12 +56,14 @@ const Popular = () => {
 			data.results &&
 			JSON.stringify(data) !== JSON.stringify(products)
 		) {
+			console.log("Popular Results", data.results);
 			setProducts(
-				data.results.reduce((result, value, index, array) => {
-					if (index % 2 === 0)
-						result.push(array.slice(index, index + 2));
-					return result;
-				}, [])
+				// data.results.reduce((result, value, index, array) => {
+				// 	if (index % 2 === 0)
+				// 		result.push(array.slice(index, index + 2));
+				// 	return result;
+				// }, [])
+				data.results
 			);
 		}
 	};
@@ -85,7 +86,6 @@ const Popular = () => {
 				.catch((err) => console.log(err));
 		}
 	}, [change]);
-
 
 	useEffect(() => {
 		fetchProducts();
@@ -153,6 +153,11 @@ const Popular = () => {
 				},
 			},
 		});
+
+		return () => {
+			popular_tab_slider.owlCarousel("destroy");
+			popular_tab_slider_two.owlCarousel("destroy");
+		};
 	}, [products]);
 
 	return (
@@ -184,36 +189,42 @@ const Popular = () => {
                 role="tabpanel"
               >
               */}
-
-						<div className="popular-tab-slider owl-carousel">
-							{/* {popularProducts.map((productGroup, index) => (
-								<div key={index} className="pp-single-slider">
-									{productGroup.map((product, idx) => (
-										<NormalProductCard
-											key={idx}
-											product={product}
-											isPopularOrRelated={true}
-										/>
-									))}
-								</div>
-							))} */}
-							{products &&
-								products.map((productPair, index) => (
-									<div
-										key={index}
-										className="pp-single-slider"
-									>
-										{productPair.map((product) => (
-											<NormalProductCard
-												key={product.id}
-												product={product}
-												isPopularOrRelated={true}
-												handleAddProductToCart={handleAddProductToCart}
-											/>
-										))}
-									</div>
-								))}
-						</div>
+						{!products.length && (
+							<h1>
+								Sorry, there are no popular products to show!
+							</h1>
+						)}
+						{products && (
+							<div
+								className="popular-tab-slider owl-carousel"
+								key={products.length}
+							>
+								{Array.from(
+									{ length: Math.ceil(products.length / 2) },
+									(_, index) => (
+										<div
+											className="pp-single-slider"
+											key={index}
+										>
+											{products
+												.slice(index * 2, index * 2 + 2)
+												.map((product) => (
+													<NormalProductCard
+														key={product.id}
+														product={product}
+														isPopularOrRelated={
+															true
+														}
+														handleAddProductToCart={
+															handleAddProductToCart
+														}
+													/>
+												))}
+										</div>
+									)
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

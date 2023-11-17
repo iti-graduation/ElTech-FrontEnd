@@ -3,7 +3,12 @@ import ItemDetails from "../../components/ProductsDetails/ProductSection/ItemDet
 import ProductTab from "../../components/ProductsDetails/ProductsTab/ProductTab";
 import RelatedProducts from "../../components/ProductsDetails/RelatedProducts/RelatedProducts";
 
-const ProductSection = ({ product, handleUpdateProductToCart, handleQuantity , quantity }) => {
+const ProductSection = ({
+	product,
+	handleUpdateProductToCart,
+	handleQuantity,
+	quantity,
+}) => {
 	console.log(product);
 	return (
 		<section className="single-product-section">
@@ -11,11 +16,11 @@ const ProductSection = ({ product, handleUpdateProductToCart, handleQuantity , q
 				<ItemDetails
 					product={product}
 					handleUpdateProductToCart={handleUpdateProductToCart}
-					handleQuantity = {handleQuantity}
-					quantity = {quantity}
+					handleQuantity={handleQuantity}
+					quantity={quantity}
 				/>
 				<ProductTab product={product} />
-				<RelatedProducts />
+				{/* <RelatedProducts /> */}
 			</div>
 		</section>
 	);

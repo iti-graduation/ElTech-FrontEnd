@@ -1,4 +1,5 @@
 // Importing Link component from react-router-dom
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
@@ -8,8 +9,15 @@ import flag from "../../assets/images/flag.png";
 import cart from "../../assets/images/cart.png";
 
 const Header = ({ className }) => {
-  const user = useSelector((state) => state.authSlice.user);
-  const count = useSelector((state) => state.cartSlice.count);
+const user = useSelector((state) => state.authSlice.user);
+const count = useSelector((state) => state.cartSlice.count);
+
+	useEffect(() => {
+		window.$(".search-toggles").on("click", function (e) {
+			e.preventDefault();
+			window.$(".popup-search-sec").toggleClass("active");
+		});
+	}, []);
 
   return (
     <header className={`header-01 fix-header ${className}`}>
@@ -38,14 +46,19 @@ const Header = ({ className }) => {
                   <Link to="/shop">Shop</Link>
                 </li>
                 <li>
+                  <Link to={user ? "/wishlist" : "/login"}>Wishlist</Link>
+                </li>
+                <li>
                   <Link to="/news">News</Link>
                 </li>
                 <li>
                   <Link to="/about">About</Link>
                 </li>
-                <li>
-                  <Link to="/contact">Contact</Link>
-                </li>
+                {/*
+                  <li>
+                    <Link to="/contact">Contact</Link>
+                  </li>
+                */}
               </ul>
             </nav>
           </div>
@@ -63,7 +76,7 @@ const Header = ({ className }) => {
               </a> */}
               <Link className="user-login" to={user?"/profile":"/login"}>
                 <i className="twi-user-circle"></i>
-                <span>{user?user.first_name:"Account"}</span>
+                <span>{user ? user.first_name : "Account"}</span>
               </Link>
               <Link className="carts" to={user?"/cart":"/login"}>
                 <span>{count}</span>

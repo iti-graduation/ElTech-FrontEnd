@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { loginUserThunk } from '../../services/actions/authSlice';
+import { loginUserThunk } from "../../services/actions/authSlice";
 
 import InputField from "../../components/Shared/InputField/InputField";
 
@@ -11,7 +11,7 @@ const LoginSection = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.authSlice);
 
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -25,7 +25,7 @@ const LoginSection = () => {
 
   useEffect(() => {
     if (auth.user && auth.token) {
-      navigate('/');
+      navigate("/");
     }
   }, [auth, navigate]);
 
