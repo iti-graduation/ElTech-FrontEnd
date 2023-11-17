@@ -16,11 +16,13 @@ function WeeklyDeal() {
 	useEffect(() => {
 		const fetchWeeklyDeal = async () => {
 			const data = await getWeeklyDeal();
-			const [year, month, day] = data.deal_time.split("-");
-			data.year = parseInt(year);
-			data.month = parseInt(month) - 1;
-			data.day = parseInt(day);
-			setWeeklyDeal(data);
+			if (data && data.deal_time) {
+				const [year, month, day] = data.deal_time.split("-");
+				data.year = parseInt(year);
+				data.month = parseInt(month) - 1;
+				data.day = parseInt(day);
+				setWeeklyDeal(data);
+			}
 		};
 
 		fetchWeeklyDeal();

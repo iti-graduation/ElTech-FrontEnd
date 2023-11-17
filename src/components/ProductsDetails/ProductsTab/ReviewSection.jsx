@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { createReview } from "../../../api/services/user/product-services";
 import { getUserData } from "../../../api/services/user/user-services";
 
-import c1 from "../../../assets/images/blog/c1.jpg";
+// import c1 from "../../../assets/images/blog/c1.jpg";
+import profilePic from "../../../assets/images/user/profile_pic_placeholder.png";
 import SingleComment from "./SingleComment";
 
 const ReviewsSection = ({ product }) => {
@@ -42,7 +43,10 @@ const ReviewsSection = ({ product }) => {
 							return (
 								<SingleComment
 									key={review.id}
-									imgSrc={review.user.profile_picture || c1}
+									imgSrc={
+										review.user.profile_picture ||
+										profilePic
+									}
 									author={`${review.user.first_name} ${review.user.last_name}`}
 									date={formattedDate}
 									commentText={review.content}
