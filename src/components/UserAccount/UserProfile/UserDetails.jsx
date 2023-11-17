@@ -29,13 +29,17 @@ export default function UserCard({onEdit, onLogout}) {
       <div className="col-sm-9 text-secondary">{user? formatPhoneNumber(user.mobile_phone) : "(239) 816-9029"}</div>
     </div>
     <hr />
-    <div className="row">
-      <div className="col-sm-3">
-        <h6 className="mb-0">BirthDay</h6>
+    {user && user.birth_date &&
+    <>
+      <div className="row">
+        <div className="col-sm-3">
+          <h6 className="mb-0">BirthDay</h6>
+        </div>
+        <div className="col-sm-9 text-secondary">{user? user.birth_date : "01-01-2001"}</div>
       </div>
-      <div className="col-sm-9 text-secondary">{user? user.birth_date : "01-01-2001"}</div>
-    </div>
-    <hr />
+      <hr />
+    </>}
+    
 
     {/* <div className="row">
       <div className="col-sm-3">
@@ -46,7 +50,7 @@ export default function UserCard({onEdit, onLogout}) {
       </div>
     </div> */}
 
-    <hr />
+    {/* <hr /> */}
         <button id="editbtn" onClick={onEdit}>Edit</button>
 
         <button className="goru-btn-logout" onClick={onLogout}>Logout</button>

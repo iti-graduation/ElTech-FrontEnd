@@ -172,4 +172,29 @@ export const getUserPosts = async (userId) => {
 	}
 };
 
+export const updateUserInfo = async (userData) => {
+	try {
+		// construct url with user Id
+		const url = endpoint + 'me/';
+		// perform GET request to the constructed url
+		const response = await apiInstance.patch(url, userData);
 
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during fetching user posts
+		// const msg =
+		// 	"There was a problem getting the posts for the specified user";
+		// console.log(error);
+		// throw new Error(msg);
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(' ');
+		} else {
+			msg = 'There was a problem updating the user information';
+		}
+
+		throw new Error(msg);
+	}
+}
