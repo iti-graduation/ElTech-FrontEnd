@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 export default function SocialCard() {
@@ -33,7 +34,7 @@ export default function SocialCard() {
 
 
                 {user && user.twitter_profile &&  (
-                  <a  href={user.twitter_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <Link to={user.twitter_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h6 className="mb-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -51,13 +52,13 @@ export default function SocialCard() {
                     </svg>
                     Twitter
                   </h6>
-                  <span className="text-secondary">@bootdey</span>
-                </a>
+                  {/* <span className="text-secondary">@bootdey</span> */}
+                </Link>
                 )}
 
 
                 {user && user.instagram_profile && (
-                  <a href={user.instagram_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <Link to={user.instagram_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                   <h6 className="mb-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -84,12 +85,12 @@ export default function SocialCard() {
                     </svg>
                     Instagram
                   </h6>
-                  <span className="text-secondary">bootdey</span>
-                </a>
+                  {/* <span className="text-secondary">bootdey</span> */}
+                </Link>
                 )}
 
                   {user && user.facebook_profile && (
-                    <a href={user.facebook_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <Link to={user.facebook_profile} target='_blank' className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -107,8 +108,8 @@ export default function SocialCard() {
                       </svg>
                       Facebook
                     </h6>
-                    <span className="text-secondary">bootdey</span>
-                  </a>
+                    {/* <span className="text-secondary">bootdey</span> */}
+                  </Link>
                   )}
 
 
