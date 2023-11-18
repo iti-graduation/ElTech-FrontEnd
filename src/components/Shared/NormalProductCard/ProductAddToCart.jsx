@@ -7,7 +7,12 @@ import {
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
 
-const ProductAddToCart = ({ handleAddProductToCart, productID, productId, stock }) => {
+const ProductAddToCart = ({
+  handleAddProductToCart,
+  productID,
+  productId,
+  stock,
+}) => {
   const user = useSelector((state) => state.authSlice.user);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -58,8 +63,9 @@ const ProductAddToCart = ({ handleAddProductToCart, productID, productId, stock 
 
   return (
     <div className="sp-details-hover">
-      <Link className="sp-cart"
-      onClick={() => handleAddProductToCart(productId)}
+      <Link
+        className="sp-cart"
+        onClick={() => handleAddProductToCart(productId)}
       >
         <i className="twi-cart-plus"></i>
         <span>Add to cart</span>

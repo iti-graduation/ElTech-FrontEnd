@@ -3,7 +3,13 @@ import CartItem from "./CartItem";
 import CartSubtotal from "./CartSubtotal";
 import PaymentMethod from "./PaymentMethod";
 
-const OrderOverview = ({ products, total, subtotal, discount, handelOrder }) => {
+const OrderOverview = ({
+  products,
+  total,
+  subtotal,
+  discount,
+  handleOrder,
+}) => {
   return (
     <div className="col-md-6">
       <div className="woocommerce-checkout-review-order" id="order_review">
@@ -17,12 +23,7 @@ const OrderOverview = ({ products, total, subtotal, discount, handelOrder }) => 
           </thead>
           <tbody>
             {products.map((product) => {
-              return (
-                <CartItem
-                  key={product.id}
-                  product={product}
-                />
-              );
+              return <CartItem key={product.id} product={product} />;
             })}
           </tbody>
           <tfoot>
@@ -36,9 +37,7 @@ const OrderOverview = ({ products, total, subtotal, discount, handelOrder }) => 
               <td>
                 <div className="product-price clearfix">
                   <span className="price">
-                    <span>
-                      {discount + " %"}
-                    </span>
+                    <span>{discount + " %"}</span>
                   </span>
                 </div>
               </td>
@@ -90,10 +89,10 @@ const OrderOverview = ({ products, total, subtotal, discount, handelOrder }) => 
           </ul>
         </div>
         <div className="place-order">
-          <button 
-          type="button" 
-          className="button"
-          onClick={() => handelOrder()}
+          <button
+            type="button"
+            className="button"
+            onClick={() => handleOrder()}
           >
             Place Order
           </button>
