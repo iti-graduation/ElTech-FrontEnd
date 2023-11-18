@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { formatPhoneNumber } from "../../../utils/helpers";
 
 import {
@@ -12,6 +13,7 @@ import { showToast } from "../../../utils/toastUtil";
 
 export default function UserCard({ onEdit, onLogout }) {
 	const user = useSelector((state) => state.authSlice.user);
+	const navigate = useNavigate();
 
 	const handleSubscribe = async (event) => {
 		event.preventDefault();
@@ -45,6 +47,11 @@ export default function UserCard({ onEdit, onLogout }) {
 		}
 	};
 
+	const handleVerifyEmail = (event) => {
+		event.preventDefault();
+		navigate("/verify-email", { state: { email: user.email } });
+	};
+
 	return (
 		<div className="card-body" id="userCardBody">
 			<div className="row">
@@ -73,6 +80,27 @@ export default function UserCard({ onEdit, onLogout }) {
 					{user
 						? formatPhoneNumber(user.mobile_phone)
 						: "(239) 816-9029"}
+				</div>
+			</div>
+			<hr />
+			<div className="row">
+				<div className="col-sm-3 d-flex align-items-center">
+					<h6 className="mb-0" style={{ lineHeight: "1.5em" }}>
+						Email Verification
+					</h6>
+				</div>
+				<div className="col-sm-9 text-secondary d-flex justify-content-between align-items-center">
+					{user && user.email_confirmed ? "Verified" : "Not Verified"}
+					{user && !user.email_confirmed && (
+						<form
+							className="mailchimp-form"
+							onSubmit={handleVerifyEmail}
+						>
+							<button className="" type="submit">
+								Verify
+							</button>
+						</form>
+					)}
 				</div>
 			</div>
 			<hr />

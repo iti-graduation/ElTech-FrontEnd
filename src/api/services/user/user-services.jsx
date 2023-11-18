@@ -49,6 +49,7 @@ export const login = async (userData) => {
 		const url = endpoint + "token/";
 
 		// perform POST request to the constructed url
+		console.log(userData);
 		const response = await apiInstance.post(url, userData);
 
 		localStorage.setItem("token", response.data.token);

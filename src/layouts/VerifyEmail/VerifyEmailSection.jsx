@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	verifyEmailRequest,
 	verifyEmail,
+	getUserData,
 } from "../../api/services/user/user-services";
+
+import { saveUserData } from "../../services/actions/authSlice";
 
 import InputField from "../../components/Shared/InputField/InputField";
 import { showToast } from "../../utils/toastUtil";
@@ -18,11 +21,11 @@ const VerifyEmailSection = () => {
 	const location = useLocation();
 	const email = location.state?.email;
 
-	useEffect(() => {
-		if (auth.user && auth.token) {
-			navigate("/");
-		}
-	}, [auth, navigate]);
+	// useEffect(() => {
+	// 	if (auth.user && auth.token) {
+	// 		navigate("/");
+	// 	}
+	// }, [auth, navigate]);
 
 	// useEffect(() => {
 	// 	const sendVerificationEmail = async () => {
@@ -42,13 +45,16 @@ const VerifyEmailSection = () => {
 		const verifyUserEmail = async () => {
 			try {
 				if (uid && token) {
+					console.log("Verified");
 					await verifyEmail(uid, token, email);
 					showToast(
 						"Email verified successfully. You can now login.",
 						"success"
 					);
+					navigate(".", { state: {} }); // Clear the state
 					navigate("/login");
 				} else if (email) {
+					console.log("Request Verify", email);
 					await verifyEmailRequest(email);
 					showToast(
 						"Verification email sent. Please check your email.",
@@ -61,7 +67,7 @@ const VerifyEmailSection = () => {
 		};
 
 		verifyUserEmail();
-	}, [uid, token, email, navigate]);
+	}, [uid, token, email, navigate, dispatch]);
 
 	return (
 		<>
