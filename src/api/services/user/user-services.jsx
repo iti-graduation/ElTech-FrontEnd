@@ -4,8 +4,6 @@ import { ACCOUNTS_ENDPOINT, apiInstance } from "../../config/api-config";
 
 const endpoint = ACCOUNTS_ENDPOINT;
 
-
-
 /**
  * Registers a new user
  * @param {Object} userData An object containing username and password of the user to be registered
@@ -28,10 +26,10 @@ export const register = async (userData) => {
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
 			// Join all error messages into a single string
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
 			// Fallback error message
-			msg = 'An error occurred during registration';
+			msg = "An error occurred during registration";
 		}
 
 		throw new Error(msg);
@@ -45,15 +43,16 @@ export const register = async (userData) => {
  * @throws {Error} If there was a problem during login
  */
 export const login = async (userData) => {
-	localStorage.setItem('token', "");
+	localStorage.setItem("token", "");
 	try {
 		// construct url for login
 		const url = endpoint + "token/";
 
 		// perform POST request to the constructed url
+		console.log(userData);
 		const response = await apiInstance.post(url, userData);
 
-		localStorage.setItem('token', response.data.token);
+		localStorage.setItem("token", response.data.token);
 
 		// Return response data
 		return response.data.token;
@@ -63,16 +62,14 @@ export const login = async (userData) => {
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
 			// Join all error messages into a single string
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
 			// Fallback error message
-			msg = 'Invalid credentials or server error';
+			msg = "Invalid credentials or server error";
 		}
 		throw new Error(msg);
 	}
 };
-
-
 
 /**
  * Fetches a specific user by their ID
@@ -85,17 +82,17 @@ export const getUserData = async () => {
 		const url = endpoint + "me/";
 		const response = await apiInstance.get(url);
 		console.log("From api", response.data);
-		localStorage.setItem('user', JSON.stringify(response.data));
+		localStorage.setItem("user", JSON.stringify(response.data));
 		return response.data;
 	} catch (error) {
 		let msg = error;
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
 			// Join all error messages into a single string
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
 			// Fallback error message
-			msg = 'There was a problem getting the specified user';
+			msg = "There was a problem getting the specified user";
 		}
 		throw new Error(msg);
 	}
@@ -175,7 +172,7 @@ export const getUserPosts = async (userId) => {
 export const updateUserInfo = async (userData) => {
 	try {
 		// construct url with user Id
-		const url = endpoint + 'me/';
+		const url = endpoint + "me/";
 		// perform GET request to the constructed url
 		const response = await apiInstance.patch(url, userData);
 
@@ -190,11 +187,135 @@ export const updateUserInfo = async (userData) => {
 		let msg = error;
 		if (error.response && error.response.data) {
 			const errors = error.response.data;
-			msg = Object.values(errors).flat().join(' ');
+			msg = Object.values(errors).flat().join(" ");
 		} else {
-			msg = 'There was a problem updating the user information';
+			msg = "There was a problem updating the user information";
 		}
 
 		throw new Error(msg);
 	}
-}
+};
+
+export const resetPasswordRequest = async (email) => {
+	try {
+		const url = endpoint + "password-reset/";
+		const response = await apiInstance.post(url, { email });
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem sending the password reset email";
+		}
+
+		throw new Error(msg);
+	}
+};
+
+export const resetPassword = async (
+	uid,
+	token,
+	newPassword,
+	confirmPassword
+) => {
+	try {
+		const url = `${endpoint}password-reset-confirm/${uid}/${token}/`;
+		const response = await apiInstance.post(url, {
+			new_password: newPassword,
+			confirm_password: confirmPassword,
+		});
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem resetting the password";
+		}
+
+		throw new Error(msg);
+	}
+};
+
+export const verifyEmailRequest = async (email) => {
+	try {
+		const url = endpoint + "verify-email/";
+		const response = await apiInstance.post(url, { email });
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem sending the email verification email";
+		}
+
+		throw new Error(msg);
+	}
+};
+
+export const verifyEmail = async (uidb64, token, email) => {
+	try {
+		const url = `${endpoint}verify-email/${uidb64}/${token}/`;
+		console.log("URL", url);
+		const response = await apiInstance.post(url, { email });
+		console.log("Response", response);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem verifying the email";
+		}
+
+		throw new Error(msg);
+	}
+};
+
+export const subscribe = async (email) => {
+	try {
+		const url = `${endpoint}subscribe/`;
+		const response = await apiInstance.post(url, { email });
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem subscribing the email";
+		}
+		throw new Error(msg);
+	}
+};
+
+export const unsubscribe = async (email) => {
+	try {
+		const url = `${endpoint}unsubscribe/`;
+		const response = await apiInstance.post(url, { email });
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem unsubscribing the email";
+		}
+		throw new Error(msg);
+	}
+};

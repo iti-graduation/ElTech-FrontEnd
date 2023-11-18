@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { resetPasswordRequest } from "../../api/services/user/user-services";
+
 import { loginUserThunk } from "../../services/actions/authSlice";
 
 import InputField from "../../components/Shared/InputField/InputField";
+import { showToast } from "../../utils/toastUtil";
 
-const LoginSection = () => {
+const ForgetPasswordSection = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const auth = useSelector((state) => state.authSlice);
@@ -17,10 +20,38 @@ const LoginSection = () => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
 
-		dispatch(loginUserThunk({ credentials }));
+	// 	dispatch(loginUserThunk({ credentials }));
+	// };
+
+	const handlePasswordReset = async (event) => {
+		event.preventDefault();
+
+		try {
+			const email = credentials.email; // replace this with the actual email
+
+			// Simple regex for email validation
+			const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
+			if (!emailRegex.test(email)) {
+				showToast("Please enter a valid email.", "error");
+				return;
+			}
+
+			await resetPasswordRequest(email);
+			showToast(
+				"Password reset link has been sent to your email.",
+				"success"
+			);
+		} catch (error) {
+			console.error(error);
+			showToast(
+				"There was a problem sending the password reset email.",
+				"error"
+			);
+		}
 	};
 
 	useEffect(() => {
@@ -32,12 +63,12 @@ const LoginSection = () => {
 	return (
 		<>
 			<div className="woocommerce-billing-fields">
-				<h3 className="text-center">Login</h3>
+				<h3 className="text-center">Forget Password</h3>
 				<form
 					action="#"
 					method="post"
 					className=" d-flex justify-content-center "
-					onSubmit={handleSubmit}
+					onSubmit={handlePasswordReset}
 				>
 					<div className="row w-50 m-3">
 						<InputField
@@ -49,31 +80,23 @@ const LoginSection = () => {
 							value={credentials.email}
 							onChange={handleChange}
 						/>
-						<InputField
-							noOfCol="col-lg-12"
-							fieldLabel="Password"
-							fieldPlaceholder="Enter your password"
-							fieldName="password"
-							fieldType="password"
-							value={credentials.password}
-							onChange={handleChange}
-						/>
 						<button
 							type="submit"
 							className="goru-btn auth-button  "
+							// onClick={handlePasswordReset}
 						>
-							Login
+							Get Password Reset Link
 						</button>
 					</div>
 				</form>
 				<div className="text-center">
 					<p>
-						forgot your password?{" "}
+						Already have an account?{" "}
 						<button
 							className="goru-btn auth-button"
-							onClick={() => navigate("/forget-password")}
+							onClick={() => navigate("/login")}
 						>
-							Reset Password!
+							Login!
 						</button>
 					</p>
 					<p>
@@ -91,4 +114,4 @@ const LoginSection = () => {
 	);
 };
 
-export default LoginSection;
+export default ForgetPasswordSection;
