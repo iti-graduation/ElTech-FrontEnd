@@ -7,6 +7,8 @@ import {
   deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
 
+import {showToast} from "../../../utils/toastUtil";
+
 const ProductAddToCart = ({
   handleAddProductToCart,
   productID,
@@ -24,11 +26,13 @@ const ProductAddToCart = ({
           // Make a DELETE request to remove the favorite
           await deleteUserFavorite(productId);
           setIsFavorite(false);
+          showToast('Product removed from favorites', 'success');
         } else {
           // If not favored, add it
           // Make a POST request to create the favorite
           await createUserFavorite(productId);
           setIsFavorite(true);
+          showToast('Product added from favorites', 'success');
         }
       } catch (error) {
         console.error("Error toggling wishlist:", error.response.data);
