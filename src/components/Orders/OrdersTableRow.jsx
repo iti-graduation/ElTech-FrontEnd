@@ -28,7 +28,7 @@ function OrdersTableRow({ product, status }) {
                 <div className="quantityd clearfix">
                     <input
                         name="qty"
-                        value="1"
+                        value={product.quantity}
                         title="Qty"
                         className="input-text qty text carqty"
                         type="text"
