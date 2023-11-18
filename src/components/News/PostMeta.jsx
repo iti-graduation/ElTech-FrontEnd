@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import authorImage from "../../assets/images/blog/author.jpg";
 import moment from "moment";
 
@@ -12,10 +13,10 @@ const PostMeta = ({ post }) => {
 			<div className="blog-post-meta">
 				<span>
 					<img src={post.user.image} alt="" />
-					By <a>{post.user.email}</a>, {formattedDate}
+					By  <a>{post.user.email}</a>, {formattedDate}
 				</span>
 				<span className="cate">
-					<a>{post.category.name}</a>
+					<Link to={`/category/${post.category.id}`}>{post.category.name}</Link>
 				</span>
 			</div>
 		</>

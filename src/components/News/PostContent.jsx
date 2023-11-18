@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PostContent = ({ post,category }) => {
 	return (
 		<div className="blog-content">
@@ -11,7 +13,7 @@ const PostContent = ({ post,category }) => {
 			</ul> */}
 			<div className="post-tag">
 				<h5>
-					Category: <a> {category.name}</a>
+					Category: <Link to={`/category/${category.id}`}>{category.name}</Link>
 				</h5>
 			</div>
 		</div>
