@@ -15,7 +15,7 @@ export default function EditUserProfile({onUpdate, onCancel }) {
                 <TabNavigation/>
                 <div className="col-md-9">
                     <div className="tab-content">
-                        <GeneralTab/>
+                        <GeneralTab onCancel={onCancel} />
                         <ChangePasswordTab/>
                         <InfoTab/>
                         <SocialLinksTab/>
