@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { apiInstance, FAVORITE_ENDPOINT } from "../../../api/config/api-config";
 import {
-	createUserFavorite,
-	deleteUserFavorite,
+  createUserFavorite,
+  deleteUserFavorite,
 } from "../../../api/services/user/favorite-services";
 import { useSelector } from "react-redux";
 
@@ -12,7 +12,7 @@ const ProductCartQty = ({
   quantity,
   handleQuantity,
   productId,
-	stock,
+  stock,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const user = useSelector((state) => state.authSlice.user);
@@ -61,58 +61,55 @@ const ProductCartQty = ({
     checkFavoriteStatus();
   }, [productId]); // Add productId as a dependency to re-run the effect when productId changes
 
-	return (
-		<div className="product-cart-qty">
-			{stock === 0 ? (
-				<span className="pro-badge2 out-of-stock mt-2 mr-5">
-					Out of Stock
-				</span>
-			) : (
-				<>
-					<div className="quantityd clearfix">
-						<button
-							type="button"
-							className="qtyBtn btnMinus"
-							onClick={() => handleQuantity()}
-						>
-							<span>-</span>
-						</button>
-						<input
-							name="qty"
-							value={quantity}
-							title="Qty"
-							className="input-text qty text carqty"
-							type="text"
-						/>
-						<button
-							type="button"
-							className="qtyBtn btnPlus"
-							onClick={() => handleQuantity(true)}
-						>
-							+
-						</button>
-					</div>
-					<Link
-						className="add-to-cart-btn"
-						onClick={() => handleUpdateProductToCart(quantity)}
-					>
-						Add To Cart
-					</Link>
-				</>
-			)}
+  return (
+    <div className="product-cart-qty">
+      {stock === 0 ? (
+        <span className="pro-badge2 out-of-stock mt-2 mr-5">Out of Stock</span>
+      ) : (
+        <>
+          <div className="quantityd clearfix">
+            <button
+              type="button"
+              className="qtyBtn btnMinus"
+              onClick={() => handleQuantity()}
+            >
+              <span>-</span>
+            </button>
+            <input
+              name="qty"
+              value={quantity}
+              title="Qty"
+              className="input-text qty text carqty"
+              type="text"
+            />
+            <button
+              type="button"
+              className="qtyBtn btnPlus"
+              onClick={() => handleQuantity(true)}
+            >
+              +
+            </button>
+          </div>
+          <Link
+            className="add-to-cart-btn"
+            onClick={() => handleUpdateProductToCart(quantity)}
+          >
+            Add To Cart
+          </Link>
+        </>
+      )}
 
-			<a
-				href="#"
-				className={`Whislist ${isFavorite ? "backgroundBlue" : ""}`}
-				onClick={handleAddToWishlist}
-			>
-				<i className="twi-heart"></i>
-			</a>
-			{/* <a href="#" className="compare">
+      <Link
+        className={`Whislist ${isFavorite ? "backgroundBlue" : ""}`}
+        onClick={handleAddToWishlist}
+      >
+        <i className="twi-heart"></i>
+      </Link>
+      {/* <a href="#" className="compare">
 				<i className="twi-random"></i>
 			</a> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default ProductCartQty;

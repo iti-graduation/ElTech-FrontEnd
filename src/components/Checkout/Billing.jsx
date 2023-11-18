@@ -29,31 +29,11 @@ const Billing = () => {
         />
         <BillingField
           noOfCol="col-lg-6"
-          fieldLabel="Company Name"
-          fieldPlaceholder=""
-          fieldName="company"
-          fieldType="text"
-        />
-        <BillingField
-          noOfCol="col-lg-6"
           fieldLabel="Address"
           fieldPlaceholder=""
           fieldName="address_1"
           fieldType="text"
         />
-
-        <div className="col-lg-12">
-          <div className="billing-citys">
-            <label>City / Town</label>
-            <CountryDropDownMenu />
-          </div>
-        </div>
-        <div className="col-lg-6">
-          <div className="billing-countries">
-            <label>Country / States</label>
-            <CountryDropDownMenu />
-          </div>
-        </div>
         <BillingField
           noOfCol="col-lg-6"
           fieldLabel="Postcode / Zip"
@@ -61,20 +41,7 @@ const Billing = () => {
           fieldName="postcode"
           fieldType="text"
         />
-        <BillingField
-          noOfCol="col-lg-6"
-          fieldLabel="Email"
-          fieldPlaceholder=""
-          fieldName="billing_email"
-          fieldType="email"
-        />
-        <BillingField
-          noOfCol="col-lg-6"
-          fieldLabel="Phone Number"
-          fieldPlaceholder=""
-          fieldName="phone"
-          fieldType="tel"
-        />
+
         <p className="col-lg-12 account">
           <input name="account" value="1" type="checkbox" id="cac" />
           <label for="cac">Create an account?</label>
