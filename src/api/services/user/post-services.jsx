@@ -12,17 +12,44 @@ const endpoint = process.env.REACT_APP_NEWS_ENDPOINT;
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem retrieving the posts
  */
-export const getAllPosts = async (pageNumber, pageSize) => {
+export const getAllPosts = async (pageNumber, pageSize,order='-user_id') => {
 	try {
 	  const response = await apiInstance.get(endpoint + 'posts/', {
 		params: {
 		  page: pageNumber,
-		  page_size: pageSize
+		  page_size: pageSize,
+		  order_by: order
 		}
 	  });
 	  return response.data;
 	} catch (error) {
 	  const msg = "There was a problem getting all posts";
+	  console.error(msg, error);
+	  throw new Error(msg);
+	}
+  };
+
+/**
+ * Post newPost to the API
+ *
+ * @param {string} title of the post
+ * @param {string} content of the post
+ * @param {string} image of the post
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem retrieving the posts
+ */
+export const addPost = async (title,content,image) => {
+	try {
+	  const response = await apiInstance.post(endpoint + 'posts/', {
+		params: {
+		  title: title,
+		  content: content,
+		  image: image
+		}
+	  });
+	  return response.data;
+	} catch (error) {
+	  const msg = "There was a problem adding a new post";
 	  console.error(msg, error);
 	  throw new Error(msg);
 	}
@@ -147,5 +174,50 @@ export const addComment = async (postId, userEmail, content, parentCommentId = n
 	  const msg = "There was a problem adding the comment";
 	  console.error(msg, error);
 	  throw new Error(msg);
+	}
+  };
+
+
+/**
+ * Add a new comment to a post or as a reply to another comment
+ *
+ * @param {number} postId - The ID of the post to which the comment belongs
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem adding the comment
+ */
+export const deletePost = async (postId) => {
+	try {
+	  const url = endpoint + `posts/${postId}`;
+	  const response = await apiInstance.delete(url);
+	  return response.data; // Optionally handle the response data if needed
+	} catch (error) {
+	  console.error('Error deleting post:', error.message);
+	  throw new Error('Unable to delete post.');
+	}
+  };
+
+
+  /**
+ * Update an existing post using its ID
+ *
+ * @param {number} postId - The ID of the post to update
+ * @param {object} updatedPostData - The updated data for the post
+ * @param {string} title - The email of the user posting the comment
+ * @param {string} content - The content of the comment
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem updating the post
+ */
+export const updatePost = async (postId, updatedPostData) => {
+	try {
+		const url = endpoint + `posts/${postId}`;
+		const response = await apiInstance.put(url, {
+			title: updatedPostData.title,
+			content: updatedPostData.content, 
+			image: updatedPostData.image,
+		});
+	  return response.data; // Optionally handle the response data if needed
+	} catch (error) {
+	  console.error('Error updating post:', error.message);
+	  throw new Error('Unable to update post.');
 	}
   };
