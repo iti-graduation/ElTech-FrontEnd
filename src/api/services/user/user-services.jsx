@@ -12,6 +12,7 @@ const endpoint = ACCOUNTS_ENDPOINT;
  */
 export const register = async (userData) => {
 	try {
+		console.log(userData);
 		// construct url for registeration
 		const url = endpoint + "create/";
 		// perform POST request to the constructed url
