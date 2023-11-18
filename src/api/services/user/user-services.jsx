@@ -169,32 +169,32 @@ export const getUserPosts = async (userId) => {
 	}
 };
 
-export const updateUserInfo = async (userData) => {
-	try {
-		// construct url with user Id
-		const url = endpoint + "me/";
-		// perform GET request to the constructed url
-		const response = await apiInstance.patch(url, userData);
+// export const updateUserInfo = async (userData) => {
+// 	try {
+// 		// construct url with user Id
+// 		const url = endpoint + "me/";
+// 		// perform GET request to the constructed url
+// 		const response = await apiInstance.patch(url, userData);
 
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during fetching user posts
-		// const msg =
-		// 	"There was a problem getting the posts for the specified user";
-		// console.log(error);
-		// throw new Error(msg);
-		let msg = error;
-		if (error.response && error.response.data) {
-			const errors = error.response.data;
-			msg = Object.values(errors).flat().join(" ");
-		} else {
-			msg = "There was a problem updating the user information";
-		}
+// 		// Return response data
+// 		return response.data;
+// 	} catch (error) {
+// 		// Handle any error that occurred during fetching user posts
+// 		// const msg =
+// 		// 	"There was a problem getting the posts for the specified user";
+// 		// console.log(error);
+// 		// throw new Error(msg);
+// 		let msg = error;
+// 		if (error.response && error.response.data) {
+// 			const errors = error.response.data;
+// 			msg = Object.values(errors).flat().join(" ");
+// 		} else {
+// 			msg = "There was a problem updating the user information";
+// 		}
 
-		throw new Error(msg);
-	}
-};
+// 		throw new Error(msg);
+// 	}
+// };
 
 export const resetPasswordRequest = async (email) => {
 	try {
@@ -315,6 +315,23 @@ export const unsubscribe = async (email) => {
 			msg = Object.values(errors).flat().join(" ");
 		} else {
 			msg = "There was a problem unsubscribing the email";
+		}
+		throw new Error(msg);
+	}
+};
+
+export const updateUserInfo = async (userData) => {
+	try {
+		const url = endpoint + "me/";
+		const response = await apiInstance.patch(url, userData);
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem updating the user information";
 		}
 		throw new Error(msg);
 	}

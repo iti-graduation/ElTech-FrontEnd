@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { formatPhoneNumber } from "../../../utils/helpers";
 
 import {
@@ -132,6 +132,28 @@ export default function UserCard({ onEdit, onLogout }) {
 							</button>
 						</form>
 					)}
+				</div>
+			</div>
+			<hr />
+			<div className="row">
+				<div className="col-sm-3 d-flex align-items-center">
+					<h6 className="mb-0">Orders</h6>
+				</div>
+				<div className="col-sm-9 text-secondary d-flex justify-content-between align-items-center">
+					<Link className="goru-btn" to="/orders">
+						View Orders
+					</Link>
+				</div>
+			</div>
+			<hr />
+			<div className="row">
+				<div className="col-sm-3 d-flex align-items-center">
+					<h6 className="mb-0">Wishlist</h6>
+				</div>
+				<div className="col-sm-9 text-secondary d-flex justify-content-between align-items-center">
+					<Link className="goru-btn" to="/wishlist">
+						View Wishlist
+					</Link>
 				</div>
 			</div>
 			<hr />
