@@ -35,7 +35,7 @@ export default function ChangePasswordTab({ onCancel }) {
 			return;
 		}
 		try {
-			const response = await updateUserInfo({
+			await updateUserInfo({
 				current_password: passwordData.currentPassword,
 				new_password: passwordData.newPassword,
 			});
@@ -79,23 +79,23 @@ export default function ChangePasswordTab({ onCancel }) {
 							onChange={handleChange}
 						/>
 					</div>
-				</div>
-				<div className="text-right mt-3" id="UserProfileBtn">
-					<button
-						type="submit"
-						className="btn btn-primary"
-						// onClick={onUpdate}
-					>
-						Save changes
-					</button>
-					&nbsp;
-					<button
-						type="button"
-						className="btn btn-default"
-						onClick={onCancel}
-					>
-						Cancel
-					</button>
+					<div className="text-right mt-3" id="UserProfileBtn">
+						<button
+							type="submit"
+							className="btn btn-primary"
+							// onClick={onUpdate}
+						>
+							Save changes
+						</button>
+						&nbsp;
+						<button
+							type="button"
+							className="btn btn-default"
+							onClick={onCancel}
+						>
+							Cancel
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>

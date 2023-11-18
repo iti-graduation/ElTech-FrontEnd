@@ -66,6 +66,30 @@ export default function GeneralTab({ onCancel }) {
 	// 	}
 	// };
 
+	// const handleSubmit = async (event) => {
+	// 	event.preventDefault();
+	// 	const formData = new FormData();
+	// 	Object.keys(userData).forEach((key) => {
+	// 		if (key === "profile_picture" && userData[key] === "") {
+	// 			// Skip empty profile_picture
+	// 			return;
+	// 		}
+	// 		formData.append(key, userData[key]);
+	// 	});
+
+	// 	try {
+	// 		const response = await updateUserInfo(formData);
+	// 		// Update user data in local storage
+	// 		localStorage.setItem("user", JSON.stringify(response));
+	// 		// Reload the page
+	// 		window.location.reload();
+	// 		showToast("User info updated successfully!", "success");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		showToast("Error updating user info!", "error");
+	// 	}
+	// };
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const formData = new FormData();
@@ -77,9 +101,17 @@ export default function GeneralTab({ onCancel }) {
 			formData.append(key, userData[key]);
 		});
 
+		// Add validation for first_name and last_name
+		if (userData.first_name.length < 3 || userData.last_name.length < 3) {
+			showToast(
+				"First name and last name should be at least 3 characters long!",
+				"error"
+			);
+			return;
+		}
+
 		try {
 			const response = await updateUserInfo(formData);
-			console.log(response);
 			// Update user data in local storage
 			localStorage.setItem("user", JSON.stringify(response));
 			// Reload the page
@@ -90,16 +122,6 @@ export default function GeneralTab({ onCancel }) {
 			showToast("Error updating user info!", "error");
 		}
 	};
-
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
-	// 	try {
-	// 		const response = await updateUserInfo(userData);
-	// 		console.log(response);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// };
 
 	// useEffect(() => {
 	// 	setUserData({
