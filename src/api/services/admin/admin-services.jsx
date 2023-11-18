@@ -1,9 +1,11 @@
 // Importing the pre-configured API instance
-import { apiInstance } from "../config/api-config";
+import { ACCOUNTS_ENDPOINT,apiInstance } from "../../config/api-config";
 
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const cartEndpoint = process.env.REACT_APP_CART_ENDPOINT;
 const userEndpoint = process.env.REACT_APP_USER_ENDPOINT;
+const endpoint = ACCOUNTS_ENDPOINT;
+
 
 /**
  * Retrieves all carts from the API's endpoint
@@ -63,3 +65,21 @@ export const getAllUsers = async () => {
 		throw new Error(msg);
 	}
 };
+
+/**
+ * Fetches all users
+ * @return {boolean} The data of all users
+ * @throws {Error} If there was a problem getting all users
+ */
+export const checkAdminStatus = async () => {
+	try {
+		const url = endpoint + "check-admin/"
+        const response = await apiInstance.get(url); // Assuming your admin check endpoint
+		
+		return response.data
+	} catch (error) {
+		const msg = "There was a problem getting all users";
+		console.log(error);
+		throw new Error(msg);
+	}
+    };
