@@ -16,9 +16,9 @@ export default function EditUserProfile({onUpdate, onCancel }) {
                 <div className="col-md-9">
                     <div className="tab-content">
                         <GeneralTab onCancel={onCancel} />
-                        <ChangePasswordTab/>
-                        <InfoTab/>
-                        <SocialLinksTab/>
+                        <ChangePasswordTab onCancel={onCancel} />
+                        <InfoTab onCancel={onCancel} />
+                        <SocialLinksTab onCancel={onCancel} />
                     </div>
                 </div>
             </div>

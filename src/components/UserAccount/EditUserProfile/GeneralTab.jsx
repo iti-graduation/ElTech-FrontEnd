@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { updateUserInfo } from "../../../api/services/user/user-services";
 
+import { showToast } from "../../../utils/toastUtil";
+
 import profilePic from "../../../assets/images/user/profile_pic_placeholder.png";
 
 export default function GeneralTab({ onCancel }) {
@@ -82,8 +84,10 @@ export default function GeneralTab({ onCancel }) {
 			localStorage.setItem("user", JSON.stringify(response));
 			// Reload the page
 			window.location.reload();
+			showToast("User info updated successfully!", "success");
 		} catch (error) {
 			console.error(error);
+			showToast("Error updating user info!", "error");
 		}
 	};
 
