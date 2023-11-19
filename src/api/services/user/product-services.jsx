@@ -249,7 +249,7 @@ export const addProductRating = async (productId, rating) => {
 		console.log(productId, rating);
 		const url = productEndpoint + `${productId}/ratings/`;
 		console.log(url);
-		const response = await apiInstance.post(url, rating);
+		const response = await apiInstance.post(url, { rating: rating });
 
 		return response.data;
 	} catch (error) {
