@@ -14,7 +14,6 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
   const navigate = useNavigate();
 
   const handleSelectPayment = (event) => {
-    console.log(event.target.value);
     setSelectedPaymentMethod(event.target.value);
   };
 
@@ -115,9 +114,6 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
               paymentMethodClass="payment_method_paypal"
               paymentMethodValue="paypal"
               paymentMethodId="payment_method_paypal"
-              setSelectedPaymentMethod={() => {
-                setSelectedPaymentMethod("paypal");
-              }}
               paymentMethodLabel={
                 <span
                   dangerouslySetInnerHTML={{
@@ -128,16 +124,12 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
                       '<i class="twi-cc-discover"></i>',
                   }}
                 />
-              
               }
               paymentMethodDescription="Vestibulum impnibh. Lorem ullamcorper volutpat. Vestibulum lacinia risus. Etiam sagittis ullamcorper volutpat."
               handleSelectPayment={handleSelectPayment}
             />
             <PaymentMethod
               paymentMethodClass="payment_method_cod"
-              setSelectedPaymentMethod={() => {
-                setSelectedPaymentMethod("cod");
-              }}
               paymentMethodValue="cod"
               paymentMethodId="payment_method_cod"
               paymentMethodLabel="Cash On Delivery"
