@@ -38,14 +38,14 @@ export const getAllPosts = async (pageNumber, pageSize,order='-user_id') => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem retrieving the posts
  */
-export const addPost = async (title,content,image) => {
+export const addPost = async (title, content, image, category, userId) => {
 	try {
 	  const response = await apiInstance.post(endpoint + 'posts/', {
-		params: {
-		  title: title,
-		  content: content,
-		  image: image
-		}
+		title: title,
+		content: content,
+		image: image,
+		category: category,
+		user_id: userId
 	  });
 	  return response.data;
 	} catch (error) {
@@ -210,7 +210,7 @@ export const deletePost = async (postId) => {
 export const updatePost = async (postId, updatedPostData) => {
 	try {
 		const url = endpoint + `posts/${postId}`;
-		const response = await apiInstance.put(url, {
+		const response = await apiInstance.patch(url, {
 			title: updatedPostData.title,
 			content: updatedPostData.content, 
 			image: updatedPostData.image,

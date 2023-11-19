@@ -110,6 +110,26 @@ export const getSingleProduct = async (productId) => {
 	}
 };
 
+
+export const getSingleProductCategory = async (productId) => {
+	try {
+	  const url = productEndpoint + productId;
+	  const response = await apiInstance.get(url);
+  
+	  // Assuming the API response contains the category ID in the 'categoryId' field
+	  const { data } = response;
+	  const productCategory = data.category; // Replace 'categoryId' with the actual field name
+  
+	  return {
+		productCategory
+	  };
+	} catch (error) {
+	  const msg = "There was a problem getting the specified product";
+	  console.log(error);
+	  throw new Error(msg);
+	}
+  };
+
 /**
  * Function to get all products by a search term from the API.
  * It uses predefined api instance and specific product search endpoint.
@@ -238,3 +258,42 @@ export const addProductRating = async (productId, rating) => {
 		throw new Error(msg);
 	}
 };
+
+
+
+/**
+ * delete a product by product id
+ *
+ * @param {number} product ID 
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem adding the comment
+ */
+export const deleteProduct = async (productId) => {
+	try {
+	  const url = endpoint + `products/${productId}`;
+	  const response = await apiInstance.delete(url);
+	  return response.data; // Optionally handle the response data if needed
+	} catch (error) {
+	  console.error('Error deleting product:', error.message);
+	  throw new Error('Unable to delete product.');
+	}
+  };
+
+
+/**
+ * delete a category by category id
+ *
+ * @param {number} category ID 
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem adding the comment
+ */
+export const deleteCategory = async (categoryId) => {
+	try {
+	  const url = endpoint + `categories/${categoryId}`;
+	  const response = await apiInstance.delete(url);
+	  return response.data; // Optionally handle the response data if needed
+	} catch (error) {
+	  console.error('Error deleting product:', error.message);
+	  throw new Error('Unable to delete product.');
+	}
+  };

@@ -3,7 +3,7 @@ import { getUserData } from "../../../api/services/user/user-services"; // Impor
 import { addPost } from "../../../api/services/user/post-services"; // Import your authentication context
 
 
-const CategoryForm = ({clickHandler}) => {
+const UserForm = ({clickHandler}) => {
 	const userData = getUserData();
 	const userEmail = userData.email; 
 	const [title, setTitle] = useState('');
@@ -29,9 +29,9 @@ const CategoryForm = ({clickHandler}) => {
 	  };
 
 	return (
-		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
+		<div className="comment-form-wrapper">
 		  <h5>Add new Post</h5>
-		  <form onSubmit="" className="dashboard-form" id="dashboard-form">
+		  <form onSubmit={handleSubmit} className="row comment-form">
 			<div className="col-lg-12 col-md-12">
 			  <input
 				type="text"
@@ -65,4 +65,4 @@ const CategoryForm = ({clickHandler}) => {
 	  );
 	};
 
-export default CategoryForm;
+export default UserForm;
