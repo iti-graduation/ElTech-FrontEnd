@@ -42,24 +42,9 @@ const Billing = () => {
           fieldType="text"
         />
 
-        <p className="col-lg-12 account">
-          <input name="account" value="1" type="checkbox" id="cac" />
-          <label for="cac">Create an account?</label>
-        </p>
-        <BillingField
-          noOfCol="col-lg-12"
-          fieldLabel="Account Password"
-          fieldPlaceholder=""
-          fieldName="password"
-          fieldType="password"
-        />
         <p className="col-lg-12">
           <label>Order Note</label>
           <textarea name="order" placeholder=""></textarea>
-        </p>
-        <p className="col-lg-12 account">
-          <input name="ship-address" value="2" type="checkbox" id="ship_add" />
-          <label for="ship_add">Ship to another address</label>
         </p>
       </div>
     </div>
