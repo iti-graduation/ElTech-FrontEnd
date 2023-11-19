@@ -1,5 +1,5 @@
 // Importing Link component from react-router-dom
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { checkAdminStatus } from '../../api/services/admin/admin-services';
@@ -11,20 +11,20 @@ import flag from "../../assets/images/flag.png";
 import cart from "../../assets/images/cart.png";
 
 const Header = ({ className }) => {
-const user = useSelector((state) => state.authSlice.user);
-const count = useSelector((state) => state.cartSlice.count);
-const auth = useSelector((state) => state.authSlice);
-const [isAdmin, setIsAdmin] = useState(false);
-const [loading, setLoading] = useState(true);
+  const user = useSelector((state) => state.authSlice.user);
+  const count = useSelector((state) => state.cartSlice.count);
+  const auth = useSelector((state) => state.authSlice);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
 
 
-	useEffect(() => {
-		window.$(".search-toggles").on("click", function (e) {
-			e.preventDefault();
-			window.$(".popup-search-sec").toggleClass("active");
-		});
+  useEffect(() => {
+    window.$(".search-toggles").on("click", function (e) {
+      e.preventDefault();
+      window.$(".popup-search-sec").toggleClass("active");
+    });
 
 
 
@@ -104,17 +104,24 @@ const [loading, setLoading] = useState(true);
               <a className="select-currency" href="javascript:void(0);">
                 <i className="twi-dollar-sign"></i>Usd
               </a> */}
-              <Link className="user-login" to={user?"/profile":"/login"}>
-                <i className="twi-user-circle"></i>
-                <span>{user ? user.first_name : "Account"}</span>
 
+              <Link className="user-login" to={user ? "/profile" : "/login"}>
+                {user.profile_picture?
+                  <img
+                    style={{width:23, height:23}}
+                    className="rounded-circle mr-2"
+                    src={user.profile_picture}
+                    alt="Admin"
+                  />
+                  : <i className="twi-user-circle"></i>}
+                <span>{user ? user.first_name : "Account"}</span>
               </Link>
               {isAdmin ? (
-                  <Link className="user-login" to={user ? "/dashboard" : null}>
-                    <AdminPanelSettingsIcon/>
-                  </Link>
-                ) : null}
-              <Link className="carts" to={user?"/cart":"/login"}>
+                <Link className="user-login" to={user ? "/dashboard" : null}>
+                  <AdminPanelSettingsIcon />
+                </Link>
+              ) : null}
+              <Link className="carts" to={user ? "/cart" : "/login"}>
                 <span>{count}</span>
                 <img src={cart} alt="" />
               </Link>

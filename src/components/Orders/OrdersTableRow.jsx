@@ -1,54 +1,49 @@
 import { Link } from "react-router-dom";
-import productImg1 from "../../assets/images/cart/1.jpg";
 
-function OrdersTableRow({ product, status }) {
+function OrdersTableRow({ order }) {
+    const parsedDate = new Date(order.created_at);
+    const formattedDate = `${parsedDate.getFullYear()}-${(parsedDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${parsedDate.getDate().toString().padStart(2, "0")}`;
+
     return (
         <tr className="cart-item">
             <td className="product-thumbnail-title">
-            <Link to={'/product/'+ product.product.id}>
-					<img src={product.product.thumbnail.image ? product.product.thumbnail.image : productImg1} alt="" />
-				</Link>
-				<Link className="product-name" to={'/product/'+ product.product.id}>
-					{product.product.name}
-				</Link>
-            </td>
-            <td className="product-unit-price">
-                <div className="product-price clearfix">
-                    <span className="price">
-                        <span>
-                            <span className="woocommerce-Price-currencySymbol">
-                                $
-                            </span>
-                            {product.product.price}
-                        </span>
-                    </span>
-                </div>
+                <Link to={'/orders/' + order.id}>
+                    {formattedDate}
+                </Link>
             </td>
             <td className="product-quantity clearfix">
-                <div className="quantityd clearfix">
-                    <input
-                        name="qty"
-                        value={product.quantity}
-                        title="Qty"
-                        className="input-text qty text carqty"
-                        type="text"
-                    />
-                </div>
+                <Link to={'/orders/' + order.id}>
+                    <div className="quantityd clearfix">
+                        <input
+                            name="qty"
+                            value={order.products.length}
+                            title="Qty"
+                            className="input-text qty text carqty"
+                            type="text"
+                        />
+                    </div>
+                </Link>
             </td>
             <td className="product-total">
-                <div className="product-price clearfix">
-                    <span className="price">
-                        <span>
-                            <span className="woocommerce-Price-currencySymbol">
-                                $
+                <Link to={'/orders/' + order.id}>
+                    <div className="product-price clearfix">
+                        <span className="price">
+                            <span>
+                                <span className="woocommerce-Price-currencySymbol">
+                                    $
+                                </span>
+                                {order.total_price}
                             </span>
-                            {product.total_price}
                         </span>
-                    </span>
-                </div>
+                    </div>
+                </Link>
             </td>
             <td className="product-total">
-                {status}
+                <Link to={'/orders/' + order.id}>
+                    {order.status}
+                </Link>
             </td>
         </tr>
     )

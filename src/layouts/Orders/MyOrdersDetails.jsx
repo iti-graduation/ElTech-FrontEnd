@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { cartCount } from "../../services/actions/cartSlice"
 import { fetchUserCart } from "../../api/services/user/cart-services";
-import { fetchUserOrders } from "../../api/services/user/order_services";
+import { fetchUserOrder } from "../../api/services/user/order_services";
 
-import OrdersTable from "../../components/Orders/OrdersTable"
+import OrdersDetailsTable from "../../components/Orders/OrdersDetailsTable"
 
-function MyOrders() {
+function MyOrdersDetails() {
+	const { id } = useParams();
 	const dispatch = useDispatch();
 	const [cart, setCart] = useState([]);
-	const [orders, setOrders] = useState([]);
+	const [order, setOrder] = useState([]);
 	dispatch(cartCount(cart.length));
 	const user = useSelector((state) => state.authSlice.user);
 
@@ -22,13 +24,13 @@ function MyOrders() {
 				})
 				.catch((err) => console.log(err));
 
-			fetchUserOrders()
+			fetchUserOrder(id)
 				.then((data) => {
-					setOrders(data);
+					setOrder(data);
 				})
 				.catch((err) => console.log(err));
 		}
-	}, []);
+	}, [id]);
 
 	return (
 		<section className="cart-section">
@@ -36,7 +38,9 @@ function MyOrders() {
 				<div className="row">
 					<div className="col-md-12">
 						<form className="woocommerce-cart-form" action="#">
-							<OrdersTable orders={orders}/>
+							{order!=0 &&
+								<OrdersDetailsTable order={order} />
+							}
 						</form>
 					</div>
 				</div>
@@ -45,4 +49,4 @@ function MyOrders() {
 	)
 }
 
-export default MyOrders
+export default MyOrdersDetails

@@ -164,7 +164,7 @@ export default function UserCard({ onEdit, onLogout }) {
 							<h6 className="mb-0">BirthDay</h6>
 						</div>
 						<div className="col-sm-9 text-secondary">
-							{user ? user.birth_date : "01-01-2001"}
+							{user ? user.birth_date : "dd-mm-yyyy"}
 						</div>
 					</div>
 					<hr />
