@@ -1,19 +1,24 @@
 import CateTable from "./CateTable";
-import React from 'react';
+import CategoryForm from "./CategoryForm";
+import React,{ useState } from 'react';
 
 
 const CategoriesDashboard = () => {
 
-        const handleNewCategory = () => {
-          // Perform actions to add a new post, such as navigating to a new page or showing a form
-          // For example, you can redirect to a new post creation page or display a modal/form to add a new post
-          console.log('Add new post logic here');
-        };
+  const [showCreateForm, setShowReplyForm] = useState(false)
+  const handleCreateClick = () => {
+  setShowReplyForm(!showCreateForm);
+  };
 
     return (
       <div>
         <h1>Categories</h1>
-        <button className="guru-btn" onClick={handleNewCategory}>Create New category</button>
+        <button className="guru-btn" id="create-btn" onClick={handleCreateClick}>Add Category</button>
+        {showCreateForm && (
+				<div className="reply-form-wrapper">
+				<CategoryForm clickHandler={handleCreateClick}/>
+				</div>
+			)}
         <CateTable />
       </div>
     );

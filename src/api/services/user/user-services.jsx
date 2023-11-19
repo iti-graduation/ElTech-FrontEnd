@@ -337,3 +337,36 @@ export const updateUserInfo = async (userData) => {
 		throw new Error(msg);
 	}
 };
+
+
+
+export const getAllUsers = async () => {
+	try {
+	  const response = await apiInstance.get(endpoint + 'users/');
+	  return response.data;
+	} catch (error) {
+	  const msg = "There was a problem getting all posts";
+	  console.error(msg, error);
+	  throw new Error(msg);
+	}
+  };
+
+
+
+/**
+ * delete a specific user
+ *
+ * @param {number} userId - The ID of the user
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem 
+ */
+export const deleteUser = async (userId) => {
+	try {
+	  const url = endpoint + `users/${userId}`;
+	  const response = await apiInstance.delete(url);
+	  return response.data; // Optionally handle the response data if needed
+	} catch (error) {
+	  console.error('Error deleting user:', error.message);
+	  throw new Error('Unable to delete user.');
+	}
+  };

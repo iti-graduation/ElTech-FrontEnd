@@ -50,3 +50,23 @@ export const addOrder = async () => {
 		throw new Error(msg);
 	}
 };
+
+
+
+export const fetchAllOrders = async () => {
+	try {
+		// construct url with user Id
+		const url = order_endpoint+"/ordersList";
+		// perform GET request to the constructed url
+		const response = await apiInstance.get(url);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during fetching order products
+		const msg =
+			"There was a problem getting the order products users";
+		console.log(error);
+		throw new Error(msg);
+	}
+};

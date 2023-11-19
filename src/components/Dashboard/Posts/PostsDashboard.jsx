@@ -5,16 +5,16 @@ import React,{ useState } from 'react';
 
 const PostsDashboard = () => {
 
-    const [showReplyForm, setShowReplyForm] = useState(false)
+    const [showCreateForm, setShowCreateForm] = useState(false)
     const handleCreateClick = () => {
-    setShowReplyForm(!showReplyForm);
+    setShowCreateForm(!showCreateForm);
     };
 
     return (
       <div>
         <h1>Posts</h1>
-        <button className="guru-btn" onClick={handleCreateClick}>Create New Post</button>
-        {showReplyForm && (
+        <button className="guru-btn" id="create-btn" onClick={handleCreateClick}>Add Post</button>
+        {showCreateForm && (
 				<div className="reply-form-wrapper">
 				<PostForm clickHandler={handleCreateClick}/>
 				</div>

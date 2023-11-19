@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
-import { addPost } from "../../../api/services/user/post-services"; // Import your authentication context
+import { addProduct } from "../../../api/services/user/product-services"; // Import your authentication context
 
 
-const CategoryForm = ({clickHandler}) => {
+const ProductForm = ({clickHandler}) => {
 	const userData = getUserData();
 	const userEmail = userData.email; 
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [image, setImage] = useState('');
   
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
 	
-		try {	
-		  // Call the addPost API function
-		  const response = await addPost(title, content, image);
-		  console.log('Post added successfully:', response);
-		  console.log(response);
+	// 	try {	
+	// 	  // Call the addPost API function
+	// 	  const response = await addProduct(title, content, image);
+	// 	  console.log('Post added successfully:', response);
+	// 	  console.log(response);
 	
-		  // Reset the form after successful submission
-		  setTitle('');
-		  setContent('');
-		  setImage('');
-		} catch (error) {
-		  console.error('Error adding post:', error.message);
-		}
-	  };
+	// 	  // Reset the form after successful submission
+	// 	  setTitle('');
+	// 	  setContent('');
+	// 	  setImage('');
+	// 	} catch (error) {
+	// 	  console.error('Error adding post:', error.message);
+	// 	}
+	//   };
 
 	return (
 		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
@@ -65,4 +65,4 @@ const CategoryForm = ({clickHandler}) => {
 	  );
 	};
 
-export default CategoryForm;
+export default ProductForm;

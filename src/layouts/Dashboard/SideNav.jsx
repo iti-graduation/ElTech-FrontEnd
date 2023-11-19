@@ -16,19 +16,23 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import FeedIcon from '@mui/icons-material/Feed';
 import HomeIcon from '@mui/icons-material/Home';
-import TokenIcon from '@mui/icons-material/Token';
 import GroupIcon from '@mui/icons-material/Group';
 import CategoryIcon from '@mui/icons-material/Category';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import NavBar from './Navbar';
-import PostsDashboard from '../../components/Dashboard/Posts/PostsDashboard';
 import Home from '../../components/Dashboard/Home/DashboardHome';
+import PostsDashboard from '../../components/Dashboard/Posts/PostsDashboard';
 import CategoriesDashboard from '../../components/Dashboard/Categories/CategoriesDashboard';
+import UsersDashboard from '../../components/Dashboard/Users/UsersDashboard';
+import ProductsDashboard from '../../components/Dashboard/Products/ProductsDashboard';
+import OrdersDashboard from '../../components/Dashboard/Orders/OrdersDashboard';
 
 
 
-const drawerWidth = 240;
+
+
+const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -45,7 +49,7 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(7)} + 10px)`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
@@ -82,7 +86,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [selectedItem, setSelectedItem] = React.useState('Home'); // State to track the selected item
 
   const renderContent = () => {
@@ -97,30 +101,24 @@ export default function MiniDrawer() {
         );
         case 'Products':
         return (
-            <Typography>
-            Content for Products
-            </Typography>
+            <ProductsDashboard/>
         );
         case 'Feed':
         return (
             <PostsDashboard />
         );
-        case 'Tokens':
-        return (
-            <Typography>
-            Content for Tokens
-            </Typography>
-        );
         case 'Users':
         return (
-            <Typography>
-            Content for Users
-            </Typography>
+            <UsersDashboard />
         );
+        case 'Orders':
+          return (
+            <OrdersDashboard />
+          );
       default:
         return (
           <Typography>
-            Default Content
+            No Content to View
           </Typography>
         );
     }
@@ -132,6 +130,9 @@ export default function MiniDrawer() {
       <CssBaseline />
       <Drawer variant="permanent" open={open} sx={{backgroundColor:"blue"}} >
         <DrawerHeader >
+            <Typography>
+            
+            </Typography>
           <IconButton onClick={()=>setOpen(!open)}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
@@ -161,7 +162,7 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {['Tokens', 'Users'].map((text) => (
+          {['Users'].map((text) => (
             <ListItem
               sx={{color:"black"}}
               key={text}
@@ -170,7 +171,6 @@ export default function MiniDrawer() {
             >
               <ListItemButton>
                 <ListItemIcon sx={{color:"black"}}>
-                  {text === 'Tokens' && <TokenIcon />}
                   {text === 'Users' && <GroupIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
