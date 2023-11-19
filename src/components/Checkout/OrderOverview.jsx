@@ -13,6 +13,11 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("cod");
   const navigate = useNavigate();
 
+  const handleSelectPayment = (event) => {
+    console.log(event.target.value);
+    setSelectedPaymentMethod(event.target.value);
+  };
+
   const handleOrder = async () => {
     if (user) {
       if (selectedPaymentMethod === "cod") {
@@ -123,8 +128,10 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
                       '<i class="twi-cc-discover"></i>',
                   }}
                 />
+              
               }
               paymentMethodDescription="Vestibulum impnibh. Lorem ullamcorper volutpat. Vestibulum lacinia risus. Etiam sagittis ullamcorper volutpat."
+              handleSelectPayment={handleSelectPayment}
             />
             <PaymentMethod
               paymentMethodClass="payment_method_cod"
@@ -137,6 +144,7 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
               paymentMethodDescription="Exam id ullamcorper libero. Vestibulum impnibh. Lorem
               ullamcorper volutpat. Vestibulum lacinia risus. Etiam sagittis
               ullamcorper volutpat."
+              handleSelectPayment={handleSelectPayment}
             />
           </ul>
         </div>
