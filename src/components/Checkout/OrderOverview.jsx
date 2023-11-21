@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import CartSubtotal from "./CartSubtotal";
 import PaymentMethod from "./PaymentMethod";
@@ -8,64 +8,85 @@ import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
 
-const OrderOverview = ({ products, total, subtotal, discount }) => {
+const OrderOverview = ({
+  products,
+  total,
+  subtotal,
+  discount,
+  billingInfo,
+  isFormValid,
+}) => {
   const user = useSelector((state) => state.authSlice.user);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("cod");
   const navigate = useNavigate();
+  const orderData = {
+    ...billingInfo,
+    payment_method: selectedPaymentMethod,
+  };
 
   const handleSelectPayment = (event) => {
     setSelectedPaymentMethod(event.target.value);
   };
-
   const handleOrder = async () => {
-    if (user) {
-      if (selectedPaymentMethod === "cod") {
-        await addOrder();
-        showToast("Your order placed successfully", "success");
-        navigate("/orders");
-      } else if (selectedPaymentMethod === "paypal") {
-        try {
-          const response = await fetch(
-            "http://localhost:8000/online-payment/",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ amount: total }),
-            }
-          );
+    const emptyFields = Object.keys(billingInfo).filter(
+      (field) => !billingInfo[field]
+    );
 
-          if (response.ok) {
-            const data = await response.json();
-            const stripe = await loadStripe(
-              "pk_test_51ODhd6B9sAFUoYRFQroYtxnJVUBnzMsvpWAgvFMXWstGdnpGX5KxJIAHiIhks6Klx0ddJiahh4kJvh0gh5KzF6IU00qDCI9sMo"
+    if (isFormValid) {
+      if (user) {
+        if (selectedPaymentMethod === "cod") {
+          await addOrder(orderData);
+          showToast("Your order placed successfully", "success");
+          navigate("/orders");
+        } else if (selectedPaymentMethod === "paypal") {
+          try {
+            const response = await fetch(
+              "http://localhost:8000/online-payment/",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ amount: total }),
+              }
             );
-            await addOrder();
 
-            // Use the received sessionId
-            const { error } = await stripe.redirectToCheckout({
-              sessionId: data.sessionId,
-            });
+            if (response.ok) {
+              const data = await response.json();
+              const stripe = await loadStripe(
+                "pk_test_51ODhd6B9sAFUoYRFQroYtxnJVUBnzMsvpWAgvFMXWstGdnpGX5KxJIAHiIhks6Klx0ddJiahh4kJvh0gh5KzF6IU00qDCI9sMo"
+              );
+              await addOrder(orderData);
 
-            if (error) {
-              console.error("Error redirecting to Stripe Checkout:", error);
-              showToast("Failed to redirect to the payment gateway");
+              // Use the received sessionId
+              const { error } = await stripe.redirectToCheckout({
+                sessionId: data.sessionId,
+              });
+
+              if (error) {
+                console.error("Error redirecting to Stripe Checkout:", error);
+                showToast("Failed to redirect to the payment gateway");
+              }
+            } else {
+              console.error(
+                "Failed to create Checkout Session:",
+                response.statusText
+              );
+              showToast("Failed to initiate payment");
             }
-          } else {
-            console.error(
-              "Failed to create Checkout Session:",
-              response.statusText
-            );
-            showToast("Failed to initiate payment");
+          } catch (error) {
+            console.error("Error creating Checkout Session:", error.message);
+            showToast("Error creating payment");
           }
-        } catch (error) {
-          console.error("Error creating Checkout Session:", error.message);
-          showToast("Error creating payment");
         }
+      } else {
+        showToast("You need to log in to place an order!");
       }
     } else {
-      showToast("You need to log in to place an order!");
+      showToast(
+        `Please fill out the ${emptyFields[0].replace(/_/g, " ")}`,
+        "warning"
+      );
     }
   };
 
@@ -111,6 +132,14 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
         <div className="woocommerce-checkout-payment" id="payment">
           <ul className="wc_payment_methods payment_methods methods">
             <PaymentMethod
+              paymentMethodClass="payment_method_cod"
+              paymentMethodValue="cod"
+              paymentMethodId="payment_method_cod"
+              paymentMethodLabel="Cash On Delivery"
+              handleSelectPayment={handleSelectPayment}
+              paymentMethodChecked={true}
+            />
+            <PaymentMethod
               paymentMethodClass="payment_method_paypal"
               paymentMethodValue="paypal"
               paymentMethodId="payment_method_paypal"
@@ -125,27 +154,12 @@ const OrderOverview = ({ products, total, subtotal, discount }) => {
                   }}
                 />
               }
-              paymentMethodDescription="Vestibulum impnibh. Lorem ullamcorper volutpat. Vestibulum lacinia risus. Etiam sagittis ullamcorper volutpat."
-              handleSelectPayment={handleSelectPayment}
-            />
-            <PaymentMethod
-              paymentMethodClass="payment_method_cod"
-              paymentMethodValue="cod"
-              paymentMethodId="payment_method_cod"
-              paymentMethodLabel="Cash On Delivery"
-              paymentMethodDescription="Exam id ullamcorper libero. Vestibulum impnibh. Lorem
-              ullamcorper volutpat. Vestibulum lacinia risus. Etiam sagittis
-              ullamcorper volutpat."
               handleSelectPayment={handleSelectPayment}
             />
           </ul>
         </div>
         <div className="place-order">
-          <button
-            type="button"
-            className="button"
-            onClick={() => handleOrder()}
-          >
+          <button className="button" onClick={() => handleOrder()}>
             Place Order
           </button>
         </div>

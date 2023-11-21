@@ -7,7 +7,6 @@ const PaymentMethod = ({
   paymentMethodId,
   paymentMethodLabel,
   paymentMethodDescription,
-  setSelectedPaymentMethod,
   handleSelectPayment,
 }) => {
   return (
@@ -19,9 +18,9 @@ const PaymentMethod = ({
         id={paymentMethodId}
         type="radio"
         onClick={handleSelectPayment}
-        checked
+        defaultChecked={paymentMethodChecked}
       />
-      <label for={paymentMethodId}>{paymentMethodLabel}</label>
+      <label htmlFor={paymentMethodId}>{paymentMethodLabel}</label>
       <div className={`payment_box ${paymentMethodClass}`}>
         <p>{paymentMethodDescription}</p>
       </div>

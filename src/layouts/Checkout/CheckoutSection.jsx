@@ -20,6 +20,22 @@ const CheckoutSection = () => {
   const [discount, setDiscount] = useState(0);
   dispatch(cartCount(cart.length));
   const user = useSelector((state) => state.authSlice.user);
+  const [billingInfo, setBillingInfo] = useState({
+    country: "",
+    first_name: "",
+    last_name: "",
+    address: "",
+    zip: "",
+    order_note: "",
+  });
+  const [isFormValid, setIsFormValid] = useState(false); // State for form validation
+
+  const handleBillingInfoChange = (field, value) => {
+    setBillingInfo((prevBillingInfo) => ({
+      ...prevBillingInfo,
+      [field]: value,
+    }));
+  };
 
   useEffect(() => {
     if (user) {
@@ -36,6 +52,22 @@ const CheckoutSection = () => {
     }
   }, [change]);
 
+  // Add a function to handle form validation
+  const validateForm = () => {
+    // Perform your form validation logic here
+    const isValid =
+      !!billingInfo.country &&
+      !!billingInfo.first_name &&
+      !!billingInfo.last_name &&
+      !!billingInfo.address &&
+      !!billingInfo.zip;
+    setIsFormValid(isValid);
+  };
+
+  useEffect(() => {
+    validateForm(); // Validate the form whenever billingInfo changes
+  }, [billingInfo]);
+
   return (
     <section className="checkout-section">
       <div className="container">
@@ -45,13 +77,18 @@ const CheckoutSection = () => {
               Have a Coupon ?{" "}
               <Link to="/cart">Click here to enter your code</Link>
             </div>
-            <Billing />
+            <Billing
+              billingInfo={billingInfo}
+              handleBillingInfoChange={handleBillingInfoChange}
+            />
           </div>
           <OrderOverview
             products={cart}
             total={total}
             subtotal={subtotal}
             discount={discount}
+            billingInfo={billingInfo}
+            isFormValid={isFormValid}
           />
         </div>
       </div>

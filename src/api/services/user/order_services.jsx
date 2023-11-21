@@ -10,43 +10,44 @@ const order_endpoint = process.env.REACT_APP_ORDER_ENDPOINT;
  * @throws {Error} If there was a problem getting the order products for the specified user
  */
 export const fetchUserOrders = async () => {
-	try {
-		// construct url with user Id
-		const url = order_endpoint;
-		// perform GET request to the constructed url
-		const response = await apiInstance.get(url);
+  try {
+    // construct url with user Id
+    const url = order_endpoint;
+    // perform GET request to the constructed url
+    const response = await apiInstance.get(url);
 
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during fetching order products
-		const msg =
-			"There was a problem getting the order products for the specified user";
-		console.log(error);
-		throw new Error(msg);
-	}
+    // Return response data
+    return response.data;
+  } catch (error) {
+    // Handle any error that occurred during fetching order products
+    const msg =
+      "There was a problem getting the order products for the specified user";
+    console.log(error);
+    throw new Error(msg);
+  }
 };
 
 /**
  * add cart order for a specific user
+ * @param {Object} orderData - The data of the order to be added
  * @return {Object} The data of the added order
  * @throws {Error} If there was a problem adding the order
  */
-export const addOrder = async () => {
-	try {
-		// construct url
-		const url = order_endpoint;
-        console.log(order_endpoint);
-		// perform POST request to the constructed url
-		const response = await apiInstance.post(url);
+export const addOrder = async (orderData) => {
+  try {
+    // construct url
+    const url = order_endpoint;
+    console.log(order_endpoint);
 
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during adding the order
-		const msg =
-			"There was a problem adding the order of the specified user";
-		console.log(error);
-		throw new Error(msg);
-	}
+    // perform POST request to the constructed url
+    const response = await apiInstance.post(url, orderData);
+
+    // Return response data
+    return response.data;
+  } catch (error) {
+    // Handle any error that occurred during adding the order
+    console.error("Error adding order:", error);
+    const msg = "There was a problem adding the order of the specified user";
+    throw new Error(msg);
+  }
 };
