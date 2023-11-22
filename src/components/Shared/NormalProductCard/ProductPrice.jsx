@@ -14,15 +14,18 @@ const ProductPrice = ({ product }) => {
 						</span>
 					</span>
 				</del> */}
-				<span
-					className="woocommerce-Price-currencySymbol"
-					style={{
-						textDecoration: "line-through",
-						marginRight: "5px",
-					}}
-				>
-					${product.price}
-				</span>
+				{product.is_on_sale && (
+					<span
+						className="woocommerce-Price-currencySymbol"
+						style={{
+							textDecoration: "line-through",
+							marginRight: "5px",
+						}}
+					>
+						${product.price}
+					</span>
+				)}
+
 				<span className="woocommerce-Price-currencySymbol">
 					$
 					{product.is_on_sale
