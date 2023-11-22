@@ -3,6 +3,8 @@ import { getAllPosts,deletePost,updatePost,getSinglePost } from "../../../api/se
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PostForm from "./PostForm";
+
 
 
 
@@ -11,6 +13,8 @@ const PostsTable = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [pageSize, setPageSize] = useState(5);
     const [totalCount, setTotalCount] = useState(0); // Store the total count of posts
+    const [showEditForm, setShowEditForm] = useState(false)
+
 
     useEffect(() => {
       const fetchPosts = async () => {
@@ -19,13 +23,14 @@ const PostsTable = () => {
           setPosts(postsData.results);
           setTotalCount(postsData.count);
           setPageSize(postsData.count) // Set the total count of posts from the API response
+
         } catch (error) {
           console.error("Error fetching posts:", error.message);
         }
       };
   
       fetchPosts();
-    }, [pageNumber, pageSize]);
+    }, [pageNumber, pageSize,totalCount]);
 
     const handleDeletePost = async (postId) => {
       try {
@@ -33,6 +38,7 @@ const PostsTable = () => {
         // Refresh posts after successful deletion
         const updatedPostsData = await getAllPosts(pageNumber, pageSize);
         setPosts(updatedPostsData.results);
+        setShowEditForm(!showEditForm);
       } catch (error) {
         console.error('Error deleting post:', error.message);
       }
@@ -46,33 +52,18 @@ const PostsTable = () => {
         // Refresh posts after successful update
         const updatedPostsData = await getAllPosts(pageNumber, pageSize);
         setPosts(updatedPostsData.results);
+        setShowEditForm(!showEditForm);
       } catch (error) {
         console.error('Error updating post:', error.message);
       }
     };
   
-    const triggerEdit = async (postId) => {
-      try {
-        const currentPostData = await getSinglePost(postId);
-        console.log(currentPostData.image);
-    
-        const updatedFields = {
-          title: 'Updated Title 1',
-          content: 'Updated Content',
-          image: currentPostData.image,
-        };
-    
-        const updatedPostData = {
-          ...currentPostData,
-          ...updatedFields,
-        };
-
-        await handleEditPost(postId, updatedPostData);
-      } catch (error) {
-        console.error('Error triggering edit:', error.message);
-      }
-    };
   
+    const formatCreatedAt = (createdAt) => {
+      const date = new Date(createdAt);
+      return date.toLocaleDateString(); // Customize this as needed
+    };
+
     return (
       <div>
         <TableContainer>
@@ -92,13 +83,13 @@ const PostsTable = () => {
                 <TableRow key={post.id}>  
                   <TableCell>{post.id}</TableCell>
                   <TableCell>{post.title}</TableCell>
-                  <TableCell>{post.created_at}</TableCell>
+                  <TableCell>{formatCreatedAt(post.created_at)}</TableCell>
                   <TableCell>{post.user.email}</TableCell>
                   <TableCell>{post.category.name}</TableCell>
                   <TableCell>
                       <IconButton
                         color="primary"
-                        onClick={() =>  triggerEdit(post.id)}
+                        onClick={() =>  handleEditPost(post.id)}
                       >
                         <EditIcon />
                       </IconButton>

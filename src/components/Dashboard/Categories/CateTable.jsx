@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import { getAllCategories } from "../../../api/services/user/product-services";
+import { getAllCategories,deleteCategory } from "../../../api/services/user/product-services";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow,IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,6 +23,18 @@ const CateTable = () => {
       fetchCategories();
     }, []);
 
+
+    const handleDeleteCategory = async (categoryId) => {
+      try {
+        await deleteCategory(categoryId);
+        // Refresh posts after successful deletion
+        const updatedCategoryData = await getAllCategories();
+        setCategories(updatedCategoryData);
+      } catch (error) {
+        console.error('Error deleting post:', error.message);
+      }
+    };
+
     
     return (
       <div>
@@ -31,7 +43,11 @@ const CateTable = () => {
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
                 <TableCell>Title</TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -39,17 +55,15 @@ const CateTable = () => {
               {categories.map((category) => (
                 <TableRow key={category.id}>  
                   <TableCell>{category.id}</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
                   <TableCell>{category.name}</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
                   <TableCell>
                       <IconButton
-                        color="primary"
-                        // onClick={() =>  triggerEdit(category.id)}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
                         color="secondary"
-                        // onClick={() => handleDeleteCategory(category.id)} 
+                        onClick={() => handleDeleteCategory(category.id)} 
                       >
                       <DeleteIcon />
                     </IconButton>

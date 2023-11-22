@@ -17,7 +17,7 @@ const Comment = ({ commentDate,author,content,parent, post_id ,onCommentSubmit})
 
 	return (
 		<div className="single-comment">
-			<img src={authorImage} alt="" />
+			<img src={author.profile_picture || authorImage} alt="" />
 			<h5>
 				<a style={{cursor:"pointer"}}>{author.email}</a>
 				<span>{formattedDate}</span>
