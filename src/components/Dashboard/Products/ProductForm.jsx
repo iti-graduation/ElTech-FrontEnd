@@ -7,6 +7,8 @@ import {
 
 import InputField from "../../Shared/InputField/InputField";
 
+import { showToast } from "../../../utils/toastUtil";
+
 const ProductForm = ({ clickHandler }) => {
 	const userData = getUserData();
 	const userEmail = userData.email;
@@ -22,40 +24,141 @@ const ProductForm = ({ clickHandler }) => {
 	const [isTrending, setIsTrending] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState("");
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const response = await addProduct(
-				name,
-				price,
-				isHot,
-				isOnSale,
-				saleAmount,
-				description,
-				stock,
-				isFeatured,
-				isTrending,
-				selectedCategory
-			);
-			console.log("Product added successfully:", response);
-			// Reset form fields after successful submission
-			setName("");
-			setPrice("");
-			setIsHot(false);
-			setIsOnSale(false);
-			setSaleAmount("");
-			setDescription("");
-			setStock("");
-			setIsFeatured(false);
-			setIsTrending(false);
-			setSelectedCategory("");
-		} catch (error) {
-			console.error("Error adding product:", error.message);
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	try {
+	// 		const response = await addProduct(
+	// 			name,
+	// 			price,
+	// 			isHot,
+	// 			isOnSale,
+	// 			saleAmount,
+	// 			description,
+	// 			stock,
+	// 			isFeatured,
+	// 			isTrending,
+	// 			selectedCategory
+	// 		);
+	// 		console.log("Product added successfully:", response);
+	// 		// Reset form fields after successful submission
+	// 		setName("");
+	// 		setPrice("");
+	// 		setIsHot(false);
+	// 		setIsOnSale(false);
+	// 		setSaleAmount("");
+	// 		setDescription("");
+	// 		setStock("");
+	// 		setIsFeatured(false);
+	// 		setIsTrending(false);
+	// 		setSelectedCategory("");
+	// 	} catch (error) {
+	// 		console.error("Error adding product:", error.message);
+	// 	}
+	// };
+
+	// const handleCategoryChange = (e) => {
+	// 	setSelectedCategory(e.target.value);
+	// };
+
+	const [productData, setProductData] = useState({
+		name: "",
+		price: 0,
+		stock: 0,
+		category: 0,
+	});
+
+	// const handleChange = (event) => {
+	// 	console.log(event.target.name, event.target.value);
+	// 	console.log(productData);
+	// 	setProductData({
+	// 		...productData,
+	// 		[event.target.name]: event.target.value,
+	// 	});
+	// };
+
+	// const handleChange = (event) => {
+	// 	console.log("Before assignment", productData);
+	// 	console.log(event.target.name, event.target.value);
+	// 	console.log("after assignment", productData);
+	// 	const value =
+	// 		event.target.type === "checkbox"
+	// 			? event.target.checked
+	// 			: event.target.value;
+	// 	setProductData({
+	// 		...productData,
+	// 		[event.target.name]: value,
+	// 	});
+	// };
+
+	const handleChange = (event) => {
+		const value =
+			event.target.type === "checkbox"
+				? event.target.checked
+				: event.target.value;
+		if (event.target.name === "category") {
+			setProductData({
+				...productData,
+				[event.target.name]: parseInt(value, 10),
+			});
+		} else {
+			setProductData({
+				...productData,
+				[event.target.name]: value,
+			});
 		}
 	};
 
-	const handleCategoryChange = (e) => {
-		setSelectedCategory(e.target.value);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		const { name, price, stock, category, isOnSale, sale_amount } =
+			productData;
+
+		// Validation
+		if (!name || !price || !stock || !category) {
+			showToast(
+				"Please fill in all required fields: name, price, stock, category",
+				"error"
+			);
+			return;
+		}
+
+		if (isNaN(price) || price <= 0) {
+			showToast("Price must be a number bigger than 0", "error");
+			return;
+		}
+
+		if (isNaN(stock) || stock < 0) {
+			showToast("Stock must be a number at least 0", "error");
+			return;
+		}
+
+		if (isOnSale) {
+			if (isNaN(sale_amount) || sale_amount < 1 || sale_amount > 100) {
+				showToast(
+					"Sale amount must be a number between 1 and 100",
+					"error"
+				);
+				return;
+			}
+		}
+
+		try {
+			const response = await addProduct(productData);
+			console.log("Product added successfully:", response);
+			console.log("Product Data", productData);
+			// Reset form fields after successful submission
+			setProductData({
+				name: "",
+				price: 0,
+				stock: 0,
+				category: 0,
+			});
+			showToast("Product added successfully", "success");
+		} catch (error) {
+			console.error("Error adding product:", error.message);
+			showToast("Error adding product: " + error.message, "error");
+		}
 	};
 
 	useEffect(() => {
@@ -210,24 +313,33 @@ const ProductForm = ({ clickHandler }) => {
 							fieldPlaceholder="Enter product title"
 							fieldName="name"
 							fieldType="text"
-							// onChange={handleChange}
-							// value={formData.first_name}
+							onChange={handleChange}
 						/>
-						<InputField
+						{/* <InputField
 							noOfCol="col-lg-6"
 							fieldLabel="Price"
 							fieldPlaceholder="Enter product price"
 							fieldName="price"
 							fieldType="number"
-							// onChange={handleChange}
-							// value={formData.last_name}
-						/>
+							onChange={handleChange}
+						/> */}
+						<p className="col-lg-6">
+							<label>Price</label>
+							<input
+								placeholder="Enter product price"
+								name="price"
+								type="number"
+								onChange={handleChange}
+								step="0.01"
+							/>
+						</p>
 						<p className="col-lg-12">
 							<label>Description</label>
 							<textarea
 								name="description"
 								placeholder="Enter product description"
 								rows="4"
+								onChange={handleChange}
 							></textarea>
 						</p>
 						<InputField
@@ -236,8 +348,7 @@ const ProductForm = ({ clickHandler }) => {
 							fieldPlaceholder="Enter product stock"
 							fieldName="stock"
 							fieldType="number"
-							// onChange={handleChange}
-							// value={formData.last_name}
+							onChange={handleChange}
 						/>
 						<p className="billing-countries col-lg-6">
 							<label>Category</label>
@@ -245,9 +356,9 @@ const ProductForm = ({ clickHandler }) => {
 								className="country_to_state country_select"
 								id="billing_country"
 								name="category"
-								// onChange={fieldOnChange}
-								// value={fieldValue}
+								onChange={handleChange}
 							>
+								<option value="0">---</option>
 								{categories.map((category) => (
 									<option
 										key={category.id}
@@ -264,23 +375,36 @@ const ProductForm = ({ clickHandler }) => {
 								type="checkbox"
 								name="is_on_sale"
 								className="w-25"
+								onChange={handleChange}
 							/>
 						</p>
-						<InputField
+						{/* <InputField
 							noOfCol="col-lg-6"
 							fieldLabel="Sale Amount"
 							fieldPlaceholder="Enter sale amount (1 - 100)"
 							fieldName="sale_amount"
 							fieldType="number"
-							// onChange={handleChange}
-							// value={formData.last_name}
-						/>
+							onChange={handleChange}
+							disabled={!productData.is_on_sale}
+						/> */}
+						<p className="col-lg-6">
+							<label>Sale Amount</label>
+							<input
+								placeholder="Enter sale amount (1 - 100)"
+								name="sale_amount"
+								type="number"
+								onChange={handleChange}
+								disabled={!productData.is_on_sale}
+								step="0.01"
+							/>
+						</p>
 						<p className="col-lg-4 d-flex align-items-center">
 							<label className="w-25">Hot</label>
 							<input
 								type="checkbox"
 								name="is_hot"
 								className="w-25"
+								onChange={handleChange}
 							/>
 						</p>
 						<p className="col-lg-4 d-flex align-items-center">
@@ -289,6 +413,7 @@ const ProductForm = ({ clickHandler }) => {
 								type="checkbox"
 								name="is_featured"
 								className="w-25"
+								onChange={handleChange}
 							/>
 						</p>
 						<p className="col-lg-4 d-flex align-items-center">
@@ -297,6 +422,7 @@ const ProductForm = ({ clickHandler }) => {
 								type="checkbox"
 								name="is_trending"
 								className="w-25"
+								onChange={handleChange}
 							/>
 						</p>
 
