@@ -10,9 +10,10 @@ const ShopBanner = ({ category }) => {
 					<div className="col-md-12">
 						<span className="round-shape"></span>
 						<h2 className="banner-title">
-							{category.name.length > 40
+							{category.name && category.name.length > 40
 								? category.name.substring(0, 40) + "..."
 								: category.name}
+							{!category.name && "All"}
 						</h2>
 						<div className="bread-crumb">
 							<Link to="/">Home</Link> /{" "}

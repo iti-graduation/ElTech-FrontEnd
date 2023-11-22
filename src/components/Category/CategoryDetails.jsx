@@ -18,7 +18,7 @@ import { ProductsContext } from "../../layouts/Category/ShopLayout";
 
 import { showToast } from "../../utils/toastUtil";
 
-import ShopDetailsCategories from "../Shop/ShopDetails/ShopDetailsCategories";
+import ShopDetailsCategories from "../Category/ShopDetailsCategories";
 import NormalProductCard from "../Shared/NormalProductCard/NormalProductCard";
 import ShopPagination from "../Shop/ShopPagination/ShopPagination";
 
@@ -92,7 +92,7 @@ const CategoryDetails = ({ id, updateCategory }) => {
 	const handleCategoryClick = (categoryId) => {
 		handleFilterChange(categoryId, activeFilter);
 		setActiveItem(categoryId);
-		updateCategory(categoryId);
+		updateCategory(categoryId, () => setCurrentPage(0));
 	};
 
 	useEffect(() => {

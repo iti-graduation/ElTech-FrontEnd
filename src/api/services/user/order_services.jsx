@@ -9,23 +9,23 @@ const order_endpoint = process.env.REACT_APP_ORDER_ENDPOINT;
  * @return {Object} The data of the orders of the user
  * @throws {Error} If there was a problem getting the orders for the specified user
  */
-// export const fetchUserOrders = async () => {
-// 	try {
-// 		// construct url with user Id
-// 		const url = order_endpoint;
-// 		// perform GET request to the constructed url
-// 		const response = await apiInstance.get(url);
-//
-// 		// Return response data
-// 		return response.data;
-// 	} catch (error) {
-// 		// Handle any error that occurred during fetching orders
-// 		const msg =
-// 			"There was a problem getting the orders for the specified user";
-// 		console.log(error);
-// 		throw new Error(msg);
-// 	}
-// };
+export const fetchUserOrders = async () => {
+	try {
+		// construct url with user Id
+		const url = order_endpoint;
+		// perform GET request to the constructed url
+		const response = await apiInstance.get(url);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during fetching orders
+		const msg =
+			"There was a problem getting the orders for the specified user";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
 
 /**
  * Fetches the order products of a specific user
@@ -33,23 +33,23 @@ const order_endpoint = process.env.REACT_APP_ORDER_ENDPOINT;
  * @return {Object} The data of the order products of the user
  * @throws {Error} If there was a problem getting the order products for the specified user
  */
-export const fetchUserOrders = async (id) => {
-	try {
-		// construct url with user Id
-		const url = order_endpoint + id;
-		// perform GET request to the constructed url
-		const response = await apiInstance.get(url);
+// export const fetchUserOrders = async (id) => {
+// 	try {
+// 		// construct url with user Id
+// 		const url = order_endpoint + id;
+// 		// perform GET request to the constructed url
+// 		const response = await apiInstance.get(url);
 
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during fetching order products
-		const msg =
-			"There was a problem getting the order products for the specified user";
-		console.log(error);
-		throw new Error(msg);
-	}
-};
+// 		// Return response data
+// 		return response.data;
+// 	} catch (error) {
+// 		// Handle any error that occurred during fetching order products
+// 		const msg =
+// 			"There was a problem getting the order products for the specified user";
+// 		console.log(error);
+// 		throw new Error(msg);
+// 	}
+// };
 
 /**
  * Fetches the order products of a specific user
@@ -82,13 +82,13 @@ export const fetchUserOrder = async (id) => {
  * @throws {Error} If there was a problem adding the order
  */
 export const addOrder = async (orderData) => {
-  try {
-    // construct url
-    const url = order_endpoint;
-    console.log(order_endpoint);
+	try {
+		// construct url
+		const url = order_endpoint;
+		console.log(order_endpoint);
 
-    // perform POST request to the constructed url
-    const response = await apiInstance.post(url, orderData);
+		// perform POST request to the constructed url
+		const response = await apiInstance.post(url, orderData);
 
 		// Return response data
 		return response.data;
@@ -101,12 +101,10 @@ export const addOrder = async (orderData) => {
 	}
 };
 
-
-
 export const fetchAllOrders = async () => {
 	try {
 		// construct url with user Id
-		const url = order_endpoint+"/ordersList";
+		const url = order_endpoint + "/ordersList";
 		// perform GET request to the constructed url
 		const response = await apiInstance.get(url);
 
@@ -114,8 +112,7 @@ export const fetchAllOrders = async () => {
 		return response.data;
 	} catch (error) {
 		// Handle any error that occurred during fetching order products
-		const msg =
-			"There was a problem getting the order products users";
+		const msg = "There was a problem getting the order products users";
 		console.log(error);
 		throw new Error(msg);
 	}

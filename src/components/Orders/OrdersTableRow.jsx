@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function OrdersTableRow({ order }) {
+    console.log(order);
     const parsedDate = new Date(order.created_at);
     const formattedDate = `${parsedDate.getFullYear()}-${(parsedDate.getMonth() + 1)
         .toString()

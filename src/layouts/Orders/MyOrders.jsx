@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { cartCount } from "../../services/actions/cartSlice"
+import { cartCount } from "../../services/actions/cartSlice";
 import { fetchUserCart } from "../../api/services/user/cart-services";
 import { fetchUserOrders } from "../../api/services/user/order_services";
 
-import OrdersTable from "../../components/Orders/OrdersTable"
+import OrdersTable from "../../components/Orders/OrdersTable";
 
 function MyOrders() {
 	const dispatch = useDispatch();
@@ -36,13 +36,13 @@ function MyOrders() {
 				<div className="row">
 					<div className="col-md-12">
 						<form className="woocommerce-cart-form" action="#">
-							<OrdersTable orders={orders}/>
+							<OrdersTable orders={orders} />
 						</form>
 					</div>
 				</div>
 			</div>
 		</section>
-	)
+	);
 }
 
-export default MyOrders
+export default MyOrders;

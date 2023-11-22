@@ -15,7 +15,8 @@ const ShopLayout = () => {
 	const [category, setCategory] = useState({});
 	const { id } = useParams();
 
-	const updateCategory = async (categoryId) => {
+	const updateCategory = async (categoryId, resetPagination) => {
+		resetPagination();
 		try {
 			const data = await getSingleCategory(categoryId);
 			setCategory(data);
@@ -24,20 +25,42 @@ const ShopLayout = () => {
 		}
 	};
 
+	// useEffect(() => {
+	// 	const fetchCategory = async () => {
+	// 		try {
+	// 			const data = await getSingleCategory(id);
+	// 			console.log(data);
+	// 			setCategory(data);
+	// 			setProducts(data.products);
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	};
+
+	// 	fetchCategory();
+	// }, [id]);
+
 	useEffect(() => {
 		const fetchCategory = async () => {
-			try {
-				const data = await getSingleCategory(id);
-				console.log(data);
-				setCategory(data);
-				setProducts(data.products);
-			} catch (error) {
-				console.error(error);
+			console.log(id);
+			if (id === "ALL") {
+				setCategory({ name: "ALL" });
+				// setProducts to all products or an empty array depending on your requirement
+			} else {
+				try {
+					const data = await getSingleCategory(id);
+					console.log(data);
+					setCategory(data);
+					setProducts(data.products);
+				} catch (error) {
+					console.error(error);
+				}
 			}
 		};
 
 		fetchCategory();
 	}, [id]);
+
 	return (
 		<>
 			{category && category.name && (

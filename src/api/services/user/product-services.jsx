@@ -184,6 +184,7 @@ export const getAllCategories = async () => {
  */
 export const getSingleCategory = async (categoryId) => {
 	try {
+		console.log("category id", categoryId);
 		const url = categoryEndpoint + categoryId;
 		const response = await apiInstance.get(url);
 
