@@ -3,11 +3,15 @@ import { getAllCategories,deleteCategory } from "../../../api/services/user/prod
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow,IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CategoryEditForm from "./CategoryEditForm";
+
 
 
 
 const CateTable = () => {
     const [categories, setCategories] = useState([]);
+    const [showEditForm, setShowEditForm] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState(null); // Store the selected category for editing
 
 
     useEffect(() => {
@@ -35,9 +39,32 @@ const CateTable = () => {
       }
     };
 
+    const handleCancelEdit = () => {
+      // Clear the selected post and hide the form
+      setSelectedCategory(null);
+      setShowEditForm(false);
+    };
+
+    const handleEditCategory = (category) => {
+      if (setSelectedCategory && setSelectedCategory.id === category.id) {
+        // If the same post is clicked again, hide the form
+        setSelectedCategory(null);
+        setShowEditForm(false);
+      } else {
+        // If a different post is clicked, show the form for that post
+        setSelectedCategory(category);
+        setShowEditForm(true);
+      }
+    };
     
     return (
       <div>
+      {showEditForm && selectedCategory && (
+        <div className="reply-form-wrapper">
+          {/* Pass selectedProduct to the form for editing */}
+          <CategoryEditForm category={selectedCategory} onCancel={handleCancelEdit} />
+        </div>
+      )}
         <TableContainer>
           <Table>
             <TableHead>
@@ -61,6 +88,12 @@ const CateTable = () => {
                   <TableCell></TableCell>
                   <TableCell></TableCell>
                   <TableCell>
+                  <IconButton
+                        color="primary"
+                        onClick={() =>  handleEditCategory(category)}
+                      >
+                        <EditIcon />
+                      </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleDeleteCategory(category.id)} 

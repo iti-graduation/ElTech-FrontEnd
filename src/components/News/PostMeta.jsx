@@ -8,7 +8,7 @@ const PostMeta = ({ post }) => {
 	return (
 		<>
 			<div className="blog-thumb">
-				<img src={post.image} alt="" />
+				<img src={post.image} alt="" style={{width:"100%",height:"650px"}}/>
 			</div>
 			<div className="blog-post-meta">
 				<span>
@@ -16,7 +16,7 @@ const PostMeta = ({ post }) => {
 					By  <a>{post.user.email}</a>, {formattedDate}
 				</span>
 				<span className="cate">
-					<Link to={`/category/${post.category.id}`}>{post.category.name}</Link>
+					<Link to={`/category/${post.category}`}>{post.category}</Link>
 				</span>
 			</div>
 		</>

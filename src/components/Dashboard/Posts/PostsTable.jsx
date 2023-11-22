@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from 'react';
-import { getAllPosts,deletePost,updatePost,getSinglePost } from "../../../api/services/user/post-services";
+import { getAllPosts,deletePost,getSinglePost } from "../../../api/services/user/post-services";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PostForm from "./PostForm";
+import PostEditForm from "./PostEditForm";
 
 
 
@@ -14,6 +14,7 @@ const PostsTable = () => {
     const [pageSize, setPageSize] = useState(5);
     const [totalCount, setTotalCount] = useState(0); // Store the total count of posts
     const [showEditForm, setShowEditForm] = useState(false)
+    const [selectedPost, setSelectedPost] = useState(null); // Store the selected post for editing
 
 
     useEffect(() => {
@@ -21,16 +22,14 @@ const PostsTable = () => {
         try {
           const postsData = await getAllPosts(pageNumber, pageSize); // Add 1 to pageNumber for API's page numbering
           setPosts(postsData.results);
-          setTotalCount(postsData.count);
-          setPageSize(postsData.count) // Set the total count of posts from the API response
 
         } catch (error) {
           console.error("Error fetching posts:", error.message);
         }
       };
-  
+
       fetchPosts();
-    }, [pageNumber, pageSize,totalCount]);
+    }, [pageNumber, pageSize]);
 
     const handleDeletePost = async (postId) => {
       try {
@@ -44,20 +43,39 @@ const PostsTable = () => {
       }
     };
 
+      useEffect(() => {
+      if (showEditForm && selectedPost) {
+        // Fetch the single post data for editing
+        const fetchSinglePost = async () => {
+          try {
+            const singlePost = await getSinglePost(selectedPost.id); // Replace with your API call to fetch a single post
+            setSelectedPost(singlePost);
+          } catch (error) {
+            console.error("Error fetching single post:", error.message);
+          }
+        };
+  
+        fetchSinglePost();
+      }
+    }, [showEditForm, selectedPost]);
 
+    const handleCancelEdit = () => {
+      // Clear the selected post and hide the form
+      setSelectedPost(null);
+      setShowEditForm(false);
+    };
 
-    const handleEditPost = async (postId, updatedPostData) => {
-      try {
-        await updatePost(postId, updatedPostData);
-        // Refresh posts after successful update
-        const updatedPostsData = await getAllPosts(pageNumber, pageSize);
-        setPosts(updatedPostsData.results);
-        setShowEditForm(!showEditForm);
-      } catch (error) {
-        console.error('Error updating post:', error.message);
+    const handleEditPost = (post) => {
+      if (selectedPost && selectedPost.id === post.id) {
+        // If the same post is clicked again, hide the form
+        setSelectedPost(null);
+        setShowEditForm(false);
+      } else {
+        // If a different post is clicked, show the form for that post
+        setSelectedPost(post);
+        setShowEditForm(true);
       }
     };
-  
   
     const formatCreatedAt = (createdAt) => {
       const date = new Date(createdAt);
@@ -66,6 +84,12 @@ const PostsTable = () => {
 
     return (
       <div>
+      {showEditForm && selectedPost && (
+        <div className="reply-form-wrapper">
+          {/* Pass selectedPost to the form for editing */}
+          <PostEditForm post={selectedPost} onCancel={handleCancelEdit} />
+        </div>
+      )}
         <TableContainer>
           <Table>
             <TableHead>
@@ -74,7 +98,7 @@ const PostsTable = () => {
                 <TableCell>Title</TableCell>
                 <TableCell>Created At</TableCell>
                 <TableCell>Author</TableCell>
-                <TableCell>Category</TableCell>
+                <TableCell>Category ID</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -85,11 +109,11 @@ const PostsTable = () => {
                   <TableCell>{post.title}</TableCell>
                   <TableCell>{formatCreatedAt(post.created_at)}</TableCell>
                   <TableCell>{post.user.email}</TableCell>
-                  <TableCell>{post.category.name}</TableCell>
+                  <TableCell>{post.category}</TableCell>
                   <TableCell>
                       <IconButton
                         color="primary"
-                        onClick={() =>  handleEditPost(post.id)}
+                        onClick={() =>  handleEditPost(post)}
                       >
                         <EditIcon />
                       </IconButton>
@@ -105,17 +129,6 @@ const PostsTable = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-        component="div"
-        count={totalCount} // Use totalCount for the count property
-        rowsPerPage={pageSize}
-        page={pageNumber-1}
-        onPageChange={(e, newPage) => setPageNumber(newPage)}
-        onRowsPerPageChange={(e) => {
-          setPageSize(parseInt(e.target.value, 10));
-          setPageNumber(1); // Reset pageNumber to 0 when rowsPerPage changes
-        }}
-      />
       </div>
     );
   };

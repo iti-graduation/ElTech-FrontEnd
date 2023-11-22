@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
-import { addPost } from "../../../api/services/user/post-services"; // Import your authentication context
+import { addCategory } from "../../../api/services/user/product-services"; // Import your authentication context
 
 
 const CategoryForm = ({clickHandler}) => {
 	const userData = getUserData();
 	const userEmail = userData.email; 
-	const [title, setTitle] = useState('');
-	const [content, setContent] = useState('');
+	const [name, setName] = useState('');
 	const [image, setImage] = useState('');
   
 	const handleSubmit = async (e) => {
@@ -15,13 +14,12 @@ const CategoryForm = ({clickHandler}) => {
 	
 		try {	
 		  // Call the addPost API function
-		  const response = await addPost(title, content, image);
-		  console.log('Post added successfully:', response);
+		  const response = await addCategory(name, image);
+		  console.log('Category added successfully:', response);
 		  console.log(response);
 	
 		  // Reset the form after successful submission
-		  setTitle('');
-		  setContent('');
+		  setName('');
 		  setImage('');
 		} catch (error) {
 		  console.error('Error adding post:', error.message);
@@ -29,25 +27,17 @@ const CategoryForm = ({clickHandler}) => {
 	  };
 
 	return (
-		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
-		  <h5>Add new Post</h5>
-		  <form onSubmit="" className="dashboard-form" id="dashboard-form">
+		<div  className="dashboard-form-wrapper" id="dashboard-form-wrapper">
+		  <h5>Add new Category</h5>
+		  <form onSubmit={handleSubmit} className="dashboard-form" id="dashboard-form">
 			<div className="col-lg-12 col-md-12">
 			  <input
 				type="text"
-				name="title"
-				placeholder="Post Title"
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
+				name="name"
+				placeholder="Category Title"
+				value={name}
+				onChange={(e) => setName(e.target.value)}
 			  />
-			</div>
-			<div className="col-lg-12 col-md-12">
-			  <textarea
-				name="content"
-				placeholder="Post Content"
-				value={content}
-				onChange={(e) => setContent(e.target.value)}
-			  ></textarea>
 			</div>
 			<div className="col-lg-12 col-md-12">
 			  <input
