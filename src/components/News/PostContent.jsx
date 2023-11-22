@@ -13,7 +13,7 @@ const PostContent = ({ post,category }) => {
 			</ul> */}
 			<div className="post-tag">
 				<h5>
-					Category: <Link to={`/category/${category.id}`}>{category.name}</Link>
+					Category: <Link to={`/category/${category}`}>{category}</Link>
 				</h5>
 			</div>
 		</div>

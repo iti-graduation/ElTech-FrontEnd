@@ -38,17 +38,21 @@ export const getAllPosts = async (pageNumber, pageSize,order='-user_id') => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem retrieving the posts
  */
-export const addPost = async (title, content, image, category, userId) => {
+export const addPost = async (title, content, image, category) => {
 	try {
-	  const response = await apiInstance.post(endpoint + 'posts/', {
-		title: title,
-		content: content,
-		image: image,
-		category: category,
-		user_id: userId
+	  let formData = new FormData();
+	  formData.append("title", title);
+	  formData.append("content", content);
+	  formData.append("image", image);
+	  formData.append("category", category);
+
+	  const response = await apiInstance.post(endpoint + "posts/", formData, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
 	  });
 	  return response.data;
-	} catch (error) {
+}	catch (error) {
 	  const msg = "There was a problem adding a new post";
 	  console.error(msg, error);
 	  throw new Error(msg);
@@ -207,14 +211,23 @@ export const deletePost = async (postId) => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem updating the post
  */
-export const updatePost = async (postId, updatedPostData) => {
+export const updatePost = async (postId, title , content , image , selectedCategory) => {
 	try {
+
+		console.log('Updating post with ', postId ,'by', title ,'and', content ,'and', selectedCategory);
+		let formData = new FormData();
+		formData.append("category", selectedCategory);
+		formData.append("title", title);
+		formData.append("content", content);
+		formData.append("image", image);
+
 		const url = endpoint + `posts/${postId}`;
-		const response = await apiInstance.patch(url, {
-			title: updatedPostData.title,
-			content: updatedPostData.content, 
-			image: updatedPostData.image,
-		});
+		console.log("url for the api :" ,url)
+		const response = await apiInstance.put(url, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		  });
 	  return response.data; // Optionally handle the response data if needed
 	} catch (error) {
 	  console.error('Error updating post:', error.message);

@@ -2,11 +2,14 @@ import React, {useEffect,useState} from 'react';
 import { getAllProducts,deleteProduct,getSingleProduct } from "../../../api/services/user/product-services";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import EditIcon from '@mui/icons-material/Edit';
+import ProductEditForm from "./ProductEditForm";
 
 
 const ProductsTable = () => {
     const [products, setProducts] = useState([]);
+    const [showEditForm, setShowEditForm] = useState(false)
+    const [selectedProduct, setSelectedProduct] = useState(null); // Store the selected product for editing
 
     useEffect(() => {
       const fetchProducts = async () => {
@@ -33,10 +36,34 @@ const ProductsTable = () => {
       }
     };
 
+    const handleCancelEdit = () => {
+      // Clear the selected post and hide the form
+      setSelectedProduct(null);
+      setShowEditForm(false);
+    };
+
+    const handleEditProduct = (product) => {
+      if (setSelectedProduct && setSelectedProduct.id === product.id) {
+        // If the same post is clicked again, hide the form
+        setSelectedProduct(null);
+        setShowEditForm(false);
+      } else {
+        // If a different post is clicked, show the form for that post
+        setSelectedProduct(product);
+        setShowEditForm(true);
+      }
+    };
+
 
   
     return (
       <div>
+      {showEditForm && selectedProduct && (
+        <div className="reply-form-wrapper">
+          {/* Pass selectedProduct to the form for editing */}
+          <ProductEditForm product={selectedProduct} onCancel={handleCancelEdit} />
+        </div>
+      )}
         <TableContainer>
           <Table>
             <TableHead>
@@ -62,6 +89,12 @@ const ProductsTable = () => {
                   <TableCell></TableCell>
                   <TableCell></TableCell>
                   <TableCell>
+                      <IconButton
+                        color="primary"
+                        onClick={() =>  handleEditProduct(product)}
+                      >
+                        <EditIcon />
+                      </IconButton>
                       <IconButton
                         color="secondary"
                         onClick={() => handleDeleteProduct(product.id)} 

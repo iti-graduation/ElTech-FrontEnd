@@ -106,6 +106,7 @@ export const getSingleProduct = async (productId) => {
 	}
 };
 
+
 export const getSingleProductCategory = async (productId) => {
 	try {
 		const url = productEndpoint + productId;
@@ -290,3 +291,104 @@ export const deleteCategory = async (categoryId) => {
 		return error;
 	}
 };
+
+  };
+
+
+/**
+ * Post Category to the API
+ *
+ * @param {string} title of the Category
+ * @param {string} image of the Category
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem retrieving the posts
+ */
+export const addCategory = async (name, image) => {
+	try {
+	  let formData = new FormData();
+	  formData.append("name", name);
+	  formData.append("image", image);
+	  console.log(formData);
+	  const response = await apiInstance.post(categoryEndpoint, formData, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	  });
+	  return response.data;
+}	catch (error) {
+	  const msg = "There was a problem adding a new Category";
+	  console.error(msg, error);
+	  throw new Error(msg);
+	}
+  };
+
+/**
+ * patching Category to the API
+ *
+ * @param {string} name of the Category
+ * @param {string} image of the Category
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem retrieving the posts
+ */
+export const updateCategory = async (categoryId, catName,image) => {
+	try {
+	//   let formData = new FormData();
+	//   formData.append("name", catName);
+	//   formData.append("image", image);
+	//   console.log(formData);
+	  console.log(catName, image);
+	  const url = categoryEndpoint+`${categoryId}/`
+	  console.log(url);
+	  const response = await apiInstance.patch(url, {
+		params: {
+			"name": catName,
+			"image": image
+		},
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	  });
+	  return response.data;
+}	catch (error) {
+	  const msg = "There was a problem updating Category";
+	  console.error(msg, error);
+	  throw new Error(msg);
+	}
+  };
+
+
+/**
+ * Post new Product to the API
+ *
+ * @param {string} title of the post
+ * @param {string} content of the post
+ * @param {string} image of the post
+ * @returns {Promise} A promise that resolves to the data of the API response
+ * @throws {Error} If there is a problem retrieving the posts
+ */
+export const addProduct = async (name, price, isHOT,isOnSale, sale_amount,description, stock,isFeatured,isTrending, category) => {
+	try {
+	  let formData = new FormData();
+	  formData.append("name", name);
+	  formData.append("price", price);
+	  formData.append("is_hot", isHOT);
+	  formData.append("is_on_sale", isOnSale);
+	  formData.append("sale_amount", sale_amount);
+	  formData.append("description", description);
+	  formData.append("stock", stock);
+	  formData.append("is_featured", isFeatured);
+	  formData.append("is_trending", isTrending);
+	  formData.append("category", category);
+
+	  const response = await apiInstance.post(productEndpoint, formData, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	  });
+	  return response.data;
+}	catch (error) {
+	  const msg = "There was a problem adding a new post";
+	  console.error(msg, error);
+	  throw new Error(msg);
+	}
+  };

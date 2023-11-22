@@ -203,6 +203,7 @@ export default function Navbar() {
               <AccountCircle />
             </IconButton>
           </Box>
+
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
