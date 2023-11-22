@@ -106,7 +106,7 @@ const Header = ({ className }) => {
               </a> */}
 
               <Link className="user-login" to={user ? "/profile" : "/login"}>
-                {user.profile_picture?
+                {user && user.profile_picture?
                   <img
                     style={{width:23, height:23}}
                     className="rounded-circle mr-2"
