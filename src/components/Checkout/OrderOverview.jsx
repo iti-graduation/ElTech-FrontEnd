@@ -56,7 +56,7 @@ const OrderOverview = ({
               const stripe = await loadStripe(
                 "pk_test_51ODhd6B9sAFUoYRFQroYtxnJVUBnzMsvpWAgvFMXWstGdnpGX5KxJIAHiIhks6Klx0ddJiahh4kJvh0gh5KzF6IU00qDCI9sMo"
               );
-              await addOrder(orderData);
+              // await addOrder(orderData);
 
               // Use the received sessionId
               const { error } = await stripe.redirectToCheckout({
@@ -66,6 +66,16 @@ const OrderOverview = ({
               if (error) {
                 console.error("Error redirecting to Stripe Checkout:", error);
                 showToast("Failed to redirect to the payment gateway");
+              }
+
+              if (!error) {
+                // Parse the URL and check if success is true
+                const urlParams = new URLSearchParams(window.location.search);
+                const success = urlParams.get('success');
+            
+                if (success === 'true') {
+                  await addOrder(orderData);
+                }
               }
             } else {
               console.error(

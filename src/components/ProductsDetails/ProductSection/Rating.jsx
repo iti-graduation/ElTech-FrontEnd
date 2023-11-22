@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { getUserData } from "../../../api/services/user/user-services";
 import { addProductRating } from "../../../api/services/user/product-services";
 
+import { showToast } from "../../../utils/toastUtil";
+
 import Rating from "react-rating";
 
 const ProductRatingReviews = ({
@@ -17,9 +19,15 @@ const ProductRatingReviews = ({
 		try {
 			await addProductRating(productId, newRating);
 			console.log("Rating submitted successfully");
-			window.location.reload();
+			// showToast("Rating added successfully!", "success");
+			// window.location.reload();
+			showToast("Rating added successfully!", "success");
+			setTimeout(() => {
+				window.location.reload();
+			}, 1000);
 		} catch (error) {
 			console.error("Failed to submit rating", error);
+			showToast("There was a problem adding the rating!", "error");
 		}
 	};
 

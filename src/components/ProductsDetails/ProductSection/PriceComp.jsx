@@ -3,17 +3,20 @@ import React from "react";
 const ProductPrice = ({ product }) => {
 	return (
 		<div className="product-price clearfix">
-			<span className="price">
-				<span
-					className="woocommerce-Price-currencySymbol"
-					style={{
-						textDecoration: "line-through",
-						marginRight: "5px",
-					}}
-				>
-					${product.price}
+			{product._is_on_sale && (
+				<span className="price">
+					<span
+						className="woocommerce-Price-currencySymbol"
+						style={{
+							textDecoration: "line-through",
+							marginRight: "5px",
+						}}
+					>
+						${product.price}
+					</span>
 				</span>
-			</span>
+			)}
+
 			<span className="price">
 				<span className="woocommerce-Price-currencySymbol">
 					$
