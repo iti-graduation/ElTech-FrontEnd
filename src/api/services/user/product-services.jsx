@@ -16,9 +16,8 @@ export const getFeaturedProducts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting featured products.";
-		console.log(error);
+		console.error(error, msg);
 		return error;
-		throw new Error(msg);
 	}
 };
 
@@ -32,9 +31,8 @@ export const getTrendingProducts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting trending products.";
-		console.log(error);
+		console.error(error, msg);
 		return error;
-		throw new Error(msg);
 	}
 };
 
@@ -48,9 +46,8 @@ export const getPopularProducts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting popular products.";
-		console.log(error);
+		console.error(error, msg);
 		return error;
-		throw new Error(msg);
 	}
 };
 
@@ -61,9 +58,8 @@ export const getWeeklyDeal = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting the weekly deal.";
-		console.log(error);
+		console.error(error, msg);
 		return error;
-		throw new Error(msg);
 	}
 };
 
@@ -82,8 +78,8 @@ export const getAllProducts = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all products.";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
@@ -105,30 +101,29 @@ export const getSingleProduct = async (productId) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting the specified product";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
-
 export const getSingleProductCategory = async (productId) => {
 	try {
-	  const url = productEndpoint + productId;
-	  const response = await apiInstance.get(url);
-  
-	  // Assuming the API response contains the category ID in the 'categoryId' field
-	  const { data } = response;
-	  const productCategory = data.category; // Replace 'categoryId' with the actual field name
-  
-	  return {
-		productCategory
-	  };
+		const url = productEndpoint + productId;
+		const response = await apiInstance.get(url);
+
+		// Assuming the API response contains the category ID in the 'categoryId' field
+		const { data } = response;
+		const productCategory = data.category; // Replace 'categoryId' with the actual field name
+
+		return {
+			productCategory,
+		};
 	} catch (error) {
-	  const msg = "There was a problem getting the specified product";
-	  console.log(error);
-	  throw new Error(msg);
+		const msg = "There was a problem getting the specified product";
+		console.error(error, msg);
+		return error;
 	}
-  };
+};
 
 /**
  * Function to get all products by a search term from the API.
@@ -151,8 +146,8 @@ export const getProductsBySearch = async (searchTerm) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem searching for " + searchTerm;
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
@@ -172,8 +167,8 @@ export const getAllCategories = async () => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all categories";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		// return error;
 	}
 };
 
@@ -196,8 +191,8 @@ export const getSingleCategory = async (categoryId) => {
 	} catch (error) {
 		const msg =
 			"There was a problem getting the products of the specified category";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
@@ -209,8 +204,8 @@ export const createReview = async (productId, reviewContent) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem creating your review!";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
@@ -225,8 +220,8 @@ export const getOrderedProducts = async (ordering) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting ordered products.";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
@@ -239,8 +234,8 @@ export const getProducts = async (options = {}) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting products.";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
 
@@ -254,46 +249,43 @@ export const addProductRating = async (productId, rating) => {
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem adding your rating!";
-		console.log(error);
-		throw new Error(msg);
+		console.error(error, msg);
+		return error;
 	}
 };
-
-
 
 /**
  * delete a product by product id
  *
- * @param {number} product ID 
+ * @param {number} product ID
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem adding the comment
  */
 export const deleteProduct = async (productId) => {
 	try {
-	  const url = endpoint + `products/${productId}`;
-	  const response = await apiInstance.delete(url);
-	  return response.data; // Optionally handle the response data if needed
+		const url = endpoint + `products/${productId}`;
+		const response = await apiInstance.delete(url);
+		return response.data; // Optionally handle the response data if needed
 	} catch (error) {
-	  console.error('Error deleting product:', error.message);
-	  throw new Error('Unable to delete product.');
+		console.error("Error deleting product:", error.message);
+		return error;
 	}
-  };
-
+};
 
 /**
  * delete a category by category id
  *
- * @param {number} category ID 
+ * @param {number} category ID
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem adding the comment
  */
 export const deleteCategory = async (categoryId) => {
 	try {
-	  const url = endpoint + `categories/${categoryId}`;
-	  const response = await apiInstance.delete(url);
-	  return response.data; // Optionally handle the response data if needed
+		const url = endpoint + `categories/${categoryId}`;
+		const response = await apiInstance.delete(url);
+		return response.data; // Optionally handle the response data if needed
 	} catch (error) {
-	  console.error('Error deleting product:', error.message);
-	  throw new Error('Unable to delete product.');
+		console.error("Error deleting product:", error.message);
+		return error;
 	}
-  };
+};
