@@ -141,16 +141,6 @@ const ProductsTable = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{/* {products.map((product) => {
-						return (
-							<CartItem
-								key={product.id}
-								product={product}
-								handleDeleteProduct={handleDeleteProduct}
-								handleUpdateProduct={handleUpdateProduct}
-							/>
-						);
-					})} */}
 					{products.map((product) => {
 						return (
 							<ProductRow key={product.id} product={product} />

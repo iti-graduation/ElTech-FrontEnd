@@ -183,8 +183,6 @@ const ProductForm = ({ clickHandler }) => {
 
 		try {
 			const response = await addProduct(productData);
-			console.log("Product added successfully:", response);
-			console.log("Product Data", productData);
 			// await addProductImages(response.id, images);
 			// await addProductFeatures(response.id, features);
 			if (images.length > 0) {
@@ -194,13 +192,7 @@ const ProductForm = ({ clickHandler }) => {
 			if (features.length > 0) {
 				await addProductFeatures(response.id, features);
 			}
-			// Reset form fields after successful submission
-			// setProductData({
-			// 	name: "",
-			// 	price: 0,
-			// 	stock: 0,
-			// 	category: 0,
-			// });
+
 			setProductData({
 				name: "",
 				price: 0,
