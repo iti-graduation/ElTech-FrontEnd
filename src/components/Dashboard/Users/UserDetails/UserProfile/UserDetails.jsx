@@ -1,5 +1,9 @@
 import { formatPhoneNumber } from "../../../../../utils/helpers";
 
+import { changeUserRole } from "../../../../../api/services/admin/admin-services";
+
+import { showToast } from "../../../../../utils/toastUtil";
+
 export default function UserCard({ user, onEdit, onLogout }) {
 	// const navigate = useNavigate();
 
@@ -40,6 +44,19 @@ export default function UserCard({ user, onEdit, onLogout }) {
 	// 	navigate("/verify-email", { state: { email: user.email } });
 	// };
 
+	const handleUserRoleChange = async (event) => {
+		event.preventDefault();
+
+		try {
+			await changeUserRole(user.id, !user.is_superuser);
+			showToast("User role updated successfully!", "success");
+			window.location.reload();
+		} catch (error) {
+			showToast("There was a problem updating the user's role", "error");
+			console.error(error);
+		}
+	};
+
 	return (
 		<div className="card-body" id="userCardBody">
 			<div className="row">
@@ -68,6 +85,34 @@ export default function UserCard({ user, onEdit, onLogout }) {
 					{user
 						? formatPhoneNumber(user.mobile_phone)
 						: "(239) 816-9029"}
+				</div>
+			</div>
+			<hr />
+			<div className="row">
+				<div className="col-sm-3 d-flex align-items-center">
+					<h6 className="mb-0">Role</h6>
+				</div>
+				<div className="col-sm-9 text-secondary d-flex justify-content-between align-items-center">
+					{user && user.is_superuser ? "Admin" : "User"}
+					{user && user.is_superuser ? (
+						<form
+							className="mailchimp-form"
+							onSubmit={handleUserRoleChange}
+						>
+							<button className="" type="submit">
+								Remove From Admins
+							</button>
+						</form>
+					) : (
+						<form
+							className="mailchimp-form"
+							onSubmit={handleUserRoleChange}
+						>
+							<button className="" type="submit">
+								Make Admin
+							</button>
+						</form>
+					)}
 				</div>
 			</div>
 			<hr />
