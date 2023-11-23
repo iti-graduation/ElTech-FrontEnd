@@ -1,32 +1,66 @@
 import { Link } from "react-router-dom";
 
+import { addProductNotification } from "../../../api/services/user/product-services";
+
+import { showToast } from "../../../utils/toastUtil";
+
 import ProductCardBadge from "../Badges/ProductCardBadge";
 import ProductPrice from "./ProductPrice";
 import ProductAddToCart from "./ProductAddToCart";
 
 const NormalProductCard = ({
-  product,
-  isPopularOrRelated = false,
-  handleAddProductToCart,
+	product,
+	isPopularOrRelated = false,
+	handleAddProductToCart,
 }) => {
-  return (
-    <div className={isPopularOrRelated ? "" : "col-lg-3 col-md-6"}>
-      <div
-        className={
-          isPopularOrRelated ? "single-popular-product" : "single-shop-product"
-        }
-        style={{ width: "fit-content" }}
-      >
-        <Link to={`/product/${product.id}`}>
-          <div className="sp-thumb">
-            <img
-              src={product.thumbnail.image}
-              // src={product.image}
-              alt=""
-              style={{ maxWidth: "370px", maxHeight: "460px", minHeight: "460px", }}
-            />
-            <ProductCardBadge badgeClass={product.badge} product={product} />
-            {/* {product.badge != null && (
+	const userIdsToNotify = product.users_to_notify.map((user) => user.id);
+	const user = JSON.parse(localStorage.getItem("user"));
+	const userId = user ? user.id : null;
+
+	const handleAddProductToNotifications = async () => {
+		try {
+			await addProductNotification(product.id);
+			showToast(
+				"Product added to notifications successfully!",
+				"success"
+			);
+			window.location.reload();
+		} catch (error) {
+			showToast(
+				"There was a problem adding the product to notifications",
+				"error"
+			);
+			console.error(error);
+		}
+	};
+
+	return (
+		<div className={isPopularOrRelated ? "" : "col-lg-3 col-md-6"}>
+			<div
+				className={
+					isPopularOrRelated
+						? "single-popular-product"
+						: "single-shop-product"
+				}
+				style={{ width: "fit-content" }}
+			>
+				<Link to={`/product/${product.id}`}>
+					<div className="sp-thumb">
+						<img
+							src={product.thumbnail.image}
+							// src={product.image}
+							alt=""
+							style={{
+								maxWidth: "370px",
+								maxHeight: "460px",
+								minHeight: "460px",
+							}}
+						/>
+						<ProductCardBadge
+							badgeClass={product.badge}
+							product={product}
+						/>
+						{/* {product.badge != null && (
 							
 						)} */}
 					</div>
@@ -60,6 +94,11 @@ const NormalProductCard = ({
 						productId={product.id}
 						stock={product.stock}
 						handleAddProductToCart={handleAddProductToCart}
+						handleAddProductToNotifications={
+							handleAddProductToNotifications
+						}
+						userIdsToNotify={userIdsToNotify}
+						userId={userId}
 					/>
 				</div>
 			</div>

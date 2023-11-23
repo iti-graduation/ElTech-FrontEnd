@@ -578,3 +578,20 @@ export const updateProductFeatures = async (productId, features) => {
 		}
 	}
 };
+
+export const addProductNotification = async (productId) => {
+	try {
+		const url = productEndpoint + `${productId}/notify/`;
+		const response = await apiInstance.post(url);
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem adding the product to notifications";
+		}
+		return msg;
+	}
+};
