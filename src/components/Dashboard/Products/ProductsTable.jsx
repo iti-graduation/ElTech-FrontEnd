@@ -19,7 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ProductEditForm from "./ProductEditForm";
 import ProductRow from "./ProductRow";
 
-const ProductsTable = () => {
+const ProductsTable = ({ updateHandler }) => {
 	const [products, setProducts] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState(null); // Store the selected product for editing
@@ -153,7 +153,11 @@ const ProductsTable = () => {
 					})} */}
 					{products.map((product) => {
 						return (
-							<ProductRow key={product.id} product={product} />
+							<ProductRow
+								key={product.id}
+								product={product}
+								updateHandler={updateHandler}
+							/>
 						);
 					})}
 				</tbody>

@@ -5,14 +5,19 @@ import productImg1 from "../../../assets/images/cart/1.jpg";
 import ProductCardBadge from "../../../components/Shared/Badges/ProductCardBadge";
 import ProductPrice from "../../Shared/NormalProductCard/ProductPrice";
 
-const ProductRow = ({ product, handleDeleteProduct, handleUpdateProduct }) => {
+const ProductRow = ({
+	product,
+	handleDeleteProduct,
+	handleUpdateProduct,
+	updateHandler,
+}) => {
 	return (
 		<tr className="cart-item">
 			<td className="text-center">{product.id}</td>
 			<td className="product-thumbnail-title text-center">
 				{product && (
 					<>
-						<Link to={"/product/" + product.id}>
+						<Link to={"/dashboard/products/" + product.id}>
 							<img
 								src={
 									product.thumbnail.image
@@ -24,7 +29,7 @@ const ProductRow = ({ product, handleDeleteProduct, handleUpdateProduct }) => {
 						</Link>
 						<Link
 							className="product-name"
-							to={"/product/" + product.id}
+							to={"/dashboard/products/" + product.id}
 						>
 							{product.name}
 						</Link>
@@ -66,7 +71,12 @@ const ProductRow = ({ product, handleDeleteProduct, handleUpdateProduct }) => {
 				</div>
 			</td>
 			<td className="text-center">
-				<button className="goru-btn">Edit</button>
+				<button
+					className="goru-btn"
+					onClick={() => updateHandler(product)}
+				>
+					Edit
+				</button>
 			</td>
 			<td className="product-remove text-center">
 				<Link></Link>

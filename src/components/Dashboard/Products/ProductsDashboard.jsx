@@ -1,11 +1,20 @@
 import ProductForm from "./ProductForm";
 import ProductsTable from "./ProductsTable";
+import ProductEditForm from "./ProductEditForm";
 import React, { useState } from "react";
 
 const ProductsDashboard = () => {
 	const [showCreateForm, setShowCreateForm] = useState(false);
+	const [showUpdateForm, setShowUpdateForm] = useState(false);
+	const [product, setProduct] = useState({});
+
 	const handleCreateClick = () => {
 		setShowCreateForm(!showCreateForm);
+	};
+
+	const handleUpdateClick = (product) => {
+		setShowUpdateForm(!showUpdateForm);
+		setProduct(product);
 	};
 
 	return (
@@ -18,12 +27,22 @@ const ProductsDashboard = () => {
 			>
 				{!showCreateForm ? "Add Product" : "All Products"}
 			</button>
-			{showCreateForm && (
+			{!showUpdateForm && showCreateForm && (
 				<div className="reply-form-wrapper">
 					<ProductForm clickHandler={handleCreateClick} />
 				</div>
 			)}
-			{!showCreateForm && <ProductsTable />}
+			{!showCreateForm && !showUpdateForm && (
+				<ProductsTable updateHandler={handleUpdateClick} />
+			)}
+			{!showCreateForm && showUpdateForm && (
+				<div className="reply-form-wrapper">
+					<ProductEditForm
+						clickHandler={handleCreateClick}
+						product={product}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
