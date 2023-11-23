@@ -3,6 +3,7 @@ import { getUserData } from "../../../api/services/user/user-services"; // Impor
 import {
 	addProduct,
 	getAllCategories,
+	addProductImages,
 } from "../../../api/services/user/product-services"; // Import your authentication context
 
 import InputField from "../../Shared/InputField/InputField";
@@ -23,6 +24,25 @@ const ProductForm = ({ clickHandler }) => {
 	const [isFeatured, setIsFeatured] = useState(false);
 	const [isTrending, setIsTrending] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState("");
+	const [images, setImages] = useState([]);
+
+	// const handleFileChange = (e) => {
+	// 	setImages([...e.target.files]);
+	// };
+
+	const handleFileChange = (e) => {
+		const files = Array.from(e.target.files);
+		const validFiles = files.filter((file) =>
+			file.type.startsWith("image/")
+		);
+		if (validFiles.length !== files.length) {
+			showToast(
+				"Some files were not images and were not uploaded",
+				"error"
+			);
+		}
+		setImages(validFiles);
+	};
 
 	// const handleSubmit = async (e) => {
 	// 	e.preventDefault();
@@ -147,13 +167,26 @@ const ProductForm = ({ clickHandler }) => {
 			const response = await addProduct(productData);
 			console.log("Product added successfully:", response);
 			console.log("Product Data", productData);
+			await addProductImages(response.id, images);
 			// Reset form fields after successful submission
+			// setProductData({
+			// 	name: "",
+			// 	price: 0,
+			// 	stock: 0,
+			// 	category: 0,
+			// });
 			setProductData({
 				name: "",
 				price: 0,
 				stock: 0,
 				category: 0,
+				is_on_sale: false,
+				sale_amount: 0,
+				is_hot: false,
+				is_featured: false,
+				is_trending: false,
 			});
+			setImages([]);
 			showToast("Product added successfully", "success");
 		} catch (error) {
 			console.error("Error adding product:", error.message);
@@ -314,6 +347,7 @@ const ProductForm = ({ clickHandler }) => {
 							fieldName="name"
 							fieldType="text"
 							onChange={handleChange}
+							value={productData.name}
 						/>
 						{/* <InputField
 							noOfCol="col-lg-6"
@@ -331,6 +365,7 @@ const ProductForm = ({ clickHandler }) => {
 								type="number"
 								onChange={handleChange}
 								step="0.01"
+								value={productData.price}
 							/>
 						</p>
 						<p className="col-lg-12">
@@ -340,6 +375,7 @@ const ProductForm = ({ clickHandler }) => {
 								placeholder="Enter product description"
 								rows="4"
 								onChange={handleChange}
+								value={productData.description}
 							></textarea>
 						</p>
 						<InputField
@@ -349,6 +385,7 @@ const ProductForm = ({ clickHandler }) => {
 							fieldName="stock"
 							fieldType="number"
 							onChange={handleChange}
+							value={productData.stock}
 						/>
 						<p className="billing-countries col-lg-6">
 							<label>Category</label>
@@ -357,6 +394,7 @@ const ProductForm = ({ clickHandler }) => {
 								id="billing_country"
 								name="category"
 								onChange={handleChange}
+								value={productData.category}
 							>
 								<option value="0">---</option>
 								{categories.map((category) => (
@@ -376,6 +414,7 @@ const ProductForm = ({ clickHandler }) => {
 								name="is_on_sale"
 								className="w-25"
 								onChange={handleChange}
+								value={productData.is_on_sale}
 							/>
 						</p>
 						{/* <InputField
@@ -395,6 +434,7 @@ const ProductForm = ({ clickHandler }) => {
 								type="number"
 								onChange={handleChange}
 								disabled={!productData.is_on_sale}
+								value={productData.sale_amount}
 								step="0.01"
 							/>
 						</p>
@@ -405,6 +445,7 @@ const ProductForm = ({ clickHandler }) => {
 								name="is_hot"
 								className="w-25"
 								onChange={handleChange}
+								value={productData.is_hot}
 							/>
 						</p>
 						<p className="col-lg-4 d-flex align-items-center">
@@ -414,6 +455,7 @@ const ProductForm = ({ clickHandler }) => {
 								name="is_featured"
 								className="w-25"
 								onChange={handleChange}
+								value={productData.is_featured}
 							/>
 						</p>
 						<p className="col-lg-4 d-flex align-items-center">
@@ -423,15 +465,49 @@ const ProductForm = ({ clickHandler }) => {
 								name="is_trending"
 								className="w-25"
 								onChange={handleChange}
+								value={productData.is_trending}
 							/>
 						</p>
 
-						<button
-							type="submit"
-							className="goru-btn auth-button mx-auto col-lg-6"
-						>
-							Add Product
-						</button>
+						<p className="col-lg-12">
+							<label>
+								Note: The first image you select will be used as
+								the thumbnail.
+							</label>
+							<label
+								for="fileUpload"
+								class="goru-btn w-50 text-center mx-auto"
+							>
+								Upload Images
+							</label>
+							<input
+								type="file"
+								id="fileUpload"
+								name="images"
+								className="d-none"
+								multiple
+								onChange={handleFileChange}
+							/>
+							{/* <label htmlFor="fileUpload" className="goru-btn">
+								Choose Images
+							</label>
+							<input
+								type="file"
+								id="fileUpload"
+								name="images"
+								multiple
+								onChange={handleFileChange}
+								style={{ display: "none" }}
+							/> */}
+						</p>
+						<div className="col-lg-12">
+							<button
+								type="submit"
+								className="goru-btn auth-button d-block mx-auto"
+							>
+								Add Product
+							</button>
+						</div>
 					</div>
 				</form>
 			</div>

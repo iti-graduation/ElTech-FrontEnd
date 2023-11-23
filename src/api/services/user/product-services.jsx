@@ -418,3 +418,50 @@ export const addProduct = async (productData) => {
 		return error;
 	}
 };
+
+// export const addProductImages = async (productId, images) => {
+// 	const url = endpoint + "images/";
+
+// 	for (let i = 0; i < images.length; i++) {
+// 		let formData = new FormData();
+// 		formData.append("image", images[i]);
+// 		formData.append("is_thumbnail", i === 0);
+// 		formData.append("product_id", productId);
+
+// 		try {
+// 			const response = await apiInstance.post(url, formData, {
+// 				headers: {
+// 					"Content-Type": "multipart/form-data",
+// 				},
+// 			});
+// 			console.log("Image added successfully:", response);
+// 		} catch (error) {
+// 			console.error("Error adding image:", error);
+// 		}
+// 	}
+// };
+
+export const addProductImages = async (productId, images) => {
+	const url = endpoint + "images/";
+
+	for (let i = 0; i < images.length; i++) {
+		let formData = new FormData();
+		formData.append("image", images[i]);
+		formData.append("is_thumbnail", i === 0 ? "true" : "false");
+		formData.append("product_id", productId);
+
+		try {
+			for (let pair of formData.entries()) {
+				console.log(pair[0] + ", " + pair[1]);
+			}
+			const response = await apiInstance.post(url, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			console.log("Image added successfully:", response);
+		} catch (error) {
+			console.error("Error adding image:", error);
+		}
+	}
+};
