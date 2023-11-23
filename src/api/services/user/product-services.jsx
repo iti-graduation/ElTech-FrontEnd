@@ -481,3 +481,15 @@ export const addProductFeatures = async (productId, features) => {
 		}
 	}
 };
+
+export const updateProduct = async (productId, productData) => {
+	try {
+		const url = productEndpoint + productId + "/";
+		const response = await apiInstance.patch(url, productData);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem updating the product";
+		console.error(msg, error);
+		return error;
+	}
+};

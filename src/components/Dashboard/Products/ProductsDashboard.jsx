@@ -12,10 +12,10 @@ const ProductsDashboard = () => {
 		setShowCreateForm(!showCreateForm);
 	};
 
-	const handleUpdateClick = (product) => {
-		setShowUpdateForm(!showUpdateForm);
-		setProduct(product);
-	};
+	// const handleUpdateClick = (product) => {
+	// 	setShowUpdateForm(!showUpdateForm);
+	// 	setProduct(product);
+	// };
 
 	return (
 		<div>
@@ -27,22 +27,25 @@ const ProductsDashboard = () => {
 			>
 				{!showCreateForm ? "Add Product" : "All Products"}
 			</button>
-			{!showUpdateForm && showCreateForm && (
+			{showCreateForm ? (
 				<div className="reply-form-wrapper">
 					<ProductForm clickHandler={handleCreateClick} />
 				</div>
+			) : (
+				<ProductsTable />
 			)}
-			{!showCreateForm && !showUpdateForm && (
+			{/* {!showCreateForm && !showUpdateForm && (
 				<ProductsTable updateHandler={handleUpdateClick} />
-			)}
-			{!showCreateForm && showUpdateForm && (
+			)} */}
+			{/* {!showCreateForm && } */}
+			{/* {!showCreateForm && showUpdateForm && (
 				<div className="reply-form-wrapper">
 					<ProductEditForm
 						clickHandler={handleCreateClick}
 						product={product}
 					/>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 };

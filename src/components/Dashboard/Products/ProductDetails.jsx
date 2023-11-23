@@ -5,6 +5,7 @@ import { getSingleProduct } from "../../../api/services/user/product-services";
 
 import ItemDetails from "./ProductDetails/ItemDetails";
 import ProductTab from "./ProductDetails/ProductTab";
+import ProductEditForm from "./ProductEditForm";
 import SideNav from "../../../layouts/Dashboard/SideNav";
 import ProductDetailsTab from "../../ProductsDetails/ProductsTab/ProductTab";
 
@@ -43,6 +44,10 @@ const ProductDetails = () => {
 					{/* <RelatedProducts /> */}
 				</div>
 			</section>
+
+			<div className="reply-form-wrapper" style={{ marginTop: "300px" }}>
+				{product && <ProductEditForm product={product} />}
+			</div>
 		</>
 	);
 };

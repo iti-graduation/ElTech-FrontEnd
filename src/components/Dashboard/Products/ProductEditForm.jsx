@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
-import { updatePost } from "../../../api/services/user/post-services"; // Import your authentication context
-import { getAllCategories } from "../../../api/services/user/product-services";
+
+import {
+	addProduct,
+	getAllCategories,
+	getSingleProduct,
+	addProductImages,
+	addProductFeatures,
+	updateProduct,
+} from "../../../api/services/user/product-services";
+
+import InputField from "../../Shared/InputField/InputField";
+
+import { showToast } from "../../../utils/toastUtil";
 
 const ProductEditForm = ({ product, onCancel }) => {
 	const [title, setTitle] = useState("");
@@ -9,31 +19,79 @@ const ProductEditForm = ({ product, onCancel }) => {
 	const [image, setImage] = useState("");
 	const [categories, setCategories] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState("");
+	const [images, setImages] = useState([]);
+	const [features, setFeatures] = useState([""]);
+	const [productData, setProductData] = useState(product);
+
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+
+	// 	try {
+	// 		const updatedData = {
+	// 			title: title,
+	// 			content: content,
+	// 			image: image,
+	// 			category_id: selectedCategory,
+	// 		};
+
+	// 		// const response = await updatePost(product.id, updatedData);
+	// 		console.log("Post updated successfully:", response);
+
+	// 		// Clear form fields after successful update
+	// 		setTitle("");
+	// 		setContent("");
+	// 		setImage("");
+	// 		setSelectedCategory("");
+
+	// 		// Hide the form after successful update
+	// 		onCancel();
+	// 	} catch (error) {
+	// 		console.error("Error updating post:", error.message);
+	// 	}
+	// };
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const { name, price, stock, category, isOnSale, sale_amount } =
+			productData;
+
+		// Validation
+		if (!name || !price || !stock || !category) {
+			showToast(
+				"Please fill in all required fields: name, price, stock, category",
+				"error"
+			);
+			return;
+		}
+
+		if (isNaN(price) || price <= 0) {
+			showToast("Price must be a number bigger than 0", "error");
+			return;
+		}
+
+		if (isNaN(stock) || stock < 0) {
+			showToast("Stock must be a number at least 0", "error");
+			return;
+		}
+
+		if (isOnSale) {
+			if (isNaN(sale_amount) || sale_amount < 1 || sale_amount > 100) {
+				showToast(
+					"Sale amount must be a number between 1 and 100",
+					"error"
+				);
+				return;
+			}
+		}
+
 		try {
-			const updatedData = {
-				title: title,
-				content: content,
-				image: image,
-				category_id: selectedCategory,
-			};
-
-			const response = await updatePost(product.id, updatedData); // Assuming post.id exists
-			console.log("Post updated successfully:", response);
-
-			// Clear form fields after successful update
-			setTitle("");
-			setContent("");
-			setImage("");
-			setSelectedCategory("");
-
-			// Hide the form after successful update
-			onCancel();
+			const response = await updateProduct(product.id, productData);
+			console.log("Product updated successfully:", response);
+			// ...rest of the code...
 		} catch (error) {
-			console.error("Error updating post:", error.message);
+			console.error("Error updating product:", error.message);
+			showToast("Error updating product: " + error.message, "error");
 		}
 	};
 
@@ -41,69 +99,283 @@ const ProductEditForm = ({ product, onCancel }) => {
 		setSelectedCategory(e.target.value);
 	};
 
+	const handleChange = (event) => {
+		console.log(productData);
+		const value =
+			event.target.type === "checkbox"
+				? event.target.checked
+				: event.target.value;
+		if (event.target.name === "category") {
+			setProductData({
+				...productData,
+				[event.target.name]: parseInt(value, 10),
+			});
+		} else {
+			setProductData({
+				...productData,
+				[event.target.name]: value,
+			});
+		}
+	};
+
 	useEffect(() => {
 		const fetchCategories = async () => {
 			const data = await getAllCategories();
 			setCategories(data);
 		};
+		// const fetchProduct = async () => {
+		// 	try {
+		// 		const product = await getSingleProduct(id);
+		// 		console.log(product);
+		// 		setProductData(product);
+		// 	} catch (error) {
+		// 		console.error("Error fetching product:", error.message);
+		// 	}
+		// };
+
+		// fetchProduct();
 
 		fetchCategories();
 	}, []);
 
 	return (
-		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
-			<h5>Edit Product "{product.name}" </h5>
+		// <div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
+		// 	<h5>Edit Product "{product.name}" </h5>
+		// 	<form
+		// 		onSubmit={handleSubmit}
+		// 		className="dashboard-form"
+		// 		id="dashboard-form"
+		// 	>
+		// 		<div className="col-lg-12 col-md-12">
+		// 			<input
+		// 				type="text"
+		// 				name="title"
+		// 				placeholder={product.title}
+		// 				value={title}
+		// 				onChange={(e) => setTitle(e.target.value)}
+		// 			/>
+		// 		</div>
+		// 		<div className="col-lg-12 col-md-12">
+		// 			<textarea
+		// 				name="content"
+		// 				placeholder={product.content}
+		// 				value={content}
+		// 				onChange={(e) => setContent(e.target.value)}
+		// 			></textarea>
+		// 		</div>
+		// 		<div className="col-lg-12 col-md-12">
+		// 			<input
+		// 				type="file"
+		// 				placeholder={product.image}
+		// 				name="image"
+		// 				accept="image/*"
+		// 				onChange={(e) => setImage(e.target.files[0])}
+		// 			/>
+		// 		</div>
+		// 		<div className="col-lg-12 col-md-12">
+		// 			<select
+		// 				value={selectedCategory}
+		// 				onChange={handleCategoryChange}
+		// 			>
+		// 				<option value="">Select category</option>
+		// 				{categories.map((category) => (
+		// 					<option key={category.id} value={category.id}>
+		// 						{category.name}
+		// 					</option>
+		// 				))}
+		// 			</select>
+		// 		</div>
+		// 		<div style={{ display: "flex", width: "200px" }}>
+		// 			<div className="col-lg-12 col-md-12">
+		// 				<input type="submit" name="submit" value="Submit" />
+		// 			</div>
+		// 			<div className="col-lg-12 col-md-12">
+		// 				<button type="button" onClick={onCancel}>
+		// 					Cancel
+		// 				</button>
+		// 			</div>
+		// 		</div>
+		// 	</form>
+		// </div>
+		<div className="woocommerce-billing-fields">
+			<h3 className="text-center">Edit Product</h3>
+
 			<form
 				onSubmit={handleSubmit}
-				className="dashboard-form"
-				id="dashboard-form"
+				method="post"
+				className="d-flex justify-content-center "
 			>
-				<div className="col-lg-12 col-md-12">
-					<input
-						type="text"
-						name="title"
-						placeholder={product.title}
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
+				<div className="row m-3 w-50 ">
+					<InputField
+						noOfCol="col-lg-6"
+						fieldLabel="Title"
+						fieldPlaceholder="Enter product title"
+						fieldName="name"
+						fieldType="text"
+						onChange={handleChange}
+						value={productData.name}
 					/>
-				</div>
-				<div className="col-lg-12 col-md-12">
-					<textarea
-						name="content"
-						placeholder={product.content}
-						value={content}
-						onChange={(e) => setContent(e.target.value)}
-					></textarea>
-				</div>
-				<div className="col-lg-12 col-md-12">
-					<input
-						type="file"
-						placeholder={product.image}
-						name="image"
-						accept="image/*"
-						onChange={(e) => setImage(e.target.files[0])}
+					<p className="col-lg-6">
+						<label>Price</label>
+						<input
+							placeholder="Enter product price"
+							name="price"
+							type="number"
+							onChange={handleChange}
+							step="0.01"
+							value={productData.price}
+						/>
+					</p>
+					<p className="col-lg-12">
+						<label>Description</label>
+						<textarea
+							name="description"
+							placeholder="Enter product description"
+							rows="4"
+							onChange={handleChange}
+							value={productData.description}
+						></textarea>
+					</p>
+					<InputField
+						noOfCol="col-lg-6"
+						fieldLabel="Stock"
+						fieldPlaceholder="Enter product stock"
+						fieldName="stock"
+						fieldType="number"
+						onChange={handleChange}
+						value={productData.stock}
 					/>
-				</div>
-				<div className="col-lg-12 col-md-12">
-					<select
-						value={selectedCategory}
-						onChange={handleCategoryChange}
-					>
-						<option value="">Select category</option>
-						{categories.map((category) => (
-							<option key={category.id} value={category.id}>
-								{category.name}
-							</option>
-						))}
-					</select>
-				</div>
-				<div style={{ display: "flex", width: "200px" }}>
-					<div className="col-lg-12 col-md-12">
-						<input type="submit" name="submit" value="Submit" />
-					</div>
-					<div className="col-lg-12 col-md-12">
-						<button type="button" onClick={onCancel}>
-							Cancel
+					<p className="billing-countries col-lg-6">
+						<label>Category</label>
+						<select
+							className="country_to_state country_select"
+							id="billing_country"
+							name="category"
+							onChange={handleChange}
+							value={productData.category.id}
+						>
+							<option value="0">---</option>
+							{categories.map((category) => (
+								<option key={category.id} value={category.id}>
+									{category.name}
+								</option>
+							))}
+						</select>
+					</p>
+					<p className="col-lg-6 d-flex align-items-center">
+						<label className="w-25">On Sale</label>
+						<input
+							type="checkbox"
+							name="is_on_sale"
+							className="w-25"
+							onChange={handleChange}
+							value={productData.is_on_sale}
+							checked={productData.is_on_sale}
+						/>
+					</p>
+					<p className="col-lg-6">
+						<label>Sale Amount</label>
+						<input
+							placeholder="Enter sale amount (1 - 100)"
+							name="sale_amount"
+							type="number"
+							onChange={handleChange}
+							disabled={!productData.is_on_sale}
+							value={productData.sale_amount}
+							step="0.01"
+						/>
+					</p>
+					<p className="col-lg-4 d-flex align-items-center">
+						<label className="w-25">Hot</label>
+						<input
+							type="checkbox"
+							name="is_hot"
+							className="w-25"
+							onChange={handleChange}
+							value={productData.is_hot}
+							checked={productData.is_hot}
+						/>
+					</p>
+					<p className="col-lg-4 d-flex align-items-center">
+						<label className="w-50">Featured</label>
+						<input
+							type="checkbox"
+							name="is_featured"
+							className="w-25"
+							onChange={handleChange}
+							value={productData.is_featured}
+							checked={productData.is_featured}
+						/>
+					</p>
+					<p className="col-lg-4 d-flex align-items-center">
+						<label className="w-50">Trending</label>
+						<input
+							type="checkbox"
+							name="is_trending"
+							className="w-25"
+							onChange={handleChange}
+							value={productData.is_trending}
+							checked={productData.is_trending}
+						/>
+					</p>
+
+					<p className="col-lg-12">
+						<label>
+							Note: The first image you select will be used as the
+							thumbnail.
+						</label>
+						<label
+							for="fileUpload"
+							className="goru-btn w-50 text-center mx-auto"
+						>
+							Upload Images
+						</label>
+						<input
+							type="file"
+							id="fileUpload"
+							name="images"
+							className="d-none"
+							multiple
+							// onChange={handleFileChange}
+						/>
+					</p>
+					<p className="col-lg-12">
+						<label
+							className="goru-btn w-50 text-center mx-auto"
+							// onClick={handleAddFeature}
+						>
+							Add Feature
+						</label>
+						{/* {features.map((feature, index) => (
+							<div key={index}>
+								<input
+									type="text"
+									value={feature}
+									onChange={(event) =>
+										handleFeatureChange(index, event)
+									}
+									className="w-75"
+								/>
+								<button
+									type="button"
+									onClick={() => handleRemoveFeature(index)}
+									class="goru-btn auth-button"
+									style={{
+										height: "45px",
+										width: "22%",
+									}}
+								>
+									Remove
+								</button>
+							</div>
+						))} */}
+					</p>
+					<div className="col-lg-12">
+						<button
+							type="submit"
+							className="goru-btn auth-button d-block mx-auto"
+						>
+							Update Product
 						</button>
 					</div>
 				</div>

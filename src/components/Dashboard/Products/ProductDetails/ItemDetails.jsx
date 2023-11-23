@@ -17,7 +17,7 @@ const ItemDetails = ({
 	quantity,
 }) => {
 	return (
-		<div className="row">
+		<div className="row" style={{ marginBottom: "200px" }}>
 			<div className="col-lg-7 col-md-12">
 				<ProductSlider product={product} />
 			</div>
