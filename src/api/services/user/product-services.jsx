@@ -262,11 +262,11 @@ export const addProductRating = async (productId, rating) => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem adding the comment
  */
-export const deleteProduct = async (productId) => {
+export const deleteOrRestoreProduct = async (productId, is_deleted) => {
 	try {
-		const url = endpoint + `products/${productId}`;
-		const response = await apiInstance.delete(url);
-		return response.data; // Optionally handle the response data if needed
+		const url = productEndpoint + `${productId}/`;
+		const response = await apiInstance.patch(url, { is_deleted });
+		return response.data;
 	} catch (error) {
 		console.error("Error deleting product:", error.message);
 		return error;

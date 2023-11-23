@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
 	getAllProducts,
-	deleteProduct,
+	// deleteProduct,
 	getSingleProduct,
 } from "../../../api/services/user/product-services";
 import {
@@ -37,16 +37,16 @@ const ProductsTable = () => {
 		fetchProducts();
 	}, []);
 
-	const handleDeleteProduct = async (productId) => {
-		try {
-			await deleteProduct(productId);
-			// Refresh posts after successful deletion
-			const updatedProductsData = await getAllProducts();
-			setProducts(updatedProductsData.results);
-		} catch (error) {
-			console.error("Error deleting post:", error.message);
-		}
-	};
+	// const handleDeleteProduct = async (productId) => {
+	// 	try {
+	// 		await deleteProduct(productId);
+	// 		// Refresh posts after successful deletion
+	// 		const updatedProductsData = await getAllProducts();
+	// 		setProducts(updatedProductsData.results);
+	// 	} catch (error) {
+	// 		console.error("Error deleting post:", error.message);
+	// 	}
+	// };
 
 	const handleCancelEdit = () => {
 		// Clear the selected post and hide the form
