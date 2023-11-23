@@ -6,6 +6,8 @@ import {
 	getSingleProduct,
 	addProductImages,
 	addProductFeatures,
+	updateProductImages,
+	updateProductFeatures,
 	updateProduct,
 } from "../../../api/services/user/product-services";
 
@@ -19,9 +21,29 @@ const ProductEditForm = ({ product, onCancel }) => {
 	const [image, setImage] = useState("");
 	const [categories, setCategories] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState("");
-	const [images, setImages] = useState([]);
-	const [features, setFeatures] = useState([""]);
+	const [images, setImages] = useState(product.images);
+	const [features, setFeatures] = useState(product.features);
 	const [productData, setProductData] = useState(product);
+
+	const handleFeatureChange = (index, event) => {
+		const values = [...features];
+		values[index] = event.target.value;
+		setFeatures(values);
+	};
+
+	const handleAddFeature = () => {
+		setFeatures([...features, ""]);
+	};
+
+	const handleRemoveFeature = (index) => {
+		const values = [...features];
+		values.splice(index, 1);
+		setFeatures(values);
+	};
+
+	// const handleRemoveFeature = (index) => {
+	// 	setFeatures(features.filter((feature, i) => i !== index));
+	//   };
 
 	// const handleSubmit = async (e) => {
 	// 	e.preventDefault();
@@ -89,6 +111,10 @@ const ProductEditForm = ({ product, onCancel }) => {
 			const response = await updateProduct(product.id, productData);
 			console.log("Product updated successfully:", response);
 			// ...rest of the code...
+			await updateProductImages(product.id, images);
+			await updateProductFeatures(product.id, features);
+
+			showToast("Product updated successfully", "success");
 		} catch (error) {
 			console.error("Error updating product:", error.message);
 			showToast("Error updating product: " + error.message, "error");
@@ -101,6 +127,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 
 	const handleChange = (event) => {
 		console.log(productData);
+		console.log(features);
 		const value =
 			event.target.type === "checkbox"
 				? event.target.checked
@@ -342,15 +369,15 @@ const ProductEditForm = ({ product, onCancel }) => {
 					<p className="col-lg-12">
 						<label
 							className="goru-btn w-50 text-center mx-auto"
-							// onClick={handleAddFeature}
+							onClick={handleAddFeature}
 						>
 							Add Feature
 						</label>
-						{/* {features.map((feature, index) => (
+						{features.map((feature, index) => (
 							<div key={index}>
 								<input
 									type="text"
-									value={feature}
+									value={feature.feature}
 									onChange={(event) =>
 										handleFeatureChange(index, event)
 									}
@@ -368,7 +395,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 									Remove
 								</button>
 							</div>
-						))} */}
+						))}
 					</p>
 					<div className="col-lg-12">
 						<button

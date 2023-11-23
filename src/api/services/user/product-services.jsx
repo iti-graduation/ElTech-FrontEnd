@@ -493,3 +493,46 @@ export const updateProduct = async (productId, productData) => {
 		return error;
 	}
 };
+
+export const updateProductImages = async (productId, images) => {
+	try {
+		const url = endpoint + `products/images/${productId}/`;
+		let formData = new FormData();
+		images.forEach((image, index) => {
+			formData.append("image", image);
+			formData.append("is_thumbnail", index === 0 ? "true" : "false");
+			formData.append("product_id", productId);
+		});
+
+		const response = await apiInstance.patch(url, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		console.error("Error updating product images:", error.message);
+		return error;
+	}
+};
+
+export const updateProductFeatures = async (productId, features) => {
+	try {
+		const url = endpoint + `products/features/${productId}/`;
+		let formData = new FormData();
+		features.forEach((feature) => {
+			formData.append("feature", feature);
+			formData.append("product_id", productId);
+		});
+
+		const response = await apiInstance.patch(url, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		console.error("Error updating product features:", error.message);
+		return error;
+	}
+};
