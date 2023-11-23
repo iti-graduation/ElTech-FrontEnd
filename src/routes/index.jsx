@@ -28,6 +28,8 @@ const NewsDetails = React.lazy(() => import("../pages/NewsDetails"));
 const MyAccountProfile = React.lazy(() => import('../pages/MyAccountProfile'));
 const Dashboard = React.lazy(() => import('../pages/Dashboard'));
 const ProductDetailsDashboard = React.lazy(() => import('../components/Dashboard/Products/ProductDetails'));
+const UserDetailsDashboard = React.lazy(() => import('../components/Dashboard/Users/UserDetails'));
+
 
 export default function Router() {
 	return (
@@ -60,6 +62,10 @@ export default function Router() {
 				<Route
 					path="/dashboard/products/:id?"
 					element={<ProductDetailsDashboard />}
+				/>
+				<Route
+					path="/dashboard/users/:id?"
+					element={<UserDetailsDashboard />}
 				/>
 				<Route path="*" element={<NotFound />} />
 			</Routes>

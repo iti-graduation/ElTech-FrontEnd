@@ -338,35 +338,68 @@ export const updateUserInfo = async (userData) => {
 	}
 };
 
-
-
 export const getAllUsers = async () => {
 	try {
-	  const response = await apiInstance.get(endpoint + 'users/');
-	  return response.data;
+		const response = await apiInstance.get(endpoint + "users/");
+		return response.data;
 	} catch (error) {
-	  const msg = "There was a problem getting all posts";
-	  console.error(msg, error);
-	  throw new Error(msg);
+		const msg = "There was a problem getting all users";
+		console.error(msg, error);
+		return error;
 	}
-  };
-
-
+};
 
 /**
  * delete a specific user
  *
  * @param {number} userId - The ID of the user
  * @returns {Promise} A promise that resolves to the data of the API response
- * @throws {Error} If there is a problem 
+ * @throws {Error} If there is a problem
  */
 export const deleteUser = async (userId) => {
 	try {
-	  const url = endpoint + `users/${userId}`;
-	  const response = await apiInstance.delete(url);
-	  return response.data; // Optionally handle the response data if needed
+		const url = endpoint + `users/${userId}`;
+		const response = await apiInstance.delete(url);
+		return response.data; // Optionally handle the response data if needed
 	} catch (error) {
-	  console.error('Error deleting user:', error.message);
-	  throw new Error('Unable to delete user.');
+		console.error("Error deleting user:", error.message);
+		throw new Error("Unable to delete user.");
 	}
-  };
+};
+
+export const getSingleUser = async (userId) => {
+	try {
+		const url = `${endpoint}users/${userId}/`;
+		const response = await apiInstance.get(url);
+		return response.data;
+	} catch (error) {
+		console.error("Error getting user:", error.message);
+		throw error;
+	}
+};
+
+/**
+ * Updates a specific user's info by their ID
+ * @param {number} userId The ID of the user
+ * @param {Object} userData The new data for the user
+ * @return {Object} The updated data of the user
+ * @throws {Error} If there was a problem updating the user's info
+ */
+export const updateUserByAdmin = async (userId, userData) => {
+	try {
+		const url = endpoint + `users/${userId}/`;
+		console.log("URL", url);
+		console.log("Data", userData);
+		const response = await apiInstance.patch(url, userData);
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem updating the user's info";
+		}
+		throw new Error(msg);
+	}
+};
