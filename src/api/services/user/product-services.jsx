@@ -484,6 +484,7 @@ export const addProductFeatures = async (productId, features) => {
 
 export const updateProduct = async (productId, productData) => {
 	try {
+		console.log(productData);
 		const url = productEndpoint + productId + "/";
 		const response = await apiInstance.patch(url, productData);
 		return response.data;
@@ -494,45 +495,86 @@ export const updateProduct = async (productId, productData) => {
 	}
 };
 
-export const updateProductImages = async (productId, images) => {
-	try {
-		const url = endpoint + `products/images/${productId}/`;
-		let formData = new FormData();
-		images.forEach((image, index) => {
-			formData.append("image", image);
-			formData.append("is_thumbnail", index === 0 ? "true" : "false");
-			formData.append("product_id", productId);
-		});
+// export const updateProductImages = async (productId, images) => {
+// 	try {
+// 		const url = endpoint + `images/${productId}/`;
+// 		let formData = new FormData();
+// 		images.forEach((image, index) => {
+// 			formData.append("image", image);
+// 			formData.append("is_thumbnail", index === 0 ? "true" : "false");
+// 			formData.append("product_id", productId);
+// 		});
 
-		const response = await apiInstance.patch(url, formData, {
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
-		});
-		return response.data;
-	} catch (error) {
-		console.error("Error updating product images:", error.message);
-		return error;
+// 		const response = await apiInstance.patch(url, formData, {
+// 			headers: {
+// 				"Content-Type": "multipart/form-data",
+// 			},
+// 		});
+// 		return response.data;
+// 	} catch (error) {
+// 		console.error("Error updating product images:", error.message);
+// 		return error;
+// 	}
+// };
+
+// export const updateProductFeatures = async (productId, features) => {
+// 	try {
+// 		console.log();
+// 		const url = endpoint + `features/${productId}/`;
+// 		console.log(features, url);
+// 		let formData = new FormData();
+// 		features.forEach((feature) => {
+// 			formData.append("feature", feature);
+// 			formData.append("product_id", productId);
+// 		});
+// 		console.log(features);
+
+// 		const response = await apiInstance.patch(url, formData, {
+// 			headers: {
+// 				"Content-Type": "multipart/form-data",
+// 			},
+// 		});
+// 		return response.data;
+// 	} catch (error) {
+// 		console.error("Error updating product features:", error.message);
+// 		return error;
+// 	}
+// };
+
+export const updateProductImages = async (productId, images) => {
+	const url = endpoint + `images/${productId}/`;
+
+	for (let i = 0; i < images.length; i++) {
+		let formData = new FormData();
+		formData.append("image", images[i]);
+		formData.append("is_thumbnail", i === 0 ? "true" : "false");
+		formData.append("product_id", productId);
+
+		try {
+			const response = await apiInstance.patch(url, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			console.log("Image updated successfully:", response);
+		} catch (error) {
+			console.error("Error updating image:", error);
+		}
 	}
 };
 
 export const updateProductFeatures = async (productId, features) => {
-	try {
-		const url = endpoint + `products/features/${productId}/`;
-		let formData = new FormData();
-		features.forEach((feature) => {
-			formData.append("feature", feature);
-			formData.append("product_id", productId);
-		});
+	const url = endpoint + `features/${productId}/`;
 
-		const response = await apiInstance.patch(url, formData, {
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
-		});
-		return response.data;
-	} catch (error) {
-		console.error("Error updating product features:", error.message);
-		return error;
+	for (let i = 0; i < features.length; i++) {
+		try {
+			const response = await apiInstance.patch(url, {
+				feature: features[i],
+				product_id: productId,
+			});
+			console.log("Feature updated successfully:", response);
+		} catch (error) {
+			console.error("Error updating feature:", error);
+		}
 	}
 };

@@ -14,12 +14,9 @@ const ProductDetails = () => {
 	const { id } = useParams();
 
 	useEffect(() => {
-		console.log("Here!");
-		console.log(id);
 		const fetchProduct = async () => {
 			try {
 				const product = await getSingleProduct(id);
-				console.log(product);
 				setProduct(product);
 			} catch (error) {
 				console.error("Error fetching product:", error.message);

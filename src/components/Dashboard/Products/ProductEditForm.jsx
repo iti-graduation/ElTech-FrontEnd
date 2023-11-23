@@ -21,9 +21,20 @@ const ProductEditForm = ({ product, onCancel }) => {
 	const [image, setImage] = useState("");
 	const [categories, setCategories] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState("");
-	const [images, setImages] = useState(product.images);
-	const [features, setFeatures] = useState(product.features);
-	const [productData, setProductData] = useState(product);
+	const [images, setImages] = useState([]);
+	const [features, setFeatures] = useState(
+		product.features.map((feature) => feature.feature)
+	);
+	const [productData, setProductData] = useState({
+		name: product.name,
+		price: product.price,
+		description: product.description,
+		stock: product.stock,
+		category: product.category.id,
+		is_on_sale: product.is_on_sale,
+		is_featured: product.is_featured,
+		is_trending: product.is_trending,
+	});
 
 	const handleFeatureChange = (index, event) => {
 		const values = [...features];
@@ -39,6 +50,20 @@ const ProductEditForm = ({ product, onCancel }) => {
 		const values = [...features];
 		values.splice(index, 1);
 		setFeatures(values);
+	};
+
+	const handleFileChange = (e) => {
+		const files = Array.from(e.target.files);
+		const validFiles = files.filter((file) =>
+			file.type.startsWith("image/")
+		);
+		if (validFiles.length !== files.length) {
+			showToast(
+				"Some files were not images and were not uploaded",
+				"error"
+			);
+		}
+		setImages(validFiles);
 	};
 
 	// const handleRemoveFeature = (index) => {
@@ -111,10 +136,21 @@ const ProductEditForm = ({ product, onCancel }) => {
 			const response = await updateProduct(product.id, productData);
 			console.log("Product updated successfully:", response);
 			// ...rest of the code...
-			await updateProductImages(product.id, images);
-			await updateProductFeatures(product.id, features);
+			// await updateProductImages(product.id, images);
+			// await updateProductFeatures(product.id, features);
+			if (images.length > 0) {
+				// await updateProductImages(product.id, images);
+				await addProductImages(product.id, images);
+			}
+			// Add product features if there are any
+			if (features.length > 0) {
+				// await updateProductFeatures(product.id, features);
+				await addProductFeatures(product.id, features);
+			}
 
 			showToast("Product updated successfully", "success");
+			setImages([]);
+			window.location.reload();
 		} catch (error) {
 			console.error("Error updating product:", error.message);
 			showToast("Error updating product: " + error.message, "error");
@@ -126,8 +162,8 @@ const ProductEditForm = ({ product, onCancel }) => {
 	};
 
 	const handleChange = (event) => {
-		console.log(productData);
-		console.log(features);
+		console.log(product);
+		console.log(images);
 		const value =
 			event.target.type === "checkbox"
 				? event.target.checked
@@ -150,17 +186,6 @@ const ProductEditForm = ({ product, onCancel }) => {
 			const data = await getAllCategories();
 			setCategories(data);
 		};
-		// const fetchProduct = async () => {
-		// 	try {
-		// 		const product = await getSingleProduct(id);
-		// 		console.log(product);
-		// 		setProductData(product);
-		// 	} catch (error) {
-		// 		console.error("Error fetching product:", error.message);
-		// 	}
-		// };
-
-		// fetchProduct();
 
 		fetchCategories();
 	}, []);
@@ -279,7 +304,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 							id="billing_country"
 							name="category"
 							onChange={handleChange}
-							value={productData.category.id}
+							value={productData.category}
 						>
 							<option value="0">---</option>
 							{categories.map((category) => (
@@ -345,6 +370,62 @@ const ProductEditForm = ({ product, onCancel }) => {
 							checked={productData.is_trending}
 						/>
 					</p>
+					{images.length === 0 &&
+						product.images.map((image, index) => (
+							<div
+								key={index}
+								style={{
+									marginLeft: "5px",
+									marginBottom: "10px",
+								}}
+							>
+								<img
+									src={image.image}
+									alt={`Product ${index}`}
+									style={{
+										width: "100px",
+										height: "100px",
+										borderRadius: "50%",
+										border: "1px solid black",
+										padding: "10px",
+										objectFit: "contain",
+									}}
+								/>
+								{image.is_thumbnail && (
+									<small className="d-block text-center">
+										Thumbnail
+									</small>
+								)}
+							</div>
+						))}
+					{images.length !== 0 &&
+						images.map((image, index) => (
+							<div
+								key={index}
+								style={{
+									marginLeft: "5px",
+									marginBottom: "10px",
+								}}
+							>
+								<img
+									src={URL.createObjectURL(image)}
+									alt={`Product ${index}`}
+									style={{
+										width: "100px",
+										height: "100px",
+										borderRadius: "50%",
+										border: "1px solid black",
+										padding: "10px",
+										objectFit: "contain",
+									}}
+								/>
+								{index === 0 && (
+									<small className="d-block text-center">
+										Thumbnail
+									</small>
+								)}
+							</div>
+						))}
 
 					<p className="col-lg-12">
 						<label>
@@ -363,7 +444,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 							name="images"
 							className="d-none"
 							multiple
-							// onChange={handleFileChange}
+							onChange={handleFileChange}
 						/>
 					</p>
 					<p className="col-lg-12">
@@ -377,7 +458,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 							<div key={index}>
 								<input
 									type="text"
-									value={feature.feature}
+									value={feature}
 									onChange={(event) =>
 										handleFeatureChange(index, event)
 									}

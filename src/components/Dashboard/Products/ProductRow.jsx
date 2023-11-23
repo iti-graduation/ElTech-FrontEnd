@@ -71,12 +71,12 @@ const ProductRow = ({
 				</div>
 			</td>
 			<td className="text-center">
-				<button
+				<Link
+					to={"/dashboard/products/" + product.id}
 					className="goru-btn"
-					onClick={() => updateHandler(product)}
 				>
 					Edit
-				</button>
+				</Link>
 			</td>
 			<td className="product-remove text-center">
 				<Link></Link>
