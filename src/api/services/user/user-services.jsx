@@ -338,9 +338,9 @@ export const updateUserInfo = async (userData) => {
 	}
 };
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (page) => {
 	try {
-		const response = await apiInstance.get(endpoint + "users/");
+		const response = await apiInstance.get(endpoint + "users/", { page });
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting all users";
