@@ -360,10 +360,10 @@ export const deleteUser = async (userId) => {
 	try {
 		const url = endpoint + `users/${userId}`;
 		const response = await apiInstance.delete(url);
-		return response.data; // Optionally handle the response data if needed
+		return response.data;
 	} catch (error) {
 		console.error("Error deleting user:", error.message);
-		throw new Error("Unable to delete user.");
+		return error;
 	}
 };
 
@@ -374,7 +374,7 @@ export const getSingleUser = async (userId) => {
 		return response.data;
 	} catch (error) {
 		console.error("Error getting user:", error.message);
-		throw error;
+		return error;
 	}
 };
 

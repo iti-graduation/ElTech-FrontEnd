@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { deleteOrRestoreProduct } from "../../../api/services/user/product-services";
+import { deleteUser } from "../../../api/services/user/user-services";
 
 // import productImg1 from "../../../assets/images/cart/1.jpg";
 
@@ -12,22 +12,17 @@ import ProductPrice from "../../Shared/NormalProductCard/ProductPrice";
 import { showToast } from "../../../utils/toastUtil";
 
 const UserRow = ({ user }) => {
-	const handleProductDeletion = async (is_deleted) => {
+	const handleUserDeletion = async () => {
 		try {
-			// await deleteOrRestoreProduct(product.id, is_deleted);
+			await deleteUser(user.id);
 
-			if (is_deleted)
-				showToast("Product deleted successfully", "success");
-			else showToast("Product restored successfully", "success");
+			showToast("User deleted successfully", "success");
 
 			setTimeout(() => {
 				window.location.reload();
 			}, 1000);
 		} catch (error) {
-			showToast(
-				"Error deleting or restoring product: " + error.message,
-				"error"
-			);
+			showToast("Error deleting user: " + error.message, "error");
 		}
 	};
 
@@ -89,7 +84,7 @@ const UserRow = ({ user }) => {
 				</td>
 			)} */}
 			<td className="product-remove text-center">
-				<Link onClick={handleProductDeletion}></Link>
+				<Link onClick={handleUserDeletion}></Link>
 			</td>
 		</tr>
 	);
