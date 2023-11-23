@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-	getAllProducts,
+	getProducts,
 	// deleteProduct,
 	getSingleProduct,
 } from "../../../api/services/user/product-services";
@@ -18,22 +18,50 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ProductEditForm from "./ProductEditForm";
 import ProductRow from "./ProductRow";
+import ShopPagination from "../../Shop/ShopPagination/ShopPagination";
 
 const ProductsTable = () => {
 	const [products, setProducts] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState(null); // Store the selected product for editing
+	const [currentPage, setCurrentPage] = useState(0);
+
+	// const handlePageClick = (data) => {
+	// 	let selected = data.selected;
+	// 	setCurrentPage(selected);
+	// 	fetchProducts({ page: selected + 1 });
+	// };
+
+	const handlePageClick = (data) => {
+		console.log("New Page Selected", data);
+		let selected = data.selected;
+		setCurrentPage(selected);
+		fetchProducts(selected + 1);
+	};
+
+	// const fetchProducts = async () => {
+	// 	try {
+	// 		const productsData = await getAllProducts(); // Add 1 to pageNumber for API's page numbering
+	// 		// setProducts(productsData.results);
+	// 		console.log(productsData);
+	// 		setProducts(productsData);
+	// 	} catch (error) {
+	// 		console.error("Error fetching posts:", error.message);
+	// 	}
+	// };
+
+	const fetchProducts = async (page = 1) => {
+		try {
+			console.log("Requested Page", page);
+			const productsData = await getProducts({ page: page }); // Pass page number to API call
+			console.log(productsData);
+			setProducts(productsData);
+		} catch (error) {
+			console.error("Error fetching posts:", error.message);
+		}
+	};
 
 	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const productsData = await getAllProducts(); // Add 1 to pageNumber for API's page numbering
-				setProducts(productsData.results);
-			} catch (error) {
-				console.error("Error fetching posts:", error.message);
-			}
-		};
-
 		fetchProducts();
 	}, []);
 
@@ -141,13 +169,23 @@ const ProductsTable = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{products.map((product) => {
-						return (
-							<ProductRow key={product.id} product={product} />
-						);
-					})}
+					{products.results &&
+						products.results.map((product) => {
+							return (
+								<ProductRow
+									key={product.id}
+									product={product}
+								/>
+							);
+						})}
 				</tbody>
 			</table>
+			{products.results && products.results.length !== 0 && (
+				<ShopPagination
+					pageCount={Math.ceil(products.count / 12)}
+					onPageChange={handlePageClick}
+				/>
+			)}
 		</div>
 	);
 };
