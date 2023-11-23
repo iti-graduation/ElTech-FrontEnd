@@ -465,3 +465,19 @@ export const addProductImages = async (productId, images) => {
 		}
 	}
 };
+
+export const addProductFeatures = async (productId, features) => {
+	const url = endpoint + "features/";
+
+	for (let i = 0; i < features.length; i++) {
+		try {
+			const response = await apiInstance.post(url, {
+				feature: features[i],
+				product_id: productId,
+			});
+			console.log("Feature added successfully:", response);
+		} catch (error) {
+			console.error("Error adding feature:", error);
+		}
+	}
+};

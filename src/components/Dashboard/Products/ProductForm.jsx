@@ -4,6 +4,7 @@ import {
 	addProduct,
 	getAllCategories,
 	addProductImages,
+	addProductFeatures,
 } from "../../../api/services/user/product-services"; // Import your authentication context
 
 import InputField from "../../Shared/InputField/InputField";
@@ -25,6 +26,7 @@ const ProductForm = ({ clickHandler }) => {
 	const [isTrending, setIsTrending] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState("");
 	const [images, setImages] = useState([]);
+	const [features, setFeatures] = useState([""]);
 
 	// const handleFileChange = (e) => {
 	// 	setImages([...e.target.files]);
@@ -42,6 +44,22 @@ const ProductForm = ({ clickHandler }) => {
 			);
 		}
 		setImages(validFiles);
+	};
+
+	const handleFeatureChange = (index, event) => {
+		const values = [...features];
+		values[index] = event.target.value;
+		setFeatures(values);
+	};
+
+	const handleAddFeature = () => {
+		setFeatures([...features, ""]);
+	};
+
+	const handleRemoveFeature = (index) => {
+		const values = [...features];
+		values.splice(index, 1);
+		setFeatures(values);
 	};
 
 	// const handleSubmit = async (e) => {
@@ -168,6 +186,7 @@ const ProductForm = ({ clickHandler }) => {
 			console.log("Product added successfully:", response);
 			console.log("Product Data", productData);
 			await addProductImages(response.id, images);
+			await addProductFeatures(response.id, features);
 			// Reset form fields after successful submission
 			// setProductData({
 			// 	name: "",
@@ -187,6 +206,7 @@ const ProductForm = ({ clickHandler }) => {
 				is_trending: false,
 			});
 			setImages([]);
+			setFeatures([""]);
 			showToast("Product added successfully", "success");
 		} catch (error) {
 			console.error("Error adding product:", error.message);
@@ -476,7 +496,7 @@ const ProductForm = ({ clickHandler }) => {
 							</label>
 							<label
 								for="fileUpload"
-								class="goru-btn w-50 text-center mx-auto"
+								className="goru-btn w-50 text-center mx-auto"
 							>
 								Upload Images
 							</label>
@@ -500,6 +520,43 @@ const ProductForm = ({ clickHandler }) => {
 								style={{ display: "none" }}
 							/> */}
 						</p>
+						<p className="col-lg-12">
+							<label
+								className="goru-btn w-50 text-center mx-auto"
+								onClick={handleAddFeature}
+							>
+								Add Feature
+							</label>
+							{features.map((feature, index) => (
+								<div key={index}>
+									<input
+										type="text"
+										value={feature}
+										onChange={(event) =>
+											handleFeatureChange(index, event)
+										}
+										className="w-75"
+									/>
+									<button
+										type="button"
+										onClick={() =>
+											handleRemoveFeature(index)
+										}
+										class="goru-btn auth-button"
+										style={{
+											height: "45px",
+											width: "22%",
+										}}
+									>
+										Remove
+									</button>
+								</div>
+							))}
+						</p>
+
+						{/* <button type="button" onClick={handleAddFeature}>
+							Add Feature
+						</button> */}
 						<div className="col-lg-12">
 							<button
 								type="submit"
