@@ -185,8 +185,15 @@ const ProductForm = ({ clickHandler }) => {
 			const response = await addProduct(productData);
 			console.log("Product added successfully:", response);
 			console.log("Product Data", productData);
-			await addProductImages(response.id, images);
-			await addProductFeatures(response.id, features);
+			// await addProductImages(response.id, images);
+			// await addProductFeatures(response.id, features);
+			if (images.length > 0) {
+				await addProductImages(response.id, images);
+			}
+			// Add product features if there are any
+			if (features.length > 0) {
+				await addProductFeatures(response.id, features);
+			}
 			// Reset form fields after successful submission
 			// setProductData({
 			// 	name: "",
@@ -208,6 +215,7 @@ const ProductForm = ({ clickHandler }) => {
 			setImages([]);
 			setFeatures([""]);
 			showToast("Product added successfully", "success");
+			clickHandler();
 		} catch (error) {
 			console.error("Error adding product:", error.message);
 			showToast("Error adding product: " + error.message, "error");

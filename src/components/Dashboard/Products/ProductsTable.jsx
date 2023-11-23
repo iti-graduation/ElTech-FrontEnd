@@ -28,7 +28,6 @@ const ProductsTable = () => {
 		const fetchProducts = async () => {
 			try {
 				const productsData = await getAllProducts(); // Add 1 to pageNumber for API's page numbering
-				console.log(productsData.results);
 				setProducts(productsData.results);
 			} catch (error) {
 				console.error("Error fetching posts:", error.message);
@@ -36,7 +35,7 @@ const ProductsTable = () => {
 		};
 
 		fetchProducts();
-	});
+	}, []);
 
 	const handleDeleteProduct = async (productId) => {
 		try {
@@ -153,7 +152,6 @@ const ProductsTable = () => {
 						);
 					})} */}
 					{products.map((product) => {
-						console.log(product);
 						return (
 							<ProductRow key={product.id} product={product} />
 						);
