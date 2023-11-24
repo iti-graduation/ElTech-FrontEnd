@@ -211,24 +211,29 @@ export const deletePost = async (postId) => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem updating the post
  */
-export const updatePost = async (postId, title , content , image , selectedCategory) => {
+  export const updatePost = async (postId, title, content, image, selectedCategory) => {
 	try {
-
-		console.log('Updating post with ', postId ,'by', title ,'and', content ,'and', selectedCategory);
-		let formData = new FormData();
-		formData.append("category", selectedCategory);
+	  const formData = new FormData();
+	  if (title) {
 		formData.append("title", title);
+	  }
+	  if (content) {
 		formData.append("content", content);
+	  }
+	  if (selectedCategory) {
+		formData.append("category", selectedCategory);
+	  }
+	  if (image) {
 		formData.append("image", image);
-
-		const url = endpoint + `posts/${postId}`;
-		console.log("url for the api :" ,url)
-		const response = await apiInstance.put(url, formData, {
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
-		  });
-	  return response.data; // Optionally handle the response data if needed
+	  }
+  
+	  const url = endpoint + `posts/${postId}/`;
+	  const response = await apiInstance.patch(url, formData, {
+		headers: {
+		  "Content-Type": "multipart/form-data",
+		},
+	  });
+	  return response.data;
 	} catch (error) {
 	  console.error('Error updating post:', error.message);
 	  throw new Error('Unable to update post.');

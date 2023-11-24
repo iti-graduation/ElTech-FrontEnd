@@ -128,7 +128,7 @@ export default function MiniDrawer() {
     <>
     <Box sx={{ display: 'flex'}}>
       <CssBaseline />
-      <Drawer variant="permanent" open={open} sx={{backgroundColor:"blue"}} >
+      <Drawer variant="permanent" open={open} sx={{backgroundColor:"grey"}} >
         <DrawerHeader >
             <Typography>
             
@@ -138,7 +138,7 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Paper sx={{ backgroundColor: '', height: '100vh', overflow: 'auto'}}>
+        <Paper sx={{ height: '100vh', overflow: 'auto'}}>
         <List>
           {['Home', 'Category', 'Products', 'Feed','Orders'].map((text) => (
             <ListItem
