@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
 import { addCategory } from "../../../api/services/user/product-services"; // Import your authentication context
+import { toast } from "react-toastify";
 
 const CategoryForm = ({ clickHandler }) => {
   const userData = getUserData();
@@ -18,9 +19,22 @@ const CategoryForm = ({ clickHandler }) => {
       console.log(response);
 
       // Reset the form after successful submission
+      toast.success("Service has been updated successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+
       setName("");
       setImage("");
     } catch (error) {
+      toast.error(
+        `Error adding the service, please make sure that you filled up the form`,
+        {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+        }
+      );
+
       console.error("Error adding post:", error.message);
     }
   };

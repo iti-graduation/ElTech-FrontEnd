@@ -27,7 +27,7 @@ const ServiceTable = () => {
         const servicesData = await getAllServices();
         setServices(servicesData);
       } catch (error) {
-        console.error("Error fetching posts:", error.message);
+        console.error("Error fetching services:", error.message);
       }
     };
 
@@ -59,7 +59,7 @@ const ServiceTable = () => {
       setSelectedService(null);
       setShowEditForm(false);
     } else {
-      // If a different post is clicked, show the form for that post
+      // If a different post is service, show the form for that post
       setSelectedService(service);
       setShowEditForm(true);
     }
@@ -73,6 +73,7 @@ const ServiceTable = () => {
           <ServiceEditForm
             service={selectedService}
             onCancel={handleCancelEdit}
+            setServices={setServices}
           />
         </div>
       )}
@@ -82,6 +83,7 @@ const ServiceTable = () => {
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>Title</TableCell>
+              <TableCell>Logo</TableCell>
               <TableCell>Description</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
@@ -90,12 +92,19 @@ const ServiceTable = () => {
             {services.map((service) => (
               <TableRow key={service.id}>
                 <TableCell>{service.id}</TableCell>
+                <TableCell>
+                  <img
+                    src={service.logo}
+                    alt="Service Logo"
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
+                </TableCell>
                 <TableCell>{service.title}</TableCell>
                 <TableCell>{service.description}</TableCell>
                 <TableCell>
                   <IconButton
                     color="primary"
-                    onClick={() => handleEditService(services)}
+                    onClick={() => handleEditService(service)}
                   >
                     <EditIcon />
                   </IconButton>
