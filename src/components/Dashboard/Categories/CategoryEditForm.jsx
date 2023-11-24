@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
-import { updateCategory } from "../../../api/services/user/product-services"; // Import your authentication context
+import {
+  getAllCategories,
+  updateCategory,
+} from "../../../api/services/user/product-services"; // Import your authentication context
 import { toast } from "react-toastify";
 
-const CategoryEditForm = ({ category, onCancel }) => {
+const CategoryEditForm = ({ category, onCancel, setCategories }) => {
   const [catName, setName] = useState("");
   const [image, setImage] = useState("");
 
@@ -16,12 +19,16 @@ const CategoryEditForm = ({ category, onCancel }) => {
         image: image,
       };
 
-      const response = await updateCategory(category.id, catName, image); // Assuming post.id exists
+      const response = await updateCategory(category.id, catName, image);
       console.log("Post updated successfully:", response);
 
       // Clear form fields after successful update
       setName("");
       setImage("");
+
+      const updatedCategories = await getAllCategories();
+      setCategories(updatedCategories);
+
       toast.success("Service has been updated successfully", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,

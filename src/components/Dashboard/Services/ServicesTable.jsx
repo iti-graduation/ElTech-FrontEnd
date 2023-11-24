@@ -73,6 +73,7 @@ const ServiceTable = () => {
           <ServiceEditForm
             service={selectedService}
             onCancel={handleCancelEdit}
+            setServices={setServices}
           />
         </div>
       )}

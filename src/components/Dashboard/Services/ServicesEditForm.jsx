@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { updateService } from "../../../api/services/admin/admin-services";
+import {
+  getAllServices,
+  updateService,
+} from "../../../api/services/admin/admin-services";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ServiceEditForm = ({ service, onCancel }) => {
+const ServiceEditForm = ({ service, onCancel, setServices }) => {
   const [serviceTitle, setServiceTitle] = useState(service.title);
   const [serviceDescription, setServiceDescription] = useState(
     service.description
@@ -27,6 +30,9 @@ const ServiceEditForm = ({ service, onCancel }) => {
         serviceDescription,
         logo
       );
+
+      const updatedServices = await getAllServices();
+      setServices(updatedServices);
 
       toast.success("Service has been updated successfully", {
         position: toast.POSITION.TOP_RIGHT,

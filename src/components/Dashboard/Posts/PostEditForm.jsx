@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
-import { updatePost } from "../../../api/services/user/post-services"; // Import your authentication context
+import {
+  getAllPosts,
+  updatePost,
+} from "../../../api/services/user/post-services"; // Import your authentication context
 import { getAllCategories } from "../../../api/services/user/product-services";
 
-const PostEditForm = ({ post, onCancel }) => {
+const PostEditForm = ({ post, onCancel, setPosts }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
@@ -29,6 +32,8 @@ const PostEditForm = ({ post, onCancel }) => {
         selectedCategory
       ); // Assuming post.id exists
       console.log("Post updated successfully:", response);
+      const updatedPosts = await getAllPosts(1, 50);
+      setPosts(updatedPosts.results);
 
       // Clear form fields after successful update
       setTitle("");

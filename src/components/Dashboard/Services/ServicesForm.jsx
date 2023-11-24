@@ -24,7 +24,7 @@ const ServiceForm = ({ clickHandler }) => {
       setDescription("");
       setLogo(null);
 
-      toast.success("Service has been updated successfully", {
+      toast.success("Service has been added successfully", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
       });
