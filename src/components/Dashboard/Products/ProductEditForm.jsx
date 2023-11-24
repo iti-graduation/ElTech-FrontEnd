@@ -132,6 +132,14 @@ const ProductEditForm = ({ product, onCancel }) => {
 			}
 		}
 
+		if (images.length < 1 || images.length > 4) {
+			showToast(
+				"You must upload at least one image and at most four images",
+				"error"
+			);
+			return;
+		}
+
 		try {
 			const response = await updateProduct(product.id, productData);
 			console.log("Product updated successfully:", response);
