@@ -132,7 +132,11 @@ export const addService = async (title, description, logo) => {
       title,
       description,
       logo,
-    });
+    },{
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	});
     return response.data;
   } catch (error) {
     const msg = "There was a problem adding a new service";

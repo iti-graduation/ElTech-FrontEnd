@@ -110,6 +110,10 @@ export default function MiniDrawer() {
           return (
             <OrdersDashboard />
           );
+        case 'Services':
+          return (
+            <ServicesDashboard />
+          );
       default:
         return (
           <Typography>
@@ -135,7 +139,7 @@ export default function MiniDrawer() {
         <Divider />
         <Paper sx={{ height: '100vh', overflow: 'auto'}}>
         <List>
-          {['Home', 'Category', 'Products', 'Feed','Orders'].map((text) => (
+          {['Home', 'Category', 'Products', 'Feed','Orders', 'Services'].map((text) => (
             <ListItem
               sx={{color:"black"}}
               key={text}
@@ -149,6 +153,7 @@ export default function MiniDrawer() {
                   {text === 'Products' && <ProductionQuantityLimitsIcon />}
                   {text === 'Feed' && <FeedIcon />}
                   {text === 'Orders' && <ReceiptLongIcon />}
+                  {text === "Services" && <WorkOutlineIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

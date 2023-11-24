@@ -13,7 +13,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import FeedIcon from '@mui/icons-material/Feed';
 import "./dashhome.css"
 import { getAllCategories , getSingleCategory ,getTrendingProducts , getAllProducts} from '../../../api/services/user/product-services';
-import { fetchAllOrders} from '../../../api/services/user/order_services';
+import { fetchAllOrders} from '../../../api/services/admin/admin-services';
 import { getAllPosts} from '../../../api/services/user/post-services';
 import React, { useEffect, useState } from 'react';
 

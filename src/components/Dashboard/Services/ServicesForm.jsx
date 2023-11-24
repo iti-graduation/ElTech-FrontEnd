@@ -34,6 +34,7 @@ const ServiceForm = ({ clickHandler }) => {
         onSubmit={handleSubmit}
         className="dashboard-form"
         id="dashboard-form"
+        enctype="multipart/from-data"
       >
         <div className="col-lg-12 col-md-12">
           <input
