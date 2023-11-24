@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
 import { addService } from "../../../api/services/admin/admin-services"; // Import your authentication context
+import { toast } from "react-toastify";
 
 const ServiceForm = ({ clickHandler }) => {
   const userData = getUserData();
@@ -21,9 +22,21 @@ const ServiceForm = ({ clickHandler }) => {
       // Reset the form after successful submission
       setTitle("");
       setDescription("");
-      setLogo("");
+      setLogo(null);
+
+      toast.success("Service has been updated successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     } catch (error) {
       console.error("Error adding service:", error.message);
+      toast.error(
+        `Error adding the service, please make sure that you filled up the form`,
+        {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+        }
+      );
     }
   };
 
@@ -34,7 +47,7 @@ const ServiceForm = ({ clickHandler }) => {
         onSubmit={handleSubmit}
         className="dashboard-form"
         id="dashboard-form"
-        enctype="multipart/from-data"
+        encType="multipart/form-data"
       >
         <div className="col-lg-12 col-md-12">
           <input
