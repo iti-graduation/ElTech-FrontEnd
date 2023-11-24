@@ -13,7 +13,9 @@ import { useSelector } from "react-redux";
 import { showToast } from "../../../utils/toastUtil";
 
 const ProductCartQty = ({
+	handleAddProductToCart,
 	handleUpdateProductToCart,
+	inCart,
 	quantity,
 	handleQuantity,
 	productId,
@@ -136,7 +138,14 @@ const ProductCartQty = ({
 					</div>
 					<Link
 						className="add-to-cart-btn"
-						onClick={() => handleUpdateProductToCart(quantity)}
+						onClick={() => {
+							if (inCart){
+							handleUpdateProductToCart(quantity)
+							}
+							else {
+							handleAddProductToCart(productId, quantity)
+							}
+						}}
 					>
 						Add To Cart
 					</Link>
