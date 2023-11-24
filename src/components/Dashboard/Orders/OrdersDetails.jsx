@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { fetchUserOrder } from "../../../api/services/user/order_services";
+import { fetchUserOrder } from "../../../api/services/admin/admin-services";
 
 import OrdersDetailsTable from "../../Orders/OrdersDetailsTable"
 

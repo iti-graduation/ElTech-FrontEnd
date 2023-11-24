@@ -5,6 +5,7 @@ import { ACCOUNTS_ENDPOINT, apiInstance } from "../../config/api-config";
 const cartEndpoint = process.env.REACT_APP_CART_ENDPOINT;
 const userEndpoint = process.env.REACT_APP_USER_ENDPOINT;
 const serviceEndpoint = process.env.REACT_APP_SERVICE_ENDPOINT;
+const orderEndpoint = 'api/order/order-details/';
 const endpoint = ACCOUNTS_ENDPOINT;
 
 /**
@@ -225,4 +226,28 @@ export const updateService = async (
     console.error(msg, error);
     throw new Error(msg);
   }
+};
+
+/**
+ * Fetches the order products of a specific user
+ * @param {id} The id of the order
+ * @return {Object} The data of the order products of the user
+ * @throws {Error} If there was a problem getting the order products for the specified user
+ */
+export const fetchUserOrder = async (id) => {
+	try {
+		// construct url with user Id
+		const url = orderEndpoint + id;
+		// perform GET request to the constructed url
+		const response = await apiInstance.get(url);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during fetching order products
+		const msg =
+			"There was a problem getting the order products for the specified user";
+		console.log(error);
+		throw new Error(msg);
+	}
 };
