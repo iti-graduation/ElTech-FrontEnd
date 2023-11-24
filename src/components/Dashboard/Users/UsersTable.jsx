@@ -1,46 +1,68 @@
-import React, {useEffect,useState} from 'react';
-import { getAllUsers,deleteUser } from "../../../api/services/user/user-services";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useEffect, useState } from "react";
 
+import {
+	getAllUsers,
+	deleteUser,
+} from "../../../api/services/user/user-services";
 
+import UserRow from "./UserRow";
+import ShopPagination from "../../Shop/ShopPagination/ShopPagination";
+
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	TablePagination,
+	IconButton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const UsersTable = () => {
-    const [users, setUsers] = useState([]);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
-    const [totalCount, setTotalCount] = useState(0); // Store the total count of posts
+	const [users, setUsers] = useState([]);
+	const [pageNumber, setPageNumber] = useState(1);
+	const [pageSize, setPageSize] = useState(5);
+	const [totalCount, setTotalCount] = useState(0); // Store the total count of posts
+	const [currentPage, setCurrentPage] = useState(0);
 
-    useEffect(() => {
-      const fetchPosts = async () => {
-        try {
-          const usersData = await getAllUsers(); // Add 1 to pageNumber for API's page numbering
-          setUsers(usersData);
-          setTotalCount(usersData.length);
-          setPageSize(usersData.length) // Set the total count of posts from the API response
-        } catch (error) {
-          console.error("Error fetching all users:", error.message);
-        }
-      };
-  
-      fetchPosts();
-    }, [pageNumber, pageSize]);
+	const fetchUsers = async (page = 1) => {
+		try {
+			const usersData = await getAllUsers({ page }); // Add 1 to pageNumber for API's page numbering
+			console.log(usersData);
+			setUsers(usersData);
+			// setTotalCount(usersData.length);
+			// setPageSize(usersData.length); // Set the total count of posts from the API response
+		} catch (error) {
+			console.error("Error fetching all users:", error.message);
+		}
+	};
 
-    const handleDeleteUsers = async (userId) => {
-      try {
-        await deleteUser(userId);
-        // Refresh posts after successful deletion
-        const updatedUsersData = await getAllUsers();
-        setUsers(updatedUsersData);
-      } catch (error) {
-        console.error('Error deleting post:', error.message);
-      }
-    };
+	const handlePageClick = (data) => {
+		let selected = data.selected;
+		setCurrentPage(selected);
+		fetchUsers(selected + 1);
+	};
 
-  
-    return (
-      <div>
-        <TableContainer>
+	useEffect(() => {
+		fetchUsers();
+	}, []);
+
+	const handleDeleteUsers = async (userId) => {
+		try {
+			await deleteUser(userId);
+			// Refresh posts after successful deletion
+			const updatedUsersData = await getAllUsers();
+			setUsers(updatedUsersData);
+		} catch (error) {
+			console.error("Error deleting post:", error.message);
+		}
+	};
+
+	return (
+		<div>
+			{/* <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
@@ -81,10 +103,38 @@ const UsersTable = () => {
           setPageSize(parseInt(e.target.value, 10));
           setPageNumber(1); // Reset pageNumber to 0 when rowsPerPage changes
         }}
-      />
-      </div>
-    );
-  };
-  
+      /> */}
+			<table className="cart-table">
+				<thead>
+					<tr>
+						<th className="text-center">ID</th>
+						<th className="product-name-thumbnail text-center">
+							Email
+						</th>
+						<th className="product-price text-center">Name</th>
+						<th className="product-quantity text-center">
+							Mobile Phone
+						</th>
+						{/* <th className="product-total text-center">Total</th> */}
+						<th className="product-remove text-center">Edit</th>
+						<th className="text-center">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					{users.results &&
+						users.results.map((user) => {
+							return <UserRow key={user.id} user={user} />;
+						})}
+				</tbody>
+			</table>
+			{users.results && users.results.length !== 0 && (
+				<ShopPagination
+					pageCount={Math.ceil(users.count / 12)}
+					onPageChange={handlePageClick}
+				/>
+			)}
+		</div>
+	);
+};
 
 export default UsersTable;

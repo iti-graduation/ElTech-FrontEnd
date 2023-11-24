@@ -1,12 +1,14 @@
 import React from "react";
-import singleProductImg from "../../../assets/images/shop/single-product.jpg";
-import s1 from "../../../assets/images/shop/s1.png";
-import ProductSizeOptions from "./SizeOptions";
-import ProductCartQty from "./CartQty";
-import ProductRatingReviews from "./Rating";
-import ProductPrice from "./PriceComp";
-import ProductSlider from "./ImageSlider";
-import ProductColorOptions from "./ProductColor";
+
+import ProductSizeOptions from "./ItemDetails/SizeOptions";
+// import ProductCartQty from "./ItemDetails/CartQty";
+import ProductRatingReviews from "./ItemDetails/Rating";
+import ProductPrice from "./ItemDetails/PriceComp";
+import ProductSlider from "./ItemDetails/ImageSlider";
+import ProductColorOptions from "./ItemDetails/ProductColor";
+
+import singleProductImg from "../../../../assets/images/shop/single-product.jpg";
+import s1 from "../../../../assets/images/shop/s1.png";
 
 const ItemDetails = ({
 	product,
@@ -15,7 +17,7 @@ const ItemDetails = ({
 	quantity,
 }) => {
 	return (
-		<div className="row">
+		<div className="row" style={{ marginBottom: "200px" }}>
 			<div className="col-lg-7 col-md-12">
 				<ProductSlider product={product} />
 			</div>
@@ -35,25 +37,13 @@ const ItemDetails = ({
 					{/* <ProductColorOptions /> */}
 					{/* <ProductSizeOptions /> */}
 
-					<ProductCartQty
+					{/* <ProductCartQty
 						handleQuantity={handleQuantity}
 						quantity={quantity}
 						handleUpdateProductToCart={handleUpdateProductToCart}
 						productId={product.id}
 						stock={product.stock}
-						usersToNotify={product.users_to_notify}
-					/>
-					{/* <div className="pro-socila">
-						<a href="#">
-							<i className="twi-facebook"></i>
-						</a>
-						<a href="#">
-							<i className="twi-twitter-square"></i>
-						</a>
-						<a href="#">
-							<i className="twi-pinterest-square"></i>
-						</a>
-					</div> */}
+					/> */}
 				</div>
 			</div>
 		</div>
