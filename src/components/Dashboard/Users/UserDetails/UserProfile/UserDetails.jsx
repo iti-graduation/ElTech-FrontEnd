@@ -214,9 +214,9 @@ export default function UserCard({ user, onEdit, onLogout }) {
     </div> */}
 
 			{/* <hr /> */}
-			<button id="editbtn" onClick={onEdit}>
+			{/* <button id="editbtn" onClick={onEdit}>
 				Edit
-			</button>
+			</button> */}
 
 			{/* <button className="goru-btn-logout" onClick={onLogout}>
 				Logout

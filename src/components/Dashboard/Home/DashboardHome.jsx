@@ -121,7 +121,7 @@ export default function Home() {
                   <CreditCardIcon fontSize='large'/>
                 </div>
                 <Typography gutterBottom variant="h5" component="div">
-                  {totalPriceSum}$
+                  {totalPriceSum.toFixed(2)}$
                 </Typography>
                 <Typography gutterBottom variant="body2" component="div">
                   Total Earnings

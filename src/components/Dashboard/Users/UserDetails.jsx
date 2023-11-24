@@ -47,7 +47,7 @@ const UserDetails = () => {
 	return (
 		<>
 			<Header className="inner-header" />
-			{isEditing ? (
+			{/* {isEditing ? (
 				<EditUserProfile
 					user={user}
 					onUpdate={handleUpdate}
@@ -59,7 +59,12 @@ const UserDetails = () => {
 					onEdit={handleEditClick}
 					// onLogout={handleLogoutClick}
 				/>
-			)}
+			)} */}
+			<UserProfile
+				user={user}
+				onEdit={handleEditClick}
+				// onLogout={handleLogoutClick}
+			/>
 
 			<Footer className="inner-footer" />
 		</>

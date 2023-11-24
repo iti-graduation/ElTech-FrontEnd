@@ -14,7 +14,7 @@ const CartTotal = ({ total, subtotal, products }) => {
 									<span className="woocommerce-Price-currencySymbol">
 										$
 									</span>
-									{subtotal}
+									{subtotal && subtotal.toFixed(2)}
 								</span>
 							</td>
 						</tr>
@@ -25,7 +25,7 @@ const CartTotal = ({ total, subtotal, products }) => {
 									<span className="woocommerce-Price-currencySymbol">
 										$
 									</span>
-									{total}
+									{total && total.toFixed(2)}
 								</span>
 							</td>
 						</tr>

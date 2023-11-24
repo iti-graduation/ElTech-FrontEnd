@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { createReview } from "../../../api/services/user/product-services";
 import { getUserData } from "../../../api/services/user/user-services";
@@ -8,6 +9,7 @@ import profilePic from "../../../assets/images/user/profile_pic_placeholder.png"
 import SingleComment from "./SingleComment";
 
 const ReviewsSection = ({ product }) => {
+	const user = useSelector((state) => state.authSlice.user);
 	const isLoggedIn = !!localStorage.getItem("token");
 	const [reviewContent, setReviewContent] = useState("");
 
@@ -54,7 +56,7 @@ const ReviewsSection = ({ product }) => {
 							);
 						})}
 				</ol>
-				{isLoggedIn && (
+				{isLoggedIn && !user.is_superuser && (
 					<div className="comment-form-wrapper">
 						<h5>Add Review</h5>
 						<form

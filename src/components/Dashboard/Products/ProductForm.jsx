@@ -181,6 +181,14 @@ const ProductForm = ({ clickHandler }) => {
 			}
 		}
 
+		if (images.length < 1 || images.length > 4) {
+			showToast(
+				"You must upload at least one image and at most four images",
+				"error"
+			);
+			return;
+		}
+
 		try {
 			const response = await addProduct(productData);
 			// await addProductImages(response.id, images);
@@ -488,6 +496,34 @@ const ProductForm = ({ clickHandler }) => {
 								value={productData.is_trending}
 							/>
 						</p>
+						{images.length !== 0 &&
+						images.map((image, index) => (
+							<div
+								key={index}
+								style={{
+									marginLeft: "5px",
+									marginBottom: "10px",
+								}}
+							>
+								<img
+									src={URL.createObjectURL(image)}
+									alt={`Product ${index}`}
+									style={{
+										width: "100px",
+										height: "100px",
+										borderRadius: "50%",
+										border: "1px solid black",
+										padding: "10px",
+										objectFit: "contain",
+									}}
+								/>
+								{index === 0 && (
+									<small className="d-block text-center">
+										Thumbnail
+									</small>
+								)}
+							</div>
+						))}
 
 						<p className="col-lg-12">
 							<label>

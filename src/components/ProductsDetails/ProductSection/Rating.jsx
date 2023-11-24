@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { getUserData } from "../../../api/services/user/user-services";
 import { addProductRating } from "../../../api/services/user/product-services";
@@ -13,6 +14,7 @@ const ProductRatingReviews = ({
 	ratings,
 	productId,
 }) => {
+	const user = useSelector((state) => state.authSlice.user);
 	const [userId, setUserId] = useState(null);
 
 	const handleRatingChange = async (newRating) => {
@@ -68,7 +70,7 @@ const ProductRatingReviews = ({
 					emptySymbol="twi-star empty-star"
 					fractions={2}
 					initialRating={averageRating}
-					readonly={!userId || hasRated}
+					readonly={!userId || hasRated || user.is_superuser}
 					className="woocommerce-product-rating"
 					onChange={handleRatingChange}
 				/>

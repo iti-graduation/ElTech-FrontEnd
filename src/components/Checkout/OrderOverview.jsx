@@ -52,6 +52,7 @@ const OrderOverview = ({
             );
 
             if (response.ok) {
+              localStorage.setItem('orderData', JSON.stringify(orderData));
               const data = await response.json();
               const stripe = await loadStripe(
                 "pk_test_51ODhd6B9sAFUoYRFQroYtxnJVUBnzMsvpWAgvFMXWstGdnpGX5KxJIAHiIhks6Klx0ddJiahh4kJvh0gh5KzF6IU00qDCI9sMo"
@@ -99,6 +100,25 @@ const OrderOverview = ({
       );
     }
   };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+
+    if (success === 'true') {
+        const orderData = JSON.parse(localStorage.getItem('orderData'));
+        console.log("Order Data", orderData)
+        addOrder(orderData)
+            .then(() => {
+                showToast("Your order placed successfully", "success");
+                navigate("/orders");
+                localStorage.removeItem('orderData');
+            })
+            .catch((error) => {
+                showToast("Failed to place order", "error");
+            });
+    }
+  }, []);
 
   return (
     <div className="col-md-6">
