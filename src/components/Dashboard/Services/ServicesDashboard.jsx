@@ -1,8 +1,8 @@
-import CateTable from "./CateTable";
-import CategoryForm from "./CategoryForm";
+import ServiceTable from "./ServicesTable";
+import ServiceForm from "./ServicesForm";
 import React, { useState } from "react";
 
-const CategoriesDashboard = () => {
+const ServicesDashboard = () => {
   const [showCreateForm, setShowReplyForm] = useState(false);
   const handleCreateClick = () => {
     setShowReplyForm(!showCreateForm);
@@ -10,18 +10,18 @@ const CategoriesDashboard = () => {
 
   return (
     <div>
-      <h1>Categories</h1>
+      <h1>Services</h1>
       <button className="guru-btn" id="create-btn" onClick={handleCreateClick}>
-        Add Category
+        Add Service
       </button>
       {showCreateForm && (
         <div className="reply-form-wrapper">
-          <CategoryForm clickHandler={handleCreateClick} />
+          <ServiceForm clickHandler={handleCreateClick} />
         </div>
       )}
-      <CateTable />
+      <ServiceTable />
     </div>
   );
 };
 
-export default CategoriesDashboard;
+export default ServicesDashboard;

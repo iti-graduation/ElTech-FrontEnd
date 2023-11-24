@@ -4,7 +4,9 @@ import { ACCOUNTS_ENDPOINT, apiInstance } from "../../config/api-config";
 // Setting up the endpoint for the API to be the product endpoint in the environment variables
 const cartEndpoint = process.env.REACT_APP_CART_ENDPOINT;
 const userEndpoint = process.env.REACT_APP_USER_ENDPOINT;
+const serviceEndpoint = process.env.REACT_APP_SERVICE_ENDPOINT;
 const endpoint = ACCOUNTS_ENDPOINT;
+
 
 /**
  * Retrieves all carts from the API's endpoint
@@ -124,6 +126,21 @@ export const fetchAllOrders = async () => {
 	}
 };
 
+export const addService = async (title, description, logo) => {
+  try {
+    const response = await apiInstance.post(serviceEndpoint, {
+      title,
+      description,
+      logo,
+    });
+    return response.data;
+  } catch (error) {
+    const msg = "There was a problem adding a new service";
+    console.log(error);
+    throw new Error(msg);
+  }
+};
+
 /**
  * update order status
  * @param {number} id - The id of the order to be updated
@@ -151,4 +168,27 @@ export const updateOrderStatus = async (id, status) => {
 			"There was a problem adding the order of the specified user";
 		console.log(error);
 	}
+};
+
+export const deleteService = async (serviceId) => {
+  try {
+    // Make a DELETE request to remove the service by ID
+    const response = await apiInstance.delete(
+      `${serviceEndpoint}${serviceId}/`
+    );
+    console.log("Service deleted successfully");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAllServices = async () => {
+  try {
+    // Make a GET request to fetch all favorite products
+    const response = await apiInstance.get(serviceEndpoint);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
