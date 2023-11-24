@@ -170,7 +170,7 @@ const ProductsTable = () => {
 				</thead>
 				<tbody>
 					{products.results &&
-						products.results.map((product) => {
+						products.results.sort((a, b) => a.id - b.id).map((product) => {
 							return (
 								<ProductRow
 									key={product.id}
