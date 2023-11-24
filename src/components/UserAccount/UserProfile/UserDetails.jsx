@@ -77,11 +77,24 @@ export default function UserCard({ onEdit, onLogout }) {
 					<h6 className="mb-0">Phone</h6>
 				</div>
 				<div className="col-sm-9 text-secondary">
-					{user
+					{user && user.mobile_phone
 						? formatPhoneNumber(user.mobile_phone)
-						: "(239) 816-9029"}
+						: "(xxx) xx-xx"}
 				</div>
 			</div>
+			<hr />
+			{user && (
+				<>
+					<div className="row">
+						<div className="col-sm-3">
+							<h6 className="mb-0">BirthDay</h6>
+						</div>
+						<div className="col-sm-9 text-secondary">
+							{user && user.birth_date ? user.birth_date : "dd-mm-yyyy"}
+						</div>
+					</div>
+				</>
+			)}
 			<hr />
 			<div className="row">
 				<div className="col-sm-3 d-flex align-items-center">
@@ -134,42 +147,6 @@ export default function UserCard({ onEdit, onLogout }) {
 					)}
 				</div>
 			</div>
-			<hr />
-			<div className="row">
-				<div className="col-sm-3 d-flex align-items-center">
-					<h6 className="mb-0">Orders</h6>
-				</div>
-				<div className="col-sm-9 text-secondary d-flex justify-content-between align-items-center">
-					<Link className="goru-btn" to="/orders">
-						View Orders
-					</Link>
-				</div>
-			</div>
-			<hr />
-			<div className="row">
-				<div className="col-sm-3 d-flex align-items-center">
-					<h6 className="mb-0">Wishlist</h6>
-				</div>
-				<div className="col-sm-9 text-secondary d-flex justify-content-between align-items-center">
-					<Link className="goru-btn" to="/wishlist">
-						View Wishlist
-					</Link>
-				</div>
-			</div>
-			<hr />
-			{user && user.birth_date && (
-				<>
-					<div className="row">
-						<div className="col-sm-3">
-							<h6 className="mb-0">BirthDay</h6>
-						</div>
-						<div className="col-sm-9 text-secondary">
-							{user ? user.birth_date : "dd-mm-yyyy"}
-						</div>
-					</div>
-					<hr />
-				</>
-			)}
 
 			{/* <div className="row">
       <div className="col-sm-3">
