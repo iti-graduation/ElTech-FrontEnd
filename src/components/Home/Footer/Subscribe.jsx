@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 import {
 	subscribe,
@@ -9,6 +10,7 @@ import { showToast } from "../../../utils/toastUtil";
 
 const Subscribe = () => {
 	const user = JSON.parse(localStorage.getItem("user"));
+	const [change, setChange] = useState(false);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -16,7 +18,8 @@ const Subscribe = () => {
 			await subscribe(user.email);
 			await getUserData(); // refresh user data
 			showToast("You have subscribed successfully!", "success"); // show success toast
-			window.location.reload(); // reload the page
+			setChange(!change)
+			// window.location.reload(); // reload the page
 		} catch (error) {
 			showToast(
 				"There was a problem subscribing. Please try again.",
@@ -25,6 +28,8 @@ const Subscribe = () => {
 			console.error(error);
 		}
 	};
+
+	useEffect(() => {}, [change]);
 
 	return (
 		<>

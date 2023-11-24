@@ -132,7 +132,10 @@ const ProductEditForm = ({ product, onCancel }) => {
 			}
 		}
 
-		if (images.length < 1 || images.length > 4) {
+		if (
+			(images.length < 1 && product.images.length < 1) ||
+			images.length > 4
+		) {
 			showToast(
 				"You must upload at least one image and at most four images",
 				"error"

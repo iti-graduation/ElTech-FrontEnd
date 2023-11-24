@@ -8,7 +8,7 @@ import { getUserData } from "../../../api/services/user/user-services";
 import profilePic from "../../../assets/images/user/profile_pic_placeholder.png";
 import SingleComment from "./SingleComment";
 
-const ReviewsSection = ({ product }) => {
+const ReviewsSection = ({ product, toggleRefresh }) => {
 	const user = useSelector((state) => state.authSlice.user);
 	const isLoggedIn = !!localStorage.getItem("token");
 	const [reviewContent, setReviewContent] = useState("");
@@ -68,7 +68,8 @@ const ReviewsSection = ({ product }) => {
 								await createReview(product.id, {
 									content: reviewContent,
 								});
-								window.location.reload();
+								toggleRefresh();
+								// window.location.reload();
 							}}
 						>
 							{/* <div className="col-lg-6 col-md-6">

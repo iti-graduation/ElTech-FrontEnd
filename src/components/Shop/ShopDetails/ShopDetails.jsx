@@ -23,6 +23,7 @@ const ShopDetails = () => {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [activeItem, setActiveItem] = useState("ALL");
 	const [activeFilter, setActiveFilter] = useState("default");
+	const [refresh, setRefresh] = useState(false);
 
 	const [cart, setCart] = useState([]);
 	const [change, setChange] = useState(0);
@@ -30,18 +31,21 @@ const ShopDetails = () => {
 	dispatch(cartCount(cart.length));
 	const user = useSelector((state) => state.authSlice.user);
 
+	const toggleRefresh = () => {
+		setRefresh(!refresh);
+	};
+
 	const handleAddProductToCart = async (productID, quantity) => {
 		if (user) {
 			try {
-				await addCartProduct(productID, quantity)
-				showToast('product added to cart successfully', 'success');
+				await addCartProduct(productID, quantity);
+				showToast("product added to cart successfully", "success");
 			} catch (error) {
-				showToast(error.toString())
+				showToast(error.toString());
 			}
 			setChange(change + 1);
-		}
-		else {
-			showToast('You need Login to add product to cart !');
+		} else {
+			showToast("You need Login to add product to cart !");
 		}
 	};
 
@@ -85,7 +89,7 @@ const ShopDetails = () => {
 				})
 				.catch((err) => console.log(err));
 		}
-			
+
 		if (
 			location.pathname.includes("/search") &&
 			location.state?.searchTerm
@@ -94,7 +98,7 @@ const ShopDetails = () => {
 		} else {
 			fetchProducts();
 		}
-	}, [location, change]);
+	}, [location, change, refresh]);
 
 	const fetchProducts = async (filter = {}) => {
 		const fetchedProducts = await getProducts(filter);
@@ -120,6 +124,7 @@ const ShopDetails = () => {
 							key={product.id}
 							product={product}
 							handleAddProductToCart={handleAddProductToCart}
+							toggleRefresh={toggleRefresh}
 						/>
 					))}
 

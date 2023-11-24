@@ -10,8 +10,8 @@ const ProductSection = ({
 	handleQuantity,
 	inCart,
 	quantity,
+	toggleRefresh,
 }) => {
-	console.log(product);
 	return (
 		<section className="single-product-section">
 			<div className="container">
@@ -22,8 +22,9 @@ const ProductSection = ({
 					handleQuantity={handleQuantity}
 					inCart={inCart}
 					quantity={quantity}
+					toggleRefresh={toggleRefresh}
 				/>
-				<ProductTab product={product} />
+				<ProductTab product={product} toggleRefresh={toggleRefresh} />
 				{/* <RelatedProducts /> */}
 			</div>
 		</section>

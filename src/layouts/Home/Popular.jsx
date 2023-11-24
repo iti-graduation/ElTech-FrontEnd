@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProducts } from "../../api/services/user/product-services";
-import { fetchUserCart, addCartProduct } from "../../api/services/user/cart-services";
+import {
+	fetchUserCart,
+	addCartProduct,
+} from "../../api/services/user/cart-services";
 
 import { cartCount } from "../../services/actions/cartSlice";
 
@@ -14,27 +17,29 @@ import NormalProductCard from "../../components/Shared/NormalProductCard/NormalP
 
 const Popular = () => {
 	const [products, setProducts] = useState([]);
-
+	const [refresh, setRefresh] = useState(false);
 	const [cart, setCart] = useState([]);
 	const [change, setChange] = useState(0);
 	const dispatch = useDispatch();
 	dispatch(cartCount(cart.length));
 	const user = useSelector((state) => state.authSlice.user);
 
+	const toggleRefresh = () => {
+		setRefresh(!refresh);
+	};
+
 	const handleAddProductToCart = async (productID, quantity) => {
 		if (user) {
 			try {
-				await addCartProduct(productID, quantity)
-				showToast('product added to cart successfully', 'success');
+				await addCartProduct(productID, quantity);
+				showToast("product added to cart successfully", "success");
 			} catch (error) {
-				showToast(error.toString())
+				showToast(error.toString());
 			}
 			setChange(change + 1);
+		} else {
+			showToast("You need Login to add product to cart !");
 		}
-		else {
-			showToast('You need Login to add product to cart !');
-		}
-
 	};
 
 	const fetchProducts = async (categoryId) => {
@@ -89,7 +94,7 @@ const Popular = () => {
 
 	useEffect(() => {
 		fetchProducts();
-	}, []);
+	}, [refresh]);
 
 	useEffect(() => {
 		const popular_tab_slider = window.$(".popular-tab-slider");
@@ -217,6 +222,9 @@ const Popular = () => {
 														}
 														handleAddProductToCart={
 															handleAddProductToCart
+														}
+														toggleRefresh={
+															toggleRefresh
 														}
 													/>
 												))}

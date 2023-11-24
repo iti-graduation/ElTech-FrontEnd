@@ -29,13 +29,16 @@ const CategoryDetails = ({ id, updateCategory }) => {
 	const location = useLocation();
 	const [activeItem, setActiveItem] = useState("ALL");
 	const [activeFilter, setActiveFilter] = useState("default");
-	console.log(products);
-
+	const [refresh, setRefresh] = useState(false);
 	const [cart, setCart] = useState([]);
 	const [change, setChange] = useState(0);
 	const dispatch = useDispatch();
 	// dispatch(cartCount(cart.length));
 	dispatch(cartCount(cart ? cart.length : 0));
+
+	const toggleRefresh = () => {
+		setRefresh(!refresh);
+	};
 
 	const handleAddProductToCart = async (productID, quantity) => {
 		try {
@@ -60,7 +63,7 @@ const CategoryDetails = ({ id, updateCategory }) => {
 		};
 
 		fetchCategory();
-	}, [id]);
+	}, [id, refresh]);
 
 	const handlePageClick = (data) => {
 		let selected = data.selected;
@@ -135,6 +138,7 @@ const CategoryDetails = ({ id, updateCategory }) => {
 							key={product.id}
 							product={product}
 							handleAddProductToCart={handleAddProductToCart}
+							toggleRefresh={toggleRefresh}
 						/>
 					))}
 			</div>

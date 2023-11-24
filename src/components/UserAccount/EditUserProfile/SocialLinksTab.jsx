@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { updateUserInfo } from "../../../api/services/user/user-services";
+import { saveUserData } from "../../../services/actions/authSlice";
+
+import {
+	updateUserInfo,
+	getUserData,
+} from "../../../api/services/user/user-services";
 
 import { showToast } from "../../../utils/toastUtil";
 
 export default function SocialLinksTab({ onCancel }) {
 	const user = useSelector((state) => state.authSlice.user);
+	const dispatch = useDispatch();
 
 	const [userData, setUserData] = useState({
 		facebook_profile: user.facebook_profile,
@@ -47,9 +53,11 @@ export default function SocialLinksTab({ onCancel }) {
 		try {
 			const response = await updateUserInfo(formData);
 			// Update user data in local storage
-			localStorage.setItem("user", JSON.stringify(response));
+			// localStorage.setItem("user", JSON.stringify(response));
 			// Reload the page
-			window.location.reload();
+			// window.location.reload();
+			const updatedUser = await getUserData();
+			dispatch(saveUserData(updatedUser));
 			showToast("User info updated successfully!", "success");
 		} catch (error) {
 			console.error(error);

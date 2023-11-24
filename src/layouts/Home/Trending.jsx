@@ -28,43 +28,47 @@ const Trending = () => {
 	const dispatch = useDispatch();
 	dispatch(cartCount(cart.length));
 	const user = useSelector((state) => state.authSlice.user);
+	const [refresh, setRefresh] = useState(false);
+
+	const toggleRefresh = () => {
+		setRefresh(!refresh);
+	};
 
 	const handleAddProductToCart = async (productID, quantity) => {
 		if (user) {
 			try {
-				await addCartProduct(productID, quantity)
-				showToast('product added to cart successfully', 'success');
+				await addCartProduct(productID, quantity);
+				showToast("product added to cart successfully", "success");
 			} catch (error) {
-				showToast(error.toString())
+				showToast(error.toString());
 			}
 			setChange(change + 1);
+		} else {
+			showToast("You need Login to add product to cart !");
 		}
-		else {
-			showToast('You need Login to add product to cart !');
+	};
+
+	const fetchProducts = async () => {
+		const data = await getProducts({ is_trending: 1 });
+		console.log(data);
+
+		if (
+			data &&
+			data.results &&
+			JSON.stringify(data) !== JSON.stringify(products)
+		) {
+			setProducts(data.results);
 		}
 	};
 
 	useEffect(() => {
-		if (user){
-		fetchUserCart()
-			.then((data) => {
-				setCart(data.products);
-			})
-			.catch((err) => console.log(err));
+		if (user) {
+			fetchUserCart()
+				.then((data) => {
+					setCart(data.products);
+				})
+				.catch((err) => console.log(err));
 		}
-
-		const fetchProducts = async () => {
-			const data = await getProducts({ is_trending: 1 });
-			console.log(data);
-
-			if (
-				data &&
-				data.results &&
-				JSON.stringify(data) !== JSON.stringify(products)
-			) {
-				setProducts(data.results);
-			}
-		};
 
 		fetchProducts();
 	}, [change]);
@@ -90,6 +94,10 @@ const Trending = () => {
 			});
 		}
 	}, [products]);
+
+	useEffect(() => {
+		fetchProducts();
+	}, [refresh]);
 
 	return (
 		<section
@@ -134,6 +142,9 @@ const Trending = () => {
 															product={product}
 															handleAddProductToCart={
 																handleAddProductToCart
+															}
+															toggleRefresh={
+																toggleRefresh
 															}
 														/>
 													</div>

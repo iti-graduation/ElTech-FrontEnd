@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { updateUserInfo } from "../../../api/services/user/user-services";
+import { saveUserData } from "../../../services/actions/authSlice";
+
+import {
+	updateUserInfo,
+	getUserData,
+} from "../../../api/services/user/user-services";
 
 import { showToast } from "../../../utils/toastUtil";
 
@@ -10,6 +15,7 @@ import profilePic from "../../../assets/images/user/profile_pic_placeholder.png"
 
 export default function GeneralTab({ onCancel }) {
 	const user = useSelector((state) => state.authSlice.user);
+	const dispatch = useDispatch();
 	const [selectedFileUrl, setSelectedFileUrl] = useState(null);
 
 	const [userData, setUserData] = useState({
@@ -111,11 +117,13 @@ export default function GeneralTab({ onCancel }) {
 		}
 
 		try {
-			const response = await updateUserInfo(formData);
+			await updateUserInfo(formData);
 			// Update user data in local storage
-			localStorage.setItem("user", JSON.stringify(response));
+			// localStorage.setItem("user", JSON.stringify(response));
 			// Reload the page
-			window.location.reload();
+			// window.location.reload();
+			const updatedUser = await getUserData();
+			dispatch(saveUserData(updatedUser));
 			showToast("User info updated successfully!", "success");
 		} catch (error) {
 			console.error(error);

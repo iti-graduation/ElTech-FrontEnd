@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { updateUserInfo } from "../../../api/services/user/user-services";
+import { saveUserData } from "../../../services/actions/authSlice";
+
+import {
+	updateUserInfo,
+	getUserData,
+} from "../../../api/services/user/user-services";
 
 import { showToast } from "../../../utils/toastUtil";
 
 export default function ChangePasswordTab({ onCancel }) {
 	const user = useSelector((state) => state.authSlice.user);
+	const dispatch = useDispatch();
 	const [passwordData, setPasswordData] = useState({
 		currentPassword: "",
 		newPassword: "",
@@ -40,7 +46,9 @@ export default function ChangePasswordTab({ onCancel }) {
 				new_password: passwordData.newPassword,
 			});
 			showToast("Password updated successfully!", "success");
-			window.location.reload();
+			// window.location.reload();
+			const updatedUser = await getUserData();
+			dispatch(saveUserData(updatedUser));
 		} catch (error) {
 			showToast("Error updating password!", "error");
 		}

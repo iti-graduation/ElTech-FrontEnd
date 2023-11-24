@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { addProductNotification } from "../../../api/services/user/product-services";
@@ -9,7 +10,7 @@ import ProductCardBadge from "../../Shared/Badges/ProductCardBadge";
 
 import { showToast } from "../../../utils/toastUtil";
 
-const ProductCard = ({ product, handleAddProductToCart }) => {
+const ProductCard = ({ product, handleAddProductToCart, toggleRefresh }) => {
 	const userIdsToNotify = product.users_to_notify.map((user) => user.id);
 	const user = JSON.parse(localStorage.getItem("user"));
 	const userId = user ? user.id : null;
@@ -21,7 +22,8 @@ const ProductCard = ({ product, handleAddProductToCart }) => {
 				"Product added to notifications successfully!",
 				"success"
 			);
-			window.location.reload();
+			toggleRefresh();
+			// window.location.reload();
 		} catch (error) {
 			showToast(
 				"There was a problem adding the product to notifications",

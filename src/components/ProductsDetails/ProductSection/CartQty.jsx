@@ -21,6 +21,7 @@ const ProductCartQty = ({
 	productId,
 	stock,
 	usersToNotify,
+	toggleRefresh,
 }) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const user = useSelector((state) => state.authSlice.user);
@@ -36,7 +37,8 @@ const ProductCartQty = ({
 				"Product added to notifications successfully!",
 				"success"
 			);
-			window.location.reload();
+			toggleRefresh();
+			// window.location.reload();
 		} catch (error) {
 			showToast(
 				"There was a problem adding the product to notifications",
@@ -139,11 +141,10 @@ const ProductCartQty = ({
 					<Link
 						className="add-to-cart-btn"
 						onClick={() => {
-							if (inCart){
-							handleUpdateProductToCart(quantity)
-							}
-							else {
-							handleAddProductToCart(productId, quantity)
+							if (inCart) {
+								handleUpdateProductToCart(quantity);
+							} else {
+								handleAddProductToCart(productId, quantity);
 							}
 						}}
 					>

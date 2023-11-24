@@ -13,6 +13,7 @@ const ProductRatingReviews = ({
 	averageRating,
 	ratings,
 	productId,
+	toggleRefresh,
 }) => {
 	const user = useSelector((state) => state.authSlice.user);
 	const [userId, setUserId] = useState(null);
@@ -24,9 +25,10 @@ const ProductRatingReviews = ({
 			// showToast("Rating added successfully!", "success");
 			// window.location.reload();
 			showToast("Rating added successfully!", "success");
-			setTimeout(() => {
-				window.location.reload();
-			}, 1000);
+			toggleRefresh();
+			// setTimeout(() => {
+			// 	window.location.reload();
+			// }, 1000);
 		} catch (error) {
 			console.error("Failed to submit rating", error);
 			showToast("There was a problem adding the rating!", "error");

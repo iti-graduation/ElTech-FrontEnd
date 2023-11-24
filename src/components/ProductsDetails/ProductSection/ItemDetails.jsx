@@ -15,6 +15,7 @@ const ItemDetails = ({
 	handleQuantity,
 	inCart,
 	quantity,
+	toggleRefresh,
 }) => {
 	return (
 		<div className="row">
@@ -29,6 +30,7 @@ const ItemDetails = ({
 						averageRating={product.average_rating}
 						ratings={product.ratings}
 						productId={product.id}
+						toggleRefresh={toggleRefresh}
 					/>
 					<ProductPrice product={product} />
 					<div className="pro-excerp">
@@ -46,6 +48,7 @@ const ItemDetails = ({
 						productId={product.id}
 						stock={product.stock}
 						usersToNotify={product.users_to_notify}
+						toggleRefresh={toggleRefresh}
 					/>
 					{/* <div className="pro-socila">
 						<a href="#">

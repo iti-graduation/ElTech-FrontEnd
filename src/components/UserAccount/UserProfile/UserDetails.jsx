@@ -1,7 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { formatPhoneNumber } from "../../../utils/helpers";
+
+import { saveUserData } from "../../../services/actions/authSlice";
 
 import {
 	subscribe,
@@ -14,6 +17,7 @@ import { showToast } from "../../../utils/toastUtil";
 export default function UserCard({ onEdit, onLogout }) {
 	const user = useSelector((state) => state.authSlice.user);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const handleSubscribe = async (event) => {
 		event.preventDefault();
@@ -21,7 +25,10 @@ export default function UserCard({ onEdit, onLogout }) {
 			await subscribe(user.email);
 			await getUserData(); // refresh user data
 			showToast("You have subscribed successfully!", "success"); // show success toast
-			window.location.reload(); // reload the page
+			const updatedUser = await getUserData();
+			dispatch(saveUserData(updatedUser));
+			// toggleRefresh();
+			// window.location.reload(); // reload the page
 		} catch (error) {
 			showToast(
 				"There was a problem subscribing. Please try again.",
@@ -37,7 +44,9 @@ export default function UserCard({ onEdit, onLogout }) {
 			await unsubscribe(user.email);
 			await getUserData(); // refresh user data
 			showToast("You have unsubscribed successfully!", "success"); // show success toast
-			window.location.reload(); // reload the page
+			// window.location.reload(); // reload the page
+			const updatedUser = await getUserData();
+			dispatch(saveUserData(updatedUser));
 		} catch (error) {
 			showToast(
 				"There was a problem unsubscribing. Please try again.",
@@ -90,7 +99,9 @@ export default function UserCard({ onEdit, onLogout }) {
 							<h6 className="mb-0">BirthDay</h6>
 						</div>
 						<div className="col-sm-9 text-secondary">
-							{user && user.birth_date ? user.birth_date : "dd-mm-yyyy"}
+							{user && user.birth_date
+								? user.birth_date
+								: "dd-mm-yyyy"}
 						</div>
 					</div>
 				</>

@@ -12,6 +12,7 @@ const NormalProductCard = ({
 	product,
 	isPopularOrRelated = false,
 	handleAddProductToCart,
+	toggleRefresh,
 }) => {
 	const userIdsToNotify = product.users_to_notify.map((user) => user.id);
 	const user = JSON.parse(localStorage.getItem("user"));
@@ -24,7 +25,8 @@ const NormalProductCard = ({
 				"Product added to notifications successfully!",
 				"success"
 			);
-			window.location.reload();
+			// window.location.reload();
+			toggleRefresh();
 		} catch (error) {
 			showToast(
 				"There was a problem adding the product to notifications",
