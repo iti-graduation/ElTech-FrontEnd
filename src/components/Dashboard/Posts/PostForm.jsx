@@ -59,6 +59,7 @@ const PostForm = ({clickHandler}) => {
 				placeholder="Post Title"
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
+				required="true"
 			  />
 			</div>
 			<div className="col-lg-12 col-md-12">
@@ -67,6 +68,7 @@ const PostForm = ({clickHandler}) => {
 				placeholder="Post Content"
 				value={content}
 				onChange={(e) => setContent(e.target.value)}
+				required="true"
 			  ></textarea>
 			</div>
 			<div className="col-lg-12 col-md-12">
@@ -75,10 +77,11 @@ const PostForm = ({clickHandler}) => {
 				name="image"
 				accept="image/*"
 				onChange={(e) => setImage(e.target.files[0])}
+				required="true"
 			  />
 			</div>
 			<div className="col-lg-12 col-md-12">
-          <select value={selectedCategory} onChange={handleCategoryChange}>
+          <select value={selectedCategory} onChange={handleCategoryChange} 	required="true">
             <option value="">Select category</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>

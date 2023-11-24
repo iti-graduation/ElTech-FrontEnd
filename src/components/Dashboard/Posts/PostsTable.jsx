@@ -82,6 +82,8 @@ const PostsTable = () => {
       return date.toLocaleDateString(); // Customize this as needed
     };
 
+    
+
     return (
       <div>
       {showEditForm && selectedPost && (

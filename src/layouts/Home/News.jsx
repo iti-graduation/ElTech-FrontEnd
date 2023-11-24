@@ -63,15 +63,16 @@ function News() {
 					{Array.isArray(posts) && posts.length > 0 ? (
 					posts.map((post) => <NewsCard key={post.id} post={post} />)
 					) : (
-					<p>Loading posts...</p>
+					<p>No Posts ATM! <br/> You will hear from us asap!</p>
 					)}
-				</div>
+					</div>
 				<div className="row m-top-45">
-				<div className="col-lg-12 text-center">
-					<button className="goru-btn"onClick={handleViewMore}>
-					View More
-					</button>
-				</div>
+				{posts.length > 0 ? (
+					<div className="col-lg-12 text-center">
+						<button className="goru-btn"onClick={handleViewMore}>
+						View More
+						</button>
+					</div>):null}
 				</div>
 			</div>
 		</section>

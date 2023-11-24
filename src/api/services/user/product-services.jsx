@@ -328,22 +328,20 @@ export const addCategory = async (name, image) => {
  */
 export const updateCategory = async (categoryId, catName, image) => {
 	try {
-		//   let formData = new FormData();
-		//   formData.append("name", catName);
-		//   formData.append("image", image);
-		//   console.log(formData);
+		  let formData = new FormData();
+		  formData.append("name", catName);
+		  if (image) {
+			formData.append("image", image);
+		  }
+		  console.log(formData);
 		console.log(catName, image);
 		const url = categoryEndpoint + `${categoryId}/`;
 		console.log(url);
-		const response = await apiInstance.patch(url, {
-			params: {
-				name: catName,
-				image: image,
-			},
+		const response = await apiInstance.patch(url, formData, {
 			headers: {
-				"Content-Type": "multipart/form-data",
+			  "Content-Type": "multipart/form-data",
 			},
-		});
+		  });
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem updating Category";
