@@ -101,3 +101,54 @@ export const changeUserRole = async (userId, isSuperUser) => {
 		return msg;
 	}
 };
+
+/**
+ * fetch all orders
+ * @return {Object} The data of the orders
+ * @throws {Error} If there was a problem adding the order
+ */
+export const fetchAllOrders = async () => {
+	try {
+		// construct url with user Id
+		const url = "api/order/ordersList/";
+		// perform GET request to the constructed url
+		const response = await apiInstance.get(url);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during fetching order products
+		const msg = "There was a problem getting the order products users";
+		console.log(error);
+		throw new Error(msg);
+	}
+};
+
+/**
+ * update order status
+ * @param {number} id - The id of the order to be updated
+ * @param {string} status - The status of the order to be updated
+ * @return {Object} The data of the added order
+ * @throws {Error} If there was a problem adding the order
+ */
+export const updateOrderStatus = async (id, status) => {
+	try {
+		// construct url
+		const url = `/api/order/orders/update/${id}/`;
+
+		// perform PATCH request to the constructed url
+		const response = await apiInstance.patch(url,
+			{
+				status : status
+			}
+			);
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle any error that occurred during adding the order
+		const msg =
+			"There was a problem adding the order of the specified user";
+		console.log(error);
+	}
+};

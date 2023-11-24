@@ -29,31 +29,7 @@ export const fetchUserOrders = async () => {
 
 /**
  * Fetches the order products of a specific user
- * @param {id} The id of the order
- * @return {Object} The data of the order products of the user
- * @throws {Error} If there was a problem getting the order products for the specified user
- */
-// export const fetchUserOrders = async (id) => {
-// 	try {
-// 		// construct url with user Id
-// 		const url = order_endpoint + id;
-// 		// perform GET request to the constructed url
-// 		const response = await apiInstance.get(url);
-
-// 		// Return response data
-// 		return response.data;
-// 	} catch (error) {
-// 		// Handle any error that occurred during fetching order products
-// 		const msg =
-// 			"There was a problem getting the order products for the specified user";
-// 		console.log(error);
-// 		throw new Error(msg);
-// 	}
-// };
-
-/**
- * Fetches the order products of a specific user
- * @param {id} The id of the order
+ * @param {number} id id of the order
  * @return {Object} The data of the order products of the user
  * @throws {Error} If there was a problem getting the order products for the specified user
  */
@@ -76,7 +52,7 @@ export const fetchUserOrder = async (id) => {
 };
 
 /**
- * add cart order for a specific user
+ * add order for a specific user
  * @param {Object} orderData - The data of the order to be added
  * @return {Object} The data of the added order
  * @throws {Error} If there was a problem adding the order
@@ -101,19 +77,3 @@ export const addOrder = async (orderData) => {
 	}
 };
 
-export const fetchAllOrders = async () => {
-	try {
-		// construct url with user Id
-		const url = order_endpoint + "/ordersList";
-		// perform GET request to the constructed url
-		const response = await apiInstance.get(url);
-
-		// Return response data
-		return response.data;
-	} catch (error) {
-		// Handle any error that occurred during fetching order products
-		const msg = "There was a problem getting the order products users";
-		console.log(error);
-		throw new Error(msg);
-	}
-};

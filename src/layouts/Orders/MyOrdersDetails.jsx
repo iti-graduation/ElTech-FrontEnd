@@ -37,11 +37,9 @@ function MyOrdersDetails() {
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12">
-						<form className="woocommerce-cart-form" action="#">
-							{order!=0 &&
-								<OrdersDetailsTable order={order} />
-							}
-						</form>
+						{order != 0 &&
+							<OrdersDetailsTable order={order} />
+						}
 					</div>
 				</div>
 			</div>
