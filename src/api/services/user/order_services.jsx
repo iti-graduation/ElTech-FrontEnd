@@ -76,7 +76,7 @@ export const fetchUserOrder = async (id) => {
 };
 
 /**
- * add cart order for a specific user
+ * add order for a specific user
  * @param {Object} orderData - The data of the order to be added
  * @return {Object} The data of the added order
  * @throws {Error} If there was a problem adding the order
@@ -100,14 +100,3 @@ export const addOrder = async (orderData) => {
 		throw new Error(msg);
 	}
 };
-
-export const fetchAllOrders = async () => {
-	try {
-	  const url = "api/order/ordersList";
-	  const response = await apiInstance.get(url);
-	  return response.data;
-	} catch (error) {
-	  console.error('Error fetching orders:', error);
-	  throw new Error('There was a problem getting the orders');
-	}
-  };

@@ -60,7 +60,7 @@ const Header = ({ className }) => {
               </Link>
             </div>
           </div>
-          <div className="col-lg-6 col-md-6">
+          <div className="col-lg-10 col-md-10">
             <nav className="mainmenu mobile-menu">
               <div className="mobile-btn">
                 <a href="javascript: void(0);">
@@ -68,65 +68,68 @@ const Header = ({ className }) => {
                   <i className="twi-bars"></i>
                 </a>
               </div>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/shop">Shop</Link>
-                </li>
-                <li>
-                  <Link to={user ? "/wishlist" : "/login"}>Wishlist</Link>
-                </li>
-                <li>
-                  <Link to="/news">News</Link>
-                </li>
-                <li>
-                  <Link to="/about">About</Link>
-                </li>
-                {/*
+              <ul className="d-flex justify-content-between">
+                <span>
                   <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/">Home</Link>
                   </li>
-                */}
+                  <li>
+                    <Link to="/shop">Shop</Link>
+                  </li>
+                  <li>
+                    <Link to="/news">News</Link>
+                  </li>
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                </span>
+                <span>
+                  <li>
+                    <a className="search search-toggles" href="javascript:void(0);">
+                      <i className="twi-search"></i>
+                    </a>
+                  </li>
+                  <li class="active menu-item-has-children">
+
+                    {user && user.profile_picture ?
+                      <img
+                        style={{ width: 23, height: 23 }}
+                        className="rounded-circle mr-2"
+                        src={user.profile_picture}
+                        alt="Admin"
+                      />
+                      : <i className="twi-user-circle"></i>}
+                    <span>{user ? user.first_name : "Account"}</span>
+                    <ul class="sub-menu">
+                      <li>
+                        <Link className="user-login" to={user ? "/profile" : "/login"}><i className="twi-user mr-2"></i>Profile</Link>
+                      </li>
+                      <li>
+                        <Link to={user ? "/wishlist" : "/login"}><i className="twi-heart mr-2"></i>Wishlist</Link>
+                      </li>
+                      <li>
+                        <Link to={user ? "/orders" : "/login"}><i className="twi-box mr-2"></i>Orders</Link>
+                      </li>
+                    </ul>
+
+                  </li>
+                  {isAdmin ? (
+                    <li>
+                      <Link className="user-login" to={user ? "/dashboard" : null}>
+                        <AdminPanelSettingsIcon />
+                      </Link>
+                    </li>
+                  ) : null}
+
+                  <Link className="carts" to={user ? "/cart" : "/login"}>
+                    <span>{count}</span>
+                    <img src={cart} alt="" />
+                  </Link>
+                </span>
               </ul>
             </nav>
           </div>
-          <div className="col-lg-4 col-md-4">
-            <div className="header-cogs">
-              <a className="search search-toggles" href="javascript:void(0);">
-                <i className="twi-search"></i>
-              </a>
-              {/* <a className="select-country" href="javascript:void(0);">
-                <img src={flag} alt="" />
-                Eng
-              </a>
-              <a className="select-currency" href="javascript:void(0);">
-                <i className="twi-dollar-sign"></i>Usd
-              </a> */}
 
-              <Link className="user-login" to={user ? "/profile" : "/login"}>
-                {user && user.profile_picture?
-                  <img
-                    style={{width:23, height:23}}
-                    className="rounded-circle mr-2"
-                    src={user.profile_picture}
-                    alt="Admin"
-                  />
-                  : <i className="twi-user-circle"></i>}
-                <span>{user ? user.first_name : "Account"}</span>
-              </Link>
-              {isAdmin ? (
-                <Link className="user-login" to={user ? "/dashboard" : null}>
-                  <AdminPanelSettingsIcon />
-                </Link>
-              ) : null}
-              <Link className="carts" to={user ? "/cart" : "/login"}>
-                <span>{count}</span>
-                <img src={cart} alt="" />
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </header>

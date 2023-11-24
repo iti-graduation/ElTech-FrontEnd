@@ -20,7 +20,7 @@ export default function UserInfo() {
           />
           <div className="mt-3">
             <h4>{user ? user.first_name + " " + user.last_name : "John Doe"}</h4>
-            <p className="text-secondary mb-1">{user ? user.email : "JohnDoe@mail.com"}</p>
+            {/* <p className="text-secondary mb-1">{user ? user.email : "JohnDoe@mail.com"}</p> */}
             {/* <p className="text-muted font-size-sm">Company</p> */}
           </div>
         </div>

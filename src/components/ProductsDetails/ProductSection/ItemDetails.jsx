@@ -10,8 +10,10 @@ import ProductColorOptions from "./ProductColor";
 
 const ItemDetails = ({
 	product,
+	handleAddProductToCart,
 	handleUpdateProductToCart,
 	handleQuantity,
+	inCart,
 	quantity,
 }) => {
 	return (
@@ -37,7 +39,9 @@ const ItemDetails = ({
 
 					<ProductCartQty
 						handleQuantity={handleQuantity}
+						inCart={inCart}
 						quantity={quantity}
+						handleAddProductToCart={handleAddProductToCart}
 						handleUpdateProductToCart={handleUpdateProductToCart}
 						productId={product.id}
 						stock={product.stock}

@@ -59,14 +59,8 @@ export default function Router() {
 				<Route path="/return" element={<ReturnPolicy />} />
 				<Route path="/profile" element={<MyAccountProfile />} />
 				<Route path="/dashboard" element={<Dashboard />} />
-				<Route
-					path="/dashboard/products/:id?"
-					element={<ProductDetailsDashboard />}
-				/>
-				<Route
-					path="/dashboard/users/:id?"
-					element={<UserDetailsDashboard />}
-				/>
+				<Route path="/dashboard/products/:id?" element={<ProductDetailsDashboard />} />
+				<Route path="/dashboard/users/:id?" element={<UserDetailsDashboard />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</Suspense>
