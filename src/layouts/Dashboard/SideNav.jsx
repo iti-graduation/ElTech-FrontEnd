@@ -33,183 +33,154 @@ import ServicesDashboard from "../../components/Dashboard/Services/ServicesDashb
 const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
-	width: drawerWidth,
-	transition: theme.transitions.create("width", {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.enteringScreen,
-	}),
-	overflowX: "hidden",
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
 });
 
 const closedMixin = (theme) => ({
-	transition: theme.transitions.create("width", {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
-	overflowX: "hidden",
-	width: `calc(${theme.spacing(7)} + 10px)`,
-	[theme.breakpoints.up("sm")]: {
-		width: `calc(${theme.spacing(8)} + 1px)`,
-	},
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 10px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "flex-end",
-	padding: theme.spacing(0, 1),
-	// necessary for content to be below app bar
-	...theme.mixins.toolbar,
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
 }));
 
-// const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })
-//   (({ theme, open }) => ({
-//     width: drawerWidth,
-//     flexShrink: 0,
-//     whiteSpace: 'nowrap',
-//     boxSizing: 'border-box',
-//     ...(open && {
-//       ...openedMixin(theme),
-//       '& .MuiDrawer-paper': openedMixin(theme),
-//     }),
-//     ...(!open && {
-//       ...closedMixin(theme),
-//       '& .MuiDrawer-paper': closedMixin(theme),
-//     }),
-//   }));
 
-const Drawer = styled(MuiDrawer, {
-	shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-	width: drawerWidth,
-	flexShrink: 0,
-	whiteSpace: "nowrap",
-	boxSizing: "border-box",
-	...(open && {
-		...openedMixin(theme),
-		"& .MuiDrawer-paper": openedMixin(theme),
-	}),
-	...(!open && {
-		...closedMixin(theme),
-		"& .MuiDrawer-paper": closedMixin(theme),
-	}),
-}));
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })
+  (({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  }));
 
 export default function MiniDrawer() {
-	const theme = useTheme();
-	const [open, setOpen] = React.useState(true);
-	const [selectedItem, setSelectedItem] = React.useState("Home"); // State to track the selected item
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
+  const [selectedItem, setSelectedItem] = React.useState('Home'); // State to track the selected item
 
-	const renderContent = () => {
-		switch (selectedItem) {
-			case "Home":
-				return <Home />;
-			case "Category":
-				return <CategoriesDashboard />;
-			case "Products":
-				return <ProductsDashboard />;
-			case "Feed":
-				return <PostsDashboard />;
-			case "Users":
-				return <UsersDashboard />;
-			case "Orders":
-				return <OrdersDashboard />;
-			default:
-				return <Typography>No Content to View</Typography>;
-		}
-	};
+  const renderContent = () => {
+    switch (selectedItem) {
+        case 'Home':
+        return (
+            <Home/>
+        );
+        case 'Category':
+        return (
+            <CategoriesDashboard/>
+        );
+        case 'Products':
+        return (
+            <ProductsDashboard/>
+        );
+        case 'Feed':
+        return (
+            <PostsDashboard />
+        );
+        case 'Users':
+        return (
+            <UsersDashboard />
+        );
+        case 'Orders':
+          return (
+            <OrdersDashboard />
+          );
+      default:
+        return (
+          <Typography>
+            No Content to View
+          </Typography>
+        );
+    }
+  };
 
-	return (
-		<>
-			<Box sx={{ display: "flex" }}>
-				<CssBaseline />
-				<Drawer
-					variant="permanent"
-					open={open}
-					sx={{ backgroundColor: "grey" }}
-				>
-					<DrawerHeader>
-						<Typography></Typography>
-						<IconButton onClick={() => setOpen(!open)}>
-							{theme.direction === "rtl" ? (
-								<ChevronRightIcon />
-							) : (
-								<ChevronLeftIcon />
-							)}
-						</IconButton>
-					</DrawerHeader>
-					<Divider />
-					<Paper sx={{ height: "100vh", overflow: "auto" }}>
-						<List>
-							{[
-								"Home",
-								"Category",
-								"Products",
-								"Feed",
-								"Orders",
-							].map((text) => (
-								<ListItem
-									sx={{ color: "black" }}
-									key={text}
-									disablePadding
-									onClick={() => setSelectedItem(text)} // Set selected item onClick
-								>
-									<ListItemButton>
-										<ListItemIcon sx={{ color: "black" }}>
-											{text === "Home" && <HomeIcon />}
-											{text === "Category" && (
-												<CategoryIcon />
-											)}
-											{text === "Products" && (
-												<ProductionQuantityLimitsIcon />
-											)}
-											{text === "Feed" && <FeedIcon />}
-											{text === "Orders" && (
-												<ReceiptLongIcon />
-											)}
-										</ListItemIcon>
-										<ListItemText primary={text} />
-									</ListItemButton>
-								</ListItem>
-							))}
-						</List>
-						<Divider />
-						<List>
-							{["Users"].map((text) => (
-								<ListItem
-									sx={{ color: "black" }}
-									key={text}
-									disablePadding
-									onClick={() => setSelectedItem(text)} // Set selected item onClick
-								>
-									<ListItemButton>
-										<ListItemIcon sx={{ color: "black" }}>
-											{text === "Users" && <GroupIcon />}
-										</ListItemIcon>
-										<ListItemText primary={text} />
-									</ListItemButton>
-								</ListItem>
-							))}
-						</List>
-					</Paper>
-				</Drawer>
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						height: "100%",
-						width: "100%",
-					}}
-				>
-					<NavBar />
-					<Box
-						component="main"
-						sx={{ flexGrow: 1, p: 3, top: "0px" }}
-					>
-						{renderContent()}
-					</Box>
-				</div>
-			</Box>
-		</>
-	);
+  return (
+    <>
+    <Box sx={{ display: 'flex'}}>
+      <CssBaseline />
+      <Drawer variant="permanent" open={open} sx={{backgroundColor:"grey"}} >
+        <DrawerHeader >
+            <Typography>
+
+            </Typography>
+          <IconButton onClick={()=>setOpen(!open)}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <Paper sx={{ height: '100vh', overflow: 'auto'}}>
+        <List>
+          {['Home', 'Category', 'Products', 'Feed','Orders'].map((text) => (
+            <ListItem
+              sx={{color:"black"}}
+              key={text}
+              disablePadding
+              onClick={() => setSelectedItem(text)} // Set selected item onClick
+            >
+              <ListItemButton>
+                <ListItemIcon sx={{color:"black"}}>
+                  {text === 'Home' && <HomeIcon />}
+                  {text === 'Category' && <CategoryIcon />}
+                  {text === 'Products' && <ProductionQuantityLimitsIcon />}
+                  {text === 'Feed' && <FeedIcon />}
+                  {text === 'Orders' && <ReceiptLongIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['Users'].map((text) => (
+            <ListItem
+              sx={{color:"black"}}
+              key={text}
+              disablePadding
+              onClick={() => setSelectedItem(text)} // Set selected item onClick
+            >
+              <ListItemButton>
+                <ListItemIcon sx={{color:"black"}}>
+                  {text === 'Users' && <GroupIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        </Paper>
+      </Drawer>
+      <div style={{display:"flex",flexDirection:"column",height:"100%",width:"100%"}}>
+      <NavBar/>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 , top:"0px"}}>
+        {renderContent()}
+      </Box></div>
+    </Box>
+    </>
+  );
 }
