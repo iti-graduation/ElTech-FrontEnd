@@ -3,7 +3,7 @@ import { getUserData } from "../../../api/services/user/user-services"; // Impor
 import { addService } from "../../../api/services/admin/admin-services"; // Import your authentication context
 import { toast } from "react-toastify";
 
-const ServiceForm = ({ clickHandler }) => {
+const ServiceForm = ({ clickHandler ,onServiceCreated}) => {
   const userData = getUserData();
   const userEmail = userData.email;
   const [title, setTitle] = useState("");
@@ -20,6 +20,7 @@ const ServiceForm = ({ clickHandler }) => {
       console.log(response);
 
       // Reset the form after successful submission
+      onServiceCreated();
       setTitle("");
       setDescription("");
       setLogo(null);

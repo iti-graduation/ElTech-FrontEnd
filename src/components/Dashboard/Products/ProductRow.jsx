@@ -37,10 +37,15 @@ const ProductRow = ({
 	return (
 		<tr className="cart-item">
 			<td className="text-center">{product.id}</td>
-			<td className="product-thumbnail-title text-center">
+			<td 
+			className="product-thumbnail-title"
+			>
 				{product && (
 					<>
-						<Link to={"/dashboard/products/" + product.id}>
+						<Link 
+						to={"/dashboard/products/" + product.id}
+						style={{marginLeft:"40%"}}
+						>
 							<img
 								src={
 									product.thumbnail.image

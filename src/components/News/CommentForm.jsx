@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { getUserData } from "../../api/services/user/user-services"; // Import your authentication context
-import { addComment } from "../../api/services/user/post-services";
+import { addComment ,getCommentsForPost} from "../../api/services/user/post-services";
 
 
-const CommentForm = ({ post_id, parentCommentId, onCommentSubmit,clickHandler}) => {
+
+const CommentForm = ({ post_id, parentCommentId, onCommentSubmit,clickHandler ,setComments,setCommentsCount}) => {
 	const userData = getUserData();
 	const userEmail = userData.email; 
 	const [message, setMessage] = useState("");
@@ -16,6 +17,10 @@ const CommentForm = ({ post_id, parentCommentId, onCommentSubmit,clickHandler}) 
 		  return;
 		}
 		addComment(post_id, userEmail, message, parentCommentId);
+
+		const updatedComments = await getCommentsForPost(post_id);
+		setComments(updatedComments);
+		setCommentsCount(updatedComments.length);
   
 		setMessage("");
 		onCommentSubmit();

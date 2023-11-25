@@ -13,7 +13,7 @@ const CommentArea = ({ postId }) => {
 	  // Fetch comments when the component mounts or when count changes
 	  const fetchComments = async () => {
 		try {
-		  const fetchedComments = await getCommentsForPost(postId); // Assuming postId is available
+		  const fetchedComments = await getCommentsForPost(postId);
 		  setComments(fetchedComments);
 		  setCommentsCount(fetchedComments.length);
 		} catch (error) {
@@ -22,7 +22,7 @@ const CommentArea = ({ postId }) => {
 	  };
   
 	  fetchComments();
-	}, [postId,refreshFlag]);// Assuming postId is available
+	}, [postId,refreshFlag]);
 
 	const renderComments = (parentCommentId = null) => {
 		return (
@@ -38,6 +38,8 @@ const CommentArea = ({ postId }) => {
 					content={comment.content}
 					parent={comment.id}
 					onCommentSubmit={handleNewComment}
+					setComments={setComments} 
+					setCommentsCount={setCommentsCount}
 					/>
 				  {renderComments(comment.id)} {/* Recursively render nested comments */}
 				</li>
@@ -47,9 +49,7 @@ const CommentArea = ({ postId }) => {
 	  };
 
 	const handleNewComment = () => {
-		// Logic to create a new comment...
-		// After creating a new comment, set the flag to trigger comments refetch
-		setRefreshFlag(prevFlag => !prevFlag);
+		setRefreshFlag(!refreshFlag);
 	  };
 
 	return (
@@ -69,12 +69,14 @@ const CommentArea = ({ postId }) => {
 							content={comment.content}
 							parent={comment.id}
 							onCommentSubmit={handleNewComment}
+							setComments={setComments} 
+							setCommentsCount={setCommentsCount}
 							/>
 							{renderComments(comment.id)}
 						</li>
 				))}
 			</ol>
-			<CommentForm post_id={postId} onCommentSubmit={handleNewComment}/>
+			<CommentForm post_id={postId} onCommentSubmit={handleNewComment} setComments={setComments} setCommentsCount={setCommentsCount}/>
 		</div>
 	);
 };

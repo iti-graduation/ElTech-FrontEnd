@@ -348,8 +348,9 @@ const ProductEditForm = ({ product, onCancel }) => {
 							step="0.01"
 						/>
 					</p>
+					<hr className="col-lg-12"/>
 					<p className="col-lg-4 d-flex align-items-center">
-						<label className="w-25">Hot</label>
+						<label className="w-25" style={{marginRight:"50px"}}>Hot</label>
 						<input
 							type="checkbox"
 							name="is_hot"

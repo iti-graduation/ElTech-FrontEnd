@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/actions/authSlice";
 import HomeIcon from '@mui/icons-material/Home';
 import { showToast } from "../../utils/toastUtil";
+import logo from "../../assets/images/logo.png";
 
 
 
@@ -31,14 +32,11 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{backgroundColor:"black"}}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block',color:"white" } }}
-          >
-            El-Tech
-          </Typography>
+          <div className="logo" style={{padding:"0px"}}>
+              <Link to="/">
+                <img src={logo} alt="Goru"  style={{width:"55px",height:"55px",borderRadius:"5px"}}/>
+              </Link>
+            </div>
           <Box sx={{ flexGrow: 1 }} />
           
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

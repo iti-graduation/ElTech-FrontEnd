@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function OrdersTableRow({ order, handleDetailsTable, handleEditClick }) {
     const parsedDate = new Date(order.created_at);
-    const formattedDate = `${parsedDate.getFullYear()}-${(parsedDate.getMonth() + 1)
+    const formattedDate = `${parsedDate.getFullYear()} - ${(parsedDate.getMonth() + 1)
         .toString()
         .padStart(2, "0")} - ${parsedDate.getDate().toString().padStart(2, "0")}`;
 
@@ -61,7 +61,7 @@ function OrdersTableRow({ order, handleDetailsTable, handleEditClick }) {
                     onClick={() => handleEditClick(order)}
                     color="primary"
                 >
-                    <EditIcon />
+                    <EditIcon fontSize='large'/>
                 </IconButton>
             </td>
         </tr>

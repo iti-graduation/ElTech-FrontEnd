@@ -3,7 +3,7 @@ import CommentForm from "./CommentForm"; // Import your CommentForm component
 import React, { useState } from "react";
 
 
-const Comment = ({ commentDate,author,content,parent, post_id ,onCommentSubmit}) => {
+const Comment = ({ commentDate,author,content,parent, post_id ,onCommentSubmit,setComments,setCommentsCount}) => {
 
 	const parsedDate = new Date(commentDate);
 	const formattedDate = `${parsedDate.getFullYear()}-${(parsedDate.getMonth() + 1)
@@ -31,7 +31,7 @@ const Comment = ({ commentDate,author,content,parent, post_id ,onCommentSubmit})
 
 			{showReplyForm && (
 				<div className="reply-form-wrapper">
-				<CommentForm parentCommentId={parent} post_id={post_id} onCommentSubmit={onCommentSubmit} clickHandler={handleReplyClick}/>
+				<CommentForm parentCommentId={parent} post_id={post_id} onCommentSubmit={onCommentSubmit} clickHandler={handleReplyClick} setComments={setComments} setCommentsCount={setCommentsCount}/>
 				</div>
 			)}
 		</div>

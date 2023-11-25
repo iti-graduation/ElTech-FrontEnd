@@ -15,8 +15,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ServiceEditForm from "./ServicesEditForm";
+import ServiceTableRow from "./ServiceTableRow";
 
-const ServiceTable = () => {
+const ServiceTable = ({shouldRefreshServices}) => {
   const [services, setServices] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
   const [selectedService, setSelectedService] = useState(null); // Store the selected service for editing
@@ -32,7 +33,7 @@ const ServiceTable = () => {
     };
 
     fetchServices();
-  }, []);
+  }, [shouldRefreshServices]);
 
   const handleDeleteService = async (serviceId) => {
     console.log(serviceId);
@@ -77,49 +78,38 @@ const ServiceTable = () => {
           />
         </div>
       )}
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Logo</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {services.map((service) => (
-              <TableRow key={service.id}>
-                <TableCell>{service.id}</TableCell>
-                <TableCell>
-                  <img
-                    src={service.logo}
-                    alt="Service Logo"
-                    style={{ maxWidth: "100px", maxHeight: "100px" }}
-                  />
-                </TableCell>
-                <TableCell>{service.title}</TableCell>
-                <TableCell>{service.description}</TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEditService(service)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    color="secondary"
-                    onClick={() => handleDeleteService(service.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <table className="cart-table">
+            <thead>
+                <tr>
+                    <th className="product-total" style={{width:"100px"}}>
+                        ID
+                    </th>
+                    <th className="product-total" >
+                        Title
+                    </th>
+                    <th className="product-total" >
+                        Image
+                    </th>
+                    <th className="product-total" >
+                        Description
+                    </th>
+                    <th className="product-total">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            {services.map((service) => {
+                return (
+                    <tbody>
+                        <ServiceTableRow
+                            service={service}
+                            handleEditService={handleEditService}
+                            handleDeleteService={handleDeleteService}
+                        />
+                    </tbody>
+                );
+            })}
+          </table>
     </div>
   );
 };

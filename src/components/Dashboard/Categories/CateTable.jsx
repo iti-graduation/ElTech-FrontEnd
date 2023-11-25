@@ -15,8 +15,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CategoryEditForm from "./CategoryEditForm";
+import CategoryTableRow from "./CategoryTableRow";
 
-const CateTable = () => {
+const CateTable = ({shouldRefreshCategories}) => {
   const [categories, setCategories] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null); // Store the selected category for editing
@@ -32,7 +33,7 @@ const CateTable = () => {
     };
 
     fetchCategories();
-  }, []);
+  }, [shouldRefreshCategories]);
 
   const handleDeleteCategory = async (categoryId) => {
     try {
@@ -75,20 +76,35 @@ const CateTable = () => {
           />
         </div>
       )}
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+          <table className="cart-table">
+            <thead>
+                <tr>
+                    <th className="product-total" style={{width:"100px"}}>
+                        ID
+                    </th>
+                    <th className="product-total" >
+                        Name
+                    </th>
+                    <th className="product-total" >
+                        Image
+                    </th>
+                    <th className="product-total">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            {categories.map((category) => {
+                return (
+                    <tbody>
+                        <CategoryTableRow
+                            category={category}
+                            handleEditCategory={handleEditCategory}
+                            handleDeleteCategory={handleDeleteCategory}
+                        />
+                    </tbody>
+                );
+            })}
+          {/* <TableBody>
             {categories.map((category) => (
               <TableRow key={category.id}>
                 <TableCell>{category.id}</TableCell>
@@ -113,9 +129,8 @@ const CateTable = () => {
                 </TableCell>
               </TableRow>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </TableBody> */}
+          </table>
     </div>
   );
 };
