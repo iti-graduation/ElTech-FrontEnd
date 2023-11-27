@@ -2,19 +2,17 @@ import React, {useEffect,useState} from 'react';
 import { getAllPosts,deletePost,getSinglePost } from "../../../api/services/user/post-services";
 import PostEditForm from "./PostEditForm";
 import PostsTableRow from './PostsTableRow';
+import PostDetails from './PostDetails'
 import { showToast } from "../../../utils/toastUtil";
-// import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,IconButton } from '@mui/material';
-// import EditIcon from '@mui/icons-material/Edit';
-// import DeleteIcon from '@mui/icons-material/Delete';
 
-
-const PostsTable = ({shouldRefreshPosts}) => {
+const PostsTable = ({shouldRefreshPosts,handleCreateClick}) => {
     const [posts, setPosts] = useState([]);
     const [pageNumber, setPageNumber] = useState(1);
     const [pageSize, setPageSize] = useState(20);
-    const [totalCount, setTotalCount] = useState(0); // Store the total count of posts
     const [showEditForm, setShowEditForm] = useState(false)
-    const [selectedPost, setSelectedPost] = useState(null); // Store the selected post for editing
+    const [selectedPost, setSelectedPost] = useState(null); 
+    const [showPostDetails, setShowPostDetails] = useState(false); 
+
 
 
     useEffect(() => {
@@ -69,27 +67,36 @@ const PostsTable = ({shouldRefreshPosts}) => {
       // Clear the selected post and hide the form
       setSelectedPost(null);
       setShowEditForm(false);
+      setShowPostDetails(false)
     };
 
     const handleEditPost = (post) => {
-      if (selectedPost && selectedPost.id === post.id) {
-        // If the same post is clicked again, hide the form
-        setSelectedPost(null);
-        setShowEditForm(false);
-      } else {
-        // If a different post is clicked, show the form for that post
         setSelectedPost(post);
         setShowEditForm(true);
-      }
+        setShowPostDetails(false)
     };
+
+    const handlePostDetails = (post) => {
+      setSelectedPost(post)
+      setShowPostDetails(true)
+      setShowEditForm(false);
+    }
     
     return (
       <div>
       {showEditForm && selectedPost ? (
         <div className="reply-form-wrapper">
-          <PostEditForm post={selectedPost} onCancel={handleCancelEdit} setPosts={setPosts} />
+          <PostEditForm post={selectedPost} onCancel={handleCancelEdit} setPosts={setPosts} handlePostDetails={handlePostDetails} />
         </div>
-          ) : (
+          ) : showPostDetails ? (
+            <>
+              <PostDetails selectedPost={selectedPost} postId={selectedPost.id} onCancel={handleCancelEdit}  handleEditPost={handleEditPost} />
+            </>
+            ) : (
+            <>
+          <button className="guru-btn" id="create-btn" onClick={handleCreateClick} style={{marginBottom:"30px"}}>
+            Add Post
+          </button>
           <table className="cart-table">
             <thead>
                 <tr>
@@ -119,11 +126,14 @@ const PostsTable = ({shouldRefreshPosts}) => {
                             post={post}
                             handleEditPost={handleEditPost}
                             handleDeletePost={handleDeletePost}
+                            handlePostDetails={handlePostDetails}
+
                         />
                     </tbody>
                 );
             })}
         </table>
+        </>
       )}
       </div>
     );

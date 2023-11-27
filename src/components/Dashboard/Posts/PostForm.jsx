@@ -51,6 +51,10 @@ const PostForm = ({clickHandler ,onPostCreated}) => {
   }, []);
 
 	return (
+		<>
+		<button className="guru-btn" id="create-btn" onClick={clickHandler} style={{marginBottom:"30px"}}>
+            All Posts
+        </button>
 		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
 		  <h5>Add new Post</h5>
 		  <form onSubmit={handleSubmit} className="dashboard-form" id="dashboard-form">
@@ -97,6 +101,7 @@ const PostForm = ({clickHandler ,onPostCreated}) => {
 			</div>
 		  </form>
 		</div>
+		</>
 	  );
 	};
 

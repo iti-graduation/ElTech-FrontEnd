@@ -6,7 +6,7 @@ import { getSingleCategory } from "../../../api/services/user/product-services";
 
 
 export default function PostsTableRow(props) {
-    const { post, handleDeletePost, handleEditPost } = props;
+    const { post, handleDeletePost, handleEditPost ,handlePostDetails} = props;
     const [categoryName, setCategoryName] = useState('');
 
     const parsedDate = new Date(post.created_at);
@@ -31,16 +31,19 @@ export default function PostsTableRow(props) {
         <tr className="cart-item">
             <td
                 className="product-thumbnail-title"
+                onClick={()=>handlePostDetails(post)}
             >
                 {post.id}
             </td>
             <td
                 className="product-thumbnail-title"
+                onClick={()=>handlePostDetails(post)}
             >
                 {post.title.toUpperCase()}
             </td>
             <td
                 className="product-quantity clearfix"
+                onClick={()=>handlePostDetails(post)}
             >
                 {formattedDate}
             </td>

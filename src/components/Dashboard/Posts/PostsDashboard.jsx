@@ -18,15 +18,19 @@ const PostsDashboard = () => {
   return (
     <div>
       <h1>Posts</h1>
-      <button className="guru-btn" id="create-btn" onClick={handleCreateClick} style={{marginBottom:"30px"}}>
-        Add Post
-      </button>
       {showCreateForm ? (
-        <div className="reply-form-wrapper">
-          <PostForm clickHandler={handleCreateClick} onPostCreated={handlePostCreated}/>
-        </div>
+        <>
+          <div className="reply-form-wrapper">
+            <PostForm clickHandler={handleCreateClick} onPostCreated={handlePostCreated}/>
+          </div>
+        </>
       ) : (
-        <PostsTable shouldRefreshPosts={shouldRefreshPosts}/>
+        <>
+          {/* <button className="guru-btn" id="create-btn" onClick={handleCreateClick} style={{marginBottom:"30px"}}>
+            Add Post
+          </button> */}
+          <PostsTable handleCreateClick={handleCreateClick} shouldRefreshPosts={shouldRefreshPosts}/>
+        </>
       )}
     </div>
   );

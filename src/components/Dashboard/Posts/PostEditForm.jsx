@@ -7,7 +7,7 @@ import { showToast } from "../../../utils/toastUtil";
 
 
 
-const PostEditForm = ({post , onCancel,setPosts}) => {
+const PostEditForm = ({post , onCancel,setPosts,handlePostDetails}) => {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [image, setImage] = useState('');
@@ -61,6 +61,9 @@ const PostEditForm = ({post , onCancel,setPosts}) => {
 	  }, []);
 
 	return (
+		<>
+		<button className="guru-btn" id="create-btn" onClick={onCancel} style={{marginRight:"10px"}}>All Posts</button>
+		<button className="guru-btn" id="create-btn" onClick={handlePostDetails} style={{marginRight:"10px"}}>Post Details</button>
 		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
 		  <h5>Edit Post With Title: {post.title} </h5>
 		  <form onSubmit={handleSubmit} className="dashboard-form" id="dashboard-form">
@@ -110,6 +113,7 @@ const PostEditForm = ({post , onCancel,setPosts}) => {
 		</div>
 		  </form>
 		</div>
+		</>
 	  );
 	};
 

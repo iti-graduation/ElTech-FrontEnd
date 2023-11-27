@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { updateOrderStatus } from "../../../api/services/admin/admin-services";
 
-const OrderEditForm = ({ order, handleShowOrders }) => {
+const OrderEditForm = ({ order, handleShowOrders,handleDetailsTable }) => {
 	const [status, setStatus] = useState(order.status);
 
 	const handleUpdate = async (id) => {
@@ -10,8 +10,25 @@ const OrderEditForm = ({ order, handleShowOrders }) => {
 	}
 
 	return (
+		<>
+		<button
+			className="guru-btn mb-5"
+			id="create-btn"
+			onClick={handleShowOrders}
+			style={{marginRight:"10px"}}
+		>
+			All Orders
+		</button>
+		<button
+		className="guru-btn mb-5"
+		id="create-btn"
+		onClick={()=>handleDetailsTable(order)}
+		>
+		Order Details
+		</button>
 		<div className="woocommerce-billing-fields" id="dashboard-form-wrapper">
 			<h5>Update order status</h5>
+
 			<form className="dashboard-form mt-4">
 				<div className="col-lg-12 col-md-12 billing-countries">
 					<label>Status</label>
@@ -38,6 +55,7 @@ const OrderEditForm = ({ order, handleShowOrders }) => {
 				</div>
 			</form>
 		</div>
+		</>
 	);
 };
 

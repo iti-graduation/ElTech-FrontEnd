@@ -68,7 +68,7 @@ const ServiceTable = ({shouldRefreshServices}) => {
 
   return (
     <div>
-      {showEditForm && selectedService && (
+      {showEditForm && selectedService ? (
         <div className="reply-form-wrapper">
           {/* Pass selectedProduct to the form for editing */}
           <ServiceEditForm
@@ -77,7 +77,7 @@ const ServiceTable = ({shouldRefreshServices}) => {
             setServices={setServices}
           />
         </div>
-      )}
+      ): (
       <table className="cart-table">
             <thead>
                 <tr>
@@ -110,7 +110,9 @@ const ServiceTable = ({shouldRefreshServices}) => {
                 );
             })}
           </table>
+          )}
     </div>
+    
   );
 };
 

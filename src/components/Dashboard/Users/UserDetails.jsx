@@ -8,7 +8,6 @@ import { getSingleUser } from "../../../api/services/user/user-services";
 import { showToast } from "../../../utils/toastUtil";
 
 import Header from "../../../layouts/Home/Header";
-import Footer from "../../../layouts/Home/Footer";
 import EditUserProfile from "./UserDetails/EditUserProfile";
 import UserProfile from "./UserDetails/UserProfile";
 
@@ -67,7 +66,6 @@ const UserDetails = ({ user, handleRefresh }) => {
 				// onLogout={handleLogoutClick}
 			/>
 
-			<Footer className="inner-footer" />
 		</>
 	);
 };

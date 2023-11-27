@@ -14,34 +14,42 @@ const OrdersDashboard = () => {
       setShowEditForm(false);
       setShowOrdersTable(true);
 
-  };
-
+     };
+  
     const handleEditClick = (order) => {
         setOrder(order)
-        setShowEditForm(!showEditForm);
-        setShowOrdersTable(!showOrdersTable);
-
-	  };
+        setShowEditForm(true);
+        setShowOrdersTable(false);
+        setShowDetailsTable(false)
+	};
 
     const handleDetailsTable = (order) => {
         setOrder(order)
-        setShowDetailsTable(!showDetailsTable);
-        setShowOrdersTable(!showOrdersTable);
-  };
+        setShowDetailsTable(true);
+        setShowOrdersTable(false);
+        setShowEditForm(false);
+    };
 
     return (
         <>
             <h1 className='mb-4'> Orders </h1>
             {showDetailsTable ? (
-					      <OrderDetails
+                <>
+					<OrderDetails
                     orderID={order.id}
                     handleShowOrders={handleShowOrders}
+                    handleEditClick={handleEditClick}
+                    selectedOrder={order}
                 />
+                </>
 			      ) : showEditForm ? (
+                <>
                 <OrderEditForm
                     order={order}
                     handleShowOrders={handleShowOrders}
+                    handleDetailsTable={handleDetailsTable}
                 />
+                </>
             ) : (
                 <OrdersTable
                     handleDetailsTable={handleDetailsTable}
