@@ -1,51 +1,123 @@
+import { useState } from "react";
+
+import { getSingleProduct } from "../../../api/services/user/product-services";
+
 import ProductForm from "./ProductForm";
 import ProductsTable from "./ProductsTable";
 import ProductEditForm from "./ProductEditForm";
-import React, { useState } from "react";
+import ProductDetails from "./ProductDetails";
 
 const ProductsDashboard = () => {
-	const [showCreateForm, setShowCreateForm] = useState(false);
-	const [showUpdateForm, setShowUpdateForm] = useState(false);
+	const [currentView, setCurrentView] = useState("allProducts");
 	const [product, setProduct] = useState({});
 
-	const handleCreateClick = () => {
-		setShowCreateForm(!showCreateForm);
+	const handleShowAllProducts = () => {
+		setCurrentView("allProducts");
 	};
 
-	// const handleUpdateClick = (product) => {
-	// 	setShowUpdateForm(!showUpdateForm);
-	// 	setProduct(product);
-	// };
+	const handleCreateProduct = () => {
+		setCurrentView("createForm");
+	};
+
+	const handleUpdateProduct = async (productId) => {
+		try {
+			const product = await getSingleProduct(productId);
+			setProduct(product);
+			setCurrentView("updateForm");
+		} catch (error) {
+			console.error(`Failed to fetch product: ${error.message}`);
+		}
+	};
+
+	const handleShowProductDetails = async (productId) => {
+		try {
+			const product = await getSingleProduct(productId);
+			setProduct(product);
+			setCurrentView("productDetails");
+		} catch (error) {
+			console.error(`Failed to fetch product: ${error.message}`);
+		}
+	};
 
 	return (
 		<div>
 			<h1>Products</h1>
-			<button
-				className="guru-btn mb-5"
-				id="create-btn"
-				onClick={handleCreateClick}
-			>
-				{!showCreateForm ? "Add Product" : "All Products"}
-			</button>
-			{showCreateForm ? (
-				<div className="reply-form-wrapper">
-					<ProductForm clickHandler={handleCreateClick} />
-				</div>
-			) : (
-				<ProductsTable />
-			)}
-			{/* {!showCreateForm && !showUpdateForm && (
-				<ProductsTable updateHandler={handleUpdateClick} />
-			)} */}
-			{/* {!showCreateForm && } */}
-			{/* {!showCreateForm && showUpdateForm && (
-				<div className="reply-form-wrapper">
-					<ProductEditForm
-						clickHandler={handleCreateClick}
-						product={product}
+			{currentView === "allProducts" && (
+				<>
+					<button
+						className="guru-btn mb-5"
+						id="create-btn"
+						onClick={handleCreateProduct}
+					>
+						Add Product
+					</button>
+					<ProductsTable
+						updateHandler={handleUpdateProduct}
+						productSelectionHandler={handleShowProductDetails}
 					/>
-				</div>
-			)} */}
+				</>
+			)}
+			{currentView === "createForm" && (
+				<>
+					<button
+						className="guru-btn mb-5"
+						id="create-btn"
+						onClick={handleShowAllProducts}
+					>
+						All Products
+					</button>
+					<div className="reply-form-wrapper">
+						<ProductForm
+							allProductsHandler={handleShowAllProducts}
+						/>
+					</div>
+				</>
+			)}
+			{currentView === "updateForm" && (
+				<>
+					<button
+						className="guru-btn mb-5"
+						id="create-btn"
+						onClick={handleShowAllProducts}
+					>
+						All Products
+					</button>
+					<button
+						className="guru-btn mb-5 ml-3"
+						id="create-btn"
+						onClick={() => handleShowProductDetails(product.id)}
+					>
+						Details
+					</button>
+					<div className="reply-form-wrapper">
+						<ProductEditForm
+							product={product}
+							productDetailsHandler={handleShowProductDetails}
+						/>
+					</div>
+				</>
+			)}
+			{currentView === "productDetails" && (
+				<>
+					<button
+						className="guru-btn mb-5"
+						id="create-btn"
+						onClick={handleShowAllProducts}
+					>
+						All Products
+					</button>
+					<button
+						className="guru-btn mb-5 ml-3"
+						id="create-btn"
+						onClick={() => handleUpdateProduct(product.id)}
+					>
+						Update Product
+					</button>
+					<div className="reply-form-wrapper">
+						<ProductDetails product={product} />
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

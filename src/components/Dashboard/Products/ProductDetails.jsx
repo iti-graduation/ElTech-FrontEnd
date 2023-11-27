@@ -9,22 +9,22 @@ import ProductEditForm from "./ProductEditForm";
 import SideNav from "../../../layouts/Dashboard/SideNav";
 import ProductDetailsTab from "../../ProductsDetails/ProductsTab/ProductTab";
 
-const ProductDetails = () => {
-	const [product, setProduct] = useState();
-	const { id } = useParams();
+const ProductDetails = ({ product }) => {
+	// const [product, setProduct] = useState();
+	// const { id } = useParams();
 
-	useEffect(() => {
-		const fetchProduct = async () => {
-			try {
-				const product = await getSingleProduct(id);
-				setProduct(product);
-			} catch (error) {
-				console.error("Error fetching product:", error.message);
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchProduct = async () => {
+	// 		try {
+	// 			const product = await getSingleProduct(id);
+	// 			setProduct(product);
+	// 		} catch (error) {
+	// 			console.error("Error fetching product:", error.message);
+	// 		}
+	// 	};
 
-		fetchProduct();
-	}, [id]);
+	// 	fetchProduct();
+	// }, [id]);
 
 	return (
 		<>
@@ -42,9 +42,9 @@ const ProductDetails = () => {
 				</div>
 			</section>
 
-			<div className="reply-form-wrapper" style={{ marginTop: "300px" }}>
+			{/* <div className="reply-form-wrapper" style={{ marginTop: "300px" }}>
 				{product && <ProductEditForm product={product} />}
-			</div>
+			</div> */}
 		</>
 	);
 };

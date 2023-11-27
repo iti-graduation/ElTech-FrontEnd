@@ -1,36 +1,21 @@
 import React, { useEffect, useState } from "react";
-import {
-	getProducts,
-	// deleteProduct,
-	getSingleProduct,
-} from "../../../api/services/user/product-services";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
-	TablePagination,
-	IconButton,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+
+import { getProducts } from "../../../api/services/user/product-services";
+
 import ProductEditForm from "./ProductEditForm";
 import ProductRow from "./ProductRow";
 import ShopPagination from "../../Shop/ShopPagination/ShopPagination";
 
-const ProductsTable = () => {
+const ProductsTable = ({ updateHandler, productSelectionHandler }) => {
 	const [products, setProducts] = useState([]);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState(null); // Store the selected product for editing
 	const [currentPage, setCurrentPage] = useState(0);
+	const [refresh, setRefresh] = useState(false);
 
-	// const handlePageClick = (data) => {
-	// 	let selected = data.selected;
-	// 	setCurrentPage(selected);
-	// 	fetchProducts({ page: selected + 1 });
-	// };
+	const handleRefresh = () => {
+		setRefresh(!refresh);
+	};
 
 	const handlePageClick = (data) => {
 		console.log("New Page Selected", data);
@@ -63,7 +48,9 @@ const ProductsTable = () => {
 
 	useEffect(() => {
 		fetchProducts();
-	}, []);
+	}, [refresh]);
+
+	// useEffect(() => {}, [refresh]);
 
 	// const handleDeleteProduct = async (productId) => {
 	// 	try {
@@ -164,20 +151,28 @@ const ProductsTable = () => {
 						</th>
 						<th className="product-quantity text-center">Stock</th>
 						<th className="product-total text-center">Total</th>
-						<th className="product-remove text-center">Edit</th>
-						<th className="text-center">Delete</th>
+						{/* <th className="product-remove text-center">Edit</th>
+						<th className="text-center">Delete</th> */}
+						<th className="text-center">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					{products.results &&
-						products.results.sort((a, b) => a.id - b.id).map((product) => {
-							return (
-								<ProductRow
-									key={product.id}
-									product={product}
-								/>
-							);
-						})}
+						products.results
+							.sort((a, b) => a.id - b.id)
+							.map((product) => {
+								return (
+									<ProductRow
+										key={product.id}
+										product={product}
+										updateHandler={updateHandler}
+										refreshHandler={handleRefresh}
+										productSelectionHandler={
+											productSelectionHandler
+										}
+									/>
+								);
+							})}
 				</tbody>
 			</table>
 			{products.results && products.results.length !== 0 && (

@@ -11,7 +11,7 @@ import InputField from "../../Shared/InputField/InputField";
 
 import { showToast } from "../../../utils/toastUtil";
 
-const ProductForm = ({ clickHandler }) => {
+const ProductForm = ({ allProductsHandler }) => {
 	const userData = getUserData();
 	const userEmail = userData.email;
 	const [categories, setCategories] = useState([]);
@@ -215,7 +215,7 @@ const ProductForm = ({ clickHandler }) => {
 			setImages([]);
 			setFeatures([""]);
 			showToast("Product added successfully", "success");
-			clickHandler();
+			allProductsHandler();
 		} catch (error) {
 			console.error("Error adding product:", error.message);
 			showToast("Error adding product: " + error.message, "error");
@@ -497,33 +497,33 @@ const ProductForm = ({ clickHandler }) => {
 							/>
 						</p>
 						{images.length !== 0 &&
-						images.map((image, index) => (
-							<div
-								key={index}
-								style={{
-									marginLeft: "5px",
-									marginBottom: "10px",
-								}}
-							>
-								<img
-									src={URL.createObjectURL(image)}
-									alt={`Product ${index}`}
+							images.map((image, index) => (
+								<div
+									key={index}
 									style={{
-										width: "100px",
-										height: "100px",
-										borderRadius: "50%",
-										border: "1px solid black",
-										padding: "10px",
-										objectFit: "contain",
+										marginLeft: "5px",
+										marginBottom: "10px",
 									}}
-								/>
-								{index === 0 && (
-									<small className="d-block text-center">
-										Thumbnail
-									</small>
-								)}
-							</div>
-						))}
+								>
+									<img
+										src={URL.createObjectURL(image)}
+										alt={`Product ${index}`}
+										style={{
+											width: "100px",
+											height: "100px",
+											borderRadius: "50%",
+											border: "1px solid black",
+											padding: "10px",
+											objectFit: "contain",
+										}}
+									/>
+									{index === 0 && (
+										<small className="d-block text-center">
+											Thumbnail
+										</small>
+									)}
+								</div>
+							))}
 
 						<p className="col-lg-12">
 							<label>

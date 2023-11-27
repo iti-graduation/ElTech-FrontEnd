@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import {
-	addProduct,
 	getAllCategories,
-	getSingleProduct,
 	addProductImages,
 	addProductFeatures,
-	updateProductImages,
-	updateProductFeatures,
 	updateProduct,
 } from "../../../api/services/user/product-services";
 
@@ -15,7 +11,7 @@ import InputField from "../../Shared/InputField/InputField";
 
 import { showToast } from "../../../utils/toastUtil";
 
-const ProductEditForm = ({ product, onCancel }) => {
+const ProductEditForm = ({ product, productDetailsHandler }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState("");
@@ -26,7 +22,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 		product.features.map((feature) => feature.feature)
 	);
 	const [productData, setProductData] = useState({
-		name: product.name,
+		name: product ? product.name : "",
 		price: product.price,
 		description: product.description,
 		stock: product.stock,
@@ -144,6 +140,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 		}
 
 		try {
+			console.log("Data Before Submission", productData);
 			const response = await updateProduct(product.id, productData);
 			console.log("Product updated successfully:", response);
 			// ...rest of the code...
@@ -161,7 +158,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 
 			showToast("Product updated successfully", "success");
 			setImages([]);
-			window.location.reload();
+			productDetailsHandler(product.id);
 		} catch (error) {
 			console.error("Error updating product:", error.message);
 			showToast("Error updating product: " + error.message, "error");
@@ -173,12 +170,17 @@ const ProductEditForm = ({ product, onCancel }) => {
 	};
 
 	const handleChange = (event) => {
-		console.log(product);
-		console.log(images);
+		console.log("Product Data", productData);
+		// console.log("Categories", categories);
+		// console.log(product);
+		// console.log(images);
+		// console.log(product.category.id);
+
 		const value =
 			event.target.type === "checkbox"
 				? event.target.checked
 				: event.target.value;
+		// console.log(event.target.name, value);
 		if (event.target.name === "category") {
 			setProductData({
 				...productData,
@@ -200,6 +202,19 @@ const ProductEditForm = ({ product, onCancel }) => {
 
 		fetchCategories();
 	}, []);
+
+	useEffect(() => {
+		setProductData({
+			name: product ? product.name : "",
+			price: product.price,
+			description: product.description,
+			stock: product.stock,
+			category: product.category.id,
+			is_on_sale: product.is_on_sale,
+			is_featured: product.is_featured,
+			is_trending: product.is_trending,
+		});
+	}, [product]);
 
 	return (
 		// <div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
@@ -261,7 +276,7 @@ const ProductEditForm = ({ product, onCancel }) => {
 		// 	</form>
 		// </div>
 		<div className="woocommerce-billing-fields">
-			<h3 className="text-center">Edit Product</h3>
+			<h3 className="text-center">Edit "{product.name}"</h3>
 
 			<form
 				onSubmit={handleSubmit}
@@ -348,9 +363,11 @@ const ProductEditForm = ({ product, onCancel }) => {
 							step="0.01"
 						/>
 					</p>
-					<hr className="col-lg-12"/>
+					<hr className="col-lg-12" />
 					<p className="col-lg-4 d-flex align-items-center">
-						<label className="w-25" style={{marginRight:"50px"}}>Hot</label>
+						<label className="w-25" style={{ marginRight: "50px" }}>
+							Hot
+						</label>
 						<input
 							type="checkbox"
 							name="is_hot"
@@ -505,3 +522,9 @@ const ProductEditForm = ({ product, onCancel }) => {
 };
 
 export default ProductEditForm;
+
+// const ProductEditForm = () => {
+// 	return <h1>Edit</h1>;
+// };
+
+// export default ProductEditForm;

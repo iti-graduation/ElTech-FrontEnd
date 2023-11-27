@@ -9,11 +9,16 @@ import ProductPrice from "../../Shared/NormalProductCard/ProductPrice";
 
 import { showToast } from "../../../utils/toastUtil";
 
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import RestoreIcon from "@mui/icons-material/Restore";
+
 const ProductRow = ({
 	product,
-	handleDeleteProduct,
-	handleUpdateProduct,
+	productSelectionHandler,
 	updateHandler,
+	refreshHandler,
 }) => {
 	const handleProductDeletion = async (is_deleted) => {
 		try {
@@ -22,10 +27,11 @@ const ProductRow = ({
 			if (is_deleted)
 				showToast("Product deleted successfully", "success");
 			else showToast("Product restored successfully", "success");
+			refreshHandler();
 
-			setTimeout(() => {
-				window.location.reload();
-			}, 1000);
+			// setTimeout(() => {
+			// 	window.location.reload();
+			// }, 1000);
 		} catch (error) {
 			showToast(
 				"Error deleting or restoring product: " + error.message,
@@ -37,14 +43,13 @@ const ProductRow = ({
 	return (
 		<tr className="cart-item">
 			<td className="text-center">{product.id}</td>
-			<td 
-			className="product-thumbnail-title"
-			>
+			<td className="product-thumbnail-title">
 				{product && (
 					<>
-						<Link 
-						to={"/dashboard/products/" + product.id}
-						style={{marginLeft:"40%"}}
+						<Link
+							// to={"/dashboard/products/" + product.id}
+							onClick={() => productSelectionHandler(product.id)}
+							style={{ marginLeft: "40%" }}
 						>
 							<img
 								src={
@@ -57,7 +62,8 @@ const ProductRow = ({
 						</Link>
 						<Link
 							className="product-name"
-							to={"/dashboard/products/" + product.id}
+							// to={"/dashboard/products/" + product.id}
+							onClick={() => productSelectionHandler(product.id)}
 						>
 							{product.name}
 						</Link>
@@ -99,6 +105,29 @@ const ProductRow = ({
 				</div>
 			</td>
 			<td className="text-center">
+				<IconButton
+					color="primary"
+					onClick={() => updateHandler(product.id)}
+				>
+					<EditIcon fontSize="large" />
+				</IconButton>
+				{!product.is_deleted ? (
+					<IconButton
+						color="secondary"
+						onClick={() => handleProductDeletion(true)}
+					>
+						<DeleteIcon fontSize="large" />
+					</IconButton>
+				) : (
+					<IconButton
+						color="secondary"
+						onClick={() => handleProductDeletion(false)}
+					>
+						<RestoreIcon fontSize="large" />
+					</IconButton>
+				)}
+			</td>
+			{/* <td className="text-center">
 				<Link
 					to={"/dashboard/products/" + product.id}
 					className="goru-btn"
@@ -120,7 +149,7 @@ const ProductRow = ({
 						Restore
 					</Link>
 				</td>
-			)}
+			)} */}
 			{/* <td className="product-remove text-center">
 				<Link onClick={handleProductDeletion}></Link>
 			</td> */}
