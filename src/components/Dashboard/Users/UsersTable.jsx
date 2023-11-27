@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const UsersTable = () => {
+const UsersTable = ({ userSelectionHandler }) => {
 	const [users, setUsers] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
 	const [pageSize, setPageSize] = useState(5);
@@ -116,14 +116,21 @@ const UsersTable = () => {
 							Mobile Phone
 						</th>
 						{/* <th className="product-total text-center">Total</th> */}
-						<th className="product-remove text-center">Edit</th>
-						<th className="text-center">Delete</th>
+						{/* <th className="product-remove text-center">Edit</th>
+						<th className="text-center">Delete</th> */}
+						{/* <th className="text-center">Actions</th> */}
 					</tr>
 				</thead>
 				<tbody>
 					{users.results &&
 						users.results.map((user) => {
-							return <UserRow key={user.id} user={user} />;
+							return (
+								<UserRow
+									key={user.id}
+									user={user}
+									userSelectionHandler={userSelectionHandler}
+								/>
+							);
 						})}
 				</tbody>
 			</table>

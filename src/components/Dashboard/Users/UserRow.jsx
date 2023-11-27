@@ -11,7 +11,10 @@ import ProductPrice from "../../Shared/NormalProductCard/ProductPrice";
 
 import { showToast } from "../../../utils/toastUtil";
 
-const UserRow = ({ user }) => {
+import { IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+
+const UserRow = ({ user, userSelectionHandler }) => {
 	const handleUserDeletion = async () => {
 		try {
 			await deleteUser(user.id);
@@ -30,7 +33,11 @@ const UserRow = ({ user }) => {
 		<tr className="cart-item">
 			<td className="text-center">{user.id}</td>
 			<td className="product-thumbnail-title text-center">
-				<Link to={"/dashboard/users/" + user.id}>
+				<Link
+					onClick={() => {
+						userSelectionHandler(user.id);
+					}}
+				>
 					<img
 						src={
 							user.profile_picture
@@ -41,7 +48,12 @@ const UserRow = ({ user }) => {
 						style={{ height: "auto" }}
 					/>
 				</Link>
-				<Link className="ml-2" to={"/dashboard/users/" + user.id}>
+				<Link
+					className="ml-2"
+					onClick={() => {
+						userSelectionHandler(user.id);
+					}}
+				>
 					{user.email}
 				</Link>
 			</td>
@@ -64,11 +76,11 @@ const UserRow = ({ user }) => {
 					</span>
 				</div>
 			</td> */}
-			<td className="text-center">
+			{/* <td className="text-center">
 				<Link to={"/dashboard/users/" + user.id} className="goru-btn">
 					Edit
 				</Link>
-			</td>
+			</td> */}
 			{/* {!product.is_deleted ? (
 				<td className="product-remove text-center">
 					<Link onClick={() => handleProductDeletion(true)}></Link>
@@ -83,9 +95,9 @@ const UserRow = ({ user }) => {
 					</Link>
 				</td>
 			)} */}
-			<td className="product-remove text-center">
+			{/* <td className="product-remove text-center">
 				<Link onClick={handleUserDeletion}></Link>
-			</td>
+			</td> */}
 		</tr>
 	);
 };

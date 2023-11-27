@@ -12,41 +12,41 @@ import Footer from "../../../layouts/Home/Footer";
 import EditUserProfile from "./UserDetails/EditUserProfile";
 import UserProfile from "./UserDetails/UserProfile";
 
-const UserDetails = () => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const [isEditing, setIsEditing] = useState(false);
-	const [user, setUser] = useState();
-	const { id } = useParams();
+const UserDetails = ({ user, handleRefresh }) => {
+	// const dispatch = useDispatch();
+	// const navigate = useNavigate();
+	// const [isEditing, setIsEditing] = useState(false);
+	// const [user, setUser] = useState();
+	// const { id } = useParams();
 
-	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const user = await getSingleUser(id);
-				setUser(user);
-			} catch (error) {
-				console.error("Error fetching user:", error.message);
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchUser = async () => {
+	// 		try {
+	// 			const user = await getSingleUser(id);
+	// 			setUser(user);
+	// 		} catch (error) {
+	// 			console.error("Error fetching user:", error.message);
+	// 		}
+	// 	};
 
-		fetchUser();
-	}, [id]);
+	// 	fetchUser();
+	// }, [id]);
 
-	const handleEditClick = () => {
-		setIsEditing(true);
-	};
+	// const handleEditClick = () => {
+	// 	setIsEditing(true);
+	// };
 
-	const handleUpdate = () => {
-		setIsEditing(false);
-	};
+	// const handleUpdate = () => {
+	// 	setIsEditing(false);
+	// };
 
-	const handleCancel = () => {
-		setIsEditing(false);
-	};
+	// const handleCancel = () => {
+	// 	setIsEditing(false);
+	// };
 
 	return (
 		<>
-			<Header className="inner-header" />
+			{/* <Header className="inner-header" /> */}
 			{/* {isEditing ? (
 				<EditUserProfile
 					user={user}
@@ -62,7 +62,8 @@ const UserDetails = () => {
 			)} */}
 			<UserProfile
 				user={user}
-				onEdit={handleEditClick}
+				handleRefresh={handleRefresh}
+				// onEdit={handleEditClick}
 				// onLogout={handleLogoutClick}
 			/>
 

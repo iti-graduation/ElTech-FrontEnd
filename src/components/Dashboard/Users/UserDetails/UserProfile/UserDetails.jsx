@@ -4,7 +4,7 @@ import { changeUserRole } from "../../../../../api/services/admin/admin-services
 
 import { showToast } from "../../../../../utils/toastUtil";
 
-export default function UserCard({ user, onEdit, onLogout }) {
+export default function UserCard({ user, handleRefresh }) {
 	// const navigate = useNavigate();
 
 	// const handleSubscribe = async (event) => {
@@ -50,7 +50,8 @@ export default function UserCard({ user, onEdit, onLogout }) {
 		try {
 			await changeUserRole(user.id, !user.is_superuser);
 			showToast("User role updated successfully!", "success");
-			window.location.reload();
+			// window.location.reload();
+			handleRefresh();
 		} catch (error) {
 			showToast("There was a problem updating the user's role", "error");
 			console.error(error);

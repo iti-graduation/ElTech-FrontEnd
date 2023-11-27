@@ -1,10 +1,8 @@
-import React from "react";
-
 import UserImageCard from "./UserProfile/UserImageCard";
 import SocialCard from "./UserProfile/SocialCard";
 import UserDetails from "./UserProfile/UserDetails";
 
-export default function UserProfile({ user, onEdit, onLogout }) {
+export default function UserProfile({ user, onEdit, onLogout, handleRefresh }) {
 	return (
 		<div className="container" id="UserProfilePreview">
 			<div className="row gutters-sm">
@@ -18,6 +16,7 @@ export default function UserProfile({ user, onEdit, onLogout }) {
 						user={user}
 						onEdit={onEdit}
 						onLogout={onLogout}
+						handleRefresh={handleRefresh}
 					/>
 				</div>
 			</div>
