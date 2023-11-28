@@ -5,6 +5,7 @@ import {
 } from "../../../api/services/admin/admin-services";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InputField from "../../Shared/InputField/InputField";
 
 const ServiceEditForm = ({ service, onCancel, setServices }) => {
   const [serviceTitle, setServiceTitle] = useState(service.title);
@@ -60,51 +61,73 @@ const ServiceEditForm = ({ service, onCancel, setServices }) => {
 
   return (
     <div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
-      <h5>Edit Service With Title: {service.title}</h5>
+      <div className="woocommerce-billing-fields">
+      <h3 className="text-center">EDIT SERVICE WITH TITLE :{" "} <span style={{ color: "red" }}>{service.title}</span></h3>
       <form
         onSubmit={handleSubmit}
-        className="dashboard-form"
-        id="dashboard-form"
+        className="d-flex justify-content-center "
       >
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={serviceTitle}
-            onChange={(e) => setServiceTitle(e.target.value)}
-          />
-        </div>
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            value={serviceDescription}
+      <div className="row m-3 w-50 ">
+        <InputField
+							noOfCol="col-lg-12"
+							fieldLabel="Title"
+							fieldPlaceholder={service.title}
+							fieldName="name"
+							fieldType="text"
+              onChange={(e) => setServiceTitle(e.target.value)}
+              value={serviceTitle}
+							required="true"
+				/>
+
+        <p className="col-lg-12">
+					<label>Description</label>
+					<textarea
+						name="content"
+            placeholder={service.description}
+						rows="4"
             onChange={(e) => setServiceDescription(e.target.value)}
-          />
-        </div>
+					></textarea>
+				</p>
 
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="file"
-            name="logo"
-            accept="image/*"
+        <p className="col-lg-12">
+					<label
+						for="fileUpload"
+						className="goru-btn w-50 text-center mx-auto"
+					>
+						Upload Images
+					</label>
+					<input
+						type="file"
+						id="fileUpload"
+						name="logo"
+						className="d-none"
+						multiple
             onChange={(e) => setLogo(e.target.files[0])}
-          />
-        </div>
+					/>
+				</p>
 
-        <div style={{ display: "flex", width: "200px", marginTop: "10px" }}>
+        <div className="col-lg-12" style={{ display: "flex" }}>
           <div className="col-lg-12 col-md-12">
-            <input type="submit" name="submit" value="Submit" />
+                  <button
+                    type="submit"
+                    name="submit"
+                    value="Submit"
+                    className="goru-btn auth-button d-block mx-auto"
+                  >
+                    Update Service
+                  </button>
           </div>
-          <div className="col-lg-12 col-md-12">
+          {/* <div className="col-lg-12 col-md-12">
             <button type="button" onClick={onCancel}>
               Cancel
             </button>
-          </div>
+          </div> */}
         </div>
+
+      </div>
       </form>
+
+    </div>
     </div>
   );
 };

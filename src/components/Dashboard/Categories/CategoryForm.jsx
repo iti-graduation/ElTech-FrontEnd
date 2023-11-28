@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { getUserData } from "../../../api/services/user/user-services"; // Import your authentication context
 import { addCategory } from "../../../api/services/user/product-services"; // Import your authentication context
 import { toast } from "react-toastify";
+import InputField from "../../Shared/InputField/InputField";
+
 
 const CategoryForm = ({ clickHandler ,onCategoryCreated}) => {
   const userData = getUserData();
@@ -42,33 +44,57 @@ const CategoryForm = ({ clickHandler ,onCategoryCreated}) => {
 
   return (
     <div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
-      <h5>Add new Category</h5>
+      <div className="woocommerce-billing-fields">
+
+
+      <h3 className="text-center">ADD NEW CATEGORY</h3>
       <form
         onSubmit={handleSubmit}
-        className="dashboard-form"
-        id="dashboard-form"
+        className="d-flex justify-content-center"
       >
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="text"
-            name="name"
-            placeholder="Category Title"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
-        <div className="col-lg-12 col-md-12">
-          <input type="submit" name="submit" value="Submit" />
-        </div>
+      <div className="row m-3 w-50 ">
+          <InputField
+							noOfCol="col-lg-12"
+							fieldLabel="Title"
+              fieldPlaceholder="Category Title"
+							fieldName="name"
+							fieldType="text"
+              onChange={(e) => setName(e.target.value)}
+							value={name}
+							required="true"
+				/>
+          <p className="col-lg-12">
+					<label
+						for="fileUpload"
+						className="goru-btn w-50 text-center mx-auto"
+					>
+						Upload Images
+					</label>
+					<input
+						type="file"
+						id="fileUpload"
+						name="images"
+						className="d-none"
+						multiple
+						onChange={(e) => setImage(e.target.files[0])}
+						required="true"
+					/>
+				</p>
+
+          <div className="col-lg-12 col-md-12">
+					<button
+						type="submit"
+						name="submit"
+						value="Submit"
+						className="goru-btn auth-button d-block mx-auto"
+					>
+						Add Category
+					</button>
+				</div>
+      </div>
       </form>
+
+      </div>
     </div>
   );
 };

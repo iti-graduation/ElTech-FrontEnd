@@ -5,6 +5,7 @@ import {
   updateCategory,
 } from "../../../api/services/user/product-services"; // Import your authentication context
 import { toast } from "react-toastify";
+import InputField from "../../Shared/InputField/InputField";
 
 const CategoryEditForm = ({ category, onCancel, setCategories }) => {
   const [catName, setName] = useState("");
@@ -51,41 +52,65 @@ const CategoryEditForm = ({ category, onCancel, setCategories }) => {
 
   return (
     <div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
-      <h5>Edit Category With Name : {category.name} </h5>
+      <div className="woocommerce-billing-fields">
+
+      <h3 className="text-center">EDIT CATEGORY WITH TITLE : <span style={{color:"red"}}>{category.name}</span> </h3>
       <form
         onSubmit={handleSubmit}
-        className="dashboard-form"
-        id="dashboard-form"
+        className="d-flex justify-content-center"
+
       >
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="text"
-            name="name"
-            placeholder={category.name}
-            value={catName}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="col-lg-12 col-md-12">
-          <input
-            type="file"
-            placeholder={category.image}
-            name="image"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
-        <div style={{ display: "flex", width: "200px" }}>
+        <div className="row m-3 w-50 ">
+
+        <InputField
+							noOfCol="col-lg-12"
+							fieldLabel="Title"
+              fieldPlaceholder={category.name}
+							fieldName="name"
+							fieldType="text"
+              onChange={(e) => setName(e.target.value)}
+							value={catName}
+							required="true"
+				/>
+        <p className="col-lg-12">
+					<label
+						for="fileUpload"
+						className="goru-btn w-50 text-center mx-auto"
+					>
+						Upload Images
+					</label>
+					<input
+						type="file"
+						id="fileUpload"
+						name="images"
+						className="d-none"
+						multiple
+						onChange={(e) => setImage(e.target.files[0])}
+					/>
+				</p>
+
+        <div className="col-lg-12" style={{ display: "flex" }}>
           <div className="col-lg-12 col-md-12">
-            <input type="submit" name="submit" value="Submit" />
+                  <button
+                    type="submit"
+                    name="submit"
+                    value="Submit"
+                    className="goru-btn auth-button d-block mx-auto"
+                  >
+                    Update Post
+                  </button>
           </div>
-          <div className="col-lg-12 col-md-12">
+          
+          {/* <div className="col-lg-12 col-md-12">
             <button type="button" onClick={onCancel}>
               Cancel
             </button>
-          </div>
+          </div> */}
         </div>
+
+      </div>
       </form>
+      </div>
     </div>
   );
 };

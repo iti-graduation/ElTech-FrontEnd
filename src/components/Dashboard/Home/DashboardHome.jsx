@@ -179,7 +179,7 @@ export default function Home() {
             <Card sx={{ height:60+"vh" }}>
               <CardContent>
               <div className='dashhome-padding'>
-                  <span className='dashhome-priceTitle'>Products Per Category</span>
+                  <p className='dashhome-priceTitle' style={{marginBottom:"30px"}}>Products Per Category</p>
                 <HomePie data={chartData} categoryProducts={categoryProducts}/>
                 </div>
               </CardContent>

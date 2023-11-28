@@ -360,7 +360,7 @@ const ProductForm = ({ allProductsHandler }) => {
 				</div>
 			</form> */}
 			<div className="woocommerce-billing-fields">
-				<h3 className="text-center">Add New Product</h3>
+				<h3 className="text-center">ADD NEW PRODUCT</h3>
 
 				<form
 					onSubmit={handleSubmit}
@@ -467,7 +467,7 @@ const ProductForm = ({ allProductsHandler }) => {
 							/>
 						</p>
 						<p className="col-lg-4 d-flex align-items-center">
-							<label className="w-25">Hot</label>
+							<label className="w-25" style={{ marginRight: "38px" }}>Hot</label>
 							<input
 								type="checkbox"
 								name="is_hot"

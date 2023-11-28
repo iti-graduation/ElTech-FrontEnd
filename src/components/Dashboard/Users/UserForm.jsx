@@ -172,7 +172,7 @@ const UserForm = ({ clickHandler }) => {
 		// </div>
 		<>
 			<div className="woocommerce-billing-fields">
-				<h3 className="text-center">Add New User</h3>
+				<h3 className="text-center">ADD NEW USER</h3>
 
 				<form
 					onSubmit={handleSubmit}

@@ -2,7 +2,7 @@ const SocialShare = () => {
 	return (
 		<div className="col-lg-3 col-md-3">
 			<div className="social-share">
-				<h5>Share:</h5>
+				{/* <h5>Share:</h5>
 				<a href="#">
 					<i className="twi-facebook-f"></i>
 				</a>
@@ -14,7 +14,7 @@ const SocialShare = () => {
 				</a>
 				<a href="#">
 					<i className="twi-behance"></i>
-				</a>
+				</a> */}
 			</div>
 		</div>
 	);

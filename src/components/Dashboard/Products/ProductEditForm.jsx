@@ -276,7 +276,7 @@ const ProductEditForm = ({ product, productDetailsHandler }) => {
 		// 	</form>
 		// </div>
 		<div className="woocommerce-billing-fields">
-			<h3 className="text-center">Edit "{product.name}"</h3>
+			<h3 className="text-center">EDIT PRODUCT WITH TITLE : <span style={{color:"red"}}>{product.name}</span></h3>
 
 			<form
 				onSubmit={handleSubmit}
@@ -365,7 +365,7 @@ const ProductEditForm = ({ product, productDetailsHandler }) => {
 					</p>
 					<hr className="col-lg-12" />
 					<p className="col-lg-4 d-flex align-items-center">
-						<label className="w-25" style={{ marginRight: "50px" }}>
+						<label className="w-25" style={{ marginRight: "45px" }}>
 							Hot
 						</label>
 						<input

@@ -27,7 +27,7 @@ const OrderEditForm = ({ order, handleShowOrders,handleDetailsTable }) => {
 		Order Details
 		</button>
 		<div className="woocommerce-billing-fields" id="dashboard-form-wrapper">
-			<h5>Update order status</h5>
+			<h3 className="text-center">UPDATE ORDER STATUS</h3>
 
 			<form className="dashboard-form mt-4">
 				<div className="col-lg-12 col-md-12 billing-countries">

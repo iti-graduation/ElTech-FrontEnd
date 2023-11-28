@@ -41,7 +41,7 @@ const UserRow = ({ user, userSelectionHandler }) => {
 					<img
 						src={
 							user.profile_picture
-								? user.thumbnail.image
+								? user.profile_picture
 								: profilePic
 						}
 						alt=""

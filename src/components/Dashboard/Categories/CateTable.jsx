@@ -66,7 +66,7 @@ const CateTable = ({shouldRefreshCategories}) => {
 
   return (
     <div>
-      {showEditForm && selectedCategory && (
+      {showEditForm && selectedCategory ? (
         <div className="reply-form-wrapper">
           {/* Pass selectedProduct to the form for editing */}
           <CategoryEditForm
@@ -75,7 +75,7 @@ const CateTable = ({shouldRefreshCategories}) => {
             setCategories={setCategories}
           />
         </div>
-      )}
+      ): (
           <table className="cart-table">
             <thead>
                 <tr>
@@ -131,6 +131,7 @@ const CateTable = ({shouldRefreshCategories}) => {
             ))}
           </TableBody> */}
           </table>
+          )}
     </div>
   );
 };

@@ -143,10 +143,10 @@ const ProductsTable = ({ updateHandler, productSelectionHandler }) => {
 				<thead>
 					<tr>
 						<th className="text-center">ID</th>
-						<th className="product-name-thumbnail text-center">
+						<th className="product-name-thumbnail text-center" style={{marginLeft:"20%"}}>
 							Title
 						</th>
-						<th className="product-price text-center">
+						<th className="product-price" style={{marginLeft:"20%"}}>
 							Unit Price
 						</th>
 						<th className="product-quantity text-center">Stock</th>

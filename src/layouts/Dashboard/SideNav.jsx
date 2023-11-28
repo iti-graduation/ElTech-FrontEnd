@@ -17,6 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import FeedIcon from "@mui/icons-material/Feed";
 import HomeIcon from "@mui/icons-material/Home";
 import GroupIcon from "@mui/icons-material/Group";
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import CategoryIcon from "@mui/icons-material/Category";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
@@ -30,7 +31,7 @@ import OrdersDashboard from "../../components/Dashboard/Orders/OrdersDashboard";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ServicesDashboard from "../../components/Dashboard/Services/ServicesDashboard";
 
-const drawerWidth = 240;
+const drawerWidth = 170;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -114,6 +115,12 @@ export default function MiniDrawer() {
           return (
             <ServicesDashboard />
           );
+        case 'Weekly-Deal':
+          return (
+            <Typography>
+              No Content to View
+            </Typography>
+          );
       default:
         return (
           <Typography>
@@ -139,7 +146,7 @@ export default function MiniDrawer() {
         <Divider />
         <Paper sx={{ height: '100vh', overflow: 'auto',color:"black",fontSize:"2rem"}}>
         <List>
-          {['Home', 'Category', 'Products', 'Feed','Orders', 'Services'].map((text) => (
+          {['Home', 'Category', 'Products', 'Feed','Orders', 'Services','Weekly-Deal'].map((text) => (
             <ListItem
               sx={{color:"black"}}
               key={text}
@@ -154,9 +161,10 @@ export default function MiniDrawer() {
                   {text === 'Feed' && <FeedIcon fontSize="large"/>}
                   {text === 'Orders' && <ReceiptLongIcon fontSize="large"/>}
                   {text === "Services" && <WorkOutlineIcon fontSize="large"/>}
+                  {text === "Weekly-Deal" && <LocalOfferIcon fontSize="large"/>}
                 </ListItemIcon>
                 <ListItemText>
-                  <Typography variant="body1" style={{ fontSize: '16px',fontWeight:"700" }}>
+                  <Typography variant="body1" style={{ fontSize: '14px',fontWeight:"600" }}>
                     {text}
                   </Typography>
                 </ListItemText>
@@ -178,7 +186,7 @@ export default function MiniDrawer() {
                   {text === 'Users' && <GroupIcon fontSize="large"/>}
                 </ListItemIcon>
                 <ListItemText>
-                  <Typography variant="body1" style={{ fontSize: '16px',fontWeight:"700" }}>
+                  <Typography variant="body1" style={{ fontSize: '14px',fontWeight:"600" }}>
                     {text}
                   </Typography>
                 </ListItemText>

@@ -49,7 +49,7 @@ const ProductRow = ({
 						<Link
 							// to={"/dashboard/products/" + product.id}
 							onClick={() => productSelectionHandler(product.id)}
-							style={{ marginLeft: "40%" }}
+							style={{ marginLeft: "30%" }}
 						>
 							<img
 								src={
@@ -70,7 +70,7 @@ const ProductRow = ({
 					</>
 				)}
 			</td>
-			<td className="product-unit-price text-center">
+			<td className="product-unit-price">
 				{/* <div className="product-price clearfix">
 					<span className="price">
 						<span>

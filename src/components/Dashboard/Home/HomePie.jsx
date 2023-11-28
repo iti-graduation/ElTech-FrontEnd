@@ -23,11 +23,11 @@ export default function HomePie({ categoryProducts }) {
               fill: 'white',
               fontWeight: 'bold',
             },
-            marginTop:'20px',
+            marginTop:'',
             marginLeft:'0',
           }}
-        width={800}
-        height={400}
+        width={600}
+        height={300}
       />
     );
   }

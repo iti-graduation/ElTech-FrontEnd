@@ -3,6 +3,7 @@ import { getUserData } from "../../../api/services/user/user-services"; // Impor
 import { addPost } from "../../../api/services/user/post-services"; // Import your authentication context
 import { getAllCategories } from "../../../api/services/user/product-services";
 import { showToast } from "../../../utils/toastUtil";
+import InputField from "../../Shared/InputField/InputField";
 
 
 
@@ -56,50 +57,87 @@ const PostForm = ({clickHandler ,onPostCreated}) => {
             All Posts
         </button>
 		<div className="dashboard-form-wrapper" id="dashboard-form-wrapper">
-		  <h5>Add new Post</h5>
-		  <form onSubmit={handleSubmit} className="dashboard-form" id="dashboard-form">
-			<div className="col-lg-12 col-md-12">
-			  <input
-				type="text"
-				name="title"
-				placeholder="Post Title"
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
-				required="true"
-			  />
-			</div>
-			<div className="col-lg-12 col-md-12">
-			  <textarea
-				name="content"
-				placeholder="Post Content"
-				value={content}
-				onChange={(e) => setContent(e.target.value)}
-				required="true"
-			  ></textarea>
-			</div>
-			<div className="col-lg-12 col-md-12">
-			  <input
-				type="file"
-				name="image"
-				accept="image/*"
-				onChange={(e) => setImage(e.target.files[0])}
-				required="true"
-			  />
-			</div>
-			<div className="col-lg-12 col-md-12">
-          <select value={selectedCategory} onChange={handleCategoryChange} 	required="true">
-            <option value="">Select category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-			<div className="col-lg-12 col-md-12">
-			  <input type="submit" name="submit" value="Submit" />
+		<div className="woocommerce-billing-fields">
+
+		<h3 className="text-center">ADD NEW POST</h3>
+		  <form onSubmit={handleSubmit} className="d-flex justify-content-center ">
+		  	<div className="row m-3 w-50 ">
+				<InputField
+							noOfCol="col-lg-12"
+							fieldLabel="Title"
+							fieldPlaceholder="Enter Post Title"
+							fieldName="name"
+							fieldType="text"
+							onChange={(e) => setTitle(e.target.value)}
+							value={title}
+							required="true"
+				/>
+				<p className="col-lg-12">
+					<label>Description</label>
+					<textarea
+						name="content"
+						placeholder="Enter Post Content"
+						rows="4"
+						onChange={(e) => setContent(e.target.value)}
+						value={content}
+						required="true"
+					></textarea>
+				</p>
+				<p className="col-lg-12">
+					<label
+						for="fileUpload"
+						className="goru-btn w-50 text-center mx-auto"
+					>
+						Upload Images
+					</label>
+					<input
+						type="file"
+						id="fileUpload"
+						name="images"
+						className="d-none"
+						multiple
+						onChange={(e) => setImage(e.target.files[0])}
+						required="true"
+					/>
+				</p>
+				<p className="billing-countries col-lg-12">
+						<label>Category</label>
+						<select
+							className="country_to_state country_select"
+							id="billing_country"
+							name="category"
+							onChange={handleCategoryChange}
+							value={selectedCategory}
+							required="true"
+						>
+							<option value="0">---</option>
+							{categories.map((category) => (
+								<option
+									key={category.id}
+									value={category.id}
+								>
+									{category.name}
+								</option>
+							))}
+						</select>
+				</p>
+				{/* <div className="col-lg-12 col-md-12">
+				<input type="submit" name="submit" value="Submit" />
+				</div> */}
+          		<div className="col-lg-12 col-md-12">
+					<button
+						type="submit"
+						name="submit"
+						value="Submit"
+						className="goru-btn auth-button d-block mx-auto"
+					>
+						Add Post
+					</button>
+				</div>
 			</div>
 		  </form>
+
+		</div>
 		</div>
 		</>
 	  );
