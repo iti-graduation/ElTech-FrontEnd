@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 
 import { loginUserThunk } from '../../services/actions/authSlice';
 
 import InputField from "../../components/Shared/InputField/InputField";
+import logo from "../../assets/images/logo.png";
 
 const LoginSection = () => {
   const dispatch = useDispatch();
@@ -34,7 +36,17 @@ const LoginSection = () => {
   return (
     <>
       <div className="woocommerce-billing-fields">
+        <div>
+        <div className="logo" style={{marginLeft:"3%",padding:"0px"}}>
+              <Link to="/">
+                <img src={logo} alt="Goru"  style={{width:"90px",height:"90px",borderRadius:"5px"}}/>
+              </Link>
+        </div>
         <h3 className="text-center">Login</h3>
+
+        </div>
+
+
         <form
           action="#"
           method="post"

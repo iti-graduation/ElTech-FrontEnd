@@ -30,7 +30,7 @@ import OrdersDashboard from "../../components/Dashboard/Orders/OrdersDashboard";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ServicesDashboard from "../../components/Dashboard/Services/ServicesDashboard";
 
-const drawerWidth = 200;
+const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -137,7 +137,7 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Paper sx={{ height: '100vh', overflow: 'auto'}}>
+        <Paper sx={{ height: '100vh', overflow: 'auto',color:"black",fontSize:"2rem"}}>
         <List>
           {['Home', 'Category', 'Products', 'Feed','Orders', 'Services'].map((text) => (
             <ListItem
@@ -146,16 +146,20 @@ export default function MiniDrawer() {
               disablePadding
               onClick={() => setSelectedItem(text)} // Set selected item onClick
             >
-              <ListItemButton>
+              <ListItemButton style={{display:"flex",gap:"5px"}}>
                 <ListItemIcon sx={{color:"black"}}>
-                  {text === 'Home' && <HomeIcon />}
-                  {text === 'Category' && <CategoryIcon />}
-                  {text === 'Products' && <ProductionQuantityLimitsIcon />}
-                  {text === 'Feed' && <FeedIcon />}
-                  {text === 'Orders' && <ReceiptLongIcon />}
-                  {text === "Services" && <WorkOutlineIcon />}
+                  {text === 'Home' && <HomeIcon fontSize="large"/>}
+                  {text === 'Category' && <CategoryIcon fontSize="large"/>}
+                  {text === 'Products' && <ProductionQuantityLimitsIcon fontSize="large"/>}
+                  {text === 'Feed' && <FeedIcon fontSize="large"/>}
+                  {text === 'Orders' && <ReceiptLongIcon fontSize="large"/>}
+                  {text === "Services" && <WorkOutlineIcon fontSize="large"/>}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText>
+                  <Typography variant="body1" style={{ fontSize: '16px',fontWeight:"700" }}>
+                    {text}
+                  </Typography>
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
@@ -169,11 +173,15 @@ export default function MiniDrawer() {
               disablePadding
               onClick={() => setSelectedItem(text)} // Set selected item onClick
             >
-              <ListItemButton>
+              <ListItemButton style={{display:"flex",gap:"5px"}}>
                 <ListItemIcon sx={{color:"black"}}>
-                  {text === 'Users' && <GroupIcon />}
+                  {text === 'Users' && <GroupIcon fontSize="large"/>}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText>
+                  <Typography variant="body1" style={{ fontSize: '16px',fontWeight:"700" }}>
+                    {text}
+                  </Typography>
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           ))}

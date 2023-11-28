@@ -41,20 +41,20 @@ export default function Navbar() {
           
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleLogoutClick}>
-              <LogoutIcon />
+              <LogoutIcon fontSize='large'/>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
             <Link to={"/"} style={{color:"white"}}>
-            <HomeIcon />
+            <HomeIcon fontSize='large'/>
             </Link>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
             <Link to={"/profile"} style={{color:"white"}}>
-            <AccountCircle />
+            <AccountCircle fontSize='large'/>
             </Link>
             </IconButton>
           </Box>
