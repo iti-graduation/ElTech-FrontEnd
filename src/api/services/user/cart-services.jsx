@@ -151,6 +151,6 @@ export const addCoupon = async (code) => {
 		const msg =
 			"There was a problem adding the coupon to the cart of the specified user";
 		console.error(msg, error);
-		// throw new Error(msg);
+		throw new Error(msg);
 	}
 };

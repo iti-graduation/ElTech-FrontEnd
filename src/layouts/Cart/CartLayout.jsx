@@ -39,8 +39,14 @@ const CartLayout = () => {
 	};
 
 	const handleCoupon = async (code) => {
-		await addCoupon(code)
-		setChange(change + 1);
+		try {
+			await addCoupon(code)
+			setChange(change + 1);
+			showToast('Coupon added successfully!', 'success');
+		} catch (error) {
+			showToast(error.toString(), 'error');
+		}
+		
 	};
 
 	useEffect(() => {
