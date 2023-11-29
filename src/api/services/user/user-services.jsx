@@ -69,7 +69,7 @@ export const login = async (userData) => {
 			msg = "Invalid credentials or server error";
 		}
 		console.error(msg, error);
-		// throw new Error(msg);
+		throw new Error(msg);
 	}
 };
 
