@@ -102,7 +102,7 @@ const Header = ({ className }) => {
                     <span>{user ? user.first_name : "Account"}</span>
                     <ul class="sub-menu">
                       <li>
-                        <Link className="user-login" to={user ? "/profile" : "/login"}><i className="twi-user mr-2"></i>Profile</Link>
+                        <Link className="user-login" to={user ? "/profile" : "/login"}><i className="twi-user"></i>Profile</Link>
                       </li>
                       <li>
                         <Link to={user ? "/wishlist" : "/login"}><i className="twi-heart mr-2"></i>Wishlist</Link>
