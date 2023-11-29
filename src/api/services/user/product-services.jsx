@@ -8,60 +8,60 @@ const categoryEndpoint = endpoint + "categories/";
 const weeklyEndpoint = endpoint + "weekly-deal/";
 
 export const getFeaturedProducts = async () => {
-  try {
-    const response = await apiInstance.get(productEndpoint, {
-      params: {
-        is_featured: "1",
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting featured products.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_featured: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting featured products.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const getTrendingProducts = async () => {
-  try {
-    const response = await apiInstance.get(productEndpoint, {
-      params: {
-        is_trending: "1",
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting trending products.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_trending: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting trending products.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const getPopularProducts = async () => {
-  try {
-    const response = await apiInstance.get(productEndpoint, {
-      params: {
-        is_popular: "1",
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting popular products.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				is_popular: "1",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting popular products.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const getWeeklyDeal = async () => {
-  try {
-    const url = endpoint + "weekly-deal/latest/";
-    const response = await apiInstance.get(url);
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting the weekly deal.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		const url = endpoint + "weekly-deal/latest/";
+		const response = await apiInstance.get(url);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting the weekly deal.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 /**
@@ -74,14 +74,14 @@ export const getWeeklyDeal = async () => {
  * @throws Will throw an error if there is a problem completing the request.
  */
 export const getAllProducts = async () => {
-  try {
-    const response = await apiInstance.get(productEndpoint);
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting all products.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		const response = await apiInstance.get(productEndpoint);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting all products.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 /**
@@ -95,35 +95,35 @@ export const getAllProducts = async () => {
  * @throws Will throw an error if there is a problem completing the request.
  */
 export const getSingleProduct = async (productId) => {
-  try {
-    const url = productEndpoint + productId;
-    const response = await apiInstance.get(url);
+	try {
+		const url = productEndpoint + productId;
+		const response = await apiInstance.get(url);
 
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting the specified product";
-    console.error(error, msg);
-    return error;
-  }
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting the specified product";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const getSingleProductCategory = async (productId) => {
-  try {
-    const url = productEndpoint + productId;
-    const response = await apiInstance.get(url);
+	try {
+		const url = productEndpoint + productId;
+		const response = await apiInstance.get(url);
 
-    // Assuming the API response contains the category ID in the 'categoryId' field
-    const { data } = response;
-    const productCategory = data.category; // Replace 'categoryId' with the actual field name
+		// Assuming the API response contains the category ID in the 'categoryId' field
+		const { data } = response;
+		const productCategory = data.category; // Replace 'categoryId' with the actual field name
 
-    return {
-      productCategory,
-    };
-  } catch (error) {
-    const msg = "There was a problem getting the specified product";
-    console.error(error, msg);
-    return error;
-  }
+		return {
+			productCategory,
+		};
+	} catch (error) {
+		const msg = "There was a problem getting the specified product";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 /**
@@ -137,19 +137,19 @@ export const getSingleProductCategory = async (productId) => {
  * @throws Will throw an error if there is a problem completing the request.
  */
 export const getProductsBySearch = async (searchTerm) => {
-  try {
-    const response = await apiInstance.get(productEndpoint, {
-      params: {
-        q: searchTerm,
-      },
-    });
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				q: searchTerm,
+			},
+		});
 
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem searching for " + searchTerm;
-    console.error(error, msg);
-    return error;
-  }
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem searching for " + searchTerm;
+		console.error(error, msg);
+		return error;
+	}
 };
 
 /**
@@ -162,15 +162,15 @@ export const getProductsBySearch = async (searchTerm) => {
  * @throws Will throw an error if there is a problem completing the request.
  */
 export const getAllCategories = async () => {
-  try {
-    const url = categoryEndpoint;
-    const response = await apiInstance.get(url);
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting all categories";
-    console.error(error, msg);
-    // return error;
-  }
+	try {
+		const url = categoryEndpoint;
+		const response = await apiInstance.get(url);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting all categories";
+		console.error(error, msg);
+		// return error;
+	}
 };
 
 /**
@@ -184,76 +184,76 @@ export const getAllCategories = async () => {
  * @throws Will throw an error if there is a problem completing the request.
  */
 export const getSingleCategory = async (categoryId) => {
-  try {
-    console.log("category id", categoryId);
-    const url = categoryEndpoint + categoryId;
-    const response = await apiInstance.get(url);
+	try {
+		console.log("category id", categoryId);
+		const url = categoryEndpoint + categoryId;
+		const response = await apiInstance.get(url);
 
-    return response.data;
-  } catch (error) {
-    const msg =
-      "There was a problem getting the products of the specified category";
-    console.error(error, msg);
-    return error;
-  }
+		return response.data;
+	} catch (error) {
+		const msg =
+			"There was a problem getting the products of the specified category";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const createReview = async (productId, reviewContent) => {
-  try {
-    const url = productEndpoint + `${productId}/reviews/`;
-    const response = await apiInstance.post(url, reviewContent);
+	try {
+		const url = productEndpoint + `${productId}/reviews/`;
+		const response = await apiInstance.post(url, reviewContent);
 
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem creating your review!";
-    console.error(error, msg);
-    return error;
-  }
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem creating your review!";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const getOrderedProducts = async (ordering) => {
-  try {
-    const response = await apiInstance.get(productEndpoint, {
-      params: {
-        ordering,
-      },
-    });
+	try {
+		const response = await apiInstance.get(productEndpoint, {
+			params: {
+				ordering,
+			},
+		});
 
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting ordered products.";
-    console.error(error, msg);
-    return error;
-  }
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting ordered products.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const getProducts = async (options = {}) => {
-  try {
-    console.log("Options:", options);
-    const response = await apiInstance.get(productEndpoint, {
-      params: options,
-    });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting products.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		console.log("Options:", options);
+		const response = await apiInstance.get(productEndpoint, {
+			params: options,
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting products.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 export const addProductRating = async (productId, rating) => {
-  try {
-    console.log(productId, rating);
-    const url = productEndpoint + `${productId}/ratings/`;
-    console.log(url);
-    const response = await apiInstance.post(url, { rating: rating });
+	try {
+		console.log(productId, rating);
+		const url = productEndpoint + `${productId}/ratings/`;
+		console.log(url);
+		const response = await apiInstance.post(url, { rating: rating });
 
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem adding your rating!";
-    console.error(error, msg);
-    return error;
-  }
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem adding your rating!";
+		console.error(error, msg);
+		return error;
+	}
 };
 
 /**
@@ -264,14 +264,14 @@ export const addProductRating = async (productId, rating) => {
  * @throws {Error} If there is a problem adding the comment
  */
 export const deleteOrRestoreProduct = async (productId, is_deleted) => {
-  try {
-    const url = productEndpoint + `${productId}/`;
-    const response = await apiInstance.patch(url, { is_deleted });
-    return response.data;
-  } catch (error) {
-    console.error("Error deleting product:", error.message);
-    return error;
-  }
+	try {
+		const url = productEndpoint + `${productId}/`;
+		const response = await apiInstance.patch(url, { is_deleted });
+		return response.data;
+	} catch (error) {
+		console.error("Error deleting product:", error.message);
+		return error;
+	}
 };
 
 /**
@@ -282,14 +282,14 @@ export const deleteOrRestoreProduct = async (productId, is_deleted) => {
  * @throws {Error} If there is a problem adding the comment
  */
 export const deleteCategory = async (categoryId) => {
-  try {
-    const url = endpoint + `categories/${categoryId}`;
-    const response = await apiInstance.delete(url);
-    return response.data; // Optionally handle the response data if needed
-  } catch (error) {
-    console.error("Error deleting product:", error.message);
-    return error;
-  }
+	try {
+		const url = endpoint + `categories/${categoryId}`;
+		const response = await apiInstance.delete(url);
+		return response.data; // Optionally handle the response data if needed
+	} catch (error) {
+		console.error("Error deleting product:", error.message);
+		return error;
+	}
 };
 
 /**
@@ -301,22 +301,22 @@ export const deleteCategory = async (categoryId) => {
  * @throws {Error} If there is a problem retrieving the posts
  */
 export const addCategory = async (name, image) => {
-  try {
-    let formData = new FormData();
-    formData.append("name", name);
-    formData.append("image", image);
-    console.log(formData);
-    const response = await apiInstance.post(categoryEndpoint, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem adding a new Category";
-    console.error(msg, error);
-    throw new Error(msg);
-  }
+	try {
+		let formData = new FormData();
+		formData.append("name", name);
+		formData.append("image", image);
+		console.log(formData);
+		const response = await apiInstance.post(categoryEndpoint, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem adding a new Category";
+		console.error(msg, error);
+		// throw new Error(msg);
+	}
 };
 
 /**
@@ -328,27 +328,27 @@ export const addCategory = async (name, image) => {
  * @throws {Error} If there is a problem retrieving the posts
  */
 export const updateCategory = async (categoryId, catName, image) => {
-  try {
-    let formData = new FormData();
-    formData.append("name", catName);
-    if (image) {
-      formData.append("image", image);
-    }
-    console.log(formData);
-    console.log(catName, image);
-    const url = categoryEndpoint + `${categoryId}/`;
-    console.log(url);
-    const response = await apiInstance.patch(url, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem updating Category";
-    console.error(msg, error);
-    throw new Error(msg);
-  }
+	try {
+		let formData = new FormData();
+		formData.append("name", catName);
+		if (image) {
+			formData.append("image", image);
+		}
+		console.log(formData);
+		console.log(catName, image);
+		const url = categoryEndpoint + `${categoryId}/`;
+		console.log(url);
+		const response = await apiInstance.patch(url, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem updating Category";
+		console.error(msg, error);
+		// throw new Error(msg);
+	}
 };
 
 /**
@@ -408,14 +408,14 @@ export const updateCategory = async (categoryId, catName, image) => {
  * @throws {Error} If there is a problem retrieving the posts
  */
 export const addProduct = async (productData) => {
-  try {
-    const response = await apiInstance.post(productEndpoint, productData);
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem adding a new product";
-    console.error(msg, error);
-    return error;
-  }
+	try {
+		const response = await apiInstance.post(productEndpoint, productData);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem adding a new product";
+		console.error(msg, error);
+		return error;
+	}
 };
 
 // export const addProductImages = async (productId, images) => {
@@ -441,57 +441,57 @@ export const addProduct = async (productData) => {
 // };
 
 export const addProductImages = async (productId, images) => {
-  const url = endpoint + "images/";
+	const url = endpoint + "images/";
 
-  for (let i = 0; i < images.length; i++) {
-    let formData = new FormData();
-    formData.append("image", images[i]);
-    formData.append("is_thumbnail", i === 0 ? "true" : "false");
-    formData.append("product_id", productId);
+	for (let i = 0; i < images.length; i++) {
+		let formData = new FormData();
+		formData.append("image", images[i]);
+		formData.append("is_thumbnail", i === 0 ? "true" : "false");
+		formData.append("product_id", productId);
 
-    try {
-      for (let pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
-      const response = await apiInstance.post(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("Image added successfully:", response);
-    } catch (error) {
-      console.error("Error adding image:", error);
-    }
-  }
+		try {
+			for (let pair of formData.entries()) {
+				console.log(pair[0] + ", " + pair[1]);
+			}
+			const response = await apiInstance.post(url, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			console.log("Image added successfully:", response);
+		} catch (error) {
+			console.error("Error adding image:", error);
+		}
+	}
 };
 
 export const addProductFeatures = async (productId, features) => {
-  const url = endpoint + "features/";
+	const url = endpoint + "features/";
 
-  for (let i = 0; i < features.length; i++) {
-    try {
-      const response = await apiInstance.post(url, {
-        feature: features[i],
-        product_id: productId,
-      });
-      console.log("Feature added successfully:", response);
-    } catch (error) {
-      console.error("Error adding feature:", error);
-    }
-  }
+	for (let i = 0; i < features.length; i++) {
+		try {
+			const response = await apiInstance.post(url, {
+				feature: features[i],
+				product_id: productId,
+			});
+			console.log("Feature added successfully:", response);
+		} catch (error) {
+			console.error("Error adding feature:", error);
+		}
+	}
 };
 
 export const updateProduct = async (productId, productData) => {
-  try {
-    console.log(productData);
-    const url = productEndpoint + productId + "/";
-    const response = await apiInstance.patch(url, productData);
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem updating the product";
-    console.error(msg, error);
-    return error;
-  }
+	try {
+		console.log(productData);
+		const url = productEndpoint + productId + "/";
+		const response = await apiInstance.patch(url, productData);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem updating the product";
+		console.error(msg, error);
+		return error;
+	}
 };
 
 // export const updateProductImages = async (productId, images) => {
@@ -541,92 +541,92 @@ export const updateProduct = async (productId, productData) => {
 // };
 
 export const updateProductImages = async (productId, images) => {
-  const url = endpoint + `images/${productId}/`;
+	const url = endpoint + `images/${productId}/`;
 
-  for (let i = 0; i < images.length; i++) {
-    let formData = new FormData();
-    formData.append("image", images[i]);
-    formData.append("is_thumbnail", i === 0 ? "true" : "false");
-    formData.append("product_id", productId);
+	for (let i = 0; i < images.length; i++) {
+		let formData = new FormData();
+		formData.append("image", images[i]);
+		formData.append("is_thumbnail", i === 0 ? "true" : "false");
+		formData.append("product_id", productId);
 
-    try {
-      const response = await apiInstance.patch(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("Image updated successfully:", response);
-    } catch (error) {
-      console.error("Error updating image:", error);
-    }
-  }
+		try {
+			const response = await apiInstance.patch(url, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			console.log("Image updated successfully:", response);
+		} catch (error) {
+			console.error("Error updating image:", error);
+		}
+	}
 };
 
 export const updateProductFeatures = async (productId, features) => {
-  const url = endpoint + `features/${productId}/`;
+	const url = endpoint + `features/${productId}/`;
 
-  for (let i = 0; i < features.length; i++) {
-    try {
-      const response = await apiInstance.patch(url, {
-        feature: features[i],
-        product_id: productId,
-      });
-      console.log("Feature updated successfully:", response);
-    } catch (error) {
-      console.error("Error updating feature:", error);
-    }
-  }
+	for (let i = 0; i < features.length; i++) {
+		try {
+			const response = await apiInstance.patch(url, {
+				feature: features[i],
+				product_id: productId,
+			});
+			console.log("Feature updated successfully:", response);
+		} catch (error) {
+			console.error("Error updating feature:", error);
+		}
+	}
 };
 
 export const addProductNotification = async (productId) => {
-  try {
-    const url = productEndpoint + `${productId}/notify/`;
-    const response = await apiInstance.post(url);
-    return response.data;
-  } catch (error) {
-    let msg = error;
-    if (error.response && error.response.data) {
-      const errors = error.response.data;
-      msg = Object.values(errors).flat().join(" ");
-    } else {
-      msg = "There was a problem adding the product to notifications";
-    }
-    return msg;
-  }
+	try {
+		const url = productEndpoint + `${productId}/notify/`;
+		const response = await apiInstance.post(url);
+		return response.data;
+	} catch (error) {
+		let msg = error;
+		if (error.response && error.response.data) {
+			const errors = error.response.data;
+			msg = Object.values(errors).flat().join(" ");
+		} else {
+			msg = "There was a problem adding the product to notifications";
+		}
+		return msg;
+	}
 };
 
 export const getLatestWeekly = async () => {
-  try {
-    const url = weeklyEndpoint + "latest/";
-    const response = await apiInstance.get(url)
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem getting latest weekly-deal.";
-    console.error(error, msg);
-    return error;
-  }
+	try {
+		const url = weeklyEndpoint + "latest/";
+		const response = await apiInstance.get(url);
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem getting latest weekly-deal.";
+		console.error(error, msg);
+		return error;
+	}
 };
 
-export const updateLatestWeekly = async (id,  dealTime,productId) => {
-  try {
-    const formData = new FormData();
-    if (dealTime) {
-      formData.append("deal_time", dealTime);
-      }
-      if (productId) {
-      formData.append("product_id", productId);
-      }
+export const updateLatestWeekly = async (id, dealTime, productId) => {
+	try {
+		const formData = new FormData();
+		if (dealTime) {
+			formData.append("deal_time", dealTime);
+		}
+		if (productId) {
+			formData.append("product_id", productId);
+		}
 
-    const url = weeklyEndpoint + `${id}/`;
-    const response = await apiInstance.put(url, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      });
-    return response.data;
-  } catch (error) {
-    const msg = "There was a problem updating weekly-deal.";
-    console.error(error, msg);
-    return error;
-  }
+		const url = weeklyEndpoint + `${id}/`;
+		const response = await apiInstance.put(url, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem updating weekly-deal.";
+		console.error(error, msg);
+		return error;
+	}
 };

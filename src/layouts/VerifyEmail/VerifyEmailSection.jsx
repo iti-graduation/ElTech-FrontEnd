@@ -51,6 +51,9 @@ const VerifyEmailSection = () => {
 						"Email verified successfully. You can now login.",
 						"success"
 					);
+					await getUserData();
+					const updatedUser = await getUserData();
+					dispatch(saveUserData(updatedUser));
 					navigate(".", { state: {} }); // Clear the state
 					navigate("/login");
 				} else if (email) {

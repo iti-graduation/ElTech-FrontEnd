@@ -12,22 +12,22 @@ const endpoint = process.env.REACT_APP_NEWS_ENDPOINT;
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem retrieving the posts
  */
-export const getAllPosts = async (pageNumber, pageSize,order='-user_id') => {
+export const getAllPosts = async (pageNumber, pageSize, order = "-user_id") => {
 	try {
-	  const response = await apiInstance.get(endpoint + 'posts/', {
-		params: {
-		  page: pageNumber,
-		  page_size: pageSize,
-		  order_by: order
-		}
-	  });
-	  return response.data;
+		const response = await apiInstance.get(endpoint + "posts/", {
+			params: {
+				page: pageNumber,
+				page_size: pageSize,
+				order_by: order,
+			},
+		});
+		return response.data;
 	} catch (error) {
-	  const msg = "There was a problem getting all posts";
-	  console.error(msg, error);
-	  throw new Error(msg);
+		const msg = "There was a problem getting all posts";
+		console.error(msg, error);
+		//   throw new Error(msg);
 	}
-  };
+};
 
 /**
  * Post newPost to the API
@@ -40,24 +40,24 @@ export const getAllPosts = async (pageNumber, pageSize,order='-user_id') => {
  */
 export const addPost = async (title, content, image, category) => {
 	try {
-	  let formData = new FormData();
-	  formData.append("title", title);
-	  formData.append("content", content);
-	  formData.append("image", image);
-	  formData.append("category", category);
+		let formData = new FormData();
+		formData.append("title", title);
+		formData.append("content", content);
+		formData.append("image", image);
+		formData.append("category", category);
 
-	  const response = await apiInstance.post(endpoint + "posts/", formData, {
-		headers: {
-			"Content-Type": "multipart/form-data",
-		},
-	  });
-	  return response.data;
-}	catch (error) {
-	  const msg = "There was a problem adding a new post";
-	  console.error(msg, error);
-	  throw new Error(msg);
+		const response = await apiInstance.post(endpoint + "posts/", formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem adding a new post";
+		console.error(msg, error);
+		//   throw new Error(msg);
 	}
-  };
+};
 
 /**
  * Fetch a single post from the API
@@ -68,13 +68,13 @@ export const addPost = async (title, content, image, category) => {
  */
 export const getSinglePost = async (postId) => {
 	try {
-		const url = endpoint + 'posts/' + postId;
+		const url = endpoint + "posts/" + postId;
 		const response = await apiInstance.get(url);
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem getting the specified post";
-		console.log(error);
-		throw new Error(msg);
+		console.log(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -87,23 +87,22 @@ export const getSinglePost = async (postId) => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem searching for the posts
  */
-export const getPostsBySearch = async (pageNumber,pageSize,searchTerm) => {
+export const getPostsBySearch = async (pageNumber, pageSize, searchTerm) => {
 	try {
-		const response = await apiInstance.get(endpoint + 'posts/', {
-		  params: {
-			page: pageNumber,
-			page_size: pageSize,
-			search: searchTerm
-		  }
+		const response = await apiInstance.get(endpoint + "posts/", {
+			params: {
+				page: pageNumber,
+				page_size: pageSize,
+				search: searchTerm,
+			},
 		});
 		return response.data;
 	} catch (error) {
 		const msg = "There was a problem searching for " + searchTerm;
-		console.log(error);
-		throw new Error(msg);
+		console.log(msg, error);
+		// throw new Error(msg);
 	}
 };
-
 
 /**
  * Search for posts from the API using a category ID
@@ -116,21 +115,20 @@ export const getPostsBySearch = async (pageNumber,pageSize,searchTerm) => {
  */
 export const getPostsByCategory = async (pageNumber, pageSize, categoryId) => {
 	try {
-	  const response = await apiInstance.get(endpoint + 'posts/', {
-		params: {
-		  page: pageNumber,
-		  page_size: pageSize,
-		  category_id: categoryId
-		}
-	  });
-	  return response.data;
+		const response = await apiInstance.get(endpoint + "posts/", {
+			params: {
+				page: pageNumber,
+				page_size: pageSize,
+				category_id: categoryId,
+			},
+		});
+		return response.data;
 	} catch (error) {
-	  const msg = `There was a problem searching for posts in category ${categoryId}`;
-	  console.error(error);
-	  throw new Error(msg);
+		const msg = `There was a problem searching for posts in category ${categoryId}`;
+		console.error(msg, error);
+		//   throw new Error(msg);
 	}
-  };
-
+};
 
 /**
  * Fetch comments for a specific post from the API
@@ -141,17 +139,16 @@ export const getPostsByCategory = async (pageNumber, pageSize, categoryId) => {
  */
 export const getCommentsForPost = async (postId) => {
 	try {
-	  const url = endpoint + `posts/${postId}/comments/`;
-	  const response = await apiInstance.get(url);
-	  return response.data;
+		const url = endpoint + `posts/${postId}/comments/`;
+		const response = await apiInstance.get(url);
+		return response.data;
 	} catch (error) {
-	  const msg = "There was a problem getting comments for the specified post";
-	  console.error(error);
-	  throw new Error(msg);
+		const msg =
+			"There was a problem getting comments for the specified post";
+		console.error(msg, error);
+		//   throw new Error(msg);
 	}
-  };
-
-
+};
 
 /**
  * Add a new comment to a post or as a reply to another comment
@@ -163,7 +160,12 @@ export const getCommentsForPost = async (postId) => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem adding the comment
  */
-export const addComment = async (postId, userEmail, content, parentCommentId = null) => {
+export const addComment = async (
+	postId,
+	userEmail,
+	content,
+	parentCommentId = null
+) => {
 	try {
 		const url = endpoint + `posts/${postId}/comments/`;
 		const response = await apiInstance.post(url, {
@@ -171,16 +173,15 @@ export const addComment = async (postId, userEmail, content, parentCommentId = n
 			user_email: userEmail, // Change to the appropriate field in your API
 			parent: parentCommentId,
 			content,
-	  });
-  
-	  return response.data;
-	} catch (error) {
-	  const msg = "There was a problem adding the comment";
-	  console.error(msg, error);
-	  throw new Error(msg);
-	}
-  };
+		});
 
+		return response.data;
+	} catch (error) {
+		const msg = "There was a problem adding the comment";
+		console.error(msg, error);
+		//   throw new Error(msg);
+	}
+};
 
 /**
  * Add a new comment to a post or as a reply to another comment
@@ -191,17 +192,16 @@ export const addComment = async (postId, userEmail, content, parentCommentId = n
  */
 export const deletePost = async (postId) => {
 	try {
-	  const url = endpoint + `posts/${postId}`;
-	  const response = await apiInstance.delete(url);
-	  return response.data; // Optionally handle the response data if needed
+		const url = endpoint + `posts/${postId}`;
+		const response = await apiInstance.delete(url);
+		return response.data; // Optionally handle the response data if needed
 	} catch (error) {
-	  console.error('Error deleting post:', error.message);
-	  throw new Error('Unable to delete post.');
+		console.error("Error deleting post:", error.message);
+		//   throw new Error('Unable to delete post.');
 	}
-  };
+};
 
-
-  /**
+/**
  * Update an existing post using its ID
  *
  * @param {number} postId - The ID of the post to update
@@ -211,31 +211,37 @@ export const deletePost = async (postId) => {
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem updating the post
  */
-  export const updatePost = async (postId, title, content, image, selectedCategory) => {
+export const updatePost = async (
+	postId,
+	title,
+	content,
+	image,
+	selectedCategory
+) => {
 	try {
-	  const formData = new FormData();
-	  if (title) {
-		formData.append("title", title);
-	  }
-	  if (content) {
-		formData.append("content", content);
-	  }
-	  if (selectedCategory) {
-		formData.append("category", selectedCategory);
-	  }
-	  if (image) {
-		formData.append("image", image);
-	  }
-  
-	  const url = endpoint + `posts/${postId}/`;
-	  const response = await apiInstance.patch(url, formData, {
-		headers: {
-		  "Content-Type": "multipart/form-data",
-		},
-	  });
-	  return response.data;
+		const formData = new FormData();
+		if (title) {
+			formData.append("title", title);
+		}
+		if (content) {
+			formData.append("content", content);
+		}
+		if (selectedCategory) {
+			formData.append("category", selectedCategory);
+		}
+		if (image) {
+			formData.append("image", image);
+		}
+
+		const url = endpoint + `posts/${postId}/`;
+		const response = await apiInstance.patch(url, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+		return response.data;
 	} catch (error) {
-	  console.error('Error updating post:', error.message);
-	  throw new Error('Unable to update post.');
+		console.error("Error updating post:", error.message);
+		//   throw new Error('Unable to update post.');
 	}
-  };
+};
