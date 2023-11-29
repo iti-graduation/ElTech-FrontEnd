@@ -6,6 +6,8 @@ import { loginUserThunk } from "../../services/actions/authSlice";
 
 import InputField from "../../components/Shared/InputField/InputField";
 
+import { showToast } from "../../utils/toastUtil";
+
 const LoginSection = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -19,6 +21,16 @@ const LoginSection = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (!credentials.email) {
+			showToast("Email is required", "error");
+			return;
+		}
+
+		if (!credentials.password) {
+			showToast("Password is required", "error");
+			return;
+		}
 
 		dispatch(loginUserThunk({ credentials }));
 	};
