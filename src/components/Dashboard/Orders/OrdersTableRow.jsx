@@ -19,6 +19,12 @@ function OrdersTableRow({ order, handleDetailsTable, handleEditClick }) {
                 onClick={() => handleDetailsTable(order)}
                 className="product-thumbnail-title"
             >
+                {order.user.email}
+            </td>
+            <td
+                onClick={() => handleDetailsTable(order)}
+                className="product-thumbnail-title"
+            >
                 {formattedDate}
             </td>
             <td

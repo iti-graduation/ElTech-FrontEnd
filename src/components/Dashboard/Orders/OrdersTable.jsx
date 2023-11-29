@@ -27,6 +27,9 @@ const OrdersTable = ({ handleDetailsTable, handleEditClick }) => {
                         ID
                     </th>
                     <th className="product-total">
+                        User
+                    </th>
+                    <th className="product-total">
                         Date
                     </th>
                     <th className="product-quantity">
