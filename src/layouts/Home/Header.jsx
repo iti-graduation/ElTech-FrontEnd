@@ -98,8 +98,8 @@ const Header = ({ className }) => {
                         src={user.profile_picture}
                         alt="Admin"
                       />
-                      : <i className="twi-user-circle"></i>}
-                    <span>{user ? user.first_name : " Account"}</span>
+                      : <i className="twi-user-circle mr-2"></i>}
+                    <span>{user ? user.first_name : "Account"}</span>
                     <ul class="sub-menu">
                       <li>
                         <Link className="user-login" to={user ? "/profile" : "/login"}><i className="twi-user mr-2"></i>Profile</Link>
