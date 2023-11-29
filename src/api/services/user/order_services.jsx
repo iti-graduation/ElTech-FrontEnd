@@ -22,8 +22,8 @@ export const fetchUserOrders = async () => {
 		// Handle any error that occurred during fetching orders
 		const msg =
 			"There was a problem getting the orders for the specified user";
-		console.log(error);
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -70,8 +70,8 @@ export const fetchUserOrder = async (id) => {
 		// Handle any error that occurred during fetching order products
 		const msg =
 			"There was a problem getting the order products for the specified user";
-		console.log(error);
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -96,7 +96,7 @@ export const addOrder = async (orderData) => {
 		// Handle any error that occurred during adding the order
 		const msg =
 			"There was a problem adding the order of the specified user";
-		console.log(error);
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };

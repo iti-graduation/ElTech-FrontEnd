@@ -32,8 +32,8 @@ export const register = async (userData) => {
 			// Fallback error message
 			msg = "An error occurred during registration";
 		}
-
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -68,7 +68,8 @@ export const login = async (userData) => {
 			// Fallback error message
 			msg = "Invalid credentials or server error";
 		}
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -95,7 +96,8 @@ export const getUserData = async () => {
 			// Fallback error message
 			msg = "There was a problem getting the specified user";
 		}
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -117,8 +119,8 @@ export const getUsersBySearch = async (searchTerm) => {
 	} catch (error) {
 		// Handle any error that occurred during search
 		const msg = "There was a problem searching for " + searchTerm;
-		console.log(error);
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -141,8 +143,8 @@ export const getUserCartProducts = async (userId) => {
 		// Handle any error that occurred during fetching user cart products
 		const msg =
 			"There was a problem getting the cart products for the specified user";
-		console.log(error);
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -165,8 +167,8 @@ export const getUserPosts = async (userId) => {
 		// Handle any error that occurred during fetching user posts
 		const msg =
 			"There was a problem getting the posts for the specified user";
-		console.log(error);
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -212,8 +214,8 @@ export const resetPasswordRequest = async (email) => {
 		} else {
 			msg = "There was a problem sending the password reset email";
 		}
-
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -240,8 +242,8 @@ export const resetPassword = async (
 		} else {
 			msg = "There was a problem resetting the password";
 		}
-
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -260,8 +262,8 @@ export const verifyEmailRequest = async (email) => {
 		} else {
 			msg = "There was a problem sending the email verification email";
 		}
-
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -282,8 +284,8 @@ export const verifyEmail = async (uidb64, token, email) => {
 		} else {
 			msg = "There was a problem verifying the email";
 		}
-
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -300,7 +302,8 @@ export const subscribe = async (email) => {
 		} else {
 			msg = "There was a problem subscribing the email";
 		}
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -317,7 +320,8 @@ export const unsubscribe = async (email) => {
 		} else {
 			msg = "There was a problem unsubscribing the email";
 		}
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -334,7 +338,8 @@ export const updateUserInfo = async (userData) => {
 		} else {
 			msg = "There was a problem updating the user information";
 		}
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
 
@@ -400,6 +405,7 @@ export const updateUserByAdmin = async (userId, userData) => {
 		} else {
 			msg = "There was a problem updating the user's info";
 		}
-		throw new Error(msg);
+		console.error(msg, error);
+		// throw new Error(msg);
 	}
 };
