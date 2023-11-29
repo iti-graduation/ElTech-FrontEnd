@@ -5,6 +5,7 @@ import { apiInstance } from "../../config/api-config";
 const endpoint = process.env.REACT_APP_PRODUCT_ENDPOINT;
 const productEndpoint = endpoint + "products/";
 const categoryEndpoint = endpoint + "categories/";
+const weeklyEndpoint = endpoint + "weekly-deal/";
 
 export const getFeaturedProducts = async () => {
   try {
@@ -591,5 +592,41 @@ export const addProductNotification = async (productId) => {
       msg = "There was a problem adding the product to notifications";
     }
     return msg;
+  }
+};
+
+export const getLatestWeekly = async () => {
+  try {
+    const url = weeklyEndpoint + "latest/";
+    const response = await apiInstance.get(url)
+    return response.data;
+  } catch (error) {
+    const msg = "There was a problem getting latest weekly-deal.";
+    console.error(error, msg);
+    return error;
+  }
+};
+
+export const updateLatestWeekly = async (id,  dealTime,productId) => {
+  try {
+    const formData = new FormData();
+    if (dealTime) {
+      formData.append("deal_time", dealTime);
+      }
+      if (productId) {
+      formData.append("product_id", productId);
+      }
+
+    const url = weeklyEndpoint + `${id}/`;
+    const response = await apiInstance.put(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      });
+    return response.data;
+  } catch (error) {
+    const msg = "There was a problem updating weekly-deal.";
+    console.error(error, msg);
+    return error;
   }
 };

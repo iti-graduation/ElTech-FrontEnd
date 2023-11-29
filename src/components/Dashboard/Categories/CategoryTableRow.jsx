@@ -39,12 +39,12 @@ export default function CategoryTableRow(props) {
                       <EditIcon fontSize='large'/>
                     </IconButton>
 
-                    <IconButton
+                    {/* <IconButton
                       color="secondary"
                       onClick={() => handleDeleteCategory(category.id)}
                       >
                     <DeleteIcon fontSize='large'/>
-                  </IconButton>
+                  </IconButton> */}
             </td>
         </tr>
     )

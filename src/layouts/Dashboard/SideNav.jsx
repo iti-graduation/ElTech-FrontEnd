@@ -28,6 +28,7 @@ import CategoriesDashboard from "../../components/Dashboard/Categories/Categorie
 import UsersDashboard from "../../components/Dashboard/Users/UsersDashboard";
 import ProductsDashboard from "../../components/Dashboard/Products/ProductsDashboard";
 import OrdersDashboard from "../../components/Dashboard/Orders/OrdersDashboard";
+import WeeklyDashboard from "../../components/Dashboard/WeeklyDeal/WeeklyDashboard";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ServicesDashboard from "../../components/Dashboard/Services/ServicesDashboard";
 
@@ -117,9 +118,7 @@ export default function MiniDrawer() {
           );
         case 'Weekly-Deal':
           return (
-            <Typography>
-              No Content to View
-            </Typography>
+            <WeeklyDashboard />
           );
       default:
         return (
