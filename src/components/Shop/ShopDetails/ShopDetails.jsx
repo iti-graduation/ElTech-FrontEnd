@@ -49,10 +49,22 @@ const ShopDetails = () => {
 		}
 	};
 
+	// const handlePageClick = (data) => {
+	// 	let selected = data.selected;
+	// 	setCurrentPage(selected);
+	// 	fetchProducts({ page: selected + 1 });
+	// };
+
 	const handlePageClick = (data) => {
 		let selected = data.selected;
 		setCurrentPage(selected);
-		fetchProducts({ page: selected + 1 });
+
+		let filter = { page: selected + 1 };
+
+		if (location.state?.searchTerm) {
+			filter.q = location.state.searchTerm;
+		}
+		fetchProducts(filter);
 	};
 
 	const handleFilterChange = async (categoryId, orderFilter) => {
@@ -68,6 +80,11 @@ const ShopDetails = () => {
 			filter.is_popular = "1";
 		}
 
+		if (location.state?.searchTerm) {
+			filter.q = location.state.searchTerm;
+		}
+
+		setCurrentPage(0);
 		fetchProducts(filter);
 	};
 
@@ -76,10 +93,71 @@ const ShopDetails = () => {
 		handleFilterChange(activeItem, selectedValue);
 	};
 
+	// const handleCategoryClick = (categoryId) => {
+	// 	handleFilterChange(categoryId, activeFilter);
+	// 	setActiveItem(categoryId);
+	// };
+
+	// const handleCategoryClick = (categoryId) => {
+	// 	console.log("Here!");
+	// 	setCurrentPage(0);
+	// 	handleFilterChange(categoryId, activeFilter);
+	// 	setActiveItem(categoryId);
+	// 	if (location.state?.searchTerm) {
+	// 		let filter = { q: location.state.searchTerm };
+	// 		if (categoryId !== "ALL") {
+	// 			filter.category = categoryId;
+	// 		}
+	// 		fetchProducts(filter);
+	// 	}
+	// };
+
 	const handleCategoryClick = (categoryId) => {
-		handleFilterChange(categoryId, activeFilter);
+		setCurrentPage(0);
+		if (location.state?.searchTerm) {
+			let filter = { q: location.state.searchTerm };
+			if (categoryId !== "ALL") {
+				filter.category = categoryId;
+			}
+			fetchProducts(filter);
+		} else {
+			handleFilterChange(categoryId, activeFilter);
+		}
 		setActiveItem(categoryId);
 	};
+
+	// const handleCategoryClick = (categoryId) => {
+	// 	setCurrentPage(0);
+	// 	let filter = {};
+	// 	if (location.state?.searchTerm) {
+	// 		filter.q = location.state.searchTerm;
+	// 	}
+	// 	if (categoryId !== "ALL") {
+	// 		filter.category = categoryId;
+	// 	}
+	// 	fetchProducts(filter);
+	// 	setActiveItem(categoryId);
+	// };
+
+	// useEffect(() => {
+	// 	if (user) {
+	// 		fetchUserCart()
+	// 			.then((data) => {
+	// 				setCart(data.products);
+	// 			})
+	// 			.catch((err) => console.log(err));
+	// 	}
+
+	// 	if (
+	// 		location.pathname.includes("/search") &&
+	// 		location.state?.searchTerm
+	// 	) {
+	// 		setCurrentPage(0);
+	// 		fetchProducts({ q: location.state.searchTerm });
+	// 	} else {
+	// 		fetchProducts();
+	// 	}
+	// }, [location, change, refresh]);
 
 	useEffect(() => {
 		if (user) {
@@ -92,13 +170,15 @@ const ShopDetails = () => {
 
 		if (
 			location.pathname.includes("/search") &&
-			location.state?.searchTerm
+			location.state?.searchTerm &&
+			activeItem === "ALL"
 		) {
+			setCurrentPage(0);
 			fetchProducts({ q: location.state.searchTerm });
-		} else {
+		} else if (activeItem === "ALL") {
 			fetchProducts();
 		}
-	}, [location, change, refresh]);
+	}, [location, change, refresh, activeItem]);
 
 	const fetchProducts = async (filter = {}) => {
 		const fetchedProducts = await getProducts(filter);
@@ -134,6 +214,7 @@ const ShopDetails = () => {
 				<ShopPagination
 					pageCount={Math.ceil(products.count / 12)}
 					onPageChange={handlePageClick}
+					currentPage={currentPage}
 				/>
 			)}
 		</div>
