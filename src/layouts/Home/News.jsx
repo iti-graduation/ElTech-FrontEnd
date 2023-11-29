@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../../components/News/NewsCard";
 import { getAllPosts } from "../../api/services/user/post-services";
+import { Link } from 'react-router-dom';
 
 function News() {
 	const [posts, setPosts] = useState([]);
@@ -59,30 +60,26 @@ function News() {
 						</p>
 					</div>
 				</div>
-				{posts && posts.results && (
+				{posts && posts.length ? (
 					<div className="row">
-						{Array.isArray(posts) && posts.length > 0 ? (
-							posts.map((post) => (
-								<NewsCard key={post.id} post={post} />
-							))
-						) : (
-							<p>
-								No Posts ATM! <br /> You will hear from us asap!
-							</p>
-						)}
+						{posts.map((post) => (
+						<NewsCard key={post.id} post={post} />
+						))}
 					</div>
-				)}
+					) : (
+					<p>
+						No Posts ATM! <br /> You will hear from us asap!
+					</p>
+					)}
+
 				<div className="row m-top-45">
-					{posts && posts.length > 0 ? (
 						<div className="col-lg-12 text-center">
-							<button
-								className="goru-btn"
-								onClick={handleViewMore}
-							>
-								View More
-							</button>
+						<Link to="/news">
+						<button className="goru-btn">
+							View More
+						</button>
+						</Link>
 						</div>
-					) : null}
 				</div>
 			</div>
 		</section>
