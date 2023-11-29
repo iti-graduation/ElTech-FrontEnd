@@ -28,11 +28,14 @@ const ProductPrice = ({ product }) => {
 
 				<span className="woocommerce-Price-currencySymbol">
 					$
-					{product.is_on_sale
+					{/* {product.is_on_sale
 						? (
 								product.price *
 								((100 - product.sale_amount) / 100)
 						  ).toFixed(2)
+						: product.price} */}
+					{product.is_on_sale
+						? product.discount_price
 						: product.price}
 				</span>
 				{/* <ins>
