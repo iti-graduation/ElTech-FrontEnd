@@ -13,25 +13,25 @@ const PostForm = ({clickHandler ,onPostCreated}) => {
 	const [image, setImage] = useState('');
 	const [categories, setCategories] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState('');
-	
-  
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-	
-		try {	
+
+		try {
 			const userData = await getUserData();
 			const userId = userData.id;
-			
+
 			const response = await addPost(title, content, image ,selectedCategory);
 			console.log('Post added successfully:', response);
-			showToast("added new post successfully");
+			showToast("added new post successfully", "success");
 			console.log(response);
 
 			onPostCreated();
 			setTitle('');
 			setContent('');
 			setImage('');
-			setSelectedCategory(''); 
+			setSelectedCategory('');
 		} catch (error) {
 		  console.error('Error adding post:', error.message);
 		}
@@ -41,7 +41,7 @@ const PostForm = ({clickHandler ,onPostCreated}) => {
 		setSelectedCategory(e.target.value);
 	  };
 
-	  
+
   useEffect(() => {
     const fetchCategories = async () => {
       const data = await getAllCategories();

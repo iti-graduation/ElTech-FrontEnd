@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { updateOrderStatus } from "../../../api/services/admin/admin-services";
+import { showToast } from "../../../utils/toastUtil";
 
 const OrderEditForm = ({ order, handleShowOrders,handleDetailsTable }) => {
 	const [status, setStatus] = useState(order.status);
 
 	const handleUpdate = async (id) => {
 		await updateOrderStatus(id, status);
+		showToast("Order updated successfuly", "success");
 		handleShowOrders()
 	}
 

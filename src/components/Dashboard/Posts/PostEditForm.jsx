@@ -33,7 +33,7 @@ const PostEditForm = ({ post, onCancel, setPosts, handlePostDetails }) => {
         selectedCategory
       ); // Assuming post.id exists
       console.log("Post updated successfully:", response);
-      showToast("updated post successfully");
+      showToast("updated post successfully", "success");
 
       const updatedPosts = await getAllPosts(1, 50);
       setPosts(updatedPosts.results);

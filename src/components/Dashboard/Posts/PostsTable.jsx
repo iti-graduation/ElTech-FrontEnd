@@ -10,8 +10,8 @@ const PostsTable = ({shouldRefreshPosts,handleCreateClick}) => {
     const [pageNumber, setPageNumber] = useState(1);
     const [pageSize, setPageSize] = useState(20);
     const [showEditForm, setShowEditForm] = useState(false)
-    const [selectedPost, setSelectedPost] = useState(null); 
-    const [showPostDetails, setShowPostDetails] = useState(false); 
+    const [selectedPost, setSelectedPost] = useState(null);
+    const [showPostDetails, setShowPostDetails] = useState(false);
 
 
 
@@ -34,7 +34,7 @@ const PostsTable = ({shouldRefreshPosts,handleCreateClick}) => {
     if (shouldDelete) {
       try {
         await deletePost(postId);
-        showToast("post has been deleted successfully");
+        showToast("post has been deleted successfully", "success");
         // Refresh posts after successful deletion
         const updatedPostsData = await getAllPosts(pageNumber, pageSize);
         setPosts(updatedPostsData.results);
@@ -43,7 +43,7 @@ const PostsTable = ({shouldRefreshPosts,handleCreateClick}) => {
         console.error('Error deleting post:', error.message);
       }
     } else {
-      showToast("Deletion canceled");
+      showToast("Deletion canceled", "error");
     }
     };
 
@@ -58,7 +58,7 @@ const PostsTable = ({shouldRefreshPosts,handleCreateClick}) => {
             console.error("Error fetching single post:", error.message);
           }
         };
-  
+
         fetchSinglePost();
       }
     }, [showEditForm, selectedPost]);
@@ -81,7 +81,7 @@ const PostsTable = ({shouldRefreshPosts,handleCreateClick}) => {
       setShowPostDetails(true)
       setShowEditForm(false);
     }
-    
+
     return (
       <div>
       {showEditForm && selectedPost ? (

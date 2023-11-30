@@ -4,6 +4,7 @@ import {
 	updateLatestWeekly,
 	getProducts,
 } from "../../../api/services/user/product-services";
+import { showToast } from "../../../utils/toastUtil";
 
 const WeeklyEditForm = ({
 	weeklyDeal,
@@ -21,6 +22,7 @@ const WeeklyEditForm = ({
 
 	const handleUpdate = async (id) => {
 		await updateLatestWeekly(id, dealTime, productId);
+		showToast("Order updated successfuly", "success");
 		handleShowOrders();
 	};
 
@@ -75,7 +77,7 @@ const WeeklyEditForm = ({
 						</div>
 
 						<div className="col-lg-12 col-md-12 billing-countries">
-							{/* <label>Product ID</label>					
+							{/* <label>Product ID</label>
 				<input
 						type="number"
 						id="productId"
