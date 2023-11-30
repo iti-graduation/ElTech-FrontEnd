@@ -1,5 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import { saveUserData } from "../../services/actions/authSlice";
 
 import { subscribe, getUserData } from "../../api/services/user/user-services";
 
@@ -10,15 +13,16 @@ import shape4 from "../../assets/images/home/shape4.png";
 const MailChimpSection = () => {
 	const user = JSON.parse(localStorage.getItem("user"));
 	const [change, setChange] = useState(false);
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			await subscribe(user.email);
-			await getUserData(); // refresh user data
+			const updatedUser = await getUserData(); // refresh user data
 			showToast("You have subscribed successfully!", "success"); // show success toast
 			setChange(!change);
-			// window.location.reload(); // reload the page
+			dispatch(saveUserData(updatedUser));
 		} catch (error) {
 			showToast(
 				"There was a problem subscribing. Please try again.",
