@@ -153,7 +153,7 @@ const PostEditForm = ({ post, onCancel, setPosts, handlePostDetails }) => {
                     value="Submit"
                     className="goru-btn auth-button d-block mx-auto"
                   >
-                    Update Post
+                    Update
                   </button>
                 </div>
                 {/* <div className="col-lg-12">

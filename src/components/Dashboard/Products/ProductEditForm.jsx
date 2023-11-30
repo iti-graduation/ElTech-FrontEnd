@@ -512,7 +512,7 @@ const ProductEditForm = ({ product, productDetailsHandler }) => {
 							type="submit"
 							className="goru-btn auth-button d-block mx-auto"
 						>
-							Update Product
+							Update
 						</button>
 					</div>
 				</div>

@@ -114,7 +114,7 @@ const ServiceEditForm = ({ service, onCancel, setServices }) => {
                     value="Submit"
                     className="goru-btn auth-button d-block mx-auto"
                   >
-                    Update Service
+                    Update
                   </button>
           </div>
           {/* <div className="col-lg-12 col-md-12">

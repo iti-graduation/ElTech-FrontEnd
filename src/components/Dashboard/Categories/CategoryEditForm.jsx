@@ -97,10 +97,10 @@ const CategoryEditForm = ({ category, onCancel, setCategories }) => {
                     value="Submit"
                     className="goru-btn auth-button d-block mx-auto"
                   >
-                    Update Post
+                    Update
                   </button>
           </div>
-          
+
           {/* <div className="col-lg-12 col-md-12">
             <button type="button" onClick={onCancel}>
               Cancel
