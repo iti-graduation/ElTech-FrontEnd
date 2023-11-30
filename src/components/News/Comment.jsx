@@ -1,6 +1,8 @@
-import authorImage from "../../assets/images/blog/c1.jpg";
+// import authorImage from "../../assets/images/blog/c1.jpg";
 import CommentForm from "./CommentForm"; // Import your CommentForm component
 import React, { useState } from "react";
+
+import profilePic from '../../assets/images/user/profile_pic_placeholder.png';
 
 
 const Comment = ({ commentDate,author,content,parent, post_id ,onCommentSubmit,setComments,setCommentsCount}) => {
@@ -17,7 +19,7 @@ const Comment = ({ commentDate,author,content,parent, post_id ,onCommentSubmit,s
 
 	return (
 		<div className="single-comment">
-			<img src={author ? `http://localhost:8000${author.profile_picture}` : authorImage} alt="admin" />
+			<img src={author && author.profile_picture ? `http://localhost:8000${author.profile_picture}` : profilePic} alt="admin" />
 			<h5>
 				<a style={{cursor:"pointer"}}>{author.email}</a>
 				<span>{formattedDate}</span>

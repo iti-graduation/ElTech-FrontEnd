@@ -70,7 +70,7 @@ const ProductRatingReviews = ({
 				<Rating
 					fullSymbol="twi-star full-star"
 					emptySymbol="twi-star empty-star"
-					fractions={2}
+					fractions={1}
 					initialRating={averageRating}
 					readonly={!userId || hasRated || user.is_superuser}
 					className="woocommerce-product-rating"
