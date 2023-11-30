@@ -44,7 +44,7 @@ export default function ProductDetails() {
 		if (flag == true) {
 			if (quantity >= product.stock) {
 				setQuantity(product.stock);
-				showToast("There is no more products in stock !");
+				showToast("There is no more products in stock !", "error");
 			} else {
 				setQuantity(quantity + 1);
 			}
