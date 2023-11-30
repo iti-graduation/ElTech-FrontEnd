@@ -203,7 +203,7 @@ export const resetPasswordRequest = async (email) => {
 	try {
 		const url = endpoint + "password-reset/";
 		const response = await apiInstance.post(url, { email });
-
+		console.log("Response", response);
 		// Return response data
 		return response.data;
 	} catch (error) {
@@ -215,7 +215,7 @@ export const resetPasswordRequest = async (email) => {
 			msg = "There was a problem sending the password reset email";
 		}
 		console.error(msg, error);
-		// throw new Error(msg);
+		throw new Error(msg);
 	}
 };
 

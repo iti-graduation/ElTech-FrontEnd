@@ -47,10 +47,11 @@ const ForgetPasswordSection = () => {
 			);
 		} catch (error) {
 			console.error(error);
-			showToast(
-				"There was a problem sending the password reset email.",
-				"error"
-			);
+			// showToast(
+			// 	"There was a problem sending the password reset email.",
+			// 	"error"
+			// );
+			showToast(error.toString(), "error");
 		}
 	};
 
