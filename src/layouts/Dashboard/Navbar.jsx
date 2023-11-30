@@ -32,7 +32,7 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{backgroundColor:"black"}}>
         <Toolbar>
-          <div className="logo" style={{padding:"0px"}}>
+          <div className="logo" style={{padding:"0px",backgroundColor:"white",borderRadius:"5px"}}>
               <Link to="/">
                 <img src={logo} alt="Goru"  style={{width:"55px",height:"55px",borderRadius:"5px"}}/>
               </Link>
