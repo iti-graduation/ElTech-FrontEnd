@@ -12,7 +12,7 @@ const endpoint = process.env.REACT_APP_NEWS_ENDPOINT;
  * @returns {Promise} A promise that resolves to the data of the API response
  * @throws {Error} If there is a problem retrieving the posts
  */
-export const getAllPosts = async (pageNumber, pageSize, order = "-user_id") => {
+export const getAllPosts = async (pageNumber, pageSize, order = "-created_at") => {
 	try {
 		const response = await apiInstance.get(endpoint + "posts/", {
 			params: {

@@ -52,8 +52,31 @@ const NewsLayout = () => {
   }, [searchTerm]);
   
 
-  const handleViewMore = () => {
-    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  const handleViewMore = async () => {
+    try {
+      const nextPage = pageNumber + 1;
+      let postsData;
+
+      if (activeItem === 'ALL' || !activeItem) {
+        postsData = await getAllPosts(nextPage, pageSize);
+      } else {
+        postsData = await getPostsByCategory(nextPage, pageSize, activeItem);
+      }
+
+      // Check for duplicate posts before appending
+      const newPosts = postsData.results.filter(
+        (newPost) => !posts.find((existingPost) => existingPost.id === newPost.id)
+      );
+
+      if (newPosts.length > 0) {
+        setPageNumber(nextPage);
+      } else {
+        // No more new posts to load
+        showToast('No more new posts available.');
+      }
+    } catch (error) {
+      console.error("Error fetching more posts:", error.message);
+    }
   };
 
   const handleCategoryChange = (categoryId) => {
@@ -84,12 +107,13 @@ console.log(posts.length);
         )}
         </div>
         <div className="row m-top-20">
-        {posts.length > 0 ? (
-          <div className="col-lg-12 text-center">
-            <button className="goru-btn"onClick={handleViewMore}>
-              View More
-            </button>
-          </div>):null}
+          {posts.length > 0 && posts.length % pageSize === 0 ? (
+            <div className="col-lg-12 text-center">
+              <button className="goru-btn" onClick={handleViewMore}>
+                View More
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
